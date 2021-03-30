@@ -142,6 +142,10 @@ class Example {
         User user = new User();
         // setter
         ClientMapping.add(user);
+        // 返回值
+		// ClientMapping.SUCCESS
+		// ClientMapping.DUPLICATE_ID
+		// ClientMapping.DUPLICATE_NICKNAME
     }
 }
 ```
@@ -152,6 +156,9 @@ class Example {
 	public void example() {
 		int id = 123;
 		ClientMapping.delete(id);
+		// 返回值
+		// ClientMapping.SUCCESS
+		// ClientMapping.CLIENT_NOT_FOUND
 	}
 }
 ```
@@ -167,6 +174,10 @@ class Example {
 		
 		// 这里我建议搭配下面的find方法使用。
 		// 使用find方法找到需要修改的实例，将需要更改的属性set之后，把新的实例传入modify方法中。
+		
+		// 返回值
+		// ClientMapping.SUCCESS
+		// ClientMapping.CLIENT_NOT_FOUND
 	}
 }
 ```
@@ -194,5 +205,7 @@ class Example {
 	    map.put("sex", "1");
 	    ArrayList<User> users = ClientMapping.findUser(map);
 	}
+	
+	// 找不到就会返回空的ArrayList
 }
 ```

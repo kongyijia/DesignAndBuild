@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +21,7 @@ public class ClientMapping {
     public static final String DATA_PATH = "data/client.json";
     public static final int SUCCESS = 0;
     public static final int DUPLICATE_ID = 1;
+    public static final int DUPLICATE_NICKNAME = 6;
     public static final int CLIENT_NOT_FOUND = 2;
     public static final int USER_NOT_FOUND = 3;
     public static final int COACH_NOT_FOUND = 4;
@@ -33,6 +33,9 @@ public class ClientMapping {
         for (Client client : clients) {
             if (type.getId() == client.getId()) {
                 return DUPLICATE_ID;
+            }
+            if (type.getNickName().equals(client.getNickName())) {
+                return DUPLICATE_NICKNAME;
             }
         }
         clients.add(type);
