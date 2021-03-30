@@ -2,14 +2,21 @@
 # DesignAndBuild
 software engineering
 
+## README release note
+### 3/30
+- 用户数据中
+	- 等级默认1级
+	- vip默认1级
+	- 公共课学习时长使用**秒数**表示，Int类型
+
 ## 数据
 ### 用户
 ```text
 {
 	Double Account：
-	Int 等级(总学习时长决定)：
-	Time 公共课学习时长"HH:mm:ss"
-	Int vip（充值决定）: 
+	Int 等级(总学习时长决定)：默认1级
+	Int 公共课学习时长(用秒数表示)
+	Int vip（充值决定）: 默认1级
 	Array 订阅课程（{id}）：
 	String Description：
 }
@@ -19,7 +26,7 @@ software engineering
 {
 	"account": 123.45,
 	"level": 1,
-	"learningTime": "10:02:00",
+	"learningTime": 123,
 	"vip": 1,
 	"courseSubscription": [
 		{
@@ -72,7 +79,7 @@ null
 	"id": 123456,
 	"nickName": "sz",
 	"password": "123456",
-	"sex": "1",
+	"sex": 1,
 	"phone": "18600000000",
 	"email": "123456789@qq.com",
 	"role": 2,
@@ -89,7 +96,7 @@ null
 > 	"id": 123456,
 > 	"nickName": "sz2",
 > 	"password": "1234563",
-> 	"sex": "1",
+> 	"sex": 1,
 > 	"phone": "18600000120",
 > 	"email": "123456349@qq.com",
 > 	"role": 1,

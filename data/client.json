@@ -1,0 +1,94 @@
+[
+  {
+    "account": 123.45,
+    "cancel": false,
+    "courseSubscription": [
+      {
+        "id": 123
+      },
+      {
+        "id": 234
+      }
+    ],
+    "description": "12345ghjkdsalfegadafds\nadsfweoba",
+    "email": "98765@qq.com",
+    "id": 123333,
+    "learningTime": 100,
+    "level": 1,
+    "nickName": "sdf",
+    "password": "123456",
+    "phone": "1234567890",
+    "role": 2,
+    "sex": 1,
+    "vip": 1
+  },
+  {
+    "account": 123.45,
+    "cancel": false,
+    "courseSubscription": [
+      {
+        "id": 123
+      },
+      {
+        "id": 234
+      }
+    ],
+    "description": "12345ghjkdsalfegadafds\nadsfweoba",
+    "email": "98765@qq.com",
+    "id": 987678,
+    "learningTime": 100,
+    "level": 1,
+    "nickName": "sdf",
+    "password": "123456",
+    "phone": "1234567890",
+    "role": 2,
+    "sex": 1,
+    "vip": 1
+  },
+  {
+    "cancel": false,
+    "description": "szsb",
+    "email": "9678902@qq.com",
+    "id": 534526,
+    "level": 0,
+    "nickName": "ertyuikjhgfd",
+    "password": "ertyuijhvca';.,m",
+    "phone": "123456765890",
+    "role": 1,
+    "sex": 1
+  },
+  {
+    "cancel": false,
+    "description": "szsb",
+    "email": "9678902@qq.com",
+    "id": 5673829,
+    "level": 0,
+    "nickName": "ertyuikjhgfd",
+    "password": "ertyuijhvca';.,m",
+    "phone": "123456765890",
+    "role": 1,
+    "sex": 1
+  },
+  {
+    "cancel": false,
+    "email": "98765@qq.com",
+    "id": 47652345,
+    "nickName": "fdgre",
+    "password": "ensdfdxcvef",
+    "phone": "d23657898765",
+    "role": 0,
+    "sex": 1
+  },
+  {
+    "cancel": false,
+    "description": "szsb",
+    "email": "fake",
+    "id": 83838383,
+    "level": 0,
+    "nickName": "ertyuikjhgfd",
+    "password": "ertyuijhvca';.,m",
+    "phone": "123456765890",
+    "role": 1,
+    "sex": 1
+  }
+]
