@@ -1,4 +1,4 @@
-package models;
+package model;
 
 public class Coach extends Client {
     private int level; // 0: 低级（默认）; 1: 高级; 2: 特级

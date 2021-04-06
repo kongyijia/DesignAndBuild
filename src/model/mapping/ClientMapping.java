@@ -1,13 +1,13 @@
-package mapping;
+package model.mapping;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONReader;
 import com.alibaba.fastjson.JSONWriter;
-import models.Administrator;
-import models.Client;
-import models.Coach;
-import models.User;
+import model.Administrator;
+import model.Client;
+import model.Coach;
+import model.User;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
