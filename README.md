@@ -2,14 +2,21 @@
 # DesignAndBuild
 software engineering
 
+## README release note
+### 3/30
+- 用户数据中
+	- 等级默认1级
+	- vip默认1级
+	- 公共课学习时长使用**秒数**表示，Int类型
+
 ## 数据
 ### 用户
 ```text
 {
 	Double Account：
-	Int 等级(总学习时长决定)：
-	Time 公共课学习时长"HH:mm:ss"
-	Int vip（充值决定）: 
+	Int 等级(总学习时长决定)：默认1级
+	Int 公共课学习时长(用秒数表示)
+	Int vip（充值决定）: 默认1级
 	Array 订阅课程（{id}）：
 	String Description：
 }
@@ -19,7 +26,7 @@ software engineering
 {
 	"account": 123.45,
 	"level": 1,
-	"learningTime": "10:02:00",
+	"learningTime": 123,
 	"vip": 1,
 	"courseSubscription": [
 		{
@@ -72,7 +79,7 @@ null
 	"id": 123456,
 	"nickName": "sz",
 	"password": "123456",
-	"sex": "1",
+	"sex": 1,
 	"phone": "18600000000",
 	"email": "123456789@qq.com",
 	"role": 2,
@@ -89,7 +96,7 @@ null
 > 	"id": 123456,
 > 	"nickName": "sz2",
 > 	"password": "1234563",
-> 	"sex": "1",
+> 	"sex": 1,
 > 	"phone": "18600000120",
 > 	"email": "123456349@qq.com",
 > 	"role": 1,
@@ -118,4 +125,87 @@ null
 	- 视频管理
 	- 人员管理
 
+### JSON接口说明
 
+#### 数据结构与注意事项
+- `Client`是`User`/`Coach`/`Administrator`的父类，包含了上面的`共有`的属性。
+- `Course`是为编写`User`的代码需要而写的，本次更新(3/30)不提供针对`course`的增删改查方法。
+- 因为`Client`是父类，所以一般而言，不需要在代码中创建与修改该类的实例，仅仅是会在查找数据(find方法)当作返回值，所以建议各位在使用find方法时，时刻注意***多态***的使用。
+- 虽然各位可以将`Client`的实例当作一般的数据插入数据库中，但我**不建议**这样做。除了上述需要用到多态的情况，各位在写代码时应只可以用到`User`/`Coach`/`Administrator`这三个类。
+- `ClientMapping`是对数据进行操作的类，包括增删改查，适用于以上三种类（和明面上不建议使用的父类）。
+
+#### 基本用法
+增：
+```java
+class Example {
+    public void example() {
+        User user = new User();
+        // setter
+        ClientMapping.add(user);
+        // 返回值
+		// ClientMapping.SUCCESS
+		// ClientMapping.DUPLICATE_ID
+		// ClientMapping.DUPLICATE_NICKNAME
+    }
+}
+```
+
+删：
+```java
+class Example {
+	public void example() {
+		int id = 123;
+		ClientMapping.delete(id);
+		// 返回值
+		// ClientMapping.SUCCESS
+		// ClientMapping.CLIENT_NOT_FOUND
+	}
+}
+```
+
+改：
+```java
+class Example {
+	public void example() {
+		ClientMapping.modify(user);
+		// user是更改之后的实例
+		// modify方法实际上是针对实例的替换，将原来的实例替换成user这个新的实例
+		// 所以需要将user设置完好。
+		
+		// 这里我建议搭配下面的find方法使用。
+		// 使用find方法找到需要修改的实例，将需要更改的属性set之后，把新的实例传入modify方法中。
+		
+		// 返回值
+		// ClientMapping.SUCCESS
+		// ClientMapping.CLIENT_NOT_FOUND
+	}
+}
+```
+
+查：
+```java
+class Example {
+    // 第一种：返回Client
+	// 传出的arrayList中所存储的实例，运用了多态，所以保留了子类所有的精确度，可以进行强制转换
+	public void example1() {
+		HashMap<String, String> map = new HashMap<>();
+		// 设置查找条件
+		map.put("id", "123");
+		map.put("sex", "0");
+		// 查找
+		ArrayList<Client> clients = ClientMapping.find(map);
+	}
+	
+	// 如果不想用上面的方法，可以选择使用一下几种方法，直接返回关于子类的arraylist，不需要强制转换
+	// 分别是findUser/findCoach/findAdministrator三种方法
+	// 下面是findUser的例子，其他两个用法与这个一样
+	public void example2() {
+	    HashMap<String, String> map = new HashMap<>();
+	    map.put("id", "234");
+	    map.put("sex", "1");
+	    ArrayList<User> users = ClientMapping.findUser(map);
+	}
+	
+	// 找不到就会返回空的ArrayList
+}
+```

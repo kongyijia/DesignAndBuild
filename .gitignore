@@ -2,3 +2,6 @@
 /.idea
 /DesignAndBuild.iml
 
+# test
+/test
+/out
