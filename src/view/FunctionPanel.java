@@ -3,6 +3,7 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import model.*;
 
 
 public class FunctionPanel extends JLayeredPane{
@@ -18,18 +19,21 @@ public class FunctionPanel extends JLayeredPane{
     private CardLayout cardLayout = new CardLayout();
     private MainPanel mainPanel;
 
-    public FunctionPanel(MainPanel mainPanel, int role) {
+    private Client client;
+
+    public FunctionPanel(MainPanel mainPanel, Client client) {
         this.mainPanel = mainPanel;
-        initialize(role);
+        this.client = client;
+        initialize(client);
     }
 
-    private void initialize(int role){
+    private void initialize(Client client){
         this.setLayout(null);
         this.setBounds(0,0, MainPanel.WIDTH, MainPanel.HEIGHT);
 
         showPanel_init();
-        infoPanel_init(role);
-        menuPanel_init(role);
+        infoPanel_init(client.getNickName(), "assets/pictures/test.jpg");
+        menuPanel_init(client.getRole());
     }
 
     private void showPanel_init(){
@@ -66,19 +70,19 @@ public class FunctionPanel extends JLayeredPane{
         this.setLayer(showPanel, -1);
     }
 
-    private void infoPanel_init(int role){
+    private void infoPanel_init(String nickname, String avatarURL){
         infoPanel = new JPanel();
 
         infoPanel.setLayout(null);
         infoPanel.setBackground(Color.DARK_GRAY);
         infoPanel.setBounds(0, 0, INFO_WIDTH, INFO_HEIGHT);
 
-        JButton photoButton = new JButton();
-        photoButton.setBounds(1100, 0, 50, 50);
-        ImageIcon icon = new ImageIcon("static/pictures/test.jpg");
-        icon.setImage(icon.getImage().getScaledInstance(photoButton.getWidth(),photoButton.getHeight(),Image.SCALE_DEFAULT));
-        photoButton.setIcon(icon);
-        photoButton.addActionListener(new ActionListener() {
+        JButton avatarButton = new JButton();
+        avatarButton.setBounds(1100, 0, 50, 50);
+        ImageIcon avatarIcon = new ImageIcon(avatarURL);
+        avatarIcon.setImage(avatarIcon.getImage().getScaledInstance(avatarButton.getWidth(),avatarButton.getHeight(),Image.SCALE_DEFAULT));
+        avatarButton.setIcon(avatarIcon);
+        avatarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 menuPanel.setVisible(true);
@@ -87,17 +91,16 @@ public class FunctionPanel extends JLayeredPane{
 
         JLabel logoLabel = new JLabel();
         logoLabel.setBounds(50, 0, 50, 50);
-        ImageIcon logoIcon = new ImageIcon("static/pictures/logo.jpg");
+        ImageIcon logoIcon = new ImageIcon("assets/pictures/logo.jpg");
         logoIcon.setImage(logoIcon.getImage().getScaledInstance(logoLabel.getWidth(),logoLabel.getHeight(),Image.SCALE_DEFAULT));
         logoLabel.setIcon(logoIcon);
         infoPanel.add(logoLabel);
 
-        String nickname = "JokerFeng";
         JLabel welcomeLabel = new JLabel("Welcome " + nickname + " !");
         welcomeLabel.setBounds(900, 10, 200, 40);
 
         infoPanel.add(welcomeLabel);
-        infoPanel.add(photoButton);
+        infoPanel.add(avatarButton);
 
         this.add(infoPanel);
         this.setLayer(infoPanel, 2);
@@ -112,7 +115,7 @@ public class FunctionPanel extends JLayeredPane{
         this.add(menuPanel);
         this.setLayer(menuPanel, 3);
 
-        if(role == 0){
+        if(role == 2){
             menuPanel.add(new MenuButton(new JPanel(), "Your Profile","userProfile",0));
             menuPanel.add(new MenuButton(new JPanel(),"Your Course","userCourse", 1));
             menuPanel.add(new MenuButton(new JPanel(),"Video Square","userVideoSquare", 2));
@@ -122,14 +125,13 @@ public class FunctionPanel extends JLayeredPane{
             menuPanel.add(new MenuButton(new JPanel(),"Your Course","coachCourse", 1));
             menuPanel.add(new MenuButton(new JPanel(),"Video Management","coachVideoManagement", 2));
         }
-        else if(role == 2){
+        else if(role == 0){
             menuPanel.add(new MenuButton(new JPanel(),"Video Square","adminVideoSquare", 0));
             menuPanel.add(new MenuButton(new JPanel(),"Video Management","adminVideoManagement", 1));
             menuPanel.add(new MenuButton(new JPanel(),"Staff Management","adminStaffManagement", 2));
         }
         JButton exitButton = new JButton("Sign out");
         exitButton.setBounds(0, MENU_HEIGHT - MENU_BUTTON_HEIGHT, MENU_WIDTH, MENU_BUTTON_HEIGHT);
-        //exitButton.setBorderPainted(false);
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

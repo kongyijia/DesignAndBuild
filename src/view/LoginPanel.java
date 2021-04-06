@@ -1,6 +1,6 @@
-package login1;
-import models.*;
-import mapping.ClientMapping;
+package view;
+import model.*;
+import model.mapping.ClientMapping;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.*;
-public class Login2 extends JFrame{
-	JPanel panel  = new JPanel(); 
-	JPanel panela = new GUILogin().panel;  
-	GUILogin f2 =new GUILogin();
-	JLabel userLabel = new JLabel("User:        ");
+public class LoginPanel extends JPanel{
+	private MainPanel mainPanel;
+	JLabel userLabel = new JLabel("User:");
 	JLabel passwordLabel = new JLabel("Password:");
 	JLabel noAccount = new JLabel("");
 	JLabel passwordError = new JLabel("");
@@ -21,42 +19,38 @@ public class Login2 extends JFrame{
     JPasswordField passwordText = new JPasswordField(20);
     JButton loginButton = new JButton("login");
     JButton registerButton = new JButton("enroll");
-    
-	public Login2() {
-		this.setSize(1200, 560);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.add(panel);
+
+	public LoginPanel(MainPanel mainPanel) {
 		this.init();
 		this.addListener();
-		this.setVisible(true);
+		this.setLayout(null);
+		this.mainPanel = mainPanel;
 	}
 	public void init() {	
-		panel.setLayout(null);
-		panel.add(userLabel);
-		panel.add(userText);
-        panel.add(noAccount);
+		this.setLayout(null);
+		this.add(userLabel);
+		this.add(userText);
+        this.add(noAccount);
         userLabel.setFont(new Font("宋体", 0, 25));
-        userLabel.setBounds(450,150, 200, 30);
-        userText.setBounds(600,150, 200, 25);
-        noAccount.setBounds(450,190, 500,30);
+        userLabel.setBounds(20,85, 150, 30);
+        userText.setBounds(170,85, 200, 25);
+        noAccount.setBounds(30,130, 500,30);
            
-        panel.add(passwordLabel);
-        panel.add(passwordText);
-        panel.add(passwordError);
+        this.add(passwordLabel);
+        this.add(passwordText);
+        this.add(passwordError);
         passwordLabel.setFont(new Font("宋体", 0, 25));
-        passwordLabel.setBounds(450,220, 200, 30);
-        passwordText.setBounds(600,220, 200, 25);
-        passwordError.setBounds(450,260, 500,30);
+        passwordLabel.setBounds(20,170, 200, 30);
+        passwordText.setBounds(170,170, 200, 25);
+        passwordError.setBounds(30,200, 500,30);
         
         loginButton.setPreferredSize(new Dimension(120,25));
-        panel.add(loginButton);
-        loginButton.setBounds(480, 300, 100, 25);
+        this.add(loginButton);
+        loginButton.setBounds(70, 240, 100, 25);
         
         registerButton.setPreferredSize(new Dimension(120,25));
-        panel.add(registerButton);
-        registerButton.setBounds(630, 300, 100, 25);
-        
+        this.add(registerButton);
+        registerButton.setBounds(220, 240, 100, 25);
 	}
 	private void addListener() {
 		loginButton.addActionListener(new ActionListener(){
@@ -68,7 +62,6 @@ public class Login2 extends JFrame{
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				}
-				
 			}
 			
 		});
@@ -87,9 +80,7 @@ public class Login2 extends JFrame{
 	
 	private void forRegister() {
 		//TODO 跳转到登陆界面
-		this.setVisible(false);
-		f2.setVisible(true);
-		System.out.println("enroll");
+		mainPanel.changeToEnroll();
 	}
 	private void clean() {
 		passwordError.setText("");
@@ -114,24 +105,10 @@ public class Login2 extends JFrame{
 		    	passwordError.setForeground(Color.red);
 		    	System.out.println("can not login");
 		    	return null;
-		    } else if(clients.get(0).getRole()==0){//0管理员
-		    	//TODO login as admin	    
-		    	
-		    	System.out.println("管理员登入");
-		    		    	
-		    }else if(clients.get(0).getRole()==1) {//1教练 
-		    	//TODO login as coach
-		    	
-		    	System.out.println("教练登入");
-		    	
-		    	
-		    }else if(clients.get(0).getRole()==2) {//2用户
-		    	//TODO login as user
-		    	System.out.println("用户登入");
-		    	  	
-		    }else {//信息错误
-		    }
-		    System.out.println(clients.get(0));
+		   	}
+			else{
+				mainPanel.changeToFunction(clients.get(0));
+				}
 		    return clients.get(0);
 	    }	         
 	}

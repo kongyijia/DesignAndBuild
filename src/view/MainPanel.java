@@ -1,48 +1,54 @@
 package view;
 
+import model.Client;
+
 import javax.swing.*;
+
 
 public class MainPanel extends JPanel {
     public static final int WIDTH = 1200;
     public static final int HEIGHT = 560;
 
     private JPanel indexPanel;
+    private JPanel enrollPanel;
     private FunctionPanel functionPanel;
-    private int role = 0;
 
     public MainPanel(){
         initialize();
     }
 
-    public void setRole(int role) {
-        this.role = role;
-    }
-
     private void initialize(){
         this.setLayout(null);
         this.setBounds(0,0, WIDTH, HEIGHT);
-        changeToFunction();
+        changeToIndex();
     }
 
-    public void changeToFunction(){
-        if(functionPanel == null) {
-            this.functionPanel = new FunctionPanel(this, this.role);
-            this.add(functionPanel);
-            functionPanel.setVisible(true);
+    public void changeToFunction(Client client){
+        if(indexPanel != null) { indexPanel.setVisible(false); }
+        if(enrollPanel != null){ enrollPanel.setVisible(false); }
+
+        if(functionPanel != null) {
+            this.remove(functionPanel);
         }
-        if(indexPanel != null) {
-            indexPanel.setVisible(false);
-        }
+        this.functionPanel = new FunctionPanel(this, client);
+        this.add(functionPanel);
     }
 
     public void changeToIndex(){
-        if (functionPanel != null) {
-            functionPanel.setVisible(false);
+        if(enrollPanel != null){ enrollPanel.setVisible(false); }
+        if (functionPanel != null) { functionPanel.setVisible(false); }
+        if (indexPanel != null){
+            this.remove(indexPanel);
         }
-        if (indexPanel == null){
-            indexPanel = new IndexPanel(this);
-            this.add(indexPanel);
-            indexPanel.setVisible(true);
-        }
+        indexPanel = new IndexPanel(this);
+        this.add(indexPanel);
+    }
+
+    public void changeToEnroll(){
+        if(indexPanel != null){ indexPanel.setVisible(false); }
+        if(functionPanel != null){ functionPanel.setVisible(false); }
+        if (enrollPanel != null) { this.remove(enrollPanel); }
+        enrollPanel = new Enroll(this);
+        this.add(enrollPanel);
     }
 }

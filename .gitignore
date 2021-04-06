@@ -1,8 +1,11 @@
 # production
 /.idea
 /DesignAndBuild.iml
+/.classpath
+/.project
 
 # test
 /test
 /out
 /bin/
+

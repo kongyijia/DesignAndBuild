@@ -17,6 +17,7 @@ public class MainFrame extends JFrame {
         this.setTitle("CourseWork");
         this.setSize(WIDTH, HEIGHT);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
 
         mainPanel = new MainPanel();
         this.add(mainPanel);

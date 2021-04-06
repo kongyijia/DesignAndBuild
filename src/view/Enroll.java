@@ -9,10 +9,9 @@ import model.*;
 import model.mapping.*;
 
 
-public class Enroll extends JFrame implements ActionListener {
+public class Enroll extends JPanel implements ActionListener {
     public int flag = 1;
     public int state = 0;
-    public JFrame f_enroll;
     public JPanel p_enroll;
     //personal information shared by all 3 roles
     public int id = 0;
@@ -52,15 +51,16 @@ public class Enroll extends JFrame implements ActionListener {
     public JLabel w_phone;
     public JLabel w_email;
 
-    public static void main(String[] args){new Enroll();}
+    private MainPanel mainPanel;
 
-    public Enroll() {
-        f_enroll = new JFrame();
-        f_enroll.setTitle("Enroll");
-        f_enroll.setSize(1200, 560);
+    public Enroll(MainPanel mainPanel) {
+        this.setLayout(null);
         p_enroll = new JPanel();
         p_enroll.setLayout(null);
+        this.setBounds(0,0,1200,560);
+        this.add(p_enroll);
 
+        this.mainPanel = mainPanel;
         newcomponent();
 
         //radio button (only select one)
@@ -75,9 +75,6 @@ public class Enroll extends JFrame implements ActionListener {
 
         setbound();
         addtopanel();
-        f_enroll.setContentPane(p_enroll);
-        f_enroll.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f_enroll.setVisible(true);
     }
 
     public void newcomponent(){
@@ -126,6 +123,8 @@ public class Enroll extends JFrame implements ActionListener {
         i_email.setBounds(700, 350, 150, 25);
         i_cancel.setBounds(350, 400, 100, 25);
         i_ok.setBounds(650, 400, 100, 25);
+
+        p_enroll.setBounds(0,0,1200,560);
     }
 
     public void addtopanel(){
@@ -375,15 +374,14 @@ public class Enroll extends JFrame implements ActionListener {
         b_login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                f_enroll.setVisible(false);
                 f_message.setVisible(false);
-                new Login();
+                mainPanel.changeToIndex();
             }
         });
         p_message.add(r_message);
         p_message.add(b_back);
         p_message.add(b_login);
-        f_message.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        // f_message.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f_message.setVisible(true);
     }
 }

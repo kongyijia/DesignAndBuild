@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry excluding="model/" kind="src" path="src"/>
-	<classpathentry kind="src" path="src/model"/>
-	<classpathentry kind="lib" path="lib/fastjson-1.2.75.jar"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>
