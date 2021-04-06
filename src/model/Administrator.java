@@ -1,4 +1,4 @@
-package models;
+package model;
 
 public class Administrator extends Client {
     public Administrator(int id, String nickName, String password, int sex, String phone, String email, int role, boolean cancel) {
