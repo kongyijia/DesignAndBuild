@@ -1,7 +1,7 @@
 import java.awt.*;
 
 
-import views.MainFrame;
+import view.MainFrame;
 
 import javax.swing.*;
 
