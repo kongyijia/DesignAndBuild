@@ -1,12 +1,9 @@
 import java.awt.*;
-
+import javax.swing.*;
 
 import view.MainFrame;
 
-import javax.swing.*;
-
 public class MainApp {
-
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {

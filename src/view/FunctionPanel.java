@@ -3,8 +3,9 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import model.*;
+import java.util.HashMap;
 
+import model.*;
 
 public class FunctionPanel extends JLayeredPane{
     public static final int MENU_WIDTH = 150;
@@ -12,18 +13,22 @@ public class FunctionPanel extends JLayeredPane{
     public static final int INFO_HEIGHT = 50;
     public static final int INFO_WIDTH = MainPanel.WIDTH;
     public static final int MENU_BUTTON_HEIGHT = 30;
+    public static int MENU_BUTTON_COUNT = 0;
+    public static int INFO_BUTTON_COUNT = 0;
 
+    private CardLayout cardLayout = new CardLayout();
     private JPanel menuPanel;
     private JPanel showPanel;
     private JPanel infoPanel;
-    private CardLayout cardLayout = new CardLayout();
-    private MainPanel mainPanel;
+    private HashMap<String, JPanel> pages = new HashMap<>();
 
+    private MainPanel mainPanel;
     private Client client;
 
     public FunctionPanel(MainPanel mainPanel, Client client) {
         this.mainPanel = mainPanel;
         this.client = client;
+
         initialize(client);
     }
 
@@ -33,7 +38,8 @@ public class FunctionPanel extends JLayeredPane{
 
         showPanel_init();
         infoPanel_init(client.getNickName(), "assets/pictures/test.jpg");
-        menuPanel_init(client.getRole());
+        menuPanel_init();
+        pages_init(client.getRole());
     }
 
     private void showPanel_init(){
@@ -48,22 +54,18 @@ public class FunctionPanel extends JLayeredPane{
 
             @Override
             public void mousePressed(MouseEvent e) {
-                return;
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                return;
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                return;
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                return;
             }
         });
         this.add(showPanel);
@@ -82,12 +84,7 @@ public class FunctionPanel extends JLayeredPane{
         ImageIcon avatarIcon = new ImageIcon(avatarURL);
         avatarIcon.setImage(avatarIcon.getImage().getScaledInstance(avatarButton.getWidth(),avatarButton.getHeight(),Image.SCALE_DEFAULT));
         avatarButton.setIcon(avatarIcon);
-        avatarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                menuPanel.setVisible(true);
-            }
-        });
+        avatarButton.addActionListener(e -> menuPanel.setVisible(true));
 
         JLabel logoLabel = new JLabel();
         logoLabel.setBounds(50, 0, 50, 50);
@@ -106,7 +103,7 @@ public class FunctionPanel extends JLayeredPane{
         this.setLayer(infoPanel, 2);
     }
 
-    private void menuPanel_init(int role) {
+    private void menuPanel_init() {
         menuPanel = new JPanel();
         menuPanel.setLayout(null);
         menuPanel.setBounds(1000, INFO_HEIGHT, MENU_WIDTH, MENU_HEIGHT);
@@ -115,49 +112,54 @@ public class FunctionPanel extends JLayeredPane{
         this.add(menuPanel);
         this.setLayer(menuPanel, 3);
 
-        if(role == 2){
-            menuPanel.add(new MenuButton(new JPanel(), "Your Profile","userProfile",0));
-            menuPanel.add(new MenuButton(new JPanel(),"Your Course","userCourse", 1));
-            menuPanel.add(new MenuButton(new JPanel(),"Video Square","userVideoSquare", 2));
-        }
-        else if(role == 1){
-            menuPanel.add(new MenuButton(new JPanel(),"Your Profile","coachProfile", 0));
-            menuPanel.add(new MenuButton(new JPanel(),"Your Course","coachCourse", 1));
-            menuPanel.add(new MenuButton(new JPanel(),"Video Management","coachVideoManagement", 2));
-        }
-        else if(role == 0){
-            menuPanel.add(new MenuButton(new JPanel(),"Video Square","adminVideoSquare", 0));
-            menuPanel.add(new MenuButton(new JPanel(),"Video Management","adminVideoManagement", 1));
-            menuPanel.add(new MenuButton(new JPanel(),"Staff Management","adminStaffManagement", 2));
-        }
         JButton exitButton = new JButton("Sign out");
         exitButton.setBounds(0, MENU_HEIGHT - MENU_BUTTON_HEIGHT, MENU_WIDTH, MENU_BUTTON_HEIGHT);
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainPanel.changeToIndex();
-            }
-        });
+        exitButton.addActionListener(e -> mainPanel.changeToIndex());
+        exitButton.setBorder(BorderFactory.createRaisedBevelBorder());
         menuPanel.add(exitButton);
         menuPanel.setVisible(false);
     }
+    private void pages_init(int role){
+        if(role == 0){
+            addPage(new JPanel(),"Your Profile","userProfile", 1);
+            addPage(new JPanel(),"Your Course","userCourse",1);
+            addPage(new JPanel(),"Video Square","userVideoSquare", 1);
+        }
+        else if(role == 1){
+            addPage(new JPanel(),"Your Profile","coachProfile",1);
+            addPage(new JPanel(),"Your Course","coachCourse",1);
+            addPage(new JPanel(),"Video Management","coachVideoManagement",1);
+        }
+        else if(role == 2){
+            addPage(new JPanel(),"Video Square","adminVideoSquare",1);
+            addPage(new JPanel(),"Video Management","adminVideoManagement",1);
+            addPage(new JPanel(),"Staff Management","adminStaffManagement",1);
+        }
+    }
 
+    private void addPage(JPanel panel, String viewName, String key, int buttonType){
+        showPanel.add(panel, key);
+        pages.put(key, panel);
+        if(buttonType == 1){
+            menuPanel.add(new MenuButton(viewName, key, MENU_BUTTON_COUNT));
+            MENU_BUTTON_COUNT++;
+        }
+        else{
+            infoPanel.add(new InfoButton(viewName, key, INFO_BUTTON_COUNT));
+            INFO_BUTTON_COUNT++;
+        }
+    }
     public class MenuButton extends JButton{
-        public MenuButton(JPanel panel, String viewName ,String options, int index){
+        public MenuButton(String viewName ,String key, int index){
             super(viewName);
             this.setBounds(0, index * MENU_BUTTON_HEIGHT, MENU_WIDTH, MENU_BUTTON_HEIGHT);
-            this.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    cardLayout.show(showPanel, options);
-                }
-            });
-            showPanel.add(panel, options);
+            this.addActionListener(e -> {cardLayout.show(showPanel, key); menuPanel.setVisible(false);});
+            this.setBorder(BorderFactory.createRaisedBevelBorder());
         }
     }
 
     public class InfoButton extends JButton{
-        public InfoButton(JPanel panel, String viewName ,String options, int index){
+        public InfoButton(String viewName, String key, int index){
             super(viewName);
 
             int INFO_BUTTON_X = 100;
@@ -166,13 +168,7 @@ public class FunctionPanel extends JLayeredPane{
             int INFO_BUTTON_HEIGHT = 30;
 
             this.setBounds(INFO_BUTTON_X + INFO_BUTTON_WIDTH * index, INFO_BUTTON_Y, INFO_BUTTON_WIDTH, INFO_BUTTON_HEIGHT);
-            this.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    cardLayout.show(showPanel, options);
-                }
-            });
-            showPanel.add(panel, options);
+            this.addActionListener(e -> cardLayout.show(showPanel, key));
         }
     }
 }

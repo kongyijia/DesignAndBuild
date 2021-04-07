@@ -1,9 +1,7 @@
 package view;
 
 import model.Client;
-
 import javax.swing.*;
-
 
 public class MainPanel extends JPanel {
     public static final int WIDTH = 1200;

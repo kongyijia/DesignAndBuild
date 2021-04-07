@@ -26,7 +26,8 @@ public class IndexPanel extends JPanel {
     private void loginPanel_init(){
         loginPanel = new LoginPanel(this.mainPanel);
         loginPanel.setBounds(670,80,400,300);
-        loginPanel.setBackground(new Color(255,255,255,170));
+        loginPanel.setBackground(new Color(255, 255, 255,170));
+        loginPanel.setBorder(BorderFactory.createRaisedBevelBorder());
         this.add(loginPanel);
     }
 }
