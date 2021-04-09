@@ -24,7 +24,7 @@ public class Userdescription extends JPanel{
 
     }
 
-    private static void showCustomDialog(JFrame Owner ,Component parentComponent) {
+    private void showCustomDialog(JFrame Owner ,Component parentComponent) {
 
         int[] times = {0};
         // 创建一个模态对话框
@@ -58,7 +58,7 @@ public class Userdescription extends JPanel{
                     if (new String(npwd.getPassword()).equals(new String(cpwd.getPassword())))
                     {
                         changepassword(new String(npwd.getPassword()));
-                        JOptionPane.showMessageDialog(Owner, "Change Successfully.");
+                        JOptionPane.showMessageDialog(new JPanel(), "Change Successfully.");
                         dialog.dispose();
                     }
                     else
