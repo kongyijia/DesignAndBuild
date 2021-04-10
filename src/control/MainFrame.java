@@ -37,20 +37,6 @@ public class MainFrame extends JFrame{
         this.setResizable(false);
 
         this.setVisible(true);
-
-        // 设置一个默认登录用户，真正用户登录后变更
-        // TODO 设置默认用户为暂时做法，之后修改逻辑
-        HashMap<String, String> map = new HashMap<>();
-        map.put("id", "123333");
-        ArrayList<User> users = null;
-        try
-        {
-            users = ClientMapping.findUser(map);
-        } catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        this.client = users.get(0);
     }
 
     public void registerObserver(String name, Controller o) {
@@ -83,9 +69,14 @@ public class MainFrame extends JFrame{
         // 注册，登录，功能页面跳转用此方法
         if(firstGate.contains(name)) {
             list.forEach((k, v) -> v.getPanel().setVisible(false));
-
-            //更新视图
-            Controller controller = list.get(name);
+            Controller controller;
+            if(!list.containsKey(name)){
+                controller = ControllerFactory.create(name);
+                this.add(controller.getPanel());
+            }
+            else{
+                controller = list.get(name);
+            }
             controller.update();
             controller.getPanel().setVisible(true);
         }

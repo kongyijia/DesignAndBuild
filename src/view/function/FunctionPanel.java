@@ -176,7 +176,9 @@ public class FunctionPanel extends JLayeredPane implements config {
             menuPanel.add(menuButton);
         }
         else{
-            infoPanel.add(new InfoButton(viewName, key, infoButtons.size()));
+            InfoButton infoButton = new InfoButton(viewName, key, infoButtons.size());
+            infoButtons.put(key, infoButton);
+            infoPanel.add(infoButton);
         }
     }
 }

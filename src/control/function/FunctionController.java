@@ -40,6 +40,7 @@ public class FunctionController extends Controller {
                 functionPanel.getMenuPanel().setVisible(true);
             }
             else if(e.getSource() == functionPanel.getExitButton()){
+                MainFrame.getInstance().setClient(null);
                 MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
             }
             else if(functionPanel.getMenuButtons().containsValue(e.getSource())){

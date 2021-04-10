@@ -14,9 +14,6 @@ public class MainApp {
                 try {
                     UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
                     MainFrame mainFrame = MainFrame.getInstance();
-                    mainFrame.add(new FunctionController().getPanel());
-                    mainFrame.add(new EnrollController().getPanel());
-                    mainFrame.add(new IndexController().getPanel());
                     MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
                 } catch (Exception e) {
                     e.printStackTrace();
