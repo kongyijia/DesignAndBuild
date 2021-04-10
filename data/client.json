@@ -102,5 +102,27 @@
     "phone": "1234567890",
     "role": 1,
     "sex": 0
+  },
+  {
+    "cancel": false,
+    "description": "",
+    "email": "6914532@qq.com",
+    "id": 4667,
+    "level": 0,
+    "nickName": "shengbo",
+    "password": "1234",
+    "phone": "0987654321",
+    "role": 1,
+    "sex": 1
+  },
+  {
+    "cancel": false,
+    "email": "876543@qq.com",
+    "id": 8811,
+    "nickName": "sheng",
+    "password": "12345678",
+    "phone": "09876321",
+    "role": 0,
+    "sex": 0
   }
 ]

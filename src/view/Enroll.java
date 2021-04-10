@@ -10,7 +10,7 @@ import model.mapping.*;
 
 
 public class Enroll extends JPanel{
-    public int flag = 1;
+    public int flag;
     public int state = 0;
     public JPanel p_enroll;
     //personal information shared by all 3 roles
