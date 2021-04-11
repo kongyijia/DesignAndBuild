@@ -20,12 +20,14 @@ public class FunctionPanel extends JLayeredPane implements config {
     private JPanel menuPanel;
     private JPanel showPanel;
     private JPanel infoPanel;
-    private HashMap<String, JPanel> pages = new HashMap<>();
     private HashMap<String, MenuButton> menuButtons = new HashMap<>();
     private HashMap<String, InfoButton> infoButtons = new HashMap<>();
 
     private JButton avatarButton;
     private JButton exitButton;
+
+    private JLabel welcomeLabel;
+
 
     private Client client;
 
@@ -41,7 +43,7 @@ public class FunctionPanel extends JLayeredPane implements config {
         showPanel_init();
         infoPanel_init(client.getNickName(), "assets/pictures/test.jpg");
         menuPanel_init();
-        pages_init(client.getRole());
+        button_init(client.getRole());
     }
 
     private void showPanel_init(){
@@ -93,6 +95,10 @@ public class FunctionPanel extends JLayeredPane implements config {
         this.client = client;
     }
 
+    public JLabel getWelcomeLabel() {
+        return welcomeLabel;
+    }
+
     public void addMouseListener(MouseListener mouseListener){
         showPanel.addMouseListener(mouseListener);
     }
@@ -124,7 +130,7 @@ public class FunctionPanel extends JLayeredPane implements config {
         logoLabel.setIcon(logoIcon);
         infoPanel.add(logoLabel);
 
-        JLabel welcomeLabel = new JLabel("Welcome " + nickname + " !");
+        welcomeLabel = new JLabel("Welcome " + nickname + " !");
         welcomeLabel.setBounds(900, 10, 200, 40);
 
         infoPanel.add(welcomeLabel);
@@ -149,35 +155,33 @@ public class FunctionPanel extends JLayeredPane implements config {
         menuPanel.add(exitButton);
         menuPanel.setVisible(false);
     }
-    private void pages_init(int role){
+    public void button_init(int role){
         if(role == 2){
-            addPage(new JPanel(),"Your Profile","userProfile", 1);
-            addPage(new JPanel(),"Your Course","userCourse",1);
-            addPage(new JPanel(),"Video Square","userVideoSquare", 1);
+            addButton("Your Profile","userProfile", 1);
+            addButton("Your Course","userCourse",2);
+            addButton("Video Square","userVideoSquare", 1);
         }
         else if(role == 1){
-            addPage(new JPanel(),"Your Profile","coachProfile",1);
-            addPage(new JPanel(),"Your Course","coachCourse",1);
-            addPage(new JPanel(),"Video Management","coachVideoManagement",1);
+            addButton("Your Profile","coachProfile",1);
+            addButton("Your Course","coachCourse",1);
+            addButton("Video Management","coachVideoManagement",1);
         }
         else if(role == 0){
-            addPage(new JPanel(),"Video Square","adminVideoSquare",1);
-            addPage(new JPanel(),"Video Management","adminVideoManagement",1);
-            addPage(new JPanel(),"Staff Management","adminStaffManagement",1);
+            addButton("Video Square","adminVideoSquare",1);
+            addButton("Video Management","adminVideoManagement",1);
+            addButton("Staff Management","adminStaffManagement",1);
         }
     }
 
-    public void addPage(JPanel panel, String viewName, String key, int buttonType){
-        showPanel.add(panel, key);
-        pages.put(key, panel);
+    private void addButton(String buttonName, String pageName, int buttonType){
         if(buttonType == 1){
-            MenuButton menuButton = new MenuButton(viewName, key, menuButtons.size());
-            menuButtons.put(key, menuButton);
+            MenuButton menuButton = new MenuButton(buttonName, pageName, menuButtons.size());
+            menuButtons.put(pageName, menuButton);
             menuPanel.add(menuButton);
         }
         else{
-            InfoButton infoButton = new InfoButton(viewName, key, infoButtons.size());
-            infoButtons.put(key, infoButton);
+            InfoButton infoButton = new InfoButton(buttonName, pageName, infoButtons.size());
+            infoButtons.put(pageName, infoButton);
             infoPanel.add(infoButton);
         }
     }

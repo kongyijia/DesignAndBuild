@@ -195,7 +195,6 @@ public class EnrollController extends Controller {
     }
 
     private void write(){
-        git
         if(enroll.i_admin.isSelected()){
             Administrator admin = new Administrator(enroll.id, enroll.nickName, enroll.password, enroll.sex, enroll.phone, enroll.email, 0);
             try {
