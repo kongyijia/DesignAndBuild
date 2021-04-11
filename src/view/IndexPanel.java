@@ -56,13 +56,11 @@ public class IndexPanel extends JPanel implements config {
         passwordText.setBounds(170, 170, 200, 25);
         passwordError.setBounds(30, 200, 500, 30);
 
-        loginButton.setPreferredSize(new Dimension(120, 25));
         loginPanel.add(loginButton);
-        loginButton.setBounds(70, 240, 100, 25);
+        loginButton.setBounds(70, 240, 120, 25);
 
-        registerButton.setPreferredSize(new Dimension(120, 25));
         loginPanel.add(registerButton);
-        registerButton.setBounds(220, 240, 100, 25);
+        registerButton.setBounds(220, 240, 120, 25);
 
         this.add(loginPanel);
     }

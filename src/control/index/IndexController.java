@@ -56,8 +56,6 @@ public class IndexController extends Controller {
         } else {
             //不能登录
             if (!clients.get(0).getPassword().equals(password)) {
-                System.out.println(password);
-                System.out.println(clients.get(0).getPassword());
                 indexPanel.getPasswordError().setText("your password is wrong, please try again!");
                 indexPanel.getPasswordError().setForeground(Color.red);
                 System.out.println("can not login");
@@ -70,6 +68,9 @@ public class IndexController extends Controller {
 
     @Override
     public void update() {
-
+        System.out.println("Index update");
+        clean();
+        indexPanel.getPasswordText().setText("");
+        indexPanel.getUserText().setText("");
     }
 }
