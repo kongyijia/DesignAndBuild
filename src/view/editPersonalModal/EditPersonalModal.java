@@ -1,14 +1,11 @@
-package view.editPersonalPageModal;
+package view.editPersonalModal;
 
 import model.Client;
 import view.basicComponents.JLabelPro;
 
 import javax.swing.*;
 
-public class EditPersonalPageModal {
-
-    private final JFrame jFrame = new JFrame("Edit Personal Information");
-    private final JPanel jPanel = new JPanel();
+public class EditPersonalModal extends JPanel{
 
     private final JLabelPro nickNameLabel = new JLabelPro("NickName: ");
     private final JLabelPro sexualityLabel = new JLabelPro("Sexuality: ");
@@ -27,16 +24,14 @@ public class EditPersonalPageModal {
     private final JButton confirmButton = new JButton("Confirm");
     private final JButton cancelButton = new JButton("Cancel");
 
-    public EditPersonalPageModal(Client client){
+    public EditPersonalModal(Client client){
+        super();
         this.setNickNameTextField(client.getNickName());
         this.setSexualityComboBox(client.getSex());
         this.setPhoneTextField(client.getPhone());
         this.setEmailTextField(client.getEmail());
     }
 
-    public JFrame getJFrame() {
-        return this.jFrame;
-    }
 
     public void setNickNameTextField(String nickName){
         this.nickNameTextField.setText(nickName);
@@ -87,8 +82,8 @@ public class EditPersonalPageModal {
     }
 
     public void initModalLayout(){
-        this.jFrame.setBounds(0,0,350,650);
-        this.jPanel.setBounds(0,0,350,650);
+        this.setBounds(0,0,350,650);
+        this.setBounds(0,0,350,650);
 
         this.nickNameLabel.setBounds(40,20,100,60);
         this.sexualityLabel.setBounds(40,80,100,60);
@@ -105,27 +100,23 @@ public class EditPersonalPageModal {
         this.confirmButton.setBounds(40,500,100,60);
         this.cancelButton.setBounds(190,500,100,60);
 
-        this.jPanel.setLayout(null);
+        this.setLayout(null);
 
-        this.jPanel.add(nickNameLabel);
-        this.jPanel.add(sexualityLabel);
-        this.jPanel.add(phoneLabel);
-        this.jPanel.add(emailLabel);
-        this.jPanel.add(descriptionLabel);
-        this.jPanel.add(nickNameTextField);
-        this.jPanel.add(sexualityComboBox);
-        this.jPanel.add(phoneTextField);
-        this.jPanel.add(emailTextField);
-        this.jPanel.add(descriptionTextArea);
-        this.jPanel.add(confirmButton);
-        this.jPanel.add(cancelButton);
+        this.add(nickNameLabel);
+        this.add(sexualityLabel);
+        this.add(phoneLabel);
+        this.add(emailLabel);
+        this.add(descriptionLabel);
+        this.add(nickNameTextField);
+        this.add(sexualityComboBox);
+        this.add(phoneTextField);
+        this.add(emailTextField);
+        this.add(descriptionTextArea);
+        this.add(confirmButton);
+        this.add(cancelButton);
 
-        this.jPanel.repaint();
-
-        this.jFrame.add(jPanel);
-        this.jFrame.setLocationRelativeTo(null);
-        this.jFrame.setResizable(false);
-        this.jFrame.setVisible(true);
+        this.repaint();
+        
     }
 
 }
