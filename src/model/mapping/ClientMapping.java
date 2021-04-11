@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONReader;
 import com.alibaba.fastjson.JSONWriter;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import model.Administrator;
 import model.Client;
 import model.Coach;
@@ -28,6 +29,13 @@ public class ClientMapping {
     public static final int ADMIN_NOT_FOUND = 5;
 
 
+    /**
+     * Add client({@link User}, {@link Coach}, {@link Administrator}) to JSON database.
+     * @param type instance of class extended {@link Client} class
+     * @param <T> extends {@link Client} class
+     * @return status code: {@value DUPLICATE_ID}, {@value DUPLICATE_NICKNAME} or {@value SUCCESS}
+     * @throws IOException when IO issue occur
+     */
     public static <T extends Client> int add(T type) throws IOException {
         ArrayList<Client> clients = readAllClients();
         for (Client client : clients) {
@@ -43,6 +51,12 @@ public class ClientMapping {
         return SUCCESS;
     }
 
+    /**
+     * Delete Client({@link User}, {@link Coach}, {@link Administrator}) from JSON database.
+     * @param id ID of the {@link Client} instance which you want to delete
+     * @return Status code: {@value CLIENT_NOT_FOUND} or {@value SUCCESS}
+     * @throws IOException when IO issue occur
+     */
     public static int delete(int id) throws IOException {
         int index = -1;
         ArrayList<Client> clients = readAllClients();
@@ -59,10 +73,22 @@ public class ClientMapping {
         return SUCCESS;
     }
 
+    /**
+     * Update Client({@link User}, {@link Coach}, {@link Administrator}) data in JSON database.
+     * The method need {@code ID} to locate where the data is so do not set a new value to the {@code ID}.
+     * @param type updated instance of client class extended {@link Client}
+     * @param <T> extends {@link Client} class
+     * @return status code: {@value DUPLICATE_NICKNAME}, {@value CLIENT_NOT_FOUND} or {@value SUCCESS}
+     * @throws IOException when IO issue occur
+     */
     public static <T extends Client> int modify(T type) throws IOException {
         int index = -1;
         ArrayList<Client> clients = readAllClients();
         for (Client client : clients) {
+            if (client.getNickName().equals(type.getNickName())
+                    && client.getId() != type.getId()) {
+                return DUPLICATE_NICKNAME;
+            }
             if (client.getId() == type.getId()) {
                 index = clients.indexOf(client);
             }
@@ -76,6 +102,14 @@ public class ClientMapping {
         return SUCCESS;
     }
 
+    /**
+     * Find client({@link User}, {@link Coach}, {@link Administrator}) from JSON database, and return the results to a {@link ArrayList<Client>}.
+     * The parameter are {@link HashMap}, you need to put all {@code AND} conditions in hashmap.
+     * This {@code find} method can't handle other conditions except {@code AND}, like {@code OR} or {@code between} or others.
+     * @param map the WHERE conditions are represented by K-V pairs using {@link HashMap}
+     * @return {@link ArrayList<Client>} contained results.
+     * @throws FileNotFoundException when {@value DATA_PATH} not found
+     */
     public static ArrayList<Client> find(HashMap<String, String> map) throws FileNotFoundException {
         ArrayList<Client> clients = new ArrayList<>();
         JSONReader reader = new JSONReader(new FileReader(DATA_PATH));
@@ -161,6 +195,8 @@ public class ClientMapping {
 
     private static void writeAll(ArrayList<Client> clients) throws IOException {
         JSONWriter writer = new JSONWriter(new FileWriter(DATA_PATH));
+        writer.config(SerializerFeature.DisableCircularReferenceDetect, true);
+        writer.config(SerializerFeature.PrettyFormat, true);
         writer.startArray();
         for (Client client : clients) {
             writer.writeValue(client);
