@@ -1,21 +1,19 @@
 package control.EditPersonalPageModal;
 
-import control.Controller;
-import model.Client;
-import util.config;
+import control.MainFrame;
+
 import view.editPersonalModal.EditPersonalModal;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EditPersonalModalController extends Controller implements ActionListener {
+public class EditPersonalModalController implements ActionListener {
 
     protected EditPersonalModal editPersonalModal;
     protected JFrame jFrame;
 
-    public EditPersonalModalController(Client client){
-        super(config.EDIT_PERSONAL_MODAL, new EditPersonalModal(client));
+    public EditPersonalModalController(){
         this.showModal();
     }
 
@@ -33,7 +31,7 @@ public class EditPersonalModalController extends Controller implements ActionLis
     }
 
     protected void showModal(){
-        this.editPersonalModal = (EditPersonalModal) this.panel;
+        this.editPersonalModal = new EditPersonalModal(MainFrame.getInstance().getClient());
         this.editPersonalModal.initModalLayout();
         this.bindActionListener();
         this.initJFrame();
@@ -60,8 +58,4 @@ public class EditPersonalModalController extends Controller implements ActionLis
         }
     }
 
-    @Override
-    public void update() {
-
-    }
 }

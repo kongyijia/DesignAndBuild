@@ -1,18 +1,19 @@
 package control.EditPersonalPageModal;
 
+import control.MainFrame;
 import model.Coach;
 
 public class EditCoachModalController extends EditPersonalModalController {
     private Coach coach;
 
-    public EditCoachModalController(Coach coach) {
-        super(coach);
+    public EditCoachModalController() {
+        super();
+        this.setCoach();
         this.editPersonalModal.setDescriptionTextArea(coach.getDescription());
-        this.setCoach(coach);
     }
 
-    public void setCoach(Coach coach) {
-        this.coach = coach;
+    public void setCoach() {
+        this.coach = (Coach) MainFrame.getInstance().getClient();
     }
 
     protected void edit(){
@@ -21,7 +22,6 @@ public class EditCoachModalController extends EditPersonalModalController {
         this.coach.setPhone(this.editPersonalModal.getPhoneTextField());
         this.coach.setEmail(this.editPersonalModal.getEmailTextField());
         this.coach.setDescription(this.editPersonalModal.getDescriptionTextArea());
-        System.out.println(this.coach.getNickName()+this.coach.getSex());
+        MainFrame.getInstance().setClient(this.coach);
     }
-
 }
