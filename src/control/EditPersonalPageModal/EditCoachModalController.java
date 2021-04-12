@@ -1,6 +1,5 @@
 package control.EditPersonalPageModal;
 
-import control.MainFrame;
 import model.Coach;
 
 public class EditCoachModalController extends EditPersonalModalController {

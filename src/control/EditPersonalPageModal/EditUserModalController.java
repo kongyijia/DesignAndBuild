@@ -1,6 +1,5 @@
 package control.EditPersonalPageModal;
 
-import control.MainFrame;
 import model.User;
 
 public class EditUserModalController extends EditPersonalModalController {
@@ -9,7 +8,7 @@ public class EditUserModalController extends EditPersonalModalController {
     public EditUserModalController() {
         super();
         this.setUser();
-        this.editPersonalModal.setDescriptionTextArea(user.getDescription());
+        this.editPersonalModal.setDescriptionTextArea(this.user.getDescription());
         this.showModal();
     }
 

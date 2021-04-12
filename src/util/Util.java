@@ -1,5 +1,8 @@
 package util;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class Util {
 
     public static boolean isNickNameLegal(String nickName){
@@ -16,6 +19,9 @@ public class Util {
         return email.matches(regex);
     }
 
-
+    public static void showDialog(Component component,String info){
+        Object[] Okay = {"OK"};
+        JOptionPane.showOptionDialog(component, info, "Message",JOptionPane.YES_NO_CANCEL_OPTION ,JOptionPane.QUESTION_MESSAGE,null, Okay, Okay[0]);
+    }
 
 }
