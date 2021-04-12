@@ -1,5 +1,13 @@
 package model;
 
+/**
+ * Coach model class.
+ *
+ * @author Yubo Wu
+ * @version 1.0
+ * @see Client
+ * @since 10 April 2021
+ */
 public class Coach extends Client {
     private int level; // 0: 低级（默认）; 1: 高级; 2: 特级
     private String description;

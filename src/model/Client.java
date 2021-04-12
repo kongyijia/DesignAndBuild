@@ -1,5 +1,12 @@
 package model;
 
+/**
+ * client model class. It represents all type of client ({@link User}, {@link Coach} and {@link Administrator}).
+ *
+ * @author Yubo Wu
+ * @version 1.0
+ * @since 10 April 2021
+ */
 public class Client {
     private int id;
     private String nickName;
