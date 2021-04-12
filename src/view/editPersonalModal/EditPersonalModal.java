@@ -83,7 +83,6 @@ public class EditPersonalModal extends JPanel{
 
     public void initModalLayout(){
         this.setBounds(0,0,350,650);
-        this.setBounds(0,0,350,650);
 
         this.nickNameLabel.setBounds(40,20,100,60);
         this.sexualityLabel.setBounds(40,80,100,60);

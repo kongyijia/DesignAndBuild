@@ -9,19 +9,16 @@ public class EditCoachModalController extends EditPersonalModalController {
     public EditCoachModalController() {
         super();
         this.setCoach();
-        this.editPersonalModal.setDescriptionTextArea(coach.getDescription());
+        this.editPersonalModal.setDescriptionTextArea(this.coach.getDescription());
+        this.showModal();
     }
 
     public void setCoach() {
-        this.coach = (Coach) MainFrame.getInstance().getClient();
+        this.coach = (Coach) this.client;
     }
 
     protected void edit(){
-        this.coach.setNickName(this.editPersonalModal.getNickNameTextField());
-        this.coach.setSex(this.editPersonalModal.getSexualityComboBox());
-        this.coach.setPhone(this.editPersonalModal.getPhoneTextField());
-        this.coach.setEmail(this.editPersonalModal.getEmailTextField());
+        super.edit();
         this.coach.setDescription(this.editPersonalModal.getDescriptionTextArea());
-        MainFrame.getInstance().setClient(this.coach);
     }
 }
