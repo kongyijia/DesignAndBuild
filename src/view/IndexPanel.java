@@ -29,7 +29,7 @@ public class IndexPanel extends JPanel implements config {
 
     // draw background
     protected void paintComponent(Graphics g) {
-        Image icon = new ImageIcon("assets\\pictures\\indexBackGround.jpg").getImage();
+        Image icon = new ImageIcon("assets/pictures/indexBackGround.jpg").getImage();
         g.drawImage(icon, 0, 0, this.getWidth(), this.getHeight(), this);
     }
 
