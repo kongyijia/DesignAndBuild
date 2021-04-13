@@ -35,8 +35,8 @@ public class buildProfilepanel extends JPanel
     public buildProfilepanel()
     {
         this.setSize(200,510);
-        this.setLocation(200,0);
-//        this.setBackground(Color.red);
+        this.setLocation(0,0);
+        this.setBackground(new Color(125, 101, 53));
         this.setLayout(null);
 
         changeinformation.setFont(new Font("Times", Font.ITALIC, 10));

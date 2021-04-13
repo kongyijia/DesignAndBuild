@@ -1,5 +1,6 @@
 package control.function;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -14,6 +15,8 @@ import view.function.InfoButton;
 import view.function.MenuButton;
 import model.Client;
 
+import javax.swing.*;
+
 public class FunctionController extends Controller{
     private FunctionPanel functionPanel;
 
@@ -21,7 +24,6 @@ public class FunctionController extends Controller{
         super(config.FUNCTION_PANEL_NAME, new FunctionPanel());
 
         this.functionPanel = (FunctionPanel) this.panel;
-
         functionPanel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) { functionPanel.getMenuPanel().setVisible(false); }
@@ -52,6 +54,8 @@ public class FunctionController extends Controller{
         else {
             controller.update();
         }
+        functionPanel.getCardLayout().setHgap(controller.getH_gap());
+        functionPanel.getCardLayout().setVgap(controller.getV_gap());
         functionPanel.getCardLayout().show(functionPanel.getShowPanel(), name);
     }
 
@@ -70,8 +74,8 @@ public class FunctionController extends Controller{
                 functionPanel.button_init(currentClient.getRole());
                 functionPanel.addListener(new FunctionActionListener());
                 functionPanel.setClient(currentClient);
-                functionPanel.getWelcomeLabel().setText("Welcome " + currentClient.getNickName() + " !");
             }
+            functionPanel.getWelcomeLabel().setText("Welcome " + currentClient.getNickName() + " !");
         }
     }
 

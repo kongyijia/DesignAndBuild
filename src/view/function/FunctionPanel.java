@@ -15,7 +15,6 @@ public class FunctionPanel extends JLayeredPane implements config {
     public static final int INFO_HEIGHT = PAGE_Y;
     public static final int MENU_BUTTON_HEIGHT = 30;
 
-
     private CardLayout cardLayout = new CardLayout();
     private JPanel menuPanel;
     private JPanel showPanel;
@@ -25,9 +24,7 @@ public class FunctionPanel extends JLayeredPane implements config {
 
     private JButton avatarButton;
     private JButton exitButton;
-
     private JLabel welcomeLabel;
-
 
     private Client client;
 
@@ -63,12 +60,12 @@ public class FunctionPanel extends JLayeredPane implements config {
         return showPanel;
     }
 
-    public JPanel getInfoPanel() {
-        return infoPanel;
-    }
-
     public CardLayout getCardLayout() {
         return cardLayout;
+    }
+
+    public JPanel getInfoPanel() {
+        return infoPanel;
     }
 
     public JButton getAvatarButton() {
