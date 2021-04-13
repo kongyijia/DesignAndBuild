@@ -1,4 +1,12 @@
 # production
 /.idea
 /DesignAndBuild.iml
+/.classpath
+/.project
+
+# test
+/test
+/out
+/bin/
+/src/Test.java
 
