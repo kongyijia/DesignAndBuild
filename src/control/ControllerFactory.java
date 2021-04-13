@@ -1,5 +1,6 @@
 package control;
 
+import control.Userinformation.UserInformationController;
 import control.enroll.EnrollController;
 import control.function.FunctionController;
 import control.index.IndexController;
@@ -13,8 +14,11 @@ public class ControllerFactory {
                 return new IndexController();
             case ENROLL_PANEL_NAME:
                 return new EnrollController();
+            case USERDESCRIPTION_PANEL_NAME:
+                return new UserInformationController();
             case FUNCTION_PANEL_NAME:
                 return new FunctionController();
+
         }
         return null;
     }

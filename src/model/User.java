@@ -3,6 +3,14 @@ package model;
 import java.sql.Time;
 import java.util.ArrayList;
 
+/**
+ * User model class.
+ *
+ * @author Yubo Wu
+ * @version 1.0
+ * @see Client
+ * @since 10 April 2021
+ */
 public class User extends Client {
     private double account;
     private int level;

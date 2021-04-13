@@ -12,7 +12,7 @@ public class MainApp {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+//                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
                     MainFrame mainFrame = MainFrame.getInstance();
                     MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
                 } catch (Exception e) {
