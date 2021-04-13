@@ -19,6 +19,7 @@ public class FunctionController extends Controller{
 
     public FunctionController(){
         super(config.FUNCTION_PANEL_NAME, new FunctionPanel());
+
         this.functionPanel = (FunctionPanel) this.panel;
 
         functionPanel.addMouseListener(new MouseListener() {
@@ -81,11 +82,13 @@ public class FunctionController extends Controller{
                 functionPanel.getMenuPanel().setVisible(true);
             }
             else if(e.getSource() == functionPanel.getExitButton()){
-                MainFrame.getInstance().setClient(null);
+                // MainFrame.getInstance().setClient(null);
+                functionPanel.getMenuPanel().setVisible(false);
                 MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
             }
             else if(functionPanel.getMenuButtons().containsValue(e.getSource())){
                 MenuButton menuButton = (MenuButton) e.getSource();
+                functionPanel.getMenuPanel().setVisible(false);
                 goTo(menuButton.getKey());
             }
             else if(functionPanel.getInfoButtons().containsValue(e.getSource())){

@@ -14,4 +14,7 @@ public interface config {
      String INDEX_PANEL_NAME = "index";
      String ENROLL_PANEL_NAME = "enroll";
      String FUNCTION_PANEL_NAME = "function";
+     String USERDESCRIPTION_PANEL_NAME = "userdes";
+
+     String EDIT_PERSONAL_MODAL = "editPersonalModal";
 }
