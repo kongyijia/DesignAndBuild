@@ -28,6 +28,10 @@ public class EditPersonalModalController implements ActionListener {
         this.client = MainFrame.getInstance().getClient();
     }
 
+    public JFrame getJFrame() {
+        return jFrame;
+    }
+
     protected void initJFrame(){
         this.jFrame = new JFrame("Edit Personal Info");
         this.jFrame.setBounds(0,0,350,650);
@@ -76,7 +80,8 @@ public class EditPersonalModalController implements ActionListener {
             } else if(ClientMapping.modify(this.client) == 2) {
                 Util.showDialog(this.jFrame, "Error! Cannot find your info!");
             } else {
-                //MainFrame.getInstance().setClient(this.client);
+                System.out.println(this.client.getNickName());
+                MainFrame.getInstance().setClient(this.client);
                 this.jFrame.dispose();
             }
         }

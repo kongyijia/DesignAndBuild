@@ -16,14 +16,14 @@ public class builddescription extends JPanel
         {
             Coach self = (Coach) receiveuser;
             destext = new JTextArea(self.getDescription());
-
         }
+
         if (receiveuser.getRole() == 2) // user
         {
             User self = (User) receiveuser;
             destext = new JTextArea(self.getDescription());
         }
-        this.setBounds(500,370,500,140);
+        this.setBounds(300,370,500,140);
         this.setLayout(null);
 
         JLabel des = new JLabel("description:");

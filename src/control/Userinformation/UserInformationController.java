@@ -2,6 +2,8 @@ package control.Userinformation;
 
 import com.sun.tools.javac.Main;
 import control.Controller;
+import control.EditPersonalPageModal.EditCoachModalController;
+import control.EditPersonalPageModal.EditUserModalController;
 import control.MainFrame;
 import model.Client;
 import model.User;
@@ -20,11 +22,17 @@ public class UserInformationController extends Controller
 {
     private Client user;
     private final Userdescription userdescription;
+
+    private EditCoachModalController editCoachModalController;
+    private EditUserModalController editUserModalController;
+
     public UserInformationController(){
         super(config.USERDESCRIPTION_PANEL_NAME, new Userdescription());
         user = MainFrame.getInstance().getClient();
         this.userdescription = (Userdescription) this.panel;
         buttons();
+        this.panel.setVisible(true);
+        this.setH_gap(150);
     }
 
     public void changepassword(String newpwd)
@@ -54,7 +62,17 @@ public class UserInformationController extends Controller
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                //TODO
+                if(MainFrame.getInstance().getClient().getRole() == 2){
+                    if(editUserModalController != null){
+                        editUserModalController.getJFrame().dispose();
+                    }
+                    editUserModalController = new EditUserModalController();
+                } else if(MainFrame.getInstance().getClient().getRole() == 1) {
+                    if(editCoachModalController != null){
+                        editCoachModalController.getJFrame().dispose();
+                    }
+                    editCoachModalController = new EditCoachModalController();
+                }
             }
         });
         buildProfilepanel.getTopup().addActionListener(new ActionListener()
@@ -135,6 +153,7 @@ public class UserInformationController extends Controller
     public void update()
     {
         this.user = MainFrame.getInstance().getClient();
+        System.out.println("fuck anyone");
         if (user != null)
                 userdescription.update();
     }
