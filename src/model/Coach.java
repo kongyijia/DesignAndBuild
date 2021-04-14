@@ -1,19 +1,21 @@
 package model;
 
+import java.util.ArrayList;
+
 /**
  * Coach model class.
  *
  * @author Yubo Wu
- * @version 1.0
+ * @version 1.1
  * @see Client
- * @since 10 April 2021
+ * @since 14 April 2021
  */
 public class Coach extends Client {
     private int level; // 0: 低级（默认）; 1: 高级; 2: 特级
     private String description;
 
-    public Coach(int id, String nickName, String password, int sex, String phone, String email, int role, boolean cancel, int level, String description) {
-        super(id, nickName, password, sex, phone, email, role, cancel);
+    public Coach(int id, String nickName, String password, int sex, String phone, String email, int role, boolean cancel, ArrayList<Integer> recordHistory, String avatarSrc, int level, String description) {
+        super(id, nickName, password, sex, phone, email, role, cancel, recordHistory, avatarSrc);
         this.level = level;
         this.description = description;
     }
