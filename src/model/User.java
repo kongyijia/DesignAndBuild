@@ -7,9 +7,9 @@ import java.util.ArrayList;
  * User model class.
  *
  * @author Yubo Wu
- * @version 1.0
+ * @version 1.1
  * @see Client
- * @since 10 April 2021
+ * @since 14 April 2021
  */
 public class User extends Client {
     private double account;
@@ -19,8 +19,10 @@ public class User extends Client {
     private ArrayList<Course> courseSubscription;
     private String description;
 
-    public User(int id, String nickName, String password, int sex, String phone, String email, int role, boolean cancel, double account, int level, int learningTime, int vip, ArrayList<Course> courseSubscription, String description) {
-        super(id, nickName, password, sex, phone, email, role, cancel);
+    public User(int id, String nickName, String password, int sex, String phone, String email
+            , int role, boolean cancel, ArrayList<Integer> recordHistory, String avatarSrc, double account
+            , int level, int learningTime, int vip, ArrayList<Course> courseSubscription, String description) {
+        super(id, nickName, password, sex, phone, email, role, cancel, recordHistory, avatarSrc);
         this.account = account;
         this.level = level;
         this.learningTime = learningTime;

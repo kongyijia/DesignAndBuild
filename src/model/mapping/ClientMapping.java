@@ -10,13 +10,12 @@ import model.Client;
 import model.Coach;
 import model.User;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Map {@link Client} data to JSON database.
@@ -26,16 +25,18 @@ import java.util.Map;
  * In this class, we use {@link com.alibaba.fastjson.JSON} to manage our {@link Client} POJO.
  *
  * @author Yubo Wu
- * @version 1.0
+ * @version 1.1
  * @see JSON
  * @see Client
  * @see User
  * @see Coach
  * @see Administrator
- * @since 12 April 2021
+ * @since 14 April 2021
  */
 public class ClientMapping {
     public static final String DATA_PATH = "data/client.json";
+    public static final String AVATAR_PATH = "data/image/";
+    public static final String DEFAULT_AVATAR = "default.jpeg";
     public static final int SUCCESS = 0;
     public static final int DUPLICATE_ID = 1;
     public static final int DUPLICATE_NICKNAME = 6;
@@ -43,6 +44,7 @@ public class ClientMapping {
     public static final int USER_NOT_FOUND = 3;
     public static final int COACH_NOT_FOUND = 4;
     public static final int ADMIN_NOT_FOUND = 5;
+    public static final int NOT_IMAGE = 6;
 
 
     /**
@@ -63,6 +65,7 @@ public class ClientMapping {
                 return DUPLICATE_NICKNAME;
             }
         }
+        type.setAvatarSrc(AVATAR_PATH + DEFAULT_AVATAR);
         clients.add(type);
         writeAll(clients);
         return SUCCESS;
@@ -118,6 +121,43 @@ public class ClientMapping {
         clients.remove(index);
         clients.add(type);
         writeAll(clients);
+        return SUCCESS;
+    }
+
+    /**
+     * Update Client({@link User}, {@link Coach} and {@link Administrator}} avatar data.
+     * It will first copy the image to {@value AVATAR_PATH}, then update the srcPath of image to JSON database.
+     *
+     * @param id           Client id you want to modify
+     * @param originalPath the original path of the profile photo. Must be absolute path
+     * @param <T>          generic type extends {@link Client}, include {@link User}, {@link Coach} and {@link Administrator}
+     * @return status code: NOT_IMAGE={@value NOT_IMAGE}, SUCCESS={@value SUCCESS}
+     * @throws IOException when IO issue occur
+     */
+    public static <T extends Client> int modifyAvatar(int id, String originalPath) throws IOException {
+        File file = new File(originalPath);
+        // check if image?
+        String mimeType = Files.probeContentType(file.toPath());
+        String type = mimeType.split("/")[0];
+        if (!type.equals("image"))
+            return NOT_IMAGE;
+
+        // copy image to data/image
+        String avatarNewId = UUID.randomUUID().toString();
+        String suffix = file.getName().substring(file.getName().lastIndexOf("."));
+        String newPath = AVATAR_PATH + avatarNewId + suffix;
+        File newFile = new File(newPath);
+        Files.copy(file.toPath(), newFile.toPath());
+
+        // update data in JSON database
+        ArrayList<Client> clients = readAllClients();
+        for (Client client : clients) {
+            if (client.getId() == id) {
+                client.setAvatarSrc(newPath);
+                modify(client);
+                break;
+            }
+        }
         return SUCCESS;
     }
 

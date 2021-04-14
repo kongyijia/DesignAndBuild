@@ -1,11 +1,13 @@
 package model;
 
+import java.util.ArrayList;
+
 /**
  * client model class. It represents all type of client ({@link User}, {@link Coach} and {@link Administrator}).
  *
  * @author Yubo Wu
- * @version 1.0
- * @since 10 April 2021
+ * @version 1.1
+ * @since 14 April 2021
  */
 public class Client {
     private int id;
@@ -16,8 +18,11 @@ public class Client {
     private String email;
     private int role; // 0: admin; 1:coach; 2: user
     private boolean cancel; // false: active; true: cancel
+    private ArrayList<Integer> recordHistory; // record history id
+    private String avatarSrc;
 
-    public Client(int id, String nickName, String password, int sex, String phone, String email, int role, boolean cancel) {
+
+    public Client(int id, String nickName, String password, int sex, String phone, String email, int role, boolean cancel, ArrayList<Integer> recordHistory, String avatarSrc) {
         this.id = id;
         this.nickName = nickName;
         this.password = password;
@@ -26,6 +31,8 @@ public class Client {
         this.email = email;
         this.role = role;
         this.cancel = cancel;
+        this.recordHistory = recordHistory;
+        this.avatarSrc = avatarSrc;
     }
 
     public Client(int id, String nickName, String password, int sex, String phone, String email, int role) {
@@ -38,9 +45,41 @@ public class Client {
         this.role = role;
         // default
         this.cancel = false;
+        this.recordHistory = new ArrayList<>();
+        this.avatarSrc = "";
     }
 
     public Client() {
+    }
+
+    public Client(int id, String nickName, String password, int sex, String phone, String email, int role, String avatarSrc) {
+        this.id = id;
+        this.nickName = nickName;
+        this.password = password;
+        this.sex = sex;
+        this.phone = phone;
+        this.email = email;
+        this.role = role;
+        this.avatarSrc = avatarSrc;
+        // default
+        this.cancel = false;
+        this.recordHistory = new ArrayList<>();
+    }
+
+    public ArrayList<Integer> getRecordHistory() {
+        return recordHistory;
+    }
+
+    public void setRecordHistory(ArrayList<Integer> recordHistory) {
+        this.recordHistory = recordHistory;
+    }
+
+    public String getAvatarSrc() {
+        return avatarSrc;
+    }
+
+    public void setAvatarSrc(String avatarSrc) {
+        this.avatarSrc = avatarSrc;
     }
 
     public int getId() {
