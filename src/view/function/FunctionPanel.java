@@ -47,6 +47,7 @@ public class FunctionPanel extends JLayeredPane implements config {
         showPanel = new JPanel();
         showPanel.setLayout(cardLayout);
         showPanel.setBounds(0, INFO_HEIGHT, PAGE_WIDTH, PAGE_HEIGHT);
+        showPanel.setBackground(Color.white);
 
         this.add(showPanel);
         this.setLayer(showPanel, -1);

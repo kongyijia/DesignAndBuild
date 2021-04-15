@@ -1,15 +1,17 @@
 package control.staffManage;
 
 import control.Controller;
+import control.MainFrame;
 import model.Client;
 import model.mapping.ClientMapping;
 import util.Util;
 import util.config;
+import view.staffManagement.ClientDetailFrame;
+import view.staffManagement.InsertButtonPanel;
 import view.staffManagement.PersonPanel;
 import view.staffManagement.StaffManagePanel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -53,7 +55,9 @@ public class StaffManageController extends Controller {
                         searchMap.put(k, "1");
                     else if ("User".equals(role))
                         searchMap.put(k, "2");
-                } else
+                } else if (k.equals("cancel"))
+                    searchMap.put(k, v.getComboBox().getSelectedItem().equals("Active") ? "false" : "true");
+                else
                     searchMap.put(k, (String) v.getComboBox().getSelectedItem());
             }
         });
@@ -70,19 +74,34 @@ public class StaffManageController extends Controller {
     @Override
     public void update() {
         System.out.println("Staff Management Page update");
+        // clear old panel
         staffManagePanel.getInfoPanel().removeAll();
         staffManagePanel.getPersonMap().clear();
+
+        // create new insert panel
+        InsertButtonPanel insertPanel = new InsertButtonPanel();
+        insertPanel.getAdminInsertButton().addActionListener(e -> {
+            MainFrame.getInstance().goTo(config.STAFF_INSERT_NAME);
+        });
+        insertPanel.getCoachInsertButton().addActionListener(e -> {
+            MainFrame.getInstance().goTo(config.STAFF_INSERT_NAME);
+        });
+        staffManagePanel.getInfoPanel().add(insertPanel);
+
+        // create new client panels
         staffManagePanel.getClients().forEach(client -> staffManagePanel.getPersonMap().put(client.getId(), new PersonPanel(client)));
         staffManagePanel.getPersonMap().forEach((k, v) -> {
             staffManagePanel.getInfoPanel().add(v);
-            v.getDeleteButton().addActionListener(new StaffDeleteListener());
+            v.getDeleteButton().addActionListener(new PersonPanelListener());
+            v.getDetailButton().addActionListener(new PersonPanelListener());
         });
         int client_num = staffManagePanel.getClients().size();
-        System.out.println(client_num);
         if (client_num == 0)
             Util.showDialog(staffManagePanel, "No qualified clients were found!");
-        else if (client_num < 5 ) {
-            // TODO change infoPanel size for matching clients' number
+        else if (client_num < 5) {
+            for (int i = 0; i < 5 - client_num; i++) {
+                staffManagePanel.getInfoPanel().add(new PersonPanel());
+            }
         }
         staffManagePanel.updateUI();
     }
@@ -102,24 +121,35 @@ public class StaffManageController extends Controller {
         }
     }
 
-    class StaffDeleteListener implements ActionListener {
+    class PersonPanelListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("delete");
             staffManagePanel.getPersonMap().forEach((k, v) -> {
+                // delete client
                 if (e.getSource() == v.getDeleteButton()) {
                     Object[] buttonName = {"Confirm", "Cancel"};
                     int result = JOptionPane.showOptionDialog(staffManagePanel,
                             "Are you sure to delete this client?\n ",
                             "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttonName, buttonName);
+                    // confirm to delete
                     if (result == JOptionPane.YES_OPTION) {
                         try {
-                            ClientMapping.delete(k);
-                            update();
+                            if (ClientMapping.cancel(k) == ClientMapping.SUCCESS) {
+                                Util.showDialog(staffManagePanel, "Delete Success! ");
+                                staffManagePanel.setClients(search_clients());
+                                update();
+                            } else
+                                Util.showDialog(staffManagePanel, "Error! \n     Delete failed !");
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
                     }
+                }
+                // show the detail information of client
+                else if (e.getSource() == v.getDetailButton()) {
+
+                    ClientDetailFrame clientDetail = new ClientDetailFrame(v.getClient());
+
                 }
             });
         }

@@ -31,7 +31,7 @@ public class MainFrame extends JFrame{
         this.setTitle("CourseWork");
         this.setSize(config.FRAME_WIDTH, config.FRAME_HEIGHT);
         this.setLocationRelativeTo(null);
-        // this.setResizable(false);
+        this.setResizable(false);
 
         this.setVisible(true);
     }

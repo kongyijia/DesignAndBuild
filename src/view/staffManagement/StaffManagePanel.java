@@ -43,6 +43,7 @@ public class StaffManagePanel extends JPanel {
         searchComboBoxMap.put("role", new PeopleSearchComponent("Type", new String[]{"All", "Admin", "Coach", "User"}, searchComboBoxMap.size()));
         searchComboBoxMap.put("sex", new PeopleSearchComponent("Sex", new String[]{"All", "male", "female"}, searchComboBoxMap.size()));
         searchComboBoxMap.put("level", new PeopleSearchComponent("Level", new String[]{"All", "0", "1", "2"}, searchComboBoxMap.size()));
+        searchComboBoxMap.put("cancel", new PeopleSearchComponent("state", new String[]{"All", "Active", "Canceled"}, searchComboBoxMap.size()));
 
         searchButton = new JButton("Search");
         searchButton.setBounds(config.PAGE_WIDTH - 100, 10, 80, SEARCH_PANEL_HEIGHT - 20);
@@ -66,7 +67,7 @@ public class StaffManagePanel extends JPanel {
         infoPanel.setBackground(Color.white);
 
         scrollPane = new JScrollPane(infoPanel);
-        scrollPane.setBounds(0, SEARCH_PANEL_HEIGHT, config.PAGE_WIDTH - 14, config.PAGE_HEIGHT - SEARCH_PANEL_HEIGHT - 15);
+        scrollPane.setBounds(0, SEARCH_PANEL_HEIGHT, config.PAGE_WIDTH - 14, config.PAGE_HEIGHT - SEARCH_PANEL_HEIGHT + 5);
 
         this.add(scrollPane);
     }
