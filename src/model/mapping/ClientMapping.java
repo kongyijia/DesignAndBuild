@@ -25,13 +25,13 @@ import java.util.UUID;
  * In this class, we use {@link com.alibaba.fastjson.JSON} to manage our {@link Client} POJO.
  *
  * @author Yubo Wu
- * @version 1.1
+ * @version 1.2
  * @see JSON
  * @see Client
  * @see User
  * @see Coach
  * @see Administrator
- * @since 14 April 2021
+ * @since 15 April 2021
  */
 public class ClientMapping {
     public static final String DATA_PATH = "data/client.json";
@@ -92,6 +92,26 @@ public class ClientMapping {
         clients.remove(index);
         writeAll(clients);
         return SUCCESS;
+    }
+
+    /**
+     * Cancel Client({@link User}, {@link Coach}, {@link Administrator}) account.
+     * Lazy deletion.
+     * That is, to set "cancel" to true.
+     *
+     * @param id ID of the {@link Client} instance which you want to delete
+     * @return Status code: CLIENT_NOT_FOUND={@value CLIENT_NOT_FOUND} or SUCCESS={@value SUCCESS}
+     * @throws IOException when IO issue occur
+     */
+    public static int cancel(int id) throws IOException {
+        ArrayList<Client> clients = readAllClients();
+        for (Client client : clients) {
+            if (client.getId() == id) {
+                client.setCancel(true);
+                return modify(client);
+            }
+        }
+        return CLIENT_NOT_FOUND;
     }
 
     /**
