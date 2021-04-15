@@ -83,10 +83,9 @@ public class FunctionController extends Controller{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == functionPanel.getAvatarButton()){
-                functionPanel.getMenuPanel().setVisible(true);
+                functionPanel.getMenuPanel().setVisible(!functionPanel.getMenuPanel().isVisible());
             }
             else if(e.getSource() == functionPanel.getExitButton()){
-                // MainFrame.getInstance().setClient(null);
                 functionPanel.getMenuPanel().setVisible(false);
                 MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
             }

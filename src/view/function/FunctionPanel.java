@@ -38,7 +38,7 @@ public class FunctionPanel extends JLayeredPane implements config {
         this.setBounds(0,0, PANEL_WIDTH, PANEL_HEIGHT);
 
         showPanel_init();
-        infoPanel_init(client.getNickName(), "assets/pictures/test.jpg");
+        infoPanel_init(client.getNickName(), client.getAvatarSrc());
         menuPanel_init();
         button_init(client.getRole());
     }
@@ -115,7 +115,7 @@ public class FunctionPanel extends JLayeredPane implements config {
         infoPanel.setBounds(0, 0, PANEL_WIDTH, INFO_HEIGHT);
 
         avatarButton = new JButton();
-        avatarButton.setBounds(1100, 0, 50, 50);
+        avatarButton.setBounds(config.PAGE_WIDTH - 100, 0, 50, 50);
         ImageIcon avatarIcon = new ImageIcon(avatarURL);
         avatarIcon.setImage(avatarIcon.getImage().getScaledInstance(avatarButton.getWidth(),avatarButton.getHeight(),Image.SCALE_DEFAULT));
         avatarButton.setIcon(avatarIcon);
@@ -128,7 +128,8 @@ public class FunctionPanel extends JLayeredPane implements config {
         infoPanel.add(logoLabel);
 
         welcomeLabel = new JLabel("Welcome " + nickname + " !");
-        welcomeLabel.setBounds(900, 10, 200, 40);
+        welcomeLabel.setForeground(Color.white);
+        welcomeLabel.setBounds(900, 0, 200, 50);
 
         infoPanel.add(welcomeLabel);
         infoPanel.add(avatarButton);
@@ -155,8 +156,8 @@ public class FunctionPanel extends JLayeredPane implements config {
     public void button_init(int role){
         if(role == 2){
             addButton("Your Profile",USERDESCRIPTION_PANEL_NAME, 1);
-            addButton("Your Course","userCourse",2);
-            addButton("Video Square","userVideoSquare", 1);
+            addButton("Your Course","userCourse",1);
+            addButton("Video Square","userVideoSquare", 2);
         }
         else if(role == 1){
             addButton("Your Profile",USERDESCRIPTION_PANEL_NAME,1);
@@ -164,9 +165,9 @@ public class FunctionPanel extends JLayeredPane implements config {
             addButton("Video Management","coachVideoManagement",1);
         }
         else if(role == 0){
-            addButton("Video Square","adminVideoSquare",1);
+            addButton("Video Square","adminVideoSquare",2);
             addButton("Video Management","adminVideoManagement",1);
-            addButton("Staff Management","adminStaffManagement",1);
+            addButton("Staff Management",STAFF_MANAGE_NAME,2);
         }
     }
 

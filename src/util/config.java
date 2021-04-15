@@ -17,4 +17,5 @@ public interface config {
      String USERDESCRIPTION_PANEL_NAME = "userdes";
 
      String EDIT_PERSONAL_MODAL = "editPersonalModal";
+     String STAFF_MANAGE_NAME = "staffManagement";
 }
