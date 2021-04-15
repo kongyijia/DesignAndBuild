@@ -25,19 +25,6 @@
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":false,
-	"description":"szsb",
-	"email":"fake",
-	"id":83838383,
-	"level":0,
-	"nickName":"ertyuikjhgfd3",
-	"password":"ertyuijhvca';.,m",
-	"phone":"123456765890",
-	"recordHistory":[],
-	"role":1,
-	"sex":1
-},{
-	"avatarSrc":"data/image/default.jpeg",
-	"cancel":false,
 	"description":"",
 	"email":"2018213231@qmul.ac.uk",
 	"id":0,
@@ -133,4 +120,17 @@
 	"role":2,
 	"sex":1,
 	"vip":1
+},{
+	"avatarSrc":"data/image/b00ce233-f396-4521-86ac-eef535522e44.jpg",
+	"cancel":false,
+	"description":"szsb",
+	"email":"fake",
+	"id":83838383,
+	"level":0,
+	"nickName":"ertyuikjhgfd3",
+	"password":"ertyuijhvca';.,m",
+	"phone":"123456765890",
+	"recordHistory":[],
+	"role":1,
+	"sex":1
 }]
