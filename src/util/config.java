@@ -15,6 +15,7 @@ public interface config {
      String ENROLL_PANEL_NAME = "enroll";
      String FUNCTION_PANEL_NAME = "function";
      String USERDESCRIPTION_PANEL_NAME = "userdes";
-
+     String VIDEOSQUARE_PANEL_NAME="videoSquare";
+     
      String EDIT_PERSONAL_MODAL = "editPersonalModal";
 }
