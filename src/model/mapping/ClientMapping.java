@@ -25,13 +25,13 @@ import java.util.UUID;
  * In this class, we use {@link com.alibaba.fastjson.JSON} to manage our {@link Client} POJO.
  *
  * @author Yubo Wu
- * @version 1.2
+ * @version 1.3
  * @see JSON
  * @see Client
  * @see User
  * @see Coach
  * @see Administrator
- * @since 15 April 2021
+ * @since 16 April 2021
  */
 public class ClientMapping {
     public static final String DATA_PATH = "data/client.json";
@@ -219,6 +219,37 @@ public class ClientMapping {
         }
         reader.endArray();
         reader.close();
+        return clients;
+    }
+
+    /**
+     * Find client({@link User}, {@link Coach}, {@link Administrator}) from JSON database, and return the results to a {@link ArrayList<Client>}.
+     * This method supports {@code fuzzy search}.
+     * This method require a key-value pair.
+     * It a simple version of {@link ClientMapping#find(HashMap)}. If you have only one condition to search, you can use this method.
+     *
+     * @param key   the key of the value you want to search
+     * @param value the value you want to search
+     * @return {@link ArrayList<Client>} contained results.
+     * @throws FileNotFoundException when {@value DATA_PATH} not found
+     */
+    public static ArrayList<Client> find(String key, String value) throws FileNotFoundException {
+        ArrayList<Client> clients = new ArrayList<>();
+        JSONReader reader = new JSONReader(new FileReader(DATA_PATH));
+        reader.startArray();
+        while (reader.hasNext()) {
+            String s = reader.readString();
+            JSONObject object = JSON.parseObject(s);
+            if (object.getString(key).contains(value)) {
+                if (object.getInteger("role") == 0) {
+                    clients.add(JSON.parseObject(s, Administrator.class));
+                } else if (object.getInteger("role") == 1) {
+                    clients.add(JSON.parseObject(s, Coach.class));
+                } else if (object.getInteger("role") == 2) {
+                    clients.add(JSON.parseObject(s, User.class));
+                }
+            }
+        }
         return clients;
     }
 
