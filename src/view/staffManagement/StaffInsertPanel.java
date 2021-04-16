@@ -13,12 +13,26 @@ public class StaffInsertPanel extends JPanel {
     private JButton backButton;
     private JButton confirmButton;
 
+    public String nickName, password, password2, phone, email;
+    public JTextField nickNameInput, phoneInput, emailInput;
+    public JPasswordField passwordInput, password2Input;
+    public JLabel w_nickName, w_password, w_password2, w_sex, w_phone, w_email;
+    public JComboBox<String> sexInput;
+    public int flag = 1, state = 0, id = 0, sex = 0;
+
+    public JFrame f_message;
+    public JButton b_back;
+    public JButton b_login;
+    public JPanel p_message;
+    public JLabel r_message;
+
     public StaffInsertPanel(){
         initialize();
     }
 
     private void initialize(){
-        this.setLayout(new GridLayout(0,2,50,30));
+        //this.setLayout(new GridLayout(0,2,50,30));
+        this.setLayout(null);
         this.setSize(new Dimension(config.PAGE_WIDTH, config.PAGE_HEIGHT - 50));
 
         // TODO
@@ -28,43 +42,57 @@ public class StaffInsertPanel extends JPanel {
         this.add(whiteJLabel2);
 
         JLabel nickNameLabel = new JLabel("NickName: ", JLabel.CENTER);
-        JTextField nickNameInput = new JTextField();
+        nickNameInput = new JTextField();
         this.insertMap.put("nickName", nickNameInput);
+        nickNameLabel.setBounds(100,50,100,25);
+        nickNameInput.setBounds(350,50,100,25);
         this.add(nickNameLabel);
         this.add(nickNameInput);
 
         JLabel passwordLabel = new JLabel("Password: ", JLabel.CENTER);
-        JTextField passwordInput = new JTextField();
+        passwordInput = new JPasswordField();
         this.insertMap.put("password", passwordInput);
+        passwordLabel.setBounds(100,100,100,25);
+        passwordInput.setBounds(350,100,100,25);
         this.add(passwordLabel);
         this.add(passwordInput);
 
         JLabel password2Label = new JLabel("Input your password again to confirm: ", JLabel.CENTER);
-        JTextField password2Input = new JTextField();
+        password2Input = new JPasswordField();
         this.insertMap.put("password2", passwordInput);
+        password2Label.setBounds(100,150,100,25);
+        password2Input.setBounds(350,150,100,25);
         this.add(password2Label);
         this.add(password2Input);
 
         JLabel sexLabel = new JLabel("Sex: ", JLabel.CENTER);
-        JComboBox<String> sexInput = new JComboBox<>(new String[] {"male", "female"});
+        sexInput = new JComboBox<>(new String[] {"male", "female"});
         this.insertMap.put("sex", sexInput);
+        sexLabel.setBounds(100,200,100,25);
+        sexInput.setBounds(350,200,100,25);
         this.add(sexLabel);
         this.add(sexInput);
 
         JLabel phoneLabel = new JLabel("Phone Number: ", JLabel.CENTER);
-        JTextField phoneInput = new JTextField();
+        phoneInput = new JTextField();
         this.insertMap.put("phoneNumber", sexInput);
+        phoneLabel.setBounds(100,250,100,25);
+        phoneInput.setBounds(350,250,100,25);
         this.add(phoneLabel);
         this.add(phoneInput);
 
         JLabel emailLabel = new JLabel("E-mail: ", JLabel.CENTER);
-        JTextField emailInput = new JTextField();
+        emailInput = new JTextField();
         this.insertMap.put("email", emailInput);
+        emailLabel.setBounds(100,300,100,25);
+        emailInput.setBounds(350,300,100,25);
         this.add(emailLabel);
         this.add(emailInput);
 
         backButton = new JButton("Back");
         confirmButton = new JButton("Confirm");
+        backButton.setBounds(100,350,100,25);
+        confirmButton.setBounds(350,350,100,25);
         this.add(backButton);
         this.add(confirmButton);
 
@@ -72,11 +100,31 @@ public class StaffInsertPanel extends JPanel {
         JLabel whiteJLabel4 = new JLabel();
         this.add(whiteJLabel3);
         this.add(whiteJLabel4);
+
+        f_message = new JFrame();
+        b_back = new JButton("Back");
+        b_login = new JButton("Login");
+        p_message = new JPanel();
+        r_message = new JLabel("Enrollment success.");
+
+        f_message.setTitle("Enroll");
+        f_message.setSize(300,300);
+        f_message.setContentPane(p_message);
+        p_message.setLayout(null);
+        r_message.setBounds(80,50,140,20);
+        b_back.setBounds(50,150,100,20);
+        b_login.setBounds(150,150,100,20);
+
+        p_message.add(r_message);
+        p_message.add(b_back);
+        p_message.add(b_login);
+        f_message.setVisible(false);
     }
 
     public void addListener(ActionListener actionListener){
         this.backButton.addActionListener(actionListener);
         this.confirmButton.addActionListener(actionListener);
+        b_back.addActionListener(actionListener);
     }
 
     public JButton getBackButton() {

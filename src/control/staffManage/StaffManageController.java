@@ -82,9 +82,11 @@ public class StaffManageController extends Controller {
         InsertButtonPanel insertPanel = new InsertButtonPanel();
         insertPanel.getAdminInsertButton().addActionListener(e -> {
             MainFrame.getInstance().goTo(config.STAFF_INSERT_NAME);
+            setRole(0);
         });
         insertPanel.getCoachInsertButton().addActionListener(e -> {
             MainFrame.getInstance().goTo(config.STAFF_INSERT_NAME);
+            setRole(1);
         });
         staffManagePanel.getInfoPanel().add(insertPanel);
 

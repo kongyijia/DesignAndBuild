@@ -8,6 +8,7 @@ public abstract class Controller {
     protected Component panel;
     protected int v_gap = 0;
     protected int h_gap = 0;
+    public int role = 0;
 
     public Controller(String name, Component panel) {
         this.panel = panel;
@@ -35,6 +36,10 @@ public abstract class Controller {
     public void setH_gap(int h_gap) {
         this.h_gap = h_gap;
     }
+
+    public void setRole(int role) {this.role = role; }
+
+    public int getRole() {return role; }
 
     public abstract void update();
 }
