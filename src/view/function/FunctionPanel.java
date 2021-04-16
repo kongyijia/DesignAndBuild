@@ -1,6 +1,7 @@
 package view.function;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicBorders;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
@@ -149,15 +150,16 @@ public class FunctionPanel extends JLayeredPane implements config {
         menuPanel = new JPanel();
         menuPanel.setLayout(null);
         menuPanel.setBounds(1000, INFO_HEIGHT, MENU_WIDTH, MENU_HEIGHT);
-        menuPanel.setBackground(Color.white);
 
         this.add(menuPanel);
         this.setLayer(menuPanel, Integer.MAX_VALUE);
 
         exitButton = new JButton("Sign out");
         exitButton.setBounds(0, MENU_HEIGHT - MENU_BUTTON_HEIGHT, MENU_WIDTH, MENU_BUTTON_HEIGHT);
-        exitButton.setBorder(BorderFactory.createRaisedBevelBorder());
+        exitButton.setBackground(Color.DARK_GRAY);
+        exitButton.setForeground(Color.white);
         menuPanel.add(exitButton);
+
         menuPanel.setVisible(false);
     }
 

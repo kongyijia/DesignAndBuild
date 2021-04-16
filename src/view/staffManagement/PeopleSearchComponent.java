@@ -1,6 +1,7 @@
 package view.staffManagement;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  *  This is the component used in {@link StaffManagePanel} to filter searching information.
@@ -33,6 +34,7 @@ public class PeopleSearchComponent {
         comboBox = new JComboBox<String>(objects);
         comboBox.setSelectedIndex(0);
         comboBox.setBounds(X + LABEL_WIDTH+ index * WIDTH, Y, WIDTH - LABEL_WIDTH - 10, HEIGHT);
+        comboBox.setBackground(Color.white);
     }
 
     public String getName() {

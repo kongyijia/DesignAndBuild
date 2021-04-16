@@ -7,6 +7,7 @@ import model.User;
 import view.Userinformation.*;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  *  This is the dialog to show detail information of one client.
@@ -72,12 +73,14 @@ public class ClientDetailDialog extends JDialog {
             changePanel.add(VIPLevel);
 
             modifyVIPButton.setBounds(280,60,80,30);
+            modifyVIPButton.setBackground(Color.white);
             changePanel.add(modifyVIPButton);
         }
         level.setBounds(100,10, 100,30);
         changePanel.add(level);
 
         modifyLevelButton.setBounds(280,10,80,30);
+        modifyLevelButton.setBackground(Color.white);
         changePanel.add(modifyLevelButton);
 
         this.add(changePanel);

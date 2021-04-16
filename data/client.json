@@ -207,4 +207,28 @@
 	"recordHistory":[],
 	"role":0,
 	"sex":0
+},{
+	"avatarSrc":"data/image/default.jpeg",
+	"cancel":false,
+	"email":"121231@qq.css",
+	"id":8942,
+	"nickName":"newadmin",
+	"password":"12345678",
+	"phone":"1234567789",
+	"recordHistory":[],
+	"role":0,
+	"sex":1
+},{
+	"avatarSrc":"data/image/default.jpeg",
+	"cancel":false,
+	"description":"",
+	"email":"23131@qeq.com",
+	"id":7131,
+	"level":0,
+	"nickName":"newCoach",
+	"password":"12345678",
+	"phone":"21313131",
+	"recordHistory":[],
+	"role":1,
+	"sex":0
 }]

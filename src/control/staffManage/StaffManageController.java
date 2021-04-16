@@ -9,10 +9,7 @@ import model.mapping.ClientMapping;
 import util.Util;
 import util.config;
 import view.Userinformation.BuildInformation;
-import view.staffManagement.ClientDetailDialog;
-import view.staffManagement.InsertButtonPanel;
-import view.staffManagement.PersonPanel;
-import view.staffManagement.StaffManagePanel;
+import view.staffManagement.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -29,7 +26,6 @@ public class StaffManageController extends Controller {
         super(config.STAFF_MANAGE_NAME, new StaffManagePanel());
         staffManagePanel = (StaffManagePanel) this.panel;
 
-        staffManagePanel.setClients(search_clients());
         staffManagePanel.addListener(new StaffManageListener());
         update();
     }
@@ -84,13 +80,16 @@ public class StaffManageController extends Controller {
         InsertButtonPanel insertPanel = new InsertButtonPanel();
         insertPanel.getAdminInsertButton().addActionListener(e -> {
             MainFrame.getInstance().goTo(config.STAFF_INSERT_NAME);
+            ((StaffInsertController) MainFrame.getInstance().getController(config.STAFF_INSERT_NAME)).setRole(0);
         });
         insertPanel.getCoachInsertButton().addActionListener(e -> {
             MainFrame.getInstance().goTo(config.STAFF_INSERT_NAME);
+            ((StaffInsertController) MainFrame.getInstance().getController(config.STAFF_INSERT_NAME)).setRole(1);
         });
         staffManagePanel.getInfoPanel().add(insertPanel);
 
         // create new client panels
+        staffManagePanel.setClients(search_clients());
         staffManagePanel.getClients().forEach(client -> staffManagePanel.getPersonMap().put(client.getId(), new PersonPanel(client)));
         staffManagePanel.getPersonMap().forEach((k, v) -> {
             staffManagePanel.getInfoPanel().add(v);
@@ -98,15 +97,15 @@ public class StaffManageController extends Controller {
             v.getDetailButton().addActionListener(new PersonPanelListener());
         });
         int client_num = staffManagePanel.getClients().size();
-        if (client_num == 0)
-            Util.showDialog(staffManagePanel, "No qualified clients were found!");
-        else if (client_num < 5) {
+        if (client_num < 5) {
             // use blank panel to occupy space
             for (int i = 0; i < 5 - client_num; i++) {
                 staffManagePanel.getInfoPanel().add(new PersonPanel());
             }
         }
         staffManagePanel.updateUI();
+        if (client_num == 0)
+            Util.showDialog(staffManagePanel, "No qualified clients were found!");
     }
 
     class StaffManageListener implements ActionListener {
@@ -114,7 +113,6 @@ public class StaffManageController extends Controller {
         public void actionPerformed(ActionEvent e) {
             // add search listener
             if (e.getSource() == staffManagePanel.getSearchButton()) {
-                staffManagePanel.setClients(search_clients());
                 update();
             }
             // add reset listener
@@ -139,7 +137,6 @@ public class StaffManageController extends Controller {
                         try {
                             if (ClientMapping.cancel(k) == ClientMapping.SUCCESS) {
                                 Util.showDialog(staffManagePanel, "Delete Success! ");
-                                staffManagePanel.setClients(search_clients());
                                 update();
                             } else
                                 Util.showDialog(staffManagePanel, "Error! \n     Delete failed !");

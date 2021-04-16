@@ -42,7 +42,7 @@ public class StaffManagePanel extends JPanel {
     private void init_searchPanel() {
         searchPanel = new JPanel();
         searchPanel.setLayout(null);
-        searchPanel.setBackground(Color.white);
+        searchPanel.setBackground(Color.lightGray);
         searchPanel.setBounds(0, 0, config.PAGE_WIDTH, SEARCH_PANEL_HEIGHT);
 
         searchInputField = new JTextField();
@@ -55,9 +55,11 @@ public class StaffManagePanel extends JPanel {
 
         searchButton = new JButton("Search");
         searchButton.setBounds(config.PAGE_WIDTH - 100, 10, 80, SEARCH_PANEL_HEIGHT - 20);
+        searchButton.setBackground(Color.white);
 
         resetButton = new JButton("Reset");
         resetButton.setBounds(config.PAGE_WIDTH - 200, 10, 80, SEARCH_PANEL_HEIGHT - 20);
+        resetButton.setBackground(Color.white);
 
         searchPanel.add(searchInputField);
         searchPanel.add(searchButton);

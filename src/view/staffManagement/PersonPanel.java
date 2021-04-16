@@ -94,7 +94,7 @@ public class PersonPanel extends JPanel {
         detailButton.setBounds(150,140,80,25);
         detailButton.setBackground(Color.white);
 
-        if (MainFrame.getInstance().getClient().getId() == client.getId() || client.isCancel())
+        if ((client.getRole() == 0 && MainFrame.getInstance().getClient().getId() != client.getId()) || client.isCancel())
             deleteButton.setVisible(false);
         if (client.getRole() == 0)
             detailButton.setVisible(false);
