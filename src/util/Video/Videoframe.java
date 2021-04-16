@@ -56,6 +56,6 @@ public class Videoframe extends JFrame
 
         this.setContentPane(contentPane);
         this.setVisible(true);
-        MediaPlayerComponent.mediaPlayer().media().play("/Users/izreal/Desktop/大三/下/软件工程/SoftWareProject/DesignAndBuild/data/video/1.mp4");
+        MediaPlayerComponent.mediaPlayer().media().play("data/video/1.mp4");
     }
 }
