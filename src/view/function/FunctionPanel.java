@@ -102,8 +102,6 @@ public class FunctionPanel extends JLayeredPane implements config {
     }
 
     public void addListener(ActionListener actionListener){
-        avatarButton.addActionListener(actionListener);
-        exitButton.addActionListener(actionListener);
         menuButtons.forEach((k, v) -> v.addActionListener(actionListener));
         infoButtons.forEach((k, v) -> v.addActionListener(actionListener));
     }
@@ -146,7 +144,7 @@ public class FunctionPanel extends JLayeredPane implements config {
         menuPanel.setBackground(Color.white);
 
         this.add(menuPanel);
-        this.setLayer(menuPanel, 3);
+        this.setLayer(menuPanel, Integer.MAX_VALUE);
 
         exitButton = new JButton("Sign out");
         exitButton.setBounds(0, MENU_HEIGHT - MENU_BUTTON_HEIGHT, MENU_WIDTH, MENU_BUTTON_HEIGHT);

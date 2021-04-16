@@ -27,6 +27,7 @@ public class PersonPanel extends JPanel {
         initialize();
     }
 
+    // this contractor create a blank panel
     public PersonPanel(){
         this.setPreferredSize(new Dimension(280,180));
         this.setBackground(Color.white);

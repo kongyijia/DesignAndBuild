@@ -9,9 +9,9 @@ import model.User;
 import javax.swing.*;
 import java.awt.*;
 
-public class buildinformation extends JPanel
+public class BuildInformation extends JPanel
 {
-    public buildinformation(Client receiveuser)
+    public BuildInformation(Client receiveuser)
     {
 
         this.setBounds(300, 20, 500, 330);

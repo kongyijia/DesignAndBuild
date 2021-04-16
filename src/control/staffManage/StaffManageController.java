@@ -3,10 +3,13 @@ package control.staffManage;
 import control.Controller;
 import control.MainFrame;
 import model.Client;
+import model.Coach;
+import model.User;
 import model.mapping.ClientMapping;
 import util.Util;
 import util.config;
-import view.staffManagement.ClientDetailFrame;
+import view.Userinformation.BuildInformation;
+import view.staffManagement.ClientDetailDialog;
 import view.staffManagement.InsertButtonPanel;
 import view.staffManagement.PersonPanel;
 import view.staffManagement.StaffManagePanel;
@@ -26,8 +29,7 @@ public class StaffManageController extends Controller {
         super(config.STAFF_MANAGE_NAME, new StaffManagePanel());
         staffManagePanel = (StaffManagePanel) this.panel;
 
-        ArrayList<Client> init_clients = search_clients();
-        staffManagePanel.setClients(init_clients);
+        staffManagePanel.setClients(search_clients());
         staffManagePanel.addListener(new StaffManageListener());
         update();
     }
@@ -99,6 +101,7 @@ public class StaffManageController extends Controller {
         if (client_num == 0)
             Util.showDialog(staffManagePanel, "No qualified clients were found!");
         else if (client_num < 5) {
+            // use blank panel to occupy space
             for (int i = 0; i < 5 - client_num; i++) {
                 staffManagePanel.getInfoPanel().add(new PersonPanel());
             }
@@ -142,14 +145,54 @@ public class StaffManageController extends Controller {
                                 Util.showDialog(staffManagePanel, "Error! \n     Delete failed !");
                         } catch (IOException ex) {
                             ex.printStackTrace();
+                            Util.showDialog(staffManagePanel, "Error! \n     Delete failed !");
                         }
                     }
                 }
                 // show the detail information of client
                 else if (e.getSource() == v.getDetailButton()) {
+                    ClientDetailDialog clientDetail = new ClientDetailDialog(v.getClient());
 
-                    ClientDetailFrame clientDetail = new ClientDetailFrame(v.getClient());
+                    // modify client level
+                    clientDetail.getModifyLevelButton().addActionListener(actionEvent -> {
+                        int newLevel = (Integer) clientDetail.getLevel().getSelectedItem();
+                        Client newClient = v.getClient();
+                        if (v.getClient().getRole() == 1) {
+                            ((Coach) newClient).setLevel(newLevel);
+                        } else {
+                            ((User) newClient).setLevel(newLevel);
+                        }
+                        try {
+                            if (ClientMapping.modify(newClient) == ClientMapping.SUCCESS) {
+                                clientDetail.setBuildinformation(new BuildInformation(newClient));
+                                Util.showDialog(clientDetail, "Modify Success! ");
+                            } else {
+                                Util.showDialog(clientDetail, "Error! \n     Modify failed !");
+                            }
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                            Util.showDialog(clientDetail, "Error! \n     Modify failed !");
+                        }
+                    });
 
+                    // modify client VIP level
+                    clientDetail.getModifyVIPButton().addActionListener(actionEvent -> {
+                        int newVIPLevel = (Integer) clientDetail.getVIPLevel().getSelectedItem();
+                        User newUser = (User) v.getClient();
+                        newUser.setVip(newVIPLevel);
+                        try {
+                            if (ClientMapping.modify(newUser) == ClientMapping.SUCCESS) {
+                                clientDetail.setBuildinformation(new BuildInformation(newUser));
+                                Util.showDialog(clientDetail, "Modify Success! ");
+                            } else {
+                                Util.showDialog(clientDetail, "Error! \n     Modify failed !");
+                            }
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                            Util.showDialog(clientDetail, "Error! \n     Modify failed !");
+                        }
+                    });
+                    clientDetail.setVisible(true);
                 }
             });
         }
