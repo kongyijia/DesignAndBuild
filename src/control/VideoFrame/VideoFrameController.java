@@ -1,6 +1,11 @@
 package control.VideoFrame;
 
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
+import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
+import uk.co.caprica.vlcj.factory.discovery.strategy.LinuxNativeDiscoveryStrategy;
+import uk.co.caprica.vlcj.factory.discovery.strategy.NativeDiscoveryStrategy;
+import uk.co.caprica.vlcj.factory.discovery.strategy.OsxNativeDiscoveryStrategy;
+import uk.co.caprica.vlcj.factory.discovery.strategy.WindowsNativeDiscoveryStrategy;
 import uk.co.caprica.vlcj.player.base.LogoPosition;
 import uk.co.caprica.vlcj.player.base.MediaPlayer;
 import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
@@ -19,7 +24,16 @@ public class VideoFrameController
     Videoframe frame;
     public VideoFrameController()
     {
-        MediaPlayerFactory factory = new MediaPlayerFactory();
+        OsxNativeDiscoveryStrategy osxNativeDiscoveryStrategy = new OsxNativeDiscoveryStrategy();
+        osxNativeDiscoveryStrategy.onSetPluginPath("bin/darwin/plugins");
+        osxNativeDiscoveryStrategy.onFound("bin/darwin");
+        NativeDiscoveryStrategy[] nativeDiscoveryStrategies = {
+                new LinuxNativeDiscoveryStrategy(),
+                new WindowsNativeDiscoveryStrategy(),
+                osxNativeDiscoveryStrategy
+        };
+        NativeDiscovery discovery = new NativeDiscovery(nativeDiscoveryStrategies);
+        MediaPlayerFactory factory = new MediaPlayerFactory(discovery);
         SwingUtilities.invokeLater(new Runnable()
         {
             @Override
@@ -104,8 +118,6 @@ public class VideoFrameController
             {
                 super.keyPressed(e);
                 int CurrentVolume = frame.MediaPlayerComponent.mediaPlayer().audio().volume();
-                if (e.getKeyCode() == KeyEvent.VK_L)
-                    System.out.println("!!!!!!");
                 if (e.getKeyCode() == KeyEvent.VK_SPACE)
                     frame.MediaPlayerComponent.mediaPlayer().controls().pause();
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) // right key

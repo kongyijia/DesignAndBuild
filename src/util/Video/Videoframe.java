@@ -35,7 +35,7 @@ public class Videoframe extends JFrame
 
     public Videoframe()
     {
-        //Parent panel is contentpane
+        //Parent panel is ContentPane
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());
         this.setBounds(100, 100, 600, 400);
