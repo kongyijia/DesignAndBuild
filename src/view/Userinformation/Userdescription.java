@@ -3,8 +3,6 @@ package view.Userinformation;
 
 import control.MainFrame;
 import model.Client;
-import model.User;
-import util.config;
 
 import javax.swing.*;
 import java.awt.*;
