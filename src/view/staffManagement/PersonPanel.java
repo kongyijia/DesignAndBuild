@@ -8,6 +8,14 @@ import model.User;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *  This is the panel to show some information of one client.
+ *
+ *  @author Jufeng Sun
+ *  @version 1.0
+ *  @since 16 April 2021
+ */
+
 public class PersonPanel extends JPanel {
     private Client client;
     private JLabel avatarLabel;

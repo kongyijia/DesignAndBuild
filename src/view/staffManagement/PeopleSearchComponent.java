@@ -2,6 +2,17 @@ package view.staffManagement;
 
 import javax.swing.*;
 
+/**
+ *  This is the component used in {@link StaffManagePanel} to filter searching information.
+ *  This component consist of one {@link JLabel} and one {@link JComboBox<String>}.
+ *
+ *  @author Jufeng Sun
+ *  @version 1.0
+ *  @see StaffManagePanel
+ *  @since 16 April 2021
+ */
+
+
 public class PeopleSearchComponent {
     private String name;
     private JLabel label;

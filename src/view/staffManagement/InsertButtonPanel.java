@@ -3,6 +3,14 @@ package view.staffManagement;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *  This is the panel which has creating new admin and coach button.
+ *
+ *  @author Jufeng Sun
+ *  @version 1.0
+ *  @since 16 April 2021
+ */
+
 public class InsertButtonPanel extends JPanel {
     private JButton adminInsertButton;
     private JButton coachInsertButton;

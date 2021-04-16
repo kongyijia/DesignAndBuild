@@ -9,6 +9,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ *  This is administrator staff management view.
+ *
+ *  @author Jufeng Sun
+ *  @version 1.0
+ *  @since 16 April 2021
+ */
+
 public class StaffManagePanel extends JPanel {
     public static final int SEARCH_PANEL_HEIGHT = 50;
 

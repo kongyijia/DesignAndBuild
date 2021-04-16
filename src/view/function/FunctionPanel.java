@@ -9,6 +9,14 @@ import control.MainFrame;
 import model.*;
 import util.config;
 
+/**
+ *  This is the main view after log in.
+ *
+ *  @author Jufeng Sun
+ *  @version 1.0
+ *  @since 16 April 2021
+ */
+
 public class FunctionPanel extends JLayeredPane implements config {
     public static final int MENU_WIDTH = 150;
     public static final int MENU_HEIGHT = 200;
@@ -152,6 +160,12 @@ public class FunctionPanel extends JLayeredPane implements config {
         menuPanel.add(exitButton);
         menuPanel.setVisible(false);
     }
+
+    /**
+     * This method will create different view button correspond to different role
+     *
+     * @param role is current logged client's role
+     */
     public void button_init(int role){
         if(role == 2){
             addButton("Your Profile",USERDESCRIPTION_PANEL_NAME, 1);

@@ -8,6 +8,14 @@ import view.Userinformation.*;
 
 import javax.swing.*;
 
+/**
+ *  This is the dialog to show detail information of one client.
+ *
+ *  @author Jufeng Sun
+ *  @version 1.0
+ *  @since 16 April 2021
+ */
+
 public class ClientDetailDialog extends JDialog {
     private Client client;
     private BuildInformation buildinformation;

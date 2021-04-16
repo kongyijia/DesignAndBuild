@@ -9,6 +9,13 @@ import control.staffManage.StaffManageController;
 
 import static util.config.*;
 
+/**
+ *  This factory will create new controller correspond the view's name.
+ *
+ *  @version 1.0
+ *  @since 16 April 2021
+ */
+
 public class ControllerFactory {
     public static Controller create(String name){
         switch (name){
@@ -25,6 +32,7 @@ public class ControllerFactory {
             case STAFF_INSERT_NAME:
                 return new StaffInsertController();
         }
+        System.out.println("Can find the view:" + name);
         return null;
     }
 }
