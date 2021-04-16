@@ -57,6 +57,11 @@ public class MainFrame extends JFrame{
         list.forEach((k, v) -> v.update());
     }
 
+    public void notifyObserver(String name) {
+        if (list.containsKey(name))
+            list.get(name).update();
+    }
+
     /**
      * This function is used to change current logged client.
      * When this function is called, it will call update() of all members in {@link MainFrame#list}.
@@ -74,6 +79,10 @@ public class MainFrame extends JFrame{
 
     public HashMap<String, Controller> getList() {
         return list;
+    }
+
+    public Controller getController(String name){
+            return list.get(name);
     }
 
     /**
