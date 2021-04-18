@@ -1,13 +1,16 @@
 package model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * client model class. It represents all type of client ({@link User}, {@link Coach} and {@link Administrator}).
  *
  * @author Yubo Wu
- * @version 1.1
- * @since 14 April 2021
+ * @version 1.2
+ * @since 18 April 2021
  */
 public class Client {
     private int id;
@@ -18,11 +21,11 @@ public class Client {
     private String email;
     private int role; // 0: admin; 1:coach; 2: user
     private boolean cancel; // false: active; true: cancel
-    private ArrayList<Integer> recordHistory; // record history id
+    private ArrayList<RecordHistory> recordHistory; // record history
     private String avatarSrc;
 
 
-    public Client(int id, String nickName, String password, int sex, String phone, String email, int role, boolean cancel, ArrayList<Integer> recordHistory, String avatarSrc) {
+    public Client(int id, String nickName, String password, int sex, String phone, String email, int role, boolean cancel, ArrayList<RecordHistory> recordHistory, String avatarSrc) {
         this.id = id;
         this.nickName = nickName;
         this.password = password;
@@ -66,11 +69,11 @@ public class Client {
         this.recordHistory = new ArrayList<>();
     }
 
-    public ArrayList<Integer> getRecordHistory() {
+    public ArrayList<RecordHistory> getRecordHistory() {
         return recordHistory;
     }
 
-    public void setRecordHistory(ArrayList<Integer> recordHistory) {
+    public void setRecordHistory(ArrayList<RecordHistory> recordHistory) {
         this.recordHistory = recordHistory;
     }
 
@@ -144,5 +147,56 @@ public class Client {
 
     public void setCancel(boolean cancel) {
         this.cancel = cancel;
+    }
+
+    public static class RecordHistory {
+        private int videoId;
+        private int learningTime;
+        private int progress;
+
+        @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+        private Date latestPlayingDateTime;
+
+        public RecordHistory(int videoId, int learningTime, int progress, Date latestPlayingDateTime) {
+            this.videoId = videoId;
+            this.learningTime = learningTime;
+            this.progress = progress;
+            this.latestPlayingDateTime = latestPlayingDateTime;
+        }
+
+        public RecordHistory() {
+        }
+
+        public int getVideoId() {
+            return videoId;
+        }
+
+        public void setVideoId(int videoId) {
+            this.videoId = videoId;
+        }
+
+        public int getLearningTime() {
+            return learningTime;
+        }
+
+        public void setLearningTime(int learningTime) {
+            this.learningTime = learningTime;
+        }
+
+        public int getProgress() {
+            return progress;
+        }
+
+        public void setProgress(int progress) {
+            this.progress = progress;
+        }
+
+        public Date getLatestPlayingDateTime() {
+            return latestPlayingDateTime;
+        }
+
+        public void setLatestPlayingDateTime(Date latestPlayingDateTime) {
+            this.latestPlayingDateTime = latestPlayingDateTime;
+        }
     }
 }

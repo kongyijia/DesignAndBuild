@@ -26,15 +26,15 @@ public class VideoFrameController
 //    private static boolean flag = true;
     public VideoFrameController()
     {
-        OsxNativeDiscoveryStrategy osxNativeDiscoveryStrategy = new OsxNativeDiscoveryStrategy();
-        osxNativeDiscoveryStrategy.onSetPluginPath("bin/darwin/plugins");
-        osxNativeDiscoveryStrategy.onFound("bin/darwin");
-        NativeDiscoveryStrategy[] nativeDiscoveryStrategies = {
-                new LinuxNativeDiscoveryStrategy(),
-                new WindowsNativeDiscoveryStrategy(),
-                osxNativeDiscoveryStrategy
-        };
-        NativeDiscovery discovery = new NativeDiscovery(nativeDiscoveryStrategies);
+//        OsxNativeDiscoveryStrategy osxNativeDiscoveryStrategy = new OsxNativeDiscoveryStrategy();
+//        osxNativeDiscoveryStrategy.onSetPluginPath("bin/darwin/plugins");
+//        osxNativeDiscoveryStrategy.onFound("bin/darwin");
+//        NativeDiscoveryStrategy[] nativeDiscoveryStrategies = {
+//                new LinuxNativeDiscoveryStrategy(),
+//                new WindowsNativeDiscoveryStrategy(),
+//                osxNativeDiscoveryStrategy
+//        };
+        NativeDiscovery discovery = new NativeDiscovery();
         MediaPlayerFactory factory = new MediaPlayerFactory(discovery);
         SwingUtilities.invokeLater(new Runnable()
         {
