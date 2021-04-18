@@ -2,6 +2,8 @@ package util;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Util {
 
@@ -22,6 +24,19 @@ public class Util {
     public static void showDialog(Component component,String info){
         Object[] Okay = {"OK"};
         JOptionPane.showOptionDialog(component, info, "Message",JOptionPane.YES_NO_CANCEL_OPTION ,JOptionPane.QUESTION_MESSAGE,null, Okay, Okay[0]);
+    }
+
+    public static boolean isVideoTypeLegal(String type){
+        String regex = "^[a-zA-Z0-9_]{0,}$";
+        return type.matches(regex);
+    }
+
+    public static ArrayList<String> toArrayList(Object[] args){
+        ArrayList<String> arrayList = new ArrayList<>();
+        for(Object i : args){
+            arrayList.add(i.toString());
+        }
+        return arrayList;
     }
 
 }

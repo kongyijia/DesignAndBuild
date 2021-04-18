@@ -142,6 +142,17 @@ public class VideoMapping {
         return results;
     }
 
+    public static int idIncrement() throws FileNotFoundException {
+        ArrayList<Video> videos = VideoMapping.readAllVideos();
+        int x = 0;
+        for(Video v : videos){
+            if (v.getId() > x){
+                x = v.getId();
+            }
+        }
+        return x;
+    }
+
     public static int modify(Video video) throws IOException {
         int index = -1;
         ArrayList<Video> videos = VideoMapping.readAllVideos();
