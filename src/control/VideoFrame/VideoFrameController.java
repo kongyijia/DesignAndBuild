@@ -14,14 +14,16 @@ import util.Video.Videoframe;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
+import java.util.List;
+
+import static java.lang.Math.floorDiv;
+import static java.lang.Math.toIntExact;
 
 public class VideoFrameController
 {
     Videoframe frame;
+//    private static boolean flag = true;
     public VideoFrameController()
     {
         OsxNativeDiscoveryStrategy osxNativeDiscoveryStrategy = new OsxNativeDiscoveryStrategy();
@@ -43,6 +45,7 @@ public class VideoFrameController
                 buildListener();
                 buildLogo();
                 videoSurface();
+                processBar();
                 frame.MediaPlayerComponent.mediaPlayer().fullScreen().strategy(new AdaptiveFullScreenStrategy(frame));
             }
         });
@@ -96,6 +99,20 @@ public class VideoFrameController
                 frame.MediaPlayerComponent.mediaPlayer().controls().skipTime(10000);
             }
         });
+
+        //Process Bar
+        frame.getProgress().addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+                int x=e.getX();
+                frame.MediaPlayerComponent.mediaPlayer().controls().setPosition((float)x/frame.getProgress().getWidth());
+            }
+        });
+
+
     }
 
     private void buildLogo()
@@ -106,6 +123,7 @@ public class VideoFrameController
         frame.MediaPlayerComponent.mediaPlayer().logo().setOpacity(0.3f);
         frame.MediaPlayerComponent.mediaPlayer().logo().enable(true);
     }
+
 
     private void videoSurface()
     {
@@ -130,8 +148,70 @@ public class VideoFrameController
                     frame.MediaPlayerComponent.mediaPlayer().audio().setVolume(CurrentVolume+20);
                 if (e.getKeyCode() == KeyEvent.VK_DOWN)
                     frame.MediaPlayerComponent.mediaPlayer().audio().setVolume(CurrentVolume-20);
-
             }
         });
     }
+
+    private void processBar()
+    {
+        try
+        {
+            new SwingWorker<String, Integer>()
+            {
+                @Override
+                protected String doInBackground() throws Exception
+                {
+                    // TODO Auto-generated method stub
+                    while (true)
+                    { // 获取视频播放进度并且按百分比显示
+                        float percent = frame.MediaPlayerComponent.mediaPlayer().status().position();
+                        publish((int) (percent * 100));
+                        Thread.sleep(100);
+                    }
+                }
+
+                protected void process(List<Integer> chunks)
+                {
+                    for (int v : chunks)
+                    {
+                        System.out.println(v);
+                        frame.getEndTime().setText(getTime(frame.MediaPlayerComponent.mediaPlayer().status().length()));
+                        frame.getCurrentTime().setText(getTime(v * frame.MediaPlayerComponent.mediaPlayer().status().length() / 100));
+                        frame.getProgress().setValue(v);
+                    }
+                }
+            }.execute();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private String getTime(Long time)
+    {
+        int dialSeconds = toIntExact(time/1000);
+        int dialhous = dialSeconds / 3600;
+        int dialMinutes = dialSeconds / 60 % 60;
+        dialSeconds %= 60;
+        String showMinutes = "";
+        String showSeconds = "";
+        String showText = "";
+        if (dialSeconds < 10) {
+            showSeconds = "0" + dialSeconds;
+        } else {
+            showSeconds = Integer.toString(dialSeconds);
+        }
+        if (dialMinutes < 10) {
+            showMinutes = "0" + dialMinutes;
+        } else {
+            showMinutes = Integer.toString(dialMinutes);
+        }
+        if (dialhous > 0) {
+            showText = dialhous + ":" + showMinutes + ":" + showSeconds;
+        } else {
+            showText = showMinutes + ":" + showSeconds;
+        }
+        return showText;
+    }
 }
+
