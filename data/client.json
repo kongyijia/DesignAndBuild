@@ -109,14 +109,27 @@
 		}
 	],
 	"description":"12345ghjkdsalfegadafds\nadsfweoba",
-	"email":"98765@qq.com",
+	"email":"93327537@qq.com",
 	"id":123333,
 	"learningTime":100,
 	"level":1,
 	"nickName":"sdf1",
 	"password":"123456",
 	"phone":"1234567890",
-	"recordHistory":[],
+	"recordHistory":[
+		{
+			"latestPlayingDateTime":"2021-04-18 16:42:24",
+			"learningTime":5,
+			"progress":5,
+			"videoId":1
+		},
+		{
+			"latestPlayingDateTime":"2021-04-18 16:47:27",
+			"learningTime":5,
+			"progress":5,
+			"videoId":2
+		}
+	],
 	"role":2,
 	"sex":1,
 	"vip":1

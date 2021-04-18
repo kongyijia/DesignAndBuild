@@ -152,7 +152,7 @@ public class VideoMapping {
         if (index == -1)
             return VIDEO_DATA_NOT_FOUND;
         videos.remove(index);
-        videos.add(video);
+        videos.add(index, video);
         writeAll(videos);
         return SUCCESS;
     }
