@@ -59,7 +59,6 @@ public class Videoframe extends JFrame
     public Videoframe()
     {
         MediaPlayerComponent = new CallbackMediaPlayerComponent();
-        MediaPlayerComponent.mediaPlayer().media().prepare("data/video/1.mp4");
         //Parent panel is ContentPane
         contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());

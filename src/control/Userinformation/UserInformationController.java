@@ -104,9 +104,9 @@ public class UserInformationController extends Controller
                         }
                         else
                         {
-                            dialog.getOpwd().setEchoChar('*');
-                            dialog.getNpwd().setEchoChar('*');
-                            dialog.getCpwd().setEchoChar('*');
+                            dialog.getOpwd().setEchoChar('●');
+                            dialog.getNpwd().setEchoChar('●');
+                            dialog.getCpwd().setEchoChar('●');
                         }
                     }
                 });
@@ -149,11 +149,16 @@ public class UserInformationController extends Controller
 
 
     }
+
+//    private void topUp(float money)
+//    {
+//        user =
+//    }
+
     @Override
     public void update()
     {
         this.user = MainFrame.getInstance().getClient();
-        System.out.println("fuck anyone");
         if (user != null)
                 userdescription.update();
     }

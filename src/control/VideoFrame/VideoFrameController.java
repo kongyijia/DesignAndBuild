@@ -17,24 +17,29 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 
-import static java.lang.Math.floorDiv;
 import static java.lang.Math.toIntExact;
 
 public class VideoFrameController
 {
     Videoframe frame;
-//    private static boolean flag = true;
     public VideoFrameController()
     {
-        OsxNativeDiscoveryStrategy osxNativeDiscoveryStrategy = new OsxNativeDiscoveryStrategy();
-        osxNativeDiscoveryStrategy.onSetPluginPath("bin/darwin/plugins");
-        osxNativeDiscoveryStrategy.onFound("bin/darwin");
-        NativeDiscoveryStrategy[] nativeDiscoveryStrategies = {
-                new LinuxNativeDiscoveryStrategy(),
-                new WindowsNativeDiscoveryStrategy(),
-                osxNativeDiscoveryStrategy
-        };
-        NativeDiscovery discovery = new NativeDiscovery(nativeDiscoveryStrategies);
+        NativeDiscovery discovery;
+        if (!isWindows())
+        {
+
+            OsxNativeDiscoveryStrategy osxNativeDiscoveryStrategy = new OsxNativeDiscoveryStrategy();
+            osxNativeDiscoveryStrategy.onSetPluginPath("bin/darwin/plugins");
+            osxNativeDiscoveryStrategy.onFound("bin/darwin");
+            NativeDiscoveryStrategy[] nativeDiscoveryStrategies = {
+                    new LinuxNativeDiscoveryStrategy(),
+                    new WindowsNativeDiscoveryStrategy(),
+                    osxNativeDiscoveryStrategy
+            };
+            discovery = new NativeDiscovery(nativeDiscoveryStrategies);
+        }
+        else
+        discovery = new NativeDiscovery();
         MediaPlayerFactory factory = new MediaPlayerFactory(discovery);
         SwingUtilities.invokeLater(new Runnable()
         {
@@ -164,6 +169,7 @@ public class VideoFrameController
                     // TODO Auto-generated method stub
                     while (true)
                     { // 获取视频播放进度并且按百分比显示
+                        frame.MediaPlayerComponent.videoSurfaceComponent().requestFocusInWindow();
                         float percent = frame.MediaPlayerComponent.mediaPlayer().status().position();
                         publish((int) (percent * 100));
                         Thread.sleep(100);
@@ -194,8 +200,8 @@ public class VideoFrameController
         int dialMinutes = dialSeconds / 60 % 60;
         dialSeconds %= 60;
         String showMinutes = "";
-        String showSeconds = "";
-        String showText = "";
+        String showSeconds;
+        String showText;
         if (dialSeconds < 10) {
             showSeconds = "0" + dialSeconds;
         } else {
@@ -212,6 +218,22 @@ public class VideoFrameController
             showText = showMinutes + ":" + showSeconds;
         }
         return showText;
+    }
+
+    protected void cleanCache()
+    {
+        try {
+            String[] cmd = { "/usr/lib/vlc/vlc-cache-gen" + "-f" + "/usr/lib/vlc/plugins/" };// 此处用于填写需要执行的命令，规则设定真实执行中需要空格的地方，这里变成String数组的来间隔开，至于sh -c命令建议网上自行脑补，我们这次执行的实际命令是查询目前linux系统存在的tomcat进程，命令如右：ps -ef|grep tomcat
+            Process p = Runtime.getRuntime().exec(cmd);//创建实例进程执行命令行代码
+            p.waitFor();
+            p.destroy();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean isWindows() {
+        return System.getProperty("os.name").toUpperCase().contains("WINDOWS");
     }
 }
 
