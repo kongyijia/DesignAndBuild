@@ -44,12 +44,19 @@ public class UploadVideoController implements ActionListener {
         this.upLoadVideo.showPanel();
     }
 
-    private int generateId() throws FileNotFoundException {
-        return VideoMapping.idIncrement() + 1;
+    public int idIncrement() throws FileNotFoundException {
+        ArrayList<Video> videos = VideoMapping.readAllVideos();
+        int x = 0;
+        for(Video v : videos){
+            if (v.getId() > x){
+                x = v.getId();
+            }
+        }
+        return x + 1;
     }
 
     private Video generateVideo() throws FileNotFoundException {
-        int id = this.generateId();
+        int id = this.idIncrement();
         String name = this.uploadForm.getVideoNameTextField();
         int tag = this.uploadForm.getVideoTagComboBox();
         String src = this.uploadForm.getVideoSrcTextField();
