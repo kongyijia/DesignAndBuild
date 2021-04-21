@@ -143,7 +143,10 @@ public class VideoFrameController
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) // left key
                     frame.MediaPlayerComponent.mediaPlayer().controls().skipTime(-10000);
                 if (e.getKeyCode() == KeyEvent.VK_F1) // F1 change FullScreen
+                {
+                    System.out.println("1111111");
                     frame.MediaPlayerComponent.mediaPlayer().fullScreen().set(!frame.MediaPlayerComponent.mediaPlayer().fullScreen().isFullScreen());
+                }
                 if (e.getKeyCode() == KeyEvent.VK_UP)
                     frame.MediaPlayerComponent.mediaPlayer().audio().setVolume(CurrentVolume+20);
                 if (e.getKeyCode() == KeyEvent.VK_DOWN)
@@ -164,6 +167,7 @@ public class VideoFrameController
                     // TODO Auto-generated method stub
                     while (true)
                     { // 获取视频播放进度并且按百分比显示
+                        frame.MediaPlayerComponent.videoSurfaceComponent().requestFocusInWindow();
                         float percent = frame.MediaPlayerComponent.mediaPlayer().status().position();
                         publish((int) (percent * 100));
                         Thread.sleep(100);
@@ -174,7 +178,6 @@ public class VideoFrameController
                 {
                     for (int v : chunks)
                     {
-                        System.out.println(v);
                         frame.getEndTime().setText(getTime(frame.MediaPlayerComponent.mediaPlayer().status().length()));
                         frame.getCurrentTime().setText(getTime(v * frame.MediaPlayerComponent.mediaPlayer().status().length() / 100));
                         frame.getProgress().setValue(v);

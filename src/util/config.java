@@ -19,4 +19,5 @@ public interface config {
      String EDIT_PERSONAL_MODAL = "editPersonalModal";
      String STAFF_MANAGE_NAME = "staffManagement";
      String STAFF_INSERT_NAME = "staffInsert";
+     String RECORD_MANAGE_NAME = "recordManagement";
 }

@@ -7,6 +7,8 @@ import control.index.IndexController;
 import control.staffManage.StaffInsertController;
 import control.staffManage.StaffManageController;
 
+import control.RecordManage.*;
+
 import static util.config.*;
 
 /**
@@ -31,6 +33,8 @@ public class ControllerFactory {
                 return new StaffManageController();
             case STAFF_INSERT_NAME:
                 return new StaffInsertController();
+            case RECORD_MANAGE_NAME:
+                return new RecordManageController();
         }
         System.out.println("Can find the view:" + name);
         return null;
