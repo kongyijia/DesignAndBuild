@@ -10,13 +10,12 @@ import model.Client;
 import model.Coach;
 import model.User;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Map {@link Client} data to JSON database.
@@ -26,16 +25,18 @@ import java.util.Map;
  * In this class, we use {@link com.alibaba.fastjson.JSON} to manage our {@link Client} POJO.
  *
  * @author Yubo Wu
- * @version 1.0
+ * @version 1.4
  * @see JSON
  * @see Client
  * @see User
  * @see Coach
  * @see Administrator
- * @since 12 April 2021
+ * @since 18 April 2021
  */
 public class ClientMapping {
     public static final String DATA_PATH = "data/client.json";
+    public static final String AVATAR_PATH = "data/image/";
+    public static final String DEFAULT_AVATAR = "default.jpeg";
     public static final int SUCCESS = 0;
     public static final int DUPLICATE_ID = 1;
     public static final int DUPLICATE_NICKNAME = 6;
@@ -43,6 +44,7 @@ public class ClientMapping {
     public static final int USER_NOT_FOUND = 3;
     public static final int COACH_NOT_FOUND = 4;
     public static final int ADMIN_NOT_FOUND = 5;
+    public static final int NOT_IMAGE = 7;
 
 
     /**
@@ -63,6 +65,7 @@ public class ClientMapping {
                 return DUPLICATE_NICKNAME;
             }
         }
+        type.setAvatarSrc(AVATAR_PATH + DEFAULT_AVATAR);
         clients.add(type);
         writeAll(clients);
         return SUCCESS;
@@ -92,13 +95,37 @@ public class ClientMapping {
     }
 
     /**
+     * Cancel Client({@link User}, {@link Coach}, {@link Administrator}) account.
+     * Lazy deletion.
+     * That is, to set "cancel" to true.
+     *
+     * @param id ID of the {@link Client} instance which you want to delete
+     * @return Status code: CLIENT_NOT_FOUND={@value CLIENT_NOT_FOUND} or SUCCESS={@value SUCCESS}
+     * @throws IOException when IO issue occur
+     */
+    public static int cancel(int id) throws IOException {
+        ArrayList<Client> clients = readAllClients();
+        for (Client client : clients) {
+            if (client.getId() == id) {
+                client.setCancel(true);
+                return modify(client);
+            }
+        }
+        return CLIENT_NOT_FOUND;
+    }
+
+    /**
      * Update Client({@link User}, {@link Coach}, {@link Administrator}) data in JSON database.
      * The method need {@code ID} to locate where the data is so do not set a new value to the {@code ID}.
+     * <p>
+     * NOTE: You can not use this method to modify {@code avatarSrc} or {@code recordHistory} in Client.
+     * If you want to modify them, you need to use {@link ClientMapping#modifyAvatar(int, String)}.
      *
      * @param type updated instance of client class extended {@link Client}
      * @param <T>  extends {@link Client} class
      * @return status code: {@value DUPLICATE_NICKNAME}, {@value CLIENT_NOT_FOUND} or {@value SUCCESS}
      * @throws IOException when IO issue occur
+     * @see ClientMapping#modifyAvatar(int, String)
      */
     public static <T extends Client> int modify(T type) throws IOException {
         int index = -1;
@@ -116,9 +143,78 @@ public class ClientMapping {
             return CLIENT_NOT_FOUND;
         }
         clients.remove(index);
-        clients.add(type);
+        clients.add(index, type);
         writeAll(clients);
         return SUCCESS;
+    }
+
+    /**
+     * Update Client({@link User}, {@link Coach} and {@link Administrator}} {@code recordHistory} data.
+     * <p>
+     * If the {@code history} you want to modified not exist, then add it to database automatically.
+     * If exist, then modify it.
+     *
+     * @param id      Client id you want to modified
+     * @param history history record you want to modified
+     * @return status code: CLIENT_NOT_FOUND={@value CLIENT_NOT_FOUND}, SUCCESS={@value SUCCESS}
+     * @throws IOException when IO issue occur
+     */
+    public static int modifyRecordHistory(int id, Client.RecordHistory history) throws IOException {
+        ArrayList<Client> clients = readAllClients();
+        for (Client client : clients) {
+            if (client.getId() == id) {
+                int index = -1;
+                ArrayList<Client.RecordHistory> histories = client.getRecordHistory();
+                for (Client.RecordHistory h : histories) {
+                    if (h.getVideoId() == history.getVideoId()) {
+                        index = histories.indexOf(h);
+                        break;
+                    }
+                }
+                if (index != -1) {
+                    // if found, remove it to change to the new one
+                    histories.remove(index);
+                }
+                // if not found, add it directly
+                histories.add(history);
+                writeAll(clients);
+                return SUCCESS;
+            }
+        }
+        return CLIENT_NOT_FOUND;
+    }
+
+    /**
+     * Update Client({@link User}, {@link Coach} and {@link Administrator}} avatar data.
+     * It will first copy the image to {@value AVATAR_PATH}, then update the srcPath of image to JSON database.
+     *
+     * @param id           Client id you want to modify
+     * @param originalPath the original path of the profile photo. Must be absolute path
+     * @return status code: NOT_IMAGE={@value NOT_IMAGE}, SUCCESS={@value SUCCESS}
+     * @throws IOException when IO issue occur
+     */
+    public static int modifyAvatar(int id, String originalPath) throws IOException {
+        File file = new File(originalPath);
+        // check if image?
+        String mimeType = Files.probeContentType(file.toPath());
+        String type = mimeType.split("/")[0];
+        if (!type.equals("image"))
+            return NOT_IMAGE;
+
+        // copy image to data/image
+        String avatarNewId = UUID.randomUUID().toString();
+        String suffix = file.getName().substring(file.getName().lastIndexOf("."));
+        String newPath = AVATAR_PATH + avatarNewId + suffix;
+        File newFile = new File(newPath);
+        Files.copy(file.toPath(), newFile.toPath());
+
+        // update data in JSON database
+        ArrayList<Client> clients = find("id", String.valueOf(id));
+        if (clients.size() == 0)
+            return CLIENT_NOT_FOUND;
+        Client client = clients.get(0);
+        client.setAvatarSrc(newPath);
+        return modify(client);
     }
 
     /**
@@ -159,6 +255,37 @@ public class ClientMapping {
         }
         reader.endArray();
         reader.close();
+        return clients;
+    }
+
+    /**
+     * Find client({@link User}, {@link Coach}, {@link Administrator}) from JSON database, and return the results to a {@link ArrayList<Client>}.
+     * This method supports {@code fuzzy search}.
+     * This method require a key-value pair.
+     * It a simple version of {@link ClientMapping#find(HashMap)}. If you have only one condition to search, you can use this method.
+     *
+     * @param key   the key of the value you want to search
+     * @param value the value you want to search
+     * @return {@link ArrayList<Client>} contained results.
+     * @throws FileNotFoundException when {@value DATA_PATH} not found
+     */
+    public static ArrayList<Client> find(String key, String value) throws FileNotFoundException {
+        ArrayList<Client> clients = new ArrayList<>();
+        JSONReader reader = new JSONReader(new FileReader(DATA_PATH));
+        reader.startArray();
+        while (reader.hasNext()) {
+            String s = reader.readString();
+            JSONObject object = JSON.parseObject(s);
+            if (object.getString(key).contains(value)) {
+                if (object.getInteger("role") == 0) {
+                    clients.add(JSON.parseObject(s, Administrator.class));
+                } else if (object.getInteger("role") == 1) {
+                    clients.add(JSON.parseObject(s, Coach.class));
+                } else if (object.getInteger("role") == 2) {
+                    clients.add(JSON.parseObject(s, User.class));
+                }
+            }
+        }
         return clients;
     }
 
