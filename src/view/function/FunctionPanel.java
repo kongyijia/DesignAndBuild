@@ -151,6 +151,8 @@ public class FunctionPanel extends JLayeredPane implements config {
         menuPanel.setLayout(null);
         menuPanel.setBounds(1000, INFO_HEIGHT, MENU_WIDTH, MENU_HEIGHT);
 
+        menuPanel.setBackground(new Color(255, 255, 255));
+
         this.add(menuPanel);
         this.setLayer(menuPanel, Integer.MAX_VALUE);
 
@@ -171,19 +173,18 @@ public class FunctionPanel extends JLayeredPane implements config {
     public void button_init(int role){
         if(role == 2){
             addButton("Your Profile",USERDESCRIPTION_PANEL_NAME, 1);
+            addButton("Video Square",VIDEOSQUARE_PANEL_NAME, 2);
             addButton("Your Course","userCourse",2);
-            addButton("Video Square",VIDEOSQUARE_PANEL_NAME, 1);
         }
         else if(role == 1){
             addButton("Your Profile",USERDESCRIPTION_PANEL_NAME,1);
-            addButton("Your Course","coachCourse",1);
-            addButton("Video Management","coachVideoManagement",1);
+            addButton("Video Square","sssss", 2);
+            addButton("Your Course","coachCourse",2);
+            addButton("Video Management","coachVideoManagement",2);
         }
         else if(role == 0){
-            addButton("Video Square","adminVideoSquare",2);
-            addButton("Video Management","adminVideoManagement",1);
             addButton("Staff Management",STAFF_MANAGE_NAME,2);
-            addButton("Watching Record Management", RECORD_MANAGE_NAME,2);
+            addButton("Video History", RECORD_MANAGE_NAME,2);
         }
     }
 
