@@ -4,15 +4,16 @@ import control.Userinformation.UserInformationController;
 import control.enroll.EnrollController;
 import control.function.FunctionController;
 import control.index.IndexController;
+import control.staffManage.StaffInsertController;
+import control.staffManage.StaffManageController;
+
+import control.RecordManage.*;
 
 import control.VideoSquare.VideoSquareController;
 
 import static util.config.*;
 
 import java.io.FileNotFoundException;
-
-import control.staffManage.StaffInsertController;
-import control.staffManage.StaffManageController;
 
 /**
  *  This factory will create new controller correspond the view's name.
@@ -43,6 +44,9 @@ public class ControllerFactory {
                 return new StaffManageController();
             case STAFF_INSERT_NAME:
                 return new StaffInsertController();
+            case RECORD_MANAGE_NAME:
+                return new RecordManageController();
+
         }
         System.out.println("Can find the view:" + name);
         return null;
