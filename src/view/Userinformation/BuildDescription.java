@@ -7,9 +7,9 @@ import model.User;
 import javax.swing.*;
 import java.awt.*;
 
-public class builddescription extends JPanel
+public class BuildDescription extends JPanel
 {
-    public builddescription(Client receiveuser)
+    public BuildDescription(Client receiveuser)
     {
         JTextArea destext = null;
         if (receiveuser.getRole() == 1) //coach

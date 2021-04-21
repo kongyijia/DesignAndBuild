@@ -9,10 +9,19 @@ import control.function.FunctionController;
 import model.Client;
 import util.config;
 
+/**
+ *  This is main controller of the overall frame.
+ *  It provides view switching method {@code goto}, view update method and stores current logged client's information.
+ *
+ *  @author Jufeng Sun
+ *  @version 1.0
+ *  @since 16 April 2021
+ */
+
 public class MainFrame extends JFrame{
     private static MainFrame mainFrame;
-    private HashMap<String, Controller> list;
-    private Client client;
+    private HashMap<String, Controller> list;      // management list
+    private Client client;                         // current logged client
 
     private MainFrame() {
         initialize();
@@ -48,6 +57,17 @@ public class MainFrame extends JFrame{
         list.forEach((k, v) -> v.update());
     }
 
+    public void notifyObserver(String name) {
+        if (list.containsKey(name))
+            list.get(name).update();
+    }
+
+    /**
+     * This function is used to change current logged client.
+     * When this function is called, it will call update() of all members in {@link MainFrame#list}.
+     *
+     * @param client is the new client of current logged client.
+     */
     public void setClient(Client client) {
         this.client = client;
         notifyObserver();
@@ -61,14 +81,29 @@ public class MainFrame extends JFrame{
         return list;
     }
 
+    public Controller getController(String name){
+            return list.get(name);
+    }
+
+    /**
+     * This function used to switch view.
+     * Two switch mode:
+     * Index, enroll, function view switch uses this switch mode, other view switch use {@link FunctionController#goTo(String)}
+     * <P>
+     * Views loaded on demand.
+     * The view will be created if {@link MainFrame#list} doesn't have this view.
+     *
+     *
+     * @param name is the view name which will be switched to
+     */
     public void goTo(String name){
         ArrayList<String> firstGate = new ArrayList<>(Arrays.asList(
                 config.INDEX_PANEL_NAME, config.FUNCTION_PANEL_NAME, config.ENROLL_PANEL_NAME));
-        // 注册，登录，功能页面跳转用此方法
+        // Index, enroll and function view switching uses this mode
         if(firstGate.contains(name)) {
             list.forEach((k, v) -> v.getPanel().setVisible(false));
             Controller controller = list.get(name);
-            // 如果还没有该页面，创造该页面
+            // if this view doesn't exist, create one
             if(controller == null ) {
                 controller = ControllerFactory.create(name);
                 this.add(controller.getPanel());
@@ -78,7 +113,7 @@ public class MainFrame extends JFrame{
             }
             controller.getPanel().setVisible(true);
         }
-        // 功能页面内的跳转用功能页面的跳转方法
+        // the page in functionPanel switching uses functionPanel's switch mode
         else{
             FunctionController functionController = (FunctionController) list.get(config.FUNCTION_PANEL_NAME);
             functionController.goTo(name);

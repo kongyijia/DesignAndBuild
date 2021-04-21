@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class showCustomDialog extends JDialog
+public class ShowCustomDialog extends JDialog
 {
     private JButton okBtn = new JButton("OK");
     private JButton CenBtn = new JButton("Cancel");
@@ -52,7 +52,7 @@ public class showCustomDialog extends JDialog
         return bt1;
     }
 
-    public showCustomDialog(Component parentComponent) {
+    public ShowCustomDialog(Component parentComponent) {
 
         // 创建一个模态对话框
         super(MainFrame.getInstance() ,"Change Your Password", true);

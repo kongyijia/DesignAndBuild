@@ -4,8 +4,17 @@ import control.Userinformation.UserInformationController;
 import control.enroll.EnrollController;
 import control.function.FunctionController;
 import control.index.IndexController;
+import control.staffManage.StaffInsertController;
+import control.staffManage.StaffManageController;
 
 import static util.config.*;
+
+/**
+ *  This factory will create new controller correspond the view's name.
+ *
+ *  @version 1.0
+ *  @since 16 April 2021
+ */
 
 public class ControllerFactory {
     public static Controller create(String name){
@@ -18,8 +27,12 @@ public class ControllerFactory {
                 return new UserInformationController();
             case FUNCTION_PANEL_NAME:
                 return new FunctionController();
-
+            case STAFF_MANAGE_NAME:
+                return new StaffManageController();
+            case STAFF_INSERT_NAME:
+                return new StaffInsertController();
         }
+        System.out.println("Can find the view:" + name);
         return null;
     }
 }

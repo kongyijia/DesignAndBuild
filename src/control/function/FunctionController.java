@@ -1,6 +1,5 @@
 package control.function;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -14,8 +13,6 @@ import view.function.FunctionPanel;
 import view.function.InfoButton;
 import view.function.MenuButton;
 import model.Client;
-
-import javax.swing.*;
 
 public class FunctionController extends Controller{
     private FunctionPanel functionPanel;
@@ -41,6 +38,15 @@ public class FunctionController extends Controller{
             public void mouseExited(MouseEvent e) { }
         });
         functionPanel.addListener(new FunctionActionListener());
+
+        // add menuPanel visible listener
+        functionPanel.getAvatarButton().addActionListener(e -> functionPanel.getMenuPanel().setVisible(!functionPanel.getMenuPanel().isVisible()));
+
+        // add exit Listener
+        functionPanel.getExitButton().addActionListener(e -> {
+            functionPanel.getMenuPanel().setVisible(false);
+            MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
+        });
     }
 
     public void goTo(String name){
@@ -76,21 +82,14 @@ public class FunctionController extends Controller{
                 functionPanel.setClient(currentClient);
             }
             functionPanel.getWelcomeLabel().setText("Welcome " + currentClient.getNickName() + " !");
+
         }
     }
 
     class FunctionActionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == functionPanel.getAvatarButton()){
-                functionPanel.getMenuPanel().setVisible(true);
-            }
-            else if(e.getSource() == functionPanel.getExitButton()){
-                // MainFrame.getInstance().setClient(null);
-                functionPanel.getMenuPanel().setVisible(false);
-                MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
-            }
-            else if(functionPanel.getMenuButtons().containsValue(e.getSource())){
+            if(functionPanel.getMenuButtons().containsValue(e.getSource())){
                 MenuButton menuButton = (MenuButton) e.getSource();
                 functionPanel.getMenuPanel().setVisible(false);
                 goTo(menuButton.getKey());
