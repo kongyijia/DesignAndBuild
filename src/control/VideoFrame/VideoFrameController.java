@@ -39,7 +39,10 @@ public class VideoFrameController
             discovery = new NativeDiscovery(nativeDiscoveryStrategies);
         }
         else
-        discovery = new NativeDiscovery();
+        {
+            cleanCache();
+            discovery = new NativeDiscovery();
+        }
         MediaPlayerFactory factory = new MediaPlayerFactory(discovery);
         SwingUtilities.invokeLater(new Runnable()
         {
@@ -223,8 +226,8 @@ public class VideoFrameController
     protected void cleanCache()
     {
         try {
-            String[] cmd = { "/usr/lib/vlc/vlc-cache-gen" + "-f" + "/usr/lib/vlc/plugins/" };// 此处用于填写需要执行的命令，规则设定真实执行中需要空格的地方，这里变成String数组的来间隔开，至于sh -c命令建议网上自行脑补，我们这次执行的实际命令是查询目前linux系统存在的tomcat进程，命令如右：ps -ef|grep tomcat
-            Process p = Runtime.getRuntime().exec(cmd);//创建实例进程执行命令行代码
+            String[] cmd = { "bin/vlc-cache-gen.exe" + "-f" + "bin/win32-x86-64/plugins" };
+            Process p = Runtime.getRuntime().exec(cmd);
             p.waitFor();
             p.destroy();
         } catch (Exception e) {
