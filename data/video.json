@@ -1,4 +1,5 @@
 [{
+	"author":534526,
 	"coverSrc":"data/image/defaultCover.png",
 	"id":1,
 	"name":"test123",
@@ -7,6 +8,7 @@
 	"time":14,
 	"types":[]
 },{
+	"author":534526,
 	"coverSrc":"data/image/e6307268-38f9-4305-b739-70bd341d6460.jpg",
 	"id":2,
 	"name":"test2",
