@@ -56,13 +56,13 @@ public class Videoframe extends JFrame
         return skipButton;
     }
 
-    public Videoframe()
+    public Videoframe(String Path)
     {
         MediaPlayerComponent = new CallbackMediaPlayerComponent();
         //Parent panel is ContentPane
         contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());
-        this.setBounds(100, 100, 800, 400);
+        this.setBounds(100, 100, 1200, 580);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         controlContentPane = new JPanel();
@@ -94,6 +94,6 @@ public class Videoframe extends JFrame
 
         this.setContentPane(contentPane);
         this.setVisible(true);
-        MediaPlayerComponent.mediaPlayer().media().play("data/video/1.mp4");
+        MediaPlayerComponent.mediaPlayer().media().play(Path);
     }
 }
