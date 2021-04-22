@@ -323,7 +323,156 @@ class Example {
 
    ​		修改已有`addButton`或添加`addButton`增加`Button`,第一个参数为按钮上显示的文字，第二个参数为`view`对应的`key`值，第三个参数为按钮的类型，`1`为将按钮加到侧导，其他为将按钮加到顶导。
 
-   
 
+### 视频播放器框架说明
+
+- 视频播放器为独立框架，集成原VLC组件于bin和lib文件夹，使用时，将bin设为test resource目录并自行导入jar包。
+- 视频播放器集成进程`runnable`接口，可作为独立进程运行。
+- 对外APi仅保留`VideoFrameController`，仅接受**一个*String***类型作为视频路径。
+- 目前已对windows和mac系统优化，但由于VLC版本原因，可能会出现类似以下报错：
+
+> [00007f8ad678ec10] main libvlc error: stale plugins cache: modified bin/darwin/plugins/../plugins/libtospdif_plugin.dylib
+> [00007f8ad678ec10] main libvlc error: stale plugins cache: modified bin/darwin/plugins/../plugins/libddummy_plugin.dylib
+> [00007f8ad678ec10] main libvlc error: stale plugins cache: modified bin/darwin/plugins/../plugins/libtaglib_plugin.dylib
+> [00007f8ad678ec10] main libvlc error: stale plugins cache: modified bin/darwin/plugins/../plugins/liblibass_plugin.dylib
+> [00007f8ad678ec10] main libvlc error: stale plugins cache: modified bin/darwin/plugins/../plugins/libspeex_plugin.dylib
+
+- 暂时不影响使用，window系统调用VideoFrameController.claenCache函数即可暂时消除报错，但缓存会继续生成，并不永久解决问题。
+- 如果遇到其他错误，请先检查lib和bin中文件完整性，如果错误得不到解决，自行去VLC官网下载3.0版本VLC然后将项目中同名文件夹覆盖。
+
+### 播放器框架函数
+
+- ***供大家使用的Long 毫秒转换为String 格式为【xx:xx:xx】 函数***
+```java
+    protected String getTime(Long time)
+    {
+        int dialSeconds = toIntExact(time/1000);
+        int dialhous = dialSeconds / 3600;
+        int dialMinutes = dialSeconds / 60 % 60;
+        dialSeconds %= 60;
+        String showMinutes = "";
+        String showSeconds;
+        String showText;
+        if (dialSeconds < 10) {
+            showSeconds = "0" + dialSeconds;
+        } else {
+            showSeconds = Integer.toString(dialSeconds);
+        }
+        if (dialMinutes < 10) {
+            showMinutes = "0" + dialMinutes;
+        } else {
+            showMinutes = Integer.toString(dialMinutes);
+        }
+        if (dialhous > 0) {
+            showText = dialhous + ":" + showMinutes + ":" + showSeconds;
+        } else {
+            showText = showMinutes + ":" + showSeconds;
+        }
+        return showText;
+    }
+```
+
+- ***重置VLC缓存（windows版本）***
+```java
+    protected void cleanCache()
+```
+
+- 被动搜寻动态库和组件
+```java
+public void MakeVideoFrameController(String Path)
+```
+
+- 添加`Button`监听器
+```java
+    private void buildListener()
+```
+
+- 添加视频水印
+```java
+    private void buildLogo()
+```
+
+- 添加鼠标监听器
+```java
+    private void videoSurface()
+```
+
+- 视频进度条独立后台进程
+```java
+    private void processBar()
+```
+
+
+
+
+#### 视频播放器调用步骤
+
+1.首先在*调用者的类*中添加同步锁实例。
+   ```java
+    static final Object lock = new Object();
+   ```
    
+2.开辟新进程实例并添加视频路径。
+```java
+public static void main(String[] args)
+    {
+            VideoFrameController test = new VideoFrameController("data/video/1.mp4"); // 路径
+            Thread VIDEO = new Thread(test);
+            VIDEO.start();
+            synchronized (lock) // try catch 块可以放在很外面，但必须包括lock.wait()
+            {
+                try
+                {
+                    lock.wait();
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+                System.out.println("Progress: " + test.getVideoProgress());
+                System.out.println("Learningtime :" + test.getLearningTime());
+            }
+    }
+```
+
+3.__注意__ : 由于`Progress`和`Leaningtime`必须在视频播放完成后才能得到，所以 `synchronized` 函数块以下的部分都必须在视频播放器结束后执行，如果并不适合，请将创建视频播放器的代码块（创建`controller`+调用`Progress`/`Learningtime`函数）打包成父进程于其他代码并行，并用`Thread.currentThread()`得到主进程并将创建的进程join到主进程下。
+
+#### 播放器具体功能及快捷键
+
+- GUI按钮不需要解释了
+
+##### *快捷键*
+
+- 键盘*control*
+
+	- 方向键上 ：音量大
+	- 方向键下 ：音量小
+	- 方向键左 ：向左回退1s
+	- 方向键右 ：向右快进1s
+	- F1 ： 全屏
+	- 空格 ：暂停
+
+- 鼠标*control*
+	- 点击进度条即可跳转到该位置
+	- 关闭窗口默认视频播放完毕。
+
+#### 获取Learningtime和Progress
+
+- ***只要在播放器释放同步锁后***，随时可以调用 `VideoFrameController.getVideoProgress()`获取视频关闭前**最后**进度。
+```   java
+public int getVideoProgress() // 返回值为毫秒
+    {
+        return progress;
+    }
+```
+或 `VideoFrameController.getLearningTime()`获取**总共视频播放时长**。
+```java
+    public int getLearningTime() // 返回值为毫秒
+    {
+        int ans = progress - skipping_time;
+        if (ans < 0)
+            return 0;
+        return ans;
+    }
+```
+***不足0s按照0s计算，若学习时长超过视频长度，按照真实学习时长计算***
 
