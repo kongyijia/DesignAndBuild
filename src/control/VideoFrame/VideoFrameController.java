@@ -164,7 +164,7 @@ public class VideoFrameController implements Runnable
     private void buildLogo()
     {
         //TODO change everycoach's profile
-        frame.MediaPlayerComponent.mediaPlayer().logo().setFile("/Users/izreal/Desktop/大三/下/软件工程/SoftWareProject/DesignAndBuild/data/image/defaultCover.png");
+        frame.MediaPlayerComponent.mediaPlayer().logo().setFile("data/image/defaultCover.png");
         frame.MediaPlayerComponent.mediaPlayer().logo().setPosition(LogoPosition.TOP_LEFT);
         frame.MediaPlayerComponent.mediaPlayer().logo().setOpacity(0.3f);
         frame.MediaPlayerComponent.mediaPlayer().logo().enable(true);
