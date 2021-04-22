@@ -1,5 +1,7 @@
 package view.Userinformation;
 
+import model.Client;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -30,7 +32,7 @@ public class BuildProfilePanel extends JPanel
         return topup;
     }
 
-    public BuildProfilePanel()
+    public BuildProfilePanel(Client receiver)
     {
         this.setSize(200,510);
         this.setLocation(0,0);
@@ -40,19 +42,23 @@ public class BuildProfilePanel extends JPanel
         changeinformation.setFont(new Font("Times", Font.ITALIC, 10));
         profilebutton.setFont(new Font("Times", Font.ITALIC, 15));
         changepassword.setFont(new Font("Times", Font.ITALIC, 15));
-        topup.setFont(new Font("Times", Font.ITALIC, 15));
+
+        if (receiver.getRole() == 2)// user
+        {
+            topup.setFont(new Font("Times", Font.ITALIC, 15));
+            topup.setBounds(30,340,140,40);
+            this.add(topup);
+        }
 
         profilebutton.setBounds(30,30,140,140);
         changepassword.setBounds(30,220,140,40);
         changeinformation.setBounds(30,280,140,40);
 
-        topup.setBounds(30,340,140,40);
 
 
         this.add(changeinformation);
         this.add(profilebutton);
         this.add(changepassword);
-        this.add(topup);
         this.setVisible(true);
     }
 }

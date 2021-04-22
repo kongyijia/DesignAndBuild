@@ -23,7 +23,7 @@ public class UserDescription extends JPanel {
         self = MainFrame.getInstance().getClient();
         this.removeAll();
         this.setBackground(new Color(226, 209, 160));
-        this.add(new BuildProfilePanel());
+        this.add(new BuildProfilePanel(self));
         this.add(new BuildInformation(self));
         this.add(new BuildDescription(self));
         this.updateUI();
