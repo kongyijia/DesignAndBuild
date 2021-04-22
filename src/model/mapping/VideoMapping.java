@@ -123,6 +123,12 @@ public class VideoMapping {
                 String v = object.getString(entry.getKey());
                 if (v == null)
                     continue;
+                if (entry.getKey().equals("types")) {
+                    if (v.contains(entry.getValue())) {
+                        tmp++;
+                        continue;
+                    }
+                }
                 if (v.equals(entry.getValue()))
                     tmp++;
             }

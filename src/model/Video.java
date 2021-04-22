@@ -116,6 +116,7 @@ public class Video {
     public String toString() {
         return "Video{" +
                 "id=" + id +
+                ", author=" + author +
                 ", name='" + name + '\'' +
                 ", src='" + src + '\'' +
                 ", tag=" + tag +

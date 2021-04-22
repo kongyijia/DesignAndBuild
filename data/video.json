@@ -6,7 +6,13 @@
 	"src":"data/video/1.mp4",
 	"tag":0,
 	"time":14,
-	"types":[]
+	"types":[
+		"type1",
+		"type2",
+		"type3",
+		"type12",
+		"type35"
+	]
 },{
 	"author":534526,
 	"coverSrc":"data/image/e6307268-38f9-4305-b739-70bd341d6460.jpg",
@@ -15,5 +21,9 @@
 	"src":"data/video/2.mp4",
 	"tag":0,
 	"time":14,
-	"types":[]
+	"types":[
+		"type1",
+		"type21",
+		"type62"
+	]
 }]
