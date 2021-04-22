@@ -43,7 +43,7 @@ public class IndexPanel extends JPanel implements config {
         loginPanel.add(userLabel);
         loginPanel.add(userText);
         loginPanel.add(noAccount);
-        userLabel.setFont(new Font("宋体", 0, 25));
+        userLabel.setFont(new Font(null, 0, 25));
         userLabel.setBounds(20, 85, 150, 30);
         userText.setBounds(170, 85, 200, 25);
         noAccount.setBounds(30, 130, 500, 30);
@@ -51,7 +51,7 @@ public class IndexPanel extends JPanel implements config {
         loginPanel.add(passwordLabel);
         loginPanel.add(passwordText);
         loginPanel.add(passwordError);
-        passwordLabel.setFont(new Font("宋体", 0, 25));
+        passwordLabel.setFont(new Font(null, 0, 25));
         passwordLabel.setBounds(20, 170, 200, 30);
         passwordText.setBounds(170, 170, 200, 25);
         passwordError.setBounds(30, 200, 500, 30);

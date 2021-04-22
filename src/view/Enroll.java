@@ -24,6 +24,7 @@ public class Enroll extends JPanel{
     public boolean cancel;
 
     public JRadioButton i_admin, i_trainer, i_user;
+    public ButtonGroup s_sex;
     //components shared by all 3 roles
     //components for input
     public TextField i_nickName;
@@ -34,7 +35,6 @@ public class Enroll extends JPanel{
     public JButton i_cancel, i_ok;
 
     //components for reminder
-    public JLabel r_select;
     public JLabel r_nickName;
     public JLabel r_password;
     public JLabel r_password2;
@@ -43,7 +43,6 @@ public class Enroll extends JPanel{
     public JLabel r_email;
 
     //components for warning
-    public JLabel w_select;
     public JLabel w_nickName;
     public JLabel w_password;
     public JLabel w_password2;
@@ -51,11 +50,11 @@ public class Enroll extends JPanel{
     public JLabel w_phone;
     public JLabel w_email;
 
-    public JFrame f_message = new JFrame();
-    public JButton b_back = new JButton("Back");
-    public JButton b_login = new JButton("Login");
-    public JPanel p_message = new JPanel();
-    public JLabel r_message = new JLabel("Enrollment success.");
+    public JFrame f_message;
+    public JButton b_back;
+    public JButton b_login;
+    public JPanel p_message;
+    public JLabel r_message;
 
     public Enroll() {
         this.setLayout(null);
@@ -67,13 +66,9 @@ public class Enroll extends JPanel{
         newcomponent();
 
         //radio button (only select one)
-        ButtonGroup select = new ButtonGroup();
-        select.add(i_admin);
-        select.add(i_trainer);
-        select.add(i_user);
-        ButtonGroup sex = new ButtonGroup();
-        sex.add(i_male);
-        sex.add(i_female);
+        s_sex = new ButtonGroup();
+        s_sex.add(i_male);
+        s_sex.add(i_female);
 
         setbound();
         addtopanel();
@@ -81,7 +76,6 @@ public class Enroll extends JPanel{
 
     public void newcomponent(){
         //reminders
-        r_select = new JLabel("Select one role");
         r_nickName = new JLabel("nickName");
         r_password = new JLabel("Password");
         r_password2 = new JLabel("Input your password again to confirm");
@@ -90,9 +84,6 @@ public class Enroll extends JPanel{
         r_email = new JLabel("Email");
 
         //input fields
-        i_admin = new JRadioButton("Administrator");
-        i_trainer = new JRadioButton("Trainer");
-        i_user = new JRadioButton("User");
         i_nickName = new TextField();
         i_password = new JPasswordField();
         i_password2 = new JPasswordField();
@@ -111,7 +102,6 @@ public class Enroll extends JPanel{
     }
 
     public void setbound(){
-        r_select.setBounds(150,50,300,25);
         r_nickName.setBounds(150, 100, 300, 25);
         r_password.setBounds(150, 150, 300, 25);
         r_password2.setBounds(150, 200, 300, 25);
@@ -119,9 +109,6 @@ public class Enroll extends JPanel{
         r_phone.setBounds(150, 300, 300, 25);
         r_email.setBounds(150, 350, 300, 25);
 
-        i_admin.setBounds(700,50,100,25);
-        i_trainer.setBounds(800,50,100,25);
-        i_user.setBounds(900,50,100,25);
         i_nickName.setBounds(700, 100, 100, 25);
         i_password.setBounds(700, 150, 100, 25);
         i_password2.setBounds(700, 200, 100, 25);
@@ -136,8 +123,6 @@ public class Enroll extends JPanel{
 
         f_message.setTitle("Enroll");
         f_message.setSize(300,300);
-
-
         f_message.setContentPane(p_message);
         p_message.setLayout(null);
         r_message.setBounds(80,50,140,20);
@@ -151,9 +136,6 @@ public class Enroll extends JPanel{
     }
 
     public void addtopanel(){
-        p_enroll.add(i_admin);
-        p_enroll.add(i_trainer);
-        p_enroll.add(i_user);
         p_enroll.add(i_nickName);
         p_enroll.add(i_password);
         p_enroll.add(i_password2);
@@ -163,7 +145,6 @@ public class Enroll extends JPanel{
         p_enroll.add(i_email);
         p_enroll.add(i_cancel);
         p_enroll.add(i_ok);
-        p_enroll.add(r_select);
         p_enroll.add(r_nickName);
         p_enroll.add(r_password);
         p_enroll.add(r_password2);

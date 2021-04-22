@@ -7,11 +7,11 @@ import model.Client;
 import javax.swing.*;
 import java.awt.*;
 
-public class Userdescription extends JPanel {
+public class UserDescription extends JPanel {
     public Client self = null;
     public JFrame parentframe;
 
-    public Userdescription() {
+    public UserDescription() {
         this.setLayout(null);// Depends on size
         this.setBounds(0, 0, 800, 510);
         update();
@@ -23,9 +23,9 @@ public class Userdescription extends JPanel {
         self = MainFrame.getInstance().getClient();
         this.removeAll();
         this.setBackground(new Color(226, 209, 160));
-        this.add(new buildProfilepanel());
-        this.add(new buildinformation(self));
-        this.add(new builddescription(self));
+        this.add(new BuildProfilePanel());
+        this.add(new BuildInformation(self));
+        this.add(new BuildDescription(self));
         this.updateUI();
     }
 

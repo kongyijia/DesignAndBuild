@@ -3,7 +3,7 @@ package view.Userinformation;
 import javax.swing.*;
 import java.awt.*;
 
-public class buildProfilepanel extends JPanel
+public class BuildProfilePanel extends JPanel
 {
     private static JButton profilebutton = new JButton("Profile Picture");
     private static JButton changepassword = new JButton("Change Password");
@@ -30,7 +30,7 @@ public class buildProfilepanel extends JPanel
         return topup;
     }
 
-    public buildProfilepanel()
+    public BuildProfilePanel()
     {
         this.setSize(200,510);
         this.setLocation(0,0);

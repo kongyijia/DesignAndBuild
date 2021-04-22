@@ -1,19 +1,16 @@
 package control.Userinformation;
 
-import com.sun.tools.javac.Main;
 import control.Controller;
 import control.EditPersonalPageModal.EditCoachModalController;
 import control.EditPersonalPageModal.EditUserModalController;
 import control.MainFrame;
 import model.Client;
-import model.User;
 import util.config;
-import view.Userinformation.Userdescription;
-import view.Userinformation.buildProfilepanel;
-import view.Userinformation.showCustomDialog;
+import view.Userinformation.UserDescription;
+import view.Userinformation.BuildProfilePanel;
+import view.Userinformation.ShowCustomDialog;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
@@ -21,15 +18,15 @@ import java.util.Objects;
 public class UserInformationController extends Controller
 {
     private Client user;
-    private final Userdescription userdescription;
+    private final UserDescription userdescription;
 
     private EditCoachModalController editCoachModalController;
     private EditUserModalController editUserModalController;
 
     public UserInformationController(){
-        super(config.USERDESCRIPTION_PANEL_NAME, new Userdescription());
+        super(config.USERDESCRIPTION_PANEL_NAME, new UserDescription());
         user = MainFrame.getInstance().getClient();
-        this.userdescription = (Userdescription) this.panel;
+        this.userdescription = (UserDescription) this.panel;
         buttons();
         this.panel.setVisible(true);
         this.setH_gap(150);
@@ -49,7 +46,7 @@ public class UserInformationController extends Controller
 
     private void buttons()
     {
-        buildProfilepanel.getProfilebutton().addActionListener(new ActionListener()
+        BuildProfilePanel.getProfilebutton().addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -57,7 +54,7 @@ public class UserInformationController extends Controller
                     JOptionPane.showMessageDialog(null,"Developing!");
             }
         });
-        buildProfilepanel.getChangeinformation().addActionListener(new ActionListener()
+        BuildProfilePanel.getChangeinformation().addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -75,7 +72,7 @@ public class UserInformationController extends Controller
                 }
             }
         });
-        buildProfilepanel.getTopup().addActionListener(new ActionListener()
+        BuildProfilePanel.getTopup().addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -83,12 +80,12 @@ public class UserInformationController extends Controller
                 //TODO
             }
         });
-        buildProfilepanel.getChangepassword().addActionListener(new ActionListener()
+        BuildProfilePanel.getChangepassword().addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                showCustomDialog dialog = new showCustomDialog(userdescription);
+                ShowCustomDialog dialog = new ShowCustomDialog(userdescription);
 
                 dialog.getBt1().addActionListener(new ActionListener()
                 {

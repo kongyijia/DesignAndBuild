@@ -1,9 +1,17 @@
 package control;
 
-import javax.swing.*;
 import java.awt.*;
 
-// 所有Controller的父类，一个Controller对应一个功能页面
+/**
+ *  This is superclass of all controller.
+ *  A controller controls one view.
+ *  When a new controller is created, it will be register to the management list {@link MainFrame}.
+ *
+ *  @author Jufeng Sun
+ *  @version 1.0
+ *  @since 16 April 2021
+ */
+
 public abstract class Controller {
     protected Component panel;
     protected int v_gap = 0;
@@ -12,7 +20,8 @@ public abstract class Controller {
     public Controller(String name, Component panel) {
         this.panel = panel;
         this.panel.setVisible(false);
-        // 将自己自动注册到管理列表
+
+        // Automatically register to tha management list
         MainFrame.getInstance().registerObserver(name, this);
     }
 
