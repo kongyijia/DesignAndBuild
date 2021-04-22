@@ -9,7 +9,6 @@ public class VideoTest
     public static void main(String[] args)
     {
             VideoFrameController test = new VideoFrameController("data/video/1.mp4");
-            Thread MAIN = Thread.currentThread();
             Thread VIDEO = new Thread(test);
             VIDEO.start();
             synchronized (lock)
@@ -22,7 +21,7 @@ public class VideoTest
                     e.printStackTrace();
                 }
                 System.out.println("Progress: " + test.getVideoProgress());
-                System.out.println("Learningtime :" + test.getLeaningTime());
+                System.out.println("Learningtime :" + test.getLearningTime());
             }
     }
 }

@@ -289,7 +289,7 @@ public class VideoFrameController implements Runnable
         return progress;
     }
 
-    public int getLeaningTime()
+    public int getLearningTime()
     {
         int ans = progress - skipping_time;
         if (ans < 0)
