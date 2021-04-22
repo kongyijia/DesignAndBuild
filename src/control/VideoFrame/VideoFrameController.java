@@ -241,7 +241,7 @@ public class VideoFrameController implements Runnable
         }
     }
 
-    private String getTime(Long time)
+    protected String getTime(Long time)
     {
         int dialSeconds = toIntExact(time/1000);
         int dialhous = dialSeconds / 3600;
