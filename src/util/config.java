@@ -20,4 +20,5 @@ public interface config {
      String STAFF_MANAGE_NAME = "staffManagement";
      String STAFF_INSERT_NAME = "staffInsert";
      String RECORD_MANAGE_NAME = "recordManagement";
+     String RECORD_PANEL_NAME = "myRecord";
 }

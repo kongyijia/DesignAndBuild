@@ -172,6 +172,7 @@ public class FunctionPanel extends JLayeredPane implements config {
         if(role == 2){
             addButton("Your Profile",USERDESCRIPTION_PANEL_NAME, 1);
             addButton("Your Course","userCourse",1);
+            addButton("My record",RECORD_PANEL_NAME, 1);
             addButton("Video Square","userVideoSquare", 2);
         }
         else if(role == 1){

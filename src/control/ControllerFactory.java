@@ -1,5 +1,6 @@
 package control;
 
+import control.Userinformation.RecordPanelController;
 import control.Userinformation.UserInformationController;
 import control.enroll.EnrollController;
 import control.function.FunctionController;
@@ -35,6 +36,8 @@ public class ControllerFactory {
                 return new StaffInsertController();
             case RECORD_MANAGE_NAME:
                 return new RecordManageController();
+            case RECORD_PANEL_NAME:
+                return new RecordPanelController();
         }
         System.out.println("Can find the view:" + name);
         return null;
