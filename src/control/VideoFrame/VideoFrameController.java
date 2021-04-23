@@ -1,5 +1,6 @@
 package control.VideoFrame;
 
+import model.Video;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
 import uk.co.caprica.vlcj.factory.discovery.strategy.LinuxNativeDiscoveryStrategy;
@@ -17,31 +18,52 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 
-import static java.lang.Math.floorDiv;
+import static control.VideoFrame.VideoTest.lock;
 import static java.lang.Math.toIntExact;
 
-public class VideoFrameController
+public class VideoFrameController implements Runnable
 {
+    private String path;
     Videoframe frame;
-//    private static boolean flag = true;
-    public VideoFrameController()
+    int skipping_time = 0;
+    int progress = 0;
+
+    public VideoFrameController(String path)  {this.path = path;}
+
+    @Override
+    public void run()
     {
-//        OsxNativeDiscoveryStrategy osxNativeDiscoveryStrategy = new OsxNativeDiscoveryStrategy();
-//        osxNativeDiscoveryStrategy.onSetPluginPath("bin/darwin/plugins");
-//        osxNativeDiscoveryStrategy.onFound("bin/darwin");
-//        NativeDiscoveryStrategy[] nativeDiscoveryStrategies = {
-//                new LinuxNativeDiscoveryStrategy(),
-//                new WindowsNativeDiscoveryStrategy(),
-//                osxNativeDiscoveryStrategy
-//        };
-        NativeDiscovery discovery = new NativeDiscovery();
+        MakeVideoFrameController(this.path);
+    }
+
+    public void MakeVideoFrameController(String Path)
+    {
+        NativeDiscovery discovery;
+        if (!isWindows())
+        {
+
+            OsxNativeDiscoveryStrategy osxNativeDiscoveryStrategy = new OsxNativeDiscoveryStrategy();
+            osxNativeDiscoveryStrategy.onSetPluginPath("bin/darwin/plugins");
+            osxNativeDiscoveryStrategy.onFound("bin/darwin");
+            NativeDiscoveryStrategy[] nativeDiscoveryStrategies = {
+                    new LinuxNativeDiscoveryStrategy(),
+                    new WindowsNativeDiscoveryStrategy(),
+                    osxNativeDiscoveryStrategy
+            };
+            discovery = new NativeDiscovery(nativeDiscoveryStrategies);
+        }
+        else
+        {
+            cleanCache();
+            discovery = new NativeDiscovery();
+        }
         MediaPlayerFactory factory = new MediaPlayerFactory(discovery);
         SwingUtilities.invokeLater(new Runnable()
         {
             @Override
             public void run()
             {
-                frame = new Videoframe();
+                frame = new Videoframe(Path);
                 buildListener();
                 buildLogo();
                 videoSurface();
@@ -58,12 +80,14 @@ public class VideoFrameController
             @Override
             public void finished(MediaPlayer mediaPlayer) {
                 // TODO finish
-                int result = JOptionPane.showConfirmDialog(null, "REPEAT？", "REPEAT", JOptionPane.YES_NO_CANCEL_OPTION);
-                System.out.println(result);
-                if(result == 0) // repeat
-                    frame.MediaPlayerComponent.mediaPlayer().controls().setRepeat(true);
-                else
-                    frame.MediaPlayerComponent.mediaPlayer().controls().setRepeat(false);
+                progress = toIntExact(frame.MediaPlayerComponent.mediaPlayer().status().length());
+//                System.out.println(progress);
+//                int result = JOptionPane.showConfirmDialog(null, "REPEAT？", "REPEAT", JOptionPane.YES_NO_CANCEL_OPTION);
+//                System.out.println(result);
+//                if(result == 0) // repeat
+//                    frame.MediaPlayerComponent.mediaPlayer().controls().setRepeat(true);
+//                else
+//                    frame.MediaPlayerComponent.mediaPlayer().controls().setRepeat(false);
             }
 
             @Override
@@ -90,6 +114,7 @@ public class VideoFrameController
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.MediaPlayerComponent.mediaPlayer().controls().skipTime(-10000);
+                skipping_time -= 10000;
             }
         });
 
@@ -97,6 +122,7 @@ public class VideoFrameController
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.MediaPlayerComponent.mediaPlayer().controls().skipTime(10000);
+                skipping_time += 10000;
             }
         });
 
@@ -108,17 +134,37 @@ public class VideoFrameController
             {
                 super.mouseClicked(e);
                 int x=e.getX();
-                frame.MediaPlayerComponent.mediaPlayer().controls().setPosition((float)x/frame.getProgress().getWidth());
+                float after_position = (float)x/frame.getProgress().getWidth();
+                long video_length = frame.MediaPlayerComponent.mediaPlayer().status().length();
+                skipping_time += Math.round((after_position - frame.MediaPlayerComponent.mediaPlayer().status().position()) * video_length);
+                System.out.println(skipping_time);
+                frame.MediaPlayerComponent.mediaPlayer().controls().setPosition((after_position));
             }
         });
 
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (frame.MediaPlayerComponent.mediaPlayer().status().isPlaying())
+                {
+                    float finish_position = frame.MediaPlayerComponent.mediaPlayer().status().position();
+                    long video_length = frame.MediaPlayerComponent.mediaPlayer().status().length();
+                    progress = Math.round(finish_position * video_length);
+                }
+                frame.MediaPlayerComponent.mediaPlayer().release();
+                synchronized(lock)
+                {
+                    lock.notify();
+                }
+            }
+        });
 
     }
 
     private void buildLogo()
     {
         //TODO change everycoach's profile
-        frame.MediaPlayerComponent.mediaPlayer().logo().setFile("/Users/izreal/Desktop/大三/下/软件工程/SoftWareProject/DesignAndBuild/data/image/defaultCover.png");
+        frame.MediaPlayerComponent.mediaPlayer().logo().setFile("data/image/defaultCover.png");
         frame.MediaPlayerComponent.mediaPlayer().logo().setPosition(LogoPosition.TOP_LEFT);
         frame.MediaPlayerComponent.mediaPlayer().logo().setOpacity(0.3f);
         frame.MediaPlayerComponent.mediaPlayer().logo().enable(true);
@@ -139,14 +185,18 @@ public class VideoFrameController
                 if (e.getKeyCode() == KeyEvent.VK_SPACE)
                     frame.MediaPlayerComponent.mediaPlayer().controls().pause();
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) // right key
-                    frame.MediaPlayerComponent.mediaPlayer().controls().skipTime(10000);
-                if (e.getKeyCode() == KeyEvent.VK_LEFT) // left key
-                    frame.MediaPlayerComponent.mediaPlayer().controls().skipTime(-10000);
-                if (e.getKeyCode() == KeyEvent.VK_F1) // F1 change FullScreen
                 {
-                    System.out.println("1111111");
-                    frame.MediaPlayerComponent.mediaPlayer().fullScreen().set(!frame.MediaPlayerComponent.mediaPlayer().fullScreen().isFullScreen());
+                    frame.MediaPlayerComponent.mediaPlayer().controls().skipTime(10000);
+                    skipping_time += 10000;
+
                 }
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) // left key
+                {
+                    frame.MediaPlayerComponent.mediaPlayer().controls().skipTime(-10000);
+                    skipping_time -= 10000;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F1) // F1 change FullScreen
+                    frame.MediaPlayerComponent.mediaPlayer().fullScreen().set(!frame.MediaPlayerComponent.mediaPlayer().fullScreen().isFullScreen());
                 if (e.getKeyCode() == KeyEvent.VK_UP)
                     frame.MediaPlayerComponent.mediaPlayer().audio().setVolume(CurrentVolume+20);
                 if (e.getKeyCode() == KeyEvent.VK_DOWN)
@@ -166,7 +216,8 @@ public class VideoFrameController
                 {
                     // TODO Auto-generated method stub
                     while (true)
-                    { // 获取视频播放进度并且按百分比显示
+                    {
+                        // 获取视频播放进度并且按百分比显示
                         frame.MediaPlayerComponent.videoSurfaceComponent().requestFocusInWindow();
                         float percent = frame.MediaPlayerComponent.mediaPlayer().status().position();
                         publish((int) (percent * 100));
@@ -190,15 +241,15 @@ public class VideoFrameController
         }
     }
 
-    private String getTime(Long time)
+    protected String getTime(Long time)
     {
         int dialSeconds = toIntExact(time/1000);
         int dialhous = dialSeconds / 3600;
         int dialMinutes = dialSeconds / 60 % 60;
         dialSeconds %= 60;
         String showMinutes = "";
-        String showSeconds = "";
-        String showText = "";
+        String showSeconds;
+        String showText;
         if (dialSeconds < 10) {
             showSeconds = "0" + dialSeconds;
         } else {
@@ -216,5 +267,35 @@ public class VideoFrameController
         }
         return showText;
     }
+
+    protected void cleanCache()
+    {
+        try {
+            String[] cmd = { "bin/vlc-cache-gen.exe" + "-f" + "bin/win32-x86-64/plugins" };
+            Process p = Runtime.getRuntime().exec(cmd);
+            p.waitFor();
+            p.destroy();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean isWindows() {
+        return System.getProperty("os.name").toUpperCase().contains("WINDOWS");
+    }
+
+    public int getVideoProgress()
+    {
+        return progress;
+    }
+
+    public int getLearningTime()
+    {
+        int ans = progress - skipping_time;
+        if (ans < 0)
+            return 0;
+        return ans;
+    }
+
 }
 

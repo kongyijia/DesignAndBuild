@@ -10,7 +10,11 @@ import control.staffManage.StaffManageController;
 
 import control.RecordManage.*;
 
+import control.VideoSquare.VideoSquareController;
+
 import static util.config.*;
+
+import java.io.FileNotFoundException;
 
 /**
  *  This factory will create new controller correspond the view's name.
@@ -30,6 +34,13 @@ public class ControllerFactory {
                 return new UserInformationController();
             case FUNCTION_PANEL_NAME:
                 return new FunctionController();
+            case VIDEOSQUARE_PANEL_NAME:
+			try {
+				return new VideoSquareController();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             case STAFF_MANAGE_NAME:
                 return new StaffManageController();
             case STAFF_INSERT_NAME:

@@ -5,6 +5,7 @@ import control.EditPersonalPageModal.EditCoachModalController;
 import control.EditPersonalPageModal.EditUserModalController;
 import control.MainFrame;
 import model.Client;
+import model.User;
 import util.config;
 import view.Userinformation.UserDescription;
 import view.Userinformation.BuildProfilePanel;
@@ -17,7 +18,7 @@ import java.util.Objects;
 
 public class UserInformationController extends Controller
 {
-    private Client user;
+    private Client client;
     private final UserDescription userdescription;
 
     private EditCoachModalController editCoachModalController;
@@ -25,7 +26,7 @@ public class UserInformationController extends Controller
 
     public UserInformationController(){
         super(config.USERDESCRIPTION_PANEL_NAME, new UserDescription());
-        user = MainFrame.getInstance().getClient();
+        client = MainFrame.getInstance().getClient();
         this.userdescription = (UserDescription) this.panel;
         buttons();
         this.panel.setVisible(true);
@@ -34,12 +35,12 @@ public class UserInformationController extends Controller
 
     public void changepassword(String newpwd)
     {
-        user.setPassword(newpwd);
+        client.setPassword(newpwd);
     }
 
     public boolean checkpassword(String oldpwd)
     {
-        String correctpassword = user.getPassword();
+        String correctpassword = client.getPassword();
         return Objects.equals(correctpassword, oldpwd);
     }
 
@@ -77,7 +78,21 @@ public class UserInformationController extends Controller
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                //TODO
+                String inputContent = JOptionPane.showInputDialog(null, "Enter the top-up amount:", "0");
+                try
+                {
+                    float account = Float.parseFloat(inputContent);
+                    if (account >= 0)
+                        topUp(account);
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Wrong number!");
+                        return;
+                    }
+                    update();
+                }catch (NumberFormatException Err){
+                JOptionPane.showMessageDialog(null,"Wrong number!");
+                }
             }
         });
         BuildProfilePanel.getChangepassword().addActionListener(new ActionListener()
@@ -101,9 +116,9 @@ public class UserInformationController extends Controller
                         }
                         else
                         {
-                            dialog.getOpwd().setEchoChar('*');
-                            dialog.getNpwd().setEchoChar('*');
-                            dialog.getCpwd().setEchoChar('*');
+                            dialog.getOpwd().setEchoChar('●');
+                            dialog.getNpwd().setEchoChar('●');
+                            dialog.getCpwd().setEchoChar('●');
                         }
                     }
                 });
@@ -146,12 +161,18 @@ public class UserInformationController extends Controller
 
 
     }
+
+    private void topUp(float money)
+    {
+        User user = (User) this.client;
+        user.setAccount(user.getAccount() + money);
+    }
+
     @Override
     public void update()
     {
-        this.user = MainFrame.getInstance().getClient();
-        System.out.println("fuck anyone");
-        if (user != null)
+        this.client = MainFrame.getInstance().getClient();
+        if (client != null)
                 userdescription.update();
     }
 }
