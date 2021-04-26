@@ -4,7 +4,7 @@
 	"id":1,
 	"name":"test123",
 	"src":"data/video/1.mp4",
-	"tag":0,
+	"tag":1,
 	"time":14,
 	"types":[
 		"type1",
@@ -19,7 +19,7 @@
 	"id":2,
 	"name":"test2",
 	"src":"data/video/2.mp4",
-	"tag":0,
+	"tag":2,
 	"time":14,
 	"types":[
 		"type1",
