@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Video {
 
     private int id;
+    private int author;
     private String name;
     private String src;     // video path
     private int tag;        // tag
@@ -12,8 +13,9 @@ public class Video {
     private long time;       // 单位：seconds
     private String coverSrc; // video cover source path
 
-    public Video(int id, String name, int tag, ArrayList<String> types) {
+    public Video(int id, int author, String name, int tag, ArrayList<String> types) {
         this.id = id;
+        this.author = author;
         this.name = name;
         this.tag = tag;
         this.types = types;
@@ -23,8 +25,9 @@ public class Video {
         this.time = 0;
     }
 
-    public Video(int id, String name, String src, int tag, ArrayList<String> types, long time, String coverSrc) {
+    public Video(int id, int author, String name, String src, int tag, ArrayList<String> types, long time, String coverSrc) {
         this.id = id;
+        this.author = author;
         this.name = name;
         this.src = src;
         this.tag = tag;
@@ -33,8 +36,9 @@ public class Video {
         this.coverSrc = coverSrc;
     }
 
-    public Video(int id, String name) {
+    public Video(int id, int author, String name) {
         this.id = id;
+        this.author = author;
         this.name = name;
         // default
         this.tag = 0;
@@ -46,6 +50,14 @@ public class Video {
 
     public String getCoverSrc() {
         return coverSrc;
+    }
+
+    public int getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(int author) {
+        this.author = author;
     }
 
     public void setCoverSrc(String coverSrc) {
@@ -104,6 +116,7 @@ public class Video {
     public String toString() {
         return "Video{" +
                 "id=" + id +
+                ", author=" + author +
                 ", name='" + name + '\'' +
                 ", src='" + src + '\'' +
                 ", tag=" + tag +
