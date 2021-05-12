@@ -55,14 +55,14 @@ public class UploadVideoController implements ActionListener {
         return x + 1;
     }
 
-    private Video generateVideo() throws FileNotFoundException {
-        int id = this.idIncrement();
-        String name = this.uploadForm.getVideoNameTextField();
-        int tag = this.uploadForm.getVideoTagComboBox();
-        String src = this.uploadForm.getVideoSrcTextField();
-        ArrayList<String> types = Util.toArrayList(this.uploadForm.getMultiComboBox());
-        return new Video(id,name,src,tag,types,0,"");
-    }
+//    private Video generateVideo() throws FileNotFoundException {
+//        int id = this.idIncrement();
+//        String name = this.uploadForm.getVideoNameTextField();
+//        int tag = this.uploadForm.getVideoTagComboBox();
+//        String src = this.uploadForm.getVideoSrcTextField();
+//        ArrayList<String> types = Util.toArrayList(this.uploadForm.getMultiComboBox());
+//        return new Video(id,name,src,tag,types,0,"");
+//    }
 
     private void onConfirm(){
         if (this.uploadForm.getVideoNameTextField().equals("")){
