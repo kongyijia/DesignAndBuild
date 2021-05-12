@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import control.Controller;
+import control.MainFrame;
 import util.config;
 import view.VideoSquare.*;
 import model.mapping.*;
@@ -28,6 +29,7 @@ public class VideoSquareController extends Controller{
 	public static final int P_HIGHT= 250;
 	public static final int P_WIDTH= 275;
 	private static ImageIcon picIcon = new ImageIcon("assets/pictures/video.jfif");
+	private Client client= MainFrame.getInstance().getClient();
 	
 	public VideoSquareController() throws FileNotFoundException {
 		super(config.VIDEOSQUARE_PANEL_NAME, new VideoSquare());
@@ -49,7 +51,7 @@ public class VideoSquareController extends Controller{
                 update();
 			}
 		});
-		//user = MainFrame.getInstance().getClient();
+		//
 	}	
 	public ArrayList<Video> generateMap(String name,String type,String tag) throws FileNotFoundException {
 		HashMap<String, String> map = new HashMap<>();
@@ -102,6 +104,14 @@ public class VideoSquareController extends Controller{
 		button.setBounds(0, 0, P_WIDTH, P_HIGHT);
 		button.addActionListener(e ->{
 			//TODO： link to the videos
+			if(client.getRole()==2) {
+				User user=(User) client;
+				if(user.getLevel()<tag)
+					JOptionPane.showMessageDialog(null,"Level is not satisfied!!"+num);
+				else
+					JOptionPane.showMessageDialog(null,"Developing!"+num);
+			}
+			else
 			 JOptionPane.showMessageDialog(null,"Developing!"+num);
 			 //历史记录
 			});
