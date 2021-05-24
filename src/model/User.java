@@ -15,13 +15,13 @@ public class User extends Client {
     private double account;
     private int level;
     private int learningTime;
-    private int vip;
+    private String vip;
     private ArrayList<Course> courseSubscription;
     private String description;
 
     public User(int id, String nickName, String password, int sex, String phone, String email
             , int role, boolean cancel, ArrayList<RecordHistory> recordHistory, String avatarSrc, double account
-            , int level, int learningTime, int vip, ArrayList<Course> courseSubscription, String description) {
+            , int level, int learningTime, String vip, ArrayList<Course> courseSubscription, String description) {
         super(id, nickName, password, sex, phone, email, role, cancel, recordHistory, avatarSrc);
         this.account = account;
         this.level = level;
@@ -37,7 +37,7 @@ public class User extends Client {
         this.account = 0.0;
         this.level = 1;
         this.learningTime = 0;
-        this.vip = 1;
+        this.vip = "plain";
         this.courseSubscription = new ArrayList<>();
         this.description = "";
     }
@@ -49,7 +49,7 @@ public class User extends Client {
         this.account = 0.0;
         this.level = 1;
         this.learningTime = 0;
-        this.vip = 1;
+        this.vip = "plain";
         this.courseSubscription = new ArrayList<>();
     }
 
@@ -69,7 +69,7 @@ public class User extends Client {
         return learningTime;
     }
 
-    public int getVip() {
+    public String getVip() {
         return vip;
     }
 
@@ -93,7 +93,7 @@ public class User extends Client {
         this.learningTime = learningTime;
     }
 
-    public void setVip(int vip) {
+    public void setVip(String vip) {
         this.vip = vip;
     }
 
