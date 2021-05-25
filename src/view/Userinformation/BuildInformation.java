@@ -1,9 +1,7 @@
 package view.Userinformation;
 
-import control.MainFrame;
 import model.Client;
 import model.Coach;
-import model.Course;
 import model.User;
 
 import javax.swing.*;
@@ -11,24 +9,24 @@ import java.awt.*;
 
 public class BuildInformation extends JPanel
 {
-    public BuildInformation(Client receiveuser)
+    public BuildInformation(Client receiveUser)
     {
 
         this.setBounds(300, 20, 500, 330);
         this.setBackground(Color.PINK);
 
-        if (receiveuser != null)
+        if (receiveUser != null)
         {
-            JLabel name = new JLabel(receiveuser.getNickName());
-            int sex_tem = receiveuser.getSex();
+            JLabel name = new JLabel(receiveUser.getNickName());
+            int sex_tem = receiveUser.getSex();
             String sex_string = null;
             if (sex_tem == 1)
                 sex_string = "male";
             if (sex_tem == 0)
                 sex_string = "female";
             JLabel sex = new JLabel(sex_string);
-            JLabel phone = new JLabel(receiveuser.getPhone());
-            JLabel mail = new JLabel(receiveuser.getEmail());
+            JLabel phone = new JLabel(receiveUser.getPhone());
+            JLabel mail = new JLabel(receiveUser.getEmail());
 
 
             JLabel label_name;
@@ -36,9 +34,9 @@ public class BuildInformation extends JPanel
             JLabel label_Phone;
             JLabel label_mail;
             JLabel label_level;
-            if (receiveuser.getRole() == 2) // user
+            if (receiveUser.getRole() == 2) // user
             {
-                User user = (User) receiveuser;
+                User user = (User) receiveUser;
                 GridLayout layout = new GridLayout(8, 2);
                 label_name = new JLabel("Name: ");
                 label_sex = new JLabel("Sex: ");
@@ -74,9 +72,9 @@ public class BuildInformation extends JPanel
                 this.add(label_vip);
                 this.add(vip);
             }
-            if (receiveuser.getRole() == 1) //coach
+            if (receiveUser.getRole() == 1) //coach
             {
-                Coach coach = (Coach) receiveuser;
+                Coach coach = (Coach) receiveUser;
                 GridLayout layout = new GridLayout(5, 2);
                 label_name = new JLabel("Name: ");
                 label_sex = new JLabel("Sex: ");

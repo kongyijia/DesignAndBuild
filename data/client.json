@@ -39,10 +39,14 @@
 	"cancel":false,
 	"courseSubscription":[
 		{
-			"id":123
+			"coachId":0,
+			"id":123,
+			"userId":0
 		},
 		{
-			"id":234
+			"coachId":0,
+			"id":234,
+			"userId":0
 		}
 	],
 	"description":"12345ghjkdsalfegadafds\n1111",
@@ -63,10 +67,14 @@
 	"cancel":false,
 	"courseSubscription":[
 		{
-			"id":123
+			"coachId":0,
+			"id":123,
+			"userId":0
 		},
 		{
-			"id":234
+			"coachId":0,
+			"id":234,
+			"userId":0
 		}
 	],
 	"description":"12345ghjkdsalfegadafds\nadsfweoba",
@@ -93,7 +101,7 @@
 	],
 	"role":2,
 	"sex":1,
-	"vip":"plain"
+	"vip":"video"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":true,

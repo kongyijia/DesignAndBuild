@@ -22,4 +22,7 @@ public interface config {
      String STAFF_INSERT_NAME = "staffInsert";
      String RECORD_MANAGE_NAME = "recordManagement";
 
+     String COURSE_BOOK_NAME = "courseBook";
+     String COURSE_BOOK_COACH_NAME = "courseBookCoach";
+     String COURSE_BOOK_TIME_NAME = "corseBookTime";
 }

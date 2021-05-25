@@ -54,7 +54,7 @@ public class UserInformationController extends Controller
                     JOptionPane.showMessageDialog(null,"Developing!");
             }
         });
-        BuildProfilePanel.getChangeinformation().addActionListener(new ActionListener()
+        BuildProfilePanel.getPersonalInformation().addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -80,7 +80,7 @@ public class UserInformationController extends Controller
                 //TODO
             }
         });
-        BuildProfilePanel.getChangepassword().addActionListener(new ActionListener()
+        BuildProfilePanel.getChangePassword().addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)

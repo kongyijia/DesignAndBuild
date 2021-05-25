@@ -14,6 +14,8 @@ import view.staffManagement.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -95,6 +97,57 @@ public class StaffManageController extends Controller {
             staffManagePanel.getInfoPanel().add(v);
             v.getDeleteButton().addActionListener(new PersonPanelListener());
             v.getDetailButton().addActionListener(new PersonPanelListener());
+            v.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
+                    if (e.getClickCount() == 2) {
+                        ClientDetailDialog clientDetail = new ClientDetailDialog(v.getClient());
+
+                        // modify client level
+                        clientDetail.getModifyLevelButton().addActionListener(actionEvent -> {
+                            int newLevel = (Integer) clientDetail.getLevel().getSelectedItem();
+                            Client newClient = v.getClient();
+                            if (v.getClient().getRole() == 1) {
+                                ((Coach) newClient).setLevel(newLevel);
+                            } else {
+                                ((User) newClient).setLevel(newLevel);
+                            }
+                            try {
+                                if (ClientMapping.modify(newClient) == ClientMapping.SUCCESS) {
+                                    clientDetail.setBuildinformation(new BuildInformation(newClient));
+                                    Util.showDialog(clientDetail, "Modify Success! ");
+                                } else {
+                                    Util.showDialog(clientDetail, "Error! \n     Modify failed !");
+                                }
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                                Util.showDialog(clientDetail, "Error! \n     Modify failed !");
+                            }
+                        });
+
+                        // modify client VIP level
+                        clientDetail.getModifyVIPButton().addActionListener(actionEvent -> {
+                            String newVIPLevel = (String) clientDetail.getVIPLevel().getSelectedItem();
+                            User newUser = (User) v.getClient();
+                            newUser.setVip(newVIPLevel);
+                            try {
+                                if (ClientMapping.modify(newUser) == ClientMapping.SUCCESS) {
+                                    clientDetail.setBuildinformation(new BuildInformation(newUser));
+                                    Util.showDialog(clientDetail, "Modify Success! ");
+                                } else {
+                                    Util.showDialog(clientDetail, "Error! \n     Modify failed !");
+                                }
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                                Util.showDialog(clientDetail, "Error! \n     Modify failed !");
+                            }
+                        });
+                        clientDetail.setVisible(true);
+
+                    }
+                }
+            });
         });
         int client_num = staffManagePanel.getClients().size();
         if (client_num < 5) {
@@ -174,7 +227,7 @@ public class StaffManageController extends Controller {
 
                     // modify client VIP level
                     clientDetail.getModifyVIPButton().addActionListener(actionEvent -> {
-                        int newVIPLevel = (Integer) clientDetail.getVIPLevel().getSelectedItem();
+                        String newVIPLevel = (String) clientDetail.getVIPLevel().getSelectedItem();
                         User newUser = (User) v.getClient();
                         newUser.setVip(newVIPLevel);
                         try {

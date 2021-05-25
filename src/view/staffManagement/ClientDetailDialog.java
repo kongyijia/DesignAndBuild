@@ -9,6 +9,7 @@ import view.Userinformation.*;
 import javax.swing.*;
 import java.awt.*;
 
+
 /**
  *  This is the dialog to show detail information of one client.
  *
@@ -25,7 +26,7 @@ public class ClientDetailDialog extends JDialog {
     private JButton modifyLevelButton =  new JButton("Modify");
     private JButton modifyVIPButton = new JButton("Modify");
     private JComboBox<Integer> level;
-    private JComboBox<Integer> VIPLevel;
+    private JComboBox<String> VIPLevel;
 
     public ClientDetailDialog(Client client){
         super(MainFrame.getInstance() ,"Detail information of " + client.getNickName(), true);
@@ -67,8 +68,11 @@ public class ClientDetailDialog extends JDialog {
             level = new JComboBox<>(new Integer[]{0, 1, 2, 3, 4, 5, 6});
             level.setSelectedIndex(((User) client).getLevel());
 
-            VIPLevel = new JComboBox<>(new Integer[]{0, 1, 2, 3, 4, 5, 6});
-            VIPLevel.setSelectedIndex(((User) client).getVip());
+            String[] VIPType = new String[]{"Big", "Video", "Course", "Plain"};
+            VIPLevel = new JComboBox<>(VIPType);
+
+            VIPLevel.setSelectedItem(((User) client).getVip());
+
             VIPLevel.setBounds(100,60, 100,30);
             changePanel.add(VIPLevel);
 
@@ -98,7 +102,7 @@ public class ClientDetailDialog extends JDialog {
         return level;
     }
 
-    public JComboBox<Integer> getVIPLevel() {
+    public JComboBox<String> getVIPLevel() {
         return VIPLevel;
     }
 

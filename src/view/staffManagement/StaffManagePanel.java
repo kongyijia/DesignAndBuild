@@ -99,10 +99,6 @@ public class StaffManagePanel extends JPanel {
         return clients;
     }
 
-    public void setPersonMap(HashMap<Integer, PersonPanel> personMap) {
-        this.personMap = personMap;
-    }
-
     public void setClients(ArrayList<Client> clients) {
         this.clients = clients;
     }
@@ -121,9 +117,5 @@ public class StaffManagePanel extends JPanel {
 
     public JPanel getInfoPanel() {
         return infoPanel;
-    }
-
-    public JScrollPane getScrollPane() {
-        return scrollPane;
     }
 }

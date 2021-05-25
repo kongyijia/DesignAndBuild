@@ -1,6 +1,9 @@
 package control;
 
 import control.Userinformation.UserInformationController;
+import control.courseBook.CoachBookController;
+import control.courseBook.CourseBookController;
+import control.courseBook.TimeBookController;
 import control.enroll.EnrollController;
 import control.function.FunctionController;
 import control.index.IndexController;
@@ -46,7 +49,12 @@ public class ControllerFactory {
                 return new StaffInsertController();
             case RECORD_MANAGE_NAME:
                 return new RecordManageController();
-
+            case COURSE_BOOK_NAME:
+                return new CourseBookController();
+            case COURSE_BOOK_COACH_NAME:
+                return new CoachBookController();
+            case COURSE_BOOK_TIME_NAME:
+                return new TimeBookController();
         }
         System.out.println("Can find the view:" + name);
         return null;

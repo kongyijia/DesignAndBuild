@@ -5,24 +5,24 @@ import java.awt.*;
 
 public class BuildProfilePanel extends JPanel
 {
-    private static JButton profilebutton = new JButton("Profile Picture");
-    private static JButton changepassword = new JButton("Change Password");
-    private static JButton changeinformation = new JButton("modify personal information");
+    private static JButton profileButton = new JButton("Profile Picture");
+    private static JButton changePassword = new JButton("Change Password");
+    private static JButton personalInformation = new JButton("modify personal information");
     private static JButton topup = new JButton("Top Up");
 
     public static JButton getProfilebutton()
     {
-        return profilebutton;
+        return profileButton;
     }
 
-    public static JButton getChangeinformation()
+    public static JButton getPersonalInformation()
     {
-        return changeinformation;
+        return personalInformation;
     }
 
-    public static JButton getChangepassword()
+    public static JButton getChangePassword()
     {
-        return changepassword;
+        return changePassword;
     }
 
     public static JButton getTopup()
@@ -37,21 +37,21 @@ public class BuildProfilePanel extends JPanel
         this.setBackground(new Color(125, 101, 53));
         this.setLayout(null);
 
-        changeinformation.setFont(new Font("Times", Font.ITALIC, 10));
-        profilebutton.setFont(new Font("Times", Font.ITALIC, 15));
-        changepassword.setFont(new Font("Times", Font.ITALIC, 15));
+        personalInformation.setFont(new Font("Times", Font.ITALIC, 10));
+        profileButton.setFont(new Font("Times", Font.ITALIC, 15));
+        changePassword.setFont(new Font("Times", Font.ITALIC, 15));
         topup.setFont(new Font("Times", Font.ITALIC, 15));
 
-        profilebutton.setBounds(30,30,140,140);
-        changepassword.setBounds(30,220,140,40);
-        changeinformation.setBounds(30,280,140,40);
+        profileButton.setBounds(30,30,140,140);
+        changePassword.setBounds(30,220,140,40);
+        personalInformation.setBounds(30,280,140,40);
 
         topup.setBounds(30,340,140,40);
 
 
-        this.add(changeinformation);
-        this.add(profilebutton);
-        this.add(changepassword);
+        this.add(personalInformation);
+        this.add(profileButton);
+        this.add(changePassword);
         this.add(topup);
         this.setVisible(true);
     }
