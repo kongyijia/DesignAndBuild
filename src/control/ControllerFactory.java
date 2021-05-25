@@ -1,5 +1,6 @@
 package control;
 
+import control.PersonalSchedule.ScheduleController;
 import control.Userinformation.UserInformationController;
 import control.enroll.EnrollController;
 import control.function.FunctionController;
@@ -46,6 +47,12 @@ public class ControllerFactory {
                 return new StaffInsertController();
             case RECORD_MANAGE_NAME:
                 return new RecordManageController();
+            case SCHEDULE_NAME:
+                try {
+                    return new ScheduleController();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
 
         }
         System.out.println("Can find the view:" + name);

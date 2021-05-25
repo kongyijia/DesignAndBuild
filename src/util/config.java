@@ -22,4 +22,6 @@ public interface config {
      String STAFF_INSERT_NAME = "staffInsert";
      String RECORD_MANAGE_NAME = "recordManagement";
 
+     String SCHEDULE_NAME ="personalSchedule";
+
 }
