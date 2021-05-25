@@ -59,36 +59,36 @@ public class GeneratePanel {
                 classPanelArray[i][j].setLayout(null);
                 classPanelArray[i][j].setBackground(Color.decode("#EAEAEA"));
                 classPanelArray[i][j].setBounds(j * (PANELGAP + PANELWIDTH), i * (PANELGAP + PANELHIGHT), PANELWIDTH, PANELHIGHT);
-
-
-                JLabel l1=new JLabel("");
-                JLabel l2=new JLabel("");
-                JLabel l3=new JLabel("");
-                JLabel l4=new JLabel("");
-                JPanel p=new JPanel();
-                if(!getTelenum(dayLabel[j].getText(),i).isEmpty()) {
-                    l1.setText(getTelenum(dayLabel[j].getText(), i).get(0));//调取接口获取string
-                    l1.setBounds(0, 0, 120, 10);
-                    l2.setText(getTelenum(dayLabel[j].getText(), i).get(1));//调取接口获取string
-                    l2.setBounds(0, 15, 120, 10);
-                    l3.setText(getTelenum(dayLabel[j].getText(), i).get(2));//调取接口获取string
-                    l3.setBounds(0, 35, 120, 10);
-                   l4.setText(getTelenum(dayLabel[j].getText(), i).get(3));//调取接口获取string
-                    l4.setBounds(0, 50, 120, 10);
-                    System.out.println(getTelenum(dayLabel[j].getText(),i));
-                    System.out.println(client.getRole());
-                    p.setBackground(Color.decode("#B4EEB4"));
-                }else{
-                    p.setBackground(Color.decode("#E0FFFF"));
-                }
-                p.add(l1);
-                p.add(l2);
-                p.add(l3);
-                p.add(l4);
-                setSchedule(i,j,p);
-
+                setSchedule(i,j,generateCoursePanel(j,i));
             }
         }
+    }
+    public JPanel generateCoursePanel(int j,int i) throws FileNotFoundException {
+        JLabel l1=new JLabel("");
+        JLabel l2=new JLabel("");
+        JLabel l3=new JLabel("");
+        JLabel l4=new JLabel("");
+        JPanel p=new JPanel();
+        if(!getTelenum(dayLabel[j].getText(),i).isEmpty()) {
+            l1.setText(getTelenum(dayLabel[j].getText(), i).get(0));//调取接口获取string
+            l1.setBounds(0, 0, 120, 10);
+            l2.setText(getTelenum(dayLabel[j].getText(), i).get(1));//调取接口获取string
+            l2.setBounds(0, 15, 120, 10);
+            l3.setText(getTelenum(dayLabel[j].getText(), i).get(2));//调取接口获取string
+            l3.setBounds(0, 35, 120, 10);
+            l4.setText(getTelenum(dayLabel[j].getText(), i).get(3));//调取接口获取string
+            l4.setBounds(0, 50, 120, 10);
+            System.out.println(getTelenum(dayLabel[j].getText(),i));
+            System.out.println(client.getRole());
+            p.setBackground(Color.decode("#B4EEB4"));
+        }else{
+            p.setBackground(Color.decode("#E0FFFF"));
+        }
+        p.add(l1);
+        p.add(l2);
+        p.add(l3);
+        p.add(l4);
+        return p;
     }
     public void setSchedule(int slot,int day,JPanel course){
         classPanelArray[slot][day].removeAll();
