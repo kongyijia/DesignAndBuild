@@ -23,7 +23,6 @@ public class Schedule2 extends JPanel {
     private static JPanel week=new JPanel();
     private static JPanel date= new JPanel();
     private static JPanel schedulePanel = new JPanel();
-    // private static JPanel personalSchedule=new JPanel();
     public static final int LABELWIDTH=120;
     public static final int LABELHIGHT=20;
     public static final int BUTTONWIDTH=60;
@@ -35,6 +34,13 @@ public class Schedule2 extends JPanel {
 
     GeneratePanel g=new GeneratePanel();
 
+    public void setOffsetOfPage(int i) {
+        g.setOffsetOfPage(i);
+    }
+
+    public int getOffsetOfPage() {
+        return g.getOffsetOfPage();
+    }
     public void setDate(JPanel generateDate) {
         date.removeAll();
         date.add(generateDate);
@@ -127,5 +133,6 @@ public class Schedule2 extends JPanel {
        this.getLast().addActionListener(actionListener);
         this.getNext().addActionListener(actionListener);
     }
+
 
 }
