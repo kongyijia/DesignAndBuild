@@ -44,6 +44,7 @@ public class PersonPanel extends JPanel {
     private void initialize(){
         this.setLayout(null);
         this.setPreferredSize(new Dimension(280,180));
+        System.out.println("!!: "+ this.getBackground());
 
         // show client avatar
         avatarLabel = new JLabel();

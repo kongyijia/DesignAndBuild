@@ -1,5 +1,7 @@
 package view.Userinformation;
 
+import control.MainFrame;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -37,17 +39,20 @@ public class BuildProfilePanel extends JPanel
         this.setBackground(new Color(125, 101, 53));
         this.setLayout(null);
 
+        profileButton.setBounds(30,30,140,140);
+        changePassword.setBounds(30,220,140,40);
+        personalInformation.setBounds(30,280,140,40);
+        topup.setBounds(30,340,140,40);
+
+        String originalPicture = MainFrame.getInstance().getClient().getAvatarSrc();
+        ImageIcon logoIcon = new ImageIcon(originalPicture);
+        logoIcon.setImage(logoIcon.getImage().getScaledInstance(profileButton.getWidth(),profileButton.getHeight(),Image.SCALE_DEFAULT));
+        profileButton.setIcon(logoIcon);
+
         personalInformation.setFont(new Font("Times", Font.ITALIC, 10));
         profileButton.setFont(new Font("Times", Font.ITALIC, 15));
         changePassword.setFont(new Font("Times", Font.ITALIC, 15));
         topup.setFont(new Font("Times", Font.ITALIC, 15));
-
-        profileButton.setBounds(30,30,140,140);
-        changePassword.setBounds(30,220,140,40);
-        personalInformation.setBounds(30,280,140,40);
-
-        topup.setBounds(30,340,140,40);
-
 
         this.add(personalInformation);
         this.add(profileButton);

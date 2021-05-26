@@ -13,7 +13,7 @@ public class BuildInformation extends JPanel
     {
 
         this.setBounds(300, 20, 500, 330);
-        this.setBackground(Color.PINK);
+        this.setBackground(Color.PINK); // monkey ass whole
 
         if (receiveUser != null)
         {

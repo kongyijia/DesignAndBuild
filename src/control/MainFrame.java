@@ -1,12 +1,14 @@
 package control;
 
 import javax.swing.*;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 import control.function.FunctionController;
 import model.Client;
+import model.mapping.ClientMapping;
 import util.config;
 
 /**
@@ -71,6 +73,21 @@ public class MainFrame extends JFrame{
     public void setClient(Client client) {
         this.client = client;
         notifyObserver();
+    }
+
+    public void setClient(int ID) {
+        HashMap<String, String> map = new HashMap<>();
+        // 设置查找条件
+        map.put("id", Integer.toString(ID));
+        // 查找
+        try
+        {
+            ArrayList<Client> clients = ClientMapping.find(map);
+            setClient(clients.get(0));
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public Client getClient() {
