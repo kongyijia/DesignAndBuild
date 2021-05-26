@@ -3,6 +3,8 @@ package control.FX_Video;
 import javafx.application.Application;
 import util.Video.JavaFX_MediaPlayer;
 
+import static util.Video.JavaFX_MediaPlayer.lock;
+
 public class VideoPlayerLauncher
 {
     public static void main(String[] args) {
@@ -14,7 +16,10 @@ public class VideoPlayerLauncher
     {
         JavaFX_MediaPlayer.path = path;
         Application.launch(util.Video.JavaFX_MediaPlayer.class);
-        long testruntime = JavaFX_MediaPlayer.getRunTime();
-        System.out.println(testruntime);
+        synchronized (JavaFX_MediaPlayer.class)
+        {
+            long testruntime = JavaFX_MediaPlayer.getRunTime();
+            System.out.println(testruntime);
+        }
     }
 }
