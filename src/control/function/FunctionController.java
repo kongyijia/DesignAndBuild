@@ -14,6 +14,8 @@ import view.function.InfoButton;
 import view.function.MenuButton;
 import model.Client;
 
+import javax.swing.*;
+
 public class FunctionController extends Controller{
     private FunctionPanel functionPanel;
 
@@ -82,7 +84,10 @@ public class FunctionController extends Controller{
                 functionPanel.setClient(currentClient);
             }
             functionPanel.getWelcomeLabel().setText("Welcome " + currentClient.getNickName() + " !");
-
+            ImageIcon avatarIcon = new ImageIcon(currentClient.getAvatarSrc());
+            JButton avatarButton = functionPanel.getAvatarButton();
+            avatarIcon.setImage(avatarIcon.getImage().getScaledInstance(avatarButton.getWidth(),avatarButton.getHeight(), Image.SCALE_DEFAULT));
+            avatarButton.setIcon(avatarIcon);
         }
     }
 

@@ -113,7 +113,7 @@ public class MainFrame extends JFrame{
      *
      * @param name is the view name which will be switched to
      */
-    public void goTo(String name){
+    public void goTo(String name) {
         ArrayList<String> firstGate = new ArrayList<>(Arrays.asList(
                 config.INDEX_PANEL_NAME, config.FUNCTION_PANEL_NAME, config.ENROLL_PANEL_NAME));
         // Index, enroll and function view switching uses this mode

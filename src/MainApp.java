@@ -20,7 +20,7 @@ public class MainApp {
                 try {
                     MainFrame mainFrame = MainFrame.getInstance();
                     mainFrame.setDefaultLookAndFeelDecorated(true);
-                    UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+                    // UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
                     MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
                 } catch (Exception e) {
                     e.printStackTrace();

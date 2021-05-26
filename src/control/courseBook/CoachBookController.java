@@ -4,6 +4,7 @@ import control.Controller;
 import control.MainFrame;
 import model.Coach;
 import model.mapping.ClientMapping;
+import util.Util;
 import util.config;
 import view.courseBook.CoachBookPanel;
 import view.staffManagement.PersonPanel;
@@ -33,12 +34,25 @@ public class CoachBookController extends Controller {
     @Override
     public void update() {
         System.out.println("Coach Book Page update");
+        search_reset();
+        showCoachInfo();
+
+        coachBookPanel.updateUI();
+    }
+
+    private void showCoachInfo(){
         // clear old panel
         coachBookPanel.getDataPanel().removeAll();
         coachBookPanel.getPersonMap().clear();
 
         HashMap<Integer, PersonPanel> personMap = new HashMap<>();
-        search_coaches().forEach(item -> personMap.put(item.getId(), new PersonPanel(item)));
+        ArrayList<Coach> coaches = search_coaches();
+        if (coaches.size() == 0){
+            Util.showDialog(coachBookPanel, "No qualified coach were found!");
+            return;
+        }
+
+        coaches.forEach(item -> personMap.put(item.getId(), new PersonPanel(item)));
         coachBookPanel.setPersonMap(personMap);
         coachBookPanel.getPersonMap().forEach((k, v) ->{
             v.getDeleteButton().setVisible(false);
@@ -55,6 +69,13 @@ public class CoachBookController extends Controller {
                 }
             });
         });
+
+        if (coaches.size() < 5) {
+            // use blank panel to occupy space
+            for (int i = 0; i < 5 - coaches.size(); i++) {
+                coachBookPanel.getDataPanel().add(new PersonPanel());
+            }
+        }
     }
 
     private ArrayList<Coach> search_coaches(){
@@ -65,10 +86,12 @@ public class CoachBookController extends Controller {
             searchMap.put("nickName", coachBookPanel.getSearchInputField().getText());
         coachBookPanel.getSearchComboBoxMap().forEach((k, v) -> {
             if (!v.getComboBox().getSelectedItem().equals("All")) {
-                searchMap.put(k, (String) v.getComboBox().getSelectedItem());
+                if (k.equals("sex"))
+                    searchMap.put(k, v.getComboBox().getSelectedItem().equals("male") ? "1" : "0");
+                else
+                    searchMap.put(k, (String) v.getComboBox().getSelectedItem());
             }
         });
-
         // search coaches
         ArrayList<Coach> coaches = new ArrayList<>();
         try {
@@ -95,7 +118,8 @@ public class CoachBookController extends Controller {
                 search_reset();
             }
             else if (e.getSource() == coachBookPanel.getSearchButton()){
-                update();
+                showCoachInfo();
+                coachBookPanel.updateUI();
             }
         }
     }

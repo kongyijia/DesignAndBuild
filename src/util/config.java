@@ -25,4 +25,7 @@ public interface config {
      String COURSE_BOOK_NAME = "courseBook";
      String COURSE_BOOK_COACH_NAME = "courseBookCoach";
      String COURSE_BOOK_TIME_NAME = "corseBookTime";
+
+     String SCHEDULE_NAME ="personalSchedule";
+
 }

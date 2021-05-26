@@ -1,5 +1,6 @@
 package control;
 
+import control.PersonalSchedule.ScheduleController;
 import control.Userinformation.UserInformationController;
 import control.courseBook.CoachBookController;
 import control.courseBook.CourseBookController;
@@ -55,6 +56,12 @@ public class ControllerFactory {
                 return new CoachBookController();
             case COURSE_BOOK_TIME_NAME:
                 return new TimeBookController();
+            case SCHEDULE_NAME:
+                try {
+                    return new ScheduleController();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
         }
         System.out.println("Can find the view:" + name);
         return null;
