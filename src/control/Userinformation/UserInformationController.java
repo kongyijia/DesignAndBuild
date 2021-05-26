@@ -67,23 +67,23 @@ public class UserInformationController extends Controller
             {
                 JFileChooser fileChooser = new JFileChooser();
 
-                // 设置默认显示的文件夹为当前文件夹
+                // Set the default displayed folder to the current folder
                 fileChooser.setCurrentDirectory(new File("."));
 
-                // 设置文件选择的模式（只选文件、只选文件夹、文件和文件均可选）
+                // Sets the mode for file selection (select only files, select only folders, files and files are optional)
                 fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                // 设置是否允许多选
+                // Sets whether multiple selection is allowed
                 fileChooser.setMultiSelectionEnabled(false);
 
-                // 设置默认使用的文件过滤器
+                // Set the file filter used by default
                 fileChooser.setFileFilter(new FileNameExtensionFilter("image(*.jpg, *.png)", "jpg", "png"));
 
-                // 打开文件选择框（线程将被阻塞, 直到选择框被关闭）
+                // Open the file selection box (the thread will be blocked until the selection box is closed)
                 int result = fileChooser.showOpenDialog(null);
 
                 if (result == JFileChooser.APPROVE_OPTION)
                 {
-                    // 如果点击了"确定", 则获取选择的文件路径
+                    // If you click OK, get the selected file path
                     File file = fileChooser.getSelectedFile();
                     String path = file.getAbsolutePath();
                     try
