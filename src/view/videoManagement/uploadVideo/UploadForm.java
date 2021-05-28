@@ -106,7 +106,7 @@ public class UploadForm extends JPanel {
         return this.returnButton;
     }
 
-    private void initMultiComboBox(ArrayList<String> args){
+    public void initMultiComboBox(ArrayList<String> args){
         String[] types;
         types = args.toArray(new String[0]);
         this.multiComboBox = new MultiComboBox(types);

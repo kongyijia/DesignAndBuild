@@ -9,6 +9,8 @@ import view.Schedule.Schedule2;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -27,9 +29,26 @@ public class ScheduleController extends Controller {
     private static Schedule2 schedule2;
     GeneratePanel g=new GeneratePanel();
 
+    public void addClassPanelArrayListener(){
+        for (int i=0;i<4;i++) {
+            for (int j = 0; j < 7; j++) {
+                GeneratePanel.classPanelArray[i][j].addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        super.mouseClicked(e);
+                        System.out.println("ffffffffs");
+                    }
+                });
+            }
+        }
+    }
+
     public ScheduleController() throws FileNotFoundException {
         super(config.SCHEDULE_NAME,new Schedule2());
         schedule2 = (Schedule2) this.panel;    // 强制转换为当前控制器对应的页面类型
+
+
+        this.addClassPanelArrayListener();
 
         schedule2.addaddListener(e->{
             if(e.getSource()== schedule2.getNext()){
@@ -38,9 +57,11 @@ public class ScheduleController extends Controller {
                 schedule2.setDate(g.generateDate());
                 try {
                     schedule2.setSchedulePanel(g.generateSchedule());
+                    this.addClassPanelArrayListener();
                 } catch (FileNotFoundException fileNotFoundException) {
                     fileNotFoundException.printStackTrace();
                 }
+                schedule2.updateUI();
             }
             if(e.getSource()== schedule2.getLast()){
                 g.client= MainFrame.getInstance().getClient();
@@ -48,6 +69,7 @@ public class ScheduleController extends Controller {
                 schedule2.setDate(g.generateDate());
                 try {
                     schedule2.setSchedulePanel(g.generateSchedule());
+                    this.addClassPanelArrayListener();
                 } catch (FileNotFoundException fileNotFoundException) {
                     fileNotFoundException.printStackTrace();
                 }

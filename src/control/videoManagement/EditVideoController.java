@@ -10,8 +10,6 @@ import java.util.ArrayList;
 
 public class EditVideoController extends UploadVideoController {
 
-
-
     public EditVideoController(){
         super(config.VIDEO_MODIFY, new UpLoadVideo(EditVideoController.getTypes()));
         //this.setVideo(video);
@@ -21,7 +19,7 @@ public class EditVideoController extends UploadVideoController {
         this.uploadForm.setVideoTextField(video.getName());
         this.uploadForm.setVideoTagComboBox(video.getTag());
         ArrayList<String> args = video.getTypes();
-        this.uploadForm.setMultiComboBox(args.toArray(new String[args.size()]));
+        this.uploadForm.setMultiComboBox(args.toArray(new String[0]));
         this.uploadForm.setVideoSrcTextField(video.getSrc());
     }
 

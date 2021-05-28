@@ -7,6 +7,8 @@ import model.Video;
 import model.mapping.ClientMapping;
 import model.mapping.CourseMapping;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import javax.swing.*;
@@ -50,6 +52,7 @@ public class GeneratePanel {
         }
         return schedulePanel;
     }
+
 
     public void generateClass() throws FileNotFoundException {
 
