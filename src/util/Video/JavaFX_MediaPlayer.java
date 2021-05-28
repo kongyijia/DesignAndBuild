@@ -116,8 +116,6 @@ public class JavaFX_MediaPlayer extends Application
         {
                 //setting group and scene
                 pane = new BorderPane();
-//                mediaView.fitHeightProperty().bind(pane.heightProperty());
-//                mediaView.fitWidthProperty().bind(pane.widthProperty());
                 mediaView.fitWidthProperty().bind(pane.widthProperty());
                 mediaView.fitHeightProperty().bind(pane.heightProperty().subtract(30));
                 pane.setCenter(mediaView);
@@ -160,7 +158,7 @@ public class JavaFX_MediaPlayer extends Application
                 countingTask = new TimerTask()
                 {
                         @Override
-                        public void run() { studyTime++; }
+                        public void run() { studyTime ++; }
                 };
                 timer.schedule(countingTask, 0,1000);
 
