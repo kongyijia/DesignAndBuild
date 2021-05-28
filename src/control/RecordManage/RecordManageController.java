@@ -58,10 +58,10 @@ public class RecordManageController extends Controller {
                 }
             });
             table.setModel(model);
-            table.setBounds(0,0,1200,510);
+            table.setBounds(0,20,1200,510);
             table.setAutoCreateRowSorter(true);
             JScrollPane pane = new JScrollPane(table);
-            pane.setBounds(0,0,1200,510);
+            pane.setBounds(0,20,1200,510);
             pane.setVisible(true);
             Recordmanagepanel.add(pane);
         } catch (FileNotFoundException e) {
