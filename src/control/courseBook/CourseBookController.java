@@ -58,4 +58,8 @@ public class CourseBookController extends Controller {
             });
         });
     }
+
+    public String getCourseType() {
+        return courseType;
+    }
 }

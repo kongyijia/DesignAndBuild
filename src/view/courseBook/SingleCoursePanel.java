@@ -22,4 +22,5 @@ public class SingleCoursePanel extends JPanel {
         nameLabel.setBounds(40,100,200,30);
         this.add(nameLabel);
     }
+
 }

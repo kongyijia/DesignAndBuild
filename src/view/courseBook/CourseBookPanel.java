@@ -31,7 +31,7 @@ public class CourseBookPanel extends JPanel {
     private void init_infoPanel() {
         infoPanel = new JPanel();
         infoPanel.setBounds(0,0, config.PAGE_WIDTH, INFO_PANEL_HEIGHT);
-        infoPanel.setBackground(Color.white);
+        infoPanel.setBackground(Color.lightGray);
 
         this.add(infoPanel);
     }

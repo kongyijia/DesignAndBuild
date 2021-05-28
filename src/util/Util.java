@@ -2,8 +2,10 @@ package util;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class Util {
 
@@ -37,6 +39,30 @@ public class Util {
             arrayList.add(i.toString());
         }
         return arrayList;
+    }
+
+    public static java.sql.Time strToTime(String strDate) {
+        String str = strDate;
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        Date d = null;
+        try {
+            d = format.parse(str);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        java.sql.Time time = new java.sql.Time(d.getTime());
+        return time.valueOf(str);
+    }
+
+    public static Date strToDate(String strDate) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(strDate);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return date;
     }
 
 }
