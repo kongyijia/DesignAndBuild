@@ -16,6 +16,7 @@ public class CourseBookPanel extends JPanel {
 
     private JTextField searchInputField;
     private JButton searchButton;
+    private JButton resetButton;
 
     public CourseBookPanel(){
         initialize();
@@ -31,7 +32,23 @@ public class CourseBookPanel extends JPanel {
     private void init_infoPanel() {
         infoPanel = new JPanel();
         infoPanel.setBounds(0,0, config.PAGE_WIDTH, INFO_PANEL_HEIGHT);
+        infoPanel.setLayout(null);
         infoPanel.setBackground(Color.lightGray);
+
+        searchInputField = new JTextField();
+        searchInputField.setBounds(30, 10, 300, INFO_PANEL_HEIGHT - 20);
+
+        resetButton = new JButton("Reset");
+        resetButton.setBounds(350, 10, 80, INFO_PANEL_HEIGHT - 20);
+        resetButton.setBackground(Color.white);
+
+        searchButton = new JButton("Search");
+        searchButton.setBounds(450, 10, 80, INFO_PANEL_HEIGHT - 20);
+        searchButton.setBackground(Color.white);
+
+        infoPanel.add(searchInputField);
+        infoPanel.add(searchButton);
+        infoPanel.add(resetButton);
 
         this.add(infoPanel);
     }
@@ -65,5 +82,9 @@ public class CourseBookPanel extends JPanel {
 
     public JButton getSearchButton() {
         return searchButton;
+    }
+
+    public JButton getResetButton() {
+        return resetButton;
     }
 }

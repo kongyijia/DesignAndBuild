@@ -1,6 +1,6 @@
 package view.courseBook;
 
-import control.MainFrame;
+
 import model.CourseInfo;
 
 import javax.swing.*;

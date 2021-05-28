@@ -1,6 +1,13 @@
 package model.mapping;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONReader;
 import control.MainFrame;
+import model.Administrator;
+import model.Client;
+import model.Coach;
+import model.User;
 import util.Util;
 
 import java.io.*;
@@ -22,6 +29,19 @@ public class VideoTypeMapping {
     public static boolean find(String type) throws IOException {
         ArrayList<String> types = readAllVideoTypes();
         return types.contains(type);
+    }
+
+    public static ArrayList<String> search (String name){
+        ArrayList<String> types = new ArrayList<>();
+        try {
+            for (String item : readAllVideoTypes()){
+                if (item.contains(name))
+                    types.add(item);
+            }
+        } catch (IOException e) {
+           e.printStackTrace();
+        }
+        return types;
     }
 
     public static ArrayList<String> readAllVideoTypes() throws IOException {
