@@ -107,43 +107,51 @@ public class UploadVideoController extends Controller implements ActionListener 
         }
     }
 
+    public void onShowFileChooserButton(){
+        JFileChooser jFileChooser = this.uploadForm.getJFileChooser();
+        int result  = jFileChooser.showOpenDialog(null);
+        if(result == JFileChooser.APPROVE_OPTION){
+            File file = jFileChooser.getSelectedFile();
+            String path = file.getAbsolutePath();
+            this.uploadForm.setVideoSrcTextField(path);
+        }
+    }
+
+    public void onAddTypeModal(){
+        String arg = this.addTypeModal.getJTextField();
+        if(arg.length() == 0){
+            Util.showDialog(this.addTypeModal,"The name cannot be empty");
+        } else if(!Util.isVideoTypeLegal(arg)){
+            Util.showDialog(this.addTypeModal,"The name should only include numbers and English letters");
+        } else {
+            try {
+                VideoTypeMapping.add(arg);
+                this.uploadForm.returnMultiComboBox().setValues(VideoTypeMapping.readAllVideoTypes().toArray());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.uploadForm.getAddType()){
             this.addTypeModal.setVisible(true);
         } else if(e.getSource() == this.uploadForm.getShowFileChooserButton()) {
-            JFileChooser jFileChooser = this.uploadForm.getJFileChooser();
-            int result  = jFileChooser.showOpenDialog(null);
-            if(result == JFileChooser.APPROVE_OPTION){
-                File file = jFileChooser.getSelectedFile();
-                String path = file.getAbsolutePath();
-                this.uploadForm.setVideoSrcTextField(path);
-            }
+            this.onShowFileChooserButton();
         }else if(e.getSource() == this.uploadForm.getConfirmButton()){
             this.onConfirm();
         } else if(e.getSource() == this.uploadForm.getReturnButton()){
             MainFrame.getInstance().goTo(config.VIDEO_MANAGEMENT);
         } else if(e.getSource() == this.addTypeModal.getConfirmButton()){
-            String arg = this.addTypeModal.getJTextField();
-            if(arg.length() == 0){
-                Util.showDialog(this.addTypeModal,"The name cannot be empty");
-            } else if(!Util.isVideoTypeLegal(arg)){
-                Util.showDialog(this.addTypeModal,"The name should only include numbers and English letters");
-            } else {
-                try {
-                    VideoTypeMapping.add(arg);
-                    this.uploadForm.returnMultiComboBox().setValues(VideoTypeMapping.readAllVideoTypes().toArray());
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
+            this.onAddTypeModal();
         } else if(e.getSource() == this.addTypeModal.getCancelButton()){
             this.addTypeModal.setVisible(false);
         }
-
     }
 
     @Override
     public void update() {
+        //this.uploadForm.initMultiComboBox();
     }
 }
