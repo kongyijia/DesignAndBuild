@@ -1,6 +1,6 @@
 package view.courseBook;
 
-import control.MainFrame;
+
 import model.CourseInfo;
 
 import javax.swing.*;
@@ -37,7 +37,7 @@ public class SingleSchedulePanel extends JPanel {
         }
         else {
             this.add(new JLabel("Already booked", JLabel.CENTER), BorderLayout.CENTER);
-            this.setBackground(Color.lightGray);
+            this.setBackground(Color.red);
         }
     }
 }

@@ -2,6 +2,7 @@ package control.courseBook;
 
 import control.Controller;
 import control.MainFrame;
+import util.Util;
 import view.courseBook.CourseBookPanel;
 import model.mapping.VideoTypeMapping;
 import util.config;
@@ -20,28 +21,42 @@ public class CourseBookController extends Controller {
         super(config.COURSE_BOOK_NAME, new CourseBookPanel());
         courseBookPanel = (CourseBookPanel) this.panel;
 
+        courseBookPanel.getResetButton().addActionListener(e -> reset());
+        courseBookPanel.getSearchButton().addActionListener(e -> showCourses());
+
         update();
     }
 
-    private ArrayList<String> getAllType() {
+    private ArrayList<String> searchTypes() {
         ArrayList<String> types = new ArrayList<>();
+        String type = courseBookPanel.getSearchInputField().getText();
+
         try {
-            types = VideoTypeMapping.readAllVideoTypes();
+            if (type != null && !type.equals("")) {
+                types = VideoTypeMapping.search(type);
+            }
+            else
+                types = VideoTypeMapping.readAllVideoTypes();
         } catch (Exception e){
             e.printStackTrace();
         }
         return types;
     }
 
-    @Override
-    public void update() {
-        System.out.println("Course Book Page update");
-        // clear old panel
+    private void showCourses() {
         courseBookPanel.getDataPanel().removeAll();
         courseBookPanel.getCourseMap().clear();
 
         HashMap<String, SingleCoursePanel> courseMap = new HashMap<>();
-        getAllType().forEach(item -> courseMap.put(item, new SingleCoursePanel(item)));
+        ArrayList<String> types = searchTypes();
+
+        if (types.size() == 0){
+            courseBookPanel.updateUI();
+            Util.showDialog(courseBookPanel, "No qualified course type were found!");
+            return;
+        }
+
+        types.forEach(item -> courseMap.put(item, new SingleCoursePanel(item)));
         courseBookPanel.setCourseMap(courseMap);
 
         courseBookPanel.getCourseMap().forEach((k, v) -> {
@@ -57,6 +72,26 @@ public class CourseBookController extends Controller {
                 }
             });
         });
+
+        if (types.size() < 5) {
+            // use blank panel to occupy space
+            for (int i = 0; i < 5 - types.size(); i++) {
+                courseBookPanel.getDataPanel().add(new SingleCoursePanel());
+            }
+        }
+
+        courseBookPanel.updateUI();
+    }
+
+    private void reset(){
+        courseBookPanel.getSearchInputField().setText("");
+    }
+
+    @Override
+    public void update() {
+        System.out.println("Course Book Page update");
+        reset();
+        showCourses();
     }
 
     public String getCourseType() {

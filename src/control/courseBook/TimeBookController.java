@@ -2,8 +2,8 @@ package control.courseBook;
 
 import control.Controller;
 import control.MainFrame;
-import model.Course;
-import model.CourseInfo;
+import model.*;
+import model.mapping.ClientMapping;
 import model.mapping.CourseMapping;
 import util.Util;
 import util.config;
@@ -11,6 +11,7 @@ import view.courseBook.SingleSchedulePanel;
 import view.courseBook.TimeBookPanel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Time;
@@ -103,6 +104,8 @@ public class TimeBookController extends Controller {
                     schedules[i][j] = panel;
                     if (dayOffset >= 0 && today.compareTo(Util.strToDate(timeBookPanel.getDateLabels().get(j).getText())) <= 0)
                         panel.addMouseListener(new CourseBookMouseAdapter(i, j));
+                    else
+                        panel.setBackground(Color.lightGray);
                 }
                 timeBookPanel.getSchedulePanel().add(panel);
             }
@@ -128,10 +131,19 @@ public class TimeBookController extends Controller {
                         "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttonName, buttonName);
                 if (result == JOptionPane.YES_OPTION) {
                     try {
-                        int userID = MainFrame.getInstance().getClient().getId();
+                        User user = (User) MainFrame.getInstance().getClient();
+                        int userID = user.getId();
 
                         CoachBookController coachController = (CoachBookController) MainFrame.getInstance().getController(config.COURSE_BOOK_COACH_NAME);
                         int coachID = coachController.getCoachID();
+                        HashMap<String, String> coachSearch = new HashMap<>();
+                        coachSearch.put("id", Integer.toString(coachID));
+                        Coach coach = ClientMapping.findCoach(coachSearch).get(0);
+
+                        if (user.getAccount() < Coach.level2price(coach)){
+                            Util.showDialog(timeBookPanel, "Error! \n     Book failed: Insufficient balance! ");
+                            return;
+                        }
 
                         CourseBookController courseController = (CourseBookController) MainFrame.getInstance().getController(config.COURSE_BOOK_NAME);
                         String type = courseController.getCourseType();
@@ -147,8 +159,11 @@ public class TimeBookController extends Controller {
                             state = CourseMapping.add(course);
                         }
                         if (state == CourseMapping.SUCCESS) {
+                            user.setAccount(user.getAccount() - Coach.level2price(coach));
+                            ClientMapping.modify(user);
                             Util.showDialog(timeBookPanel, "Book Success! ");
                             update();
+                            MainFrame.getInstance().goTo(config.VIDEOSQUARE_PANEL_NAME);
                         }
                         else
                             Util.showDialog(timeBookPanel, "Error! \n     Book failed !");

@@ -13,6 +13,11 @@ public class SingleCoursePanel extends JPanel {
         initialize();
     }
 
+    public SingleCoursePanel(){
+        this.setPreferredSize(new Dimension(280,180));
+        this.setBackground(Color.white);
+    }
+
     private void initialize(){
         this.setLayout(null);
         this.setPreferredSize(new Dimension(280,180));
