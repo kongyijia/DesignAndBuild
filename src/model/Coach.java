@@ -6,9 +6,9 @@ import java.util.ArrayList;
  * Coach model class.
  *
  * @author Yubo Wu
- * @version 1.2
+ * @version 1.3
  * @see Client
- * @since 18 April 2021
+ * @since 28 May 2021
  */
 public class Coach extends Client {
     private int level; // 0: 低级（默认）; 1: 高级; 2: 特级
@@ -60,5 +60,9 @@ public class Coach extends Client {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public static double level2price(Coach coach) {
+        return (coach.getLevel() + 1) * 400;
     }
 }
