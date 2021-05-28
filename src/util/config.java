@@ -16,8 +16,7 @@ public interface config {
      String FUNCTION_PANEL_NAME = "function";
      String USERDESCRIPTION_PANEL_NAME = "userdes";
      String VIDEOSQUARE_PANEL_NAME="videoSquare";
-     
-     String EDIT_PERSONAL_MODAL = "editPersonalModal";
+
      String STAFF_MANAGE_NAME = "staffManagement";
      String STAFF_INSERT_NAME = "staffInsert";
      String RECORD_MANAGE_NAME = "recordManagement";
@@ -27,5 +26,9 @@ public interface config {
      String COURSE_BOOK_TIME_NAME = "corseBookTime";
 
      String SCHEDULE_NAME ="personalSchedule";
+
+     String VIDEO_MANAGEMENT = "videoManagement";
+     String VIDEO_UPLOAD = "videoUpload";
+     String VIDEO_MODIFY = "videoModify";
 
 }

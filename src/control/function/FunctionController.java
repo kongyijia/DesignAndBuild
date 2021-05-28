@@ -55,7 +55,7 @@ public class FunctionController extends Controller{
     public void goTo(String name){
         Controller controller = MainFrame.getInstance().getList().get(name);
         this.functionPanel = (FunctionPanel) this.panel;
-        // 如果还没有该页面，创造该页面
+        // create the panel if not established yet
         if(controller == null ) {
             controller = ControllerFactory.create(name);
             functionPanel.getShowPanel().add(controller.getPanel(), name);

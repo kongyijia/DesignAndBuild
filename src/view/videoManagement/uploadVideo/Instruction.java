@@ -20,7 +20,7 @@ public class Instruction extends JPanel {
     }
 
     private void initPanel(){
-        this.setBackground(new Color(152, 239, 230, 151));
+        this.setBackground(new Color(152, 239, 230));
         this.setBounds(0,0, 800,100);
         this.setLayout(null);
         this.setVisible(true);

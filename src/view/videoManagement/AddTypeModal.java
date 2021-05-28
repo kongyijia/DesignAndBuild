@@ -32,8 +32,8 @@ public class AddTypeModal extends JFrame {
     public void initLayout(){
         this.jLabel.setBounds(20,20,200,30);
         this.jTextField.setBounds(20,50,200,30);
-        this.confirmButton.setBounds(200,200,75,30);
-        this.cancelButton.setBounds(300,200,75,30);
+        this.confirmButton.setBounds(100,200,100,30);
+        this.cancelButton.setBounds(250,200,100,30);
 
         this.jPanel.add(this.jLabel);
         this.jPanel.add(this.jTextField);
