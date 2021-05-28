@@ -1,6 +1,7 @@
 package view.videoManagement.uploadVideo;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -23,7 +24,8 @@ public class UpLoadVideo extends JPanel {
     }
 
     private void initPanel(){
-        this.setBounds(200,0,800,560);
+        this.setBounds(0,0,800,560);
+        this.setBackground(new Color(0,0,0));
         this.setLayout(null);
     }
 

@@ -4,7 +4,9 @@ import view.basicComponents.JLabelPro;
 import view.basicComponents.MultiComboBox;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 
 import static view.videoManagement.Const.VM_TAG_EXP;
@@ -14,7 +16,7 @@ public class UploadForm extends JPanel {
 
     private final JLabelPro title = new JLabelPro("Settings", 30);
     private final JLabelPro videoNameLabel = new JLabelPro("Video Name: ", 20,0);
-    private final JLabelPro videoTagLabel = new JLabelPro("Video Tag: ", 20,0);
+    private final JLabelPro videoTagLabel = new JLabelPro("Video Level: ", 20,0);
     private final JLabelPro tagExplain = new JLabelPro(VM_TAG_EXP, 10,0);
     private final JLabelPro videoTypeLabel = new JLabelPro("Video Type: ", 20, 0);
     private final JLabelPro videoSrcLabel = new JLabelPro("Directory: ",20,0);
@@ -28,6 +30,8 @@ public class UploadForm extends JPanel {
     private final JButton addType = new JButton("Add New Type");
 
     private final JTextField videoSrcTextField = new JTextField();
+    private final JButton showFileChooserButton = new JButton("Choose File");
+    private final JFileChooser jFileChooser = new JFileChooser();
     
     private final JButton confirmButton = new JButton("Upload");
     private final JButton returnButton = new JButton("Go Back");
@@ -35,6 +39,7 @@ public class UploadForm extends JPanel {
     public UploadForm(ArrayList<String> args){
         super();
         this.initMultiComboBox(args);
+        this.setJFileChooser();
         this.initPanel();
         this.initLayout();
     }
@@ -53,6 +58,12 @@ public class UploadForm extends JPanel {
 
     public void setVideoSrcTextField(String src){
         this.videoSrcTextField.setText(src);
+    }
+
+    public void setJFileChooser(){
+        this.jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        this.jFileChooser.setMultiSelectionEnabled(false);
+        this.jFileChooser.setFileFilter(new FileNameExtensionFilter("video(*.mp4)","mp4"));
     }
 
     public String getVideoNameTextField() {
@@ -77,6 +88,14 @@ public class UploadForm extends JPanel {
 
     public String getVideoSrcTextField() {
         return this.videoSrcTextField.getText();
+    }
+
+    public JButton getShowFileChooserButton(){
+        return this.showFileChooserButton;
+    }
+
+    public JFileChooser getJFileChooser(){
+        return this.jFileChooser;
     }
 
     public JButton getConfirmButton() {
@@ -112,6 +131,7 @@ public class UploadForm extends JPanel {
         this.multiComboBox.setBounds(180,150,200,30);
         this.addType.setBounds(400,150,150,30);
         this.videoSrcTextField.setBounds(180,200,300,30);
+        this.showFileChooserButton.setBounds(500,200,150,30);
         this.confirmButton.setBounds(400,250,150,50);
         this.returnButton.setBounds(610,250,150,50);
 
@@ -126,6 +146,7 @@ public class UploadForm extends JPanel {
         this.add(this.multiComboBox);
         this.add(this.addType);
         this.add(this.videoSrcTextField);
+        this.add(this.showFileChooserButton);
         this.add(this.confirmButton);
         this.add(this.returnButton);
 
