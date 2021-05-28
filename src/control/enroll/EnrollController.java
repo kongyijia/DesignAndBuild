@@ -34,7 +34,7 @@ public class EnrollController extends Controller {
                 enroll.email = enroll.i_email.getText();
 
                 enroll.flag = 1;
-                handle_select();
+                enroll.state = 0;
                 handle_nickName(enroll.nickName, enroll.state);
                 handle_password(enroll.password);
                 handle_password2(enroll.password, enroll.password2);
@@ -51,27 +51,18 @@ public class EnrollController extends Controller {
             }
             else if(e.getSource() == enroll.b_back){
                 enroll.f_message.setVisible(false);
+                enroll.s_sex.clearSelection();
+                enroll.i_nickName.setText("");
+                enroll.i_password.setText("");
+                enroll.i_password2.setText("");
+                enroll.i_phone.setText("");
+                enroll.i_email.setText("");
             }
             else if(e.getSource() == enroll.b_login){
                 enroll.f_message.setVisible(false);
                 MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
             }
         });
-    }
-
-    private void handle_select(){
-        if(enroll.i_admin.isSelected() || enroll.i_trainer.isSelected() || enroll.i_user.isSelected()) {
-            if(enroll.w_select != null){enroll.p_enroll.remove(enroll.w_select);}
-        }
-        else{
-            enroll.flag = 0;
-            if(enroll.w_select != null){enroll.p_enroll.remove(enroll.w_select);}
-            enroll.w_select = new JLabel("Please select a role!");
-            enroll.w_select.setForeground(Color.RED);
-            enroll.w_select.setBounds(150, 75, 300, 20);
-            enroll.p_enroll.add(enroll.w_select);
-            enroll.p_enroll.repaint();
-        }
     }
 
     private void handle_nickName(String nickName, int state){
@@ -195,74 +186,25 @@ public class EnrollController extends Controller {
     }
 
     private void write(){
-        if(enroll.i_admin.isSelected()){
-            Administrator admin = new Administrator(enroll.id, enroll.nickName, enroll.password, enroll.sex, enroll.phone, enroll.email, 0);
-            try {
-                enroll.state = ClientMapping.add(admin);
-                if (enroll.state == 6) {
-                    handle_nickName(enroll.nickName, enroll.state);
-                }
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            while (enroll.state == 2) {
-                enroll.id = (int)(Math.random()*10000);
-                try {
-                    enroll.state = ClientMapping.add(admin);
-                    if (enroll.state == 6) {
-                        handle_nickName(enroll.nickName, enroll.state);
-                    }
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
+        enroll.id = (int)(Math.random()*10000);
+        User user = new User(enroll.id, enroll.nickName, enroll.password, enroll.sex, enroll.phone, enroll.email, 2);
+        try {
+            enroll.state = ClientMapping.add(user);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
-        else if(enroll.i_trainer.isSelected()){
-            Coach trainer = new Coach(enroll.id, enroll.nickName, enroll.password, enroll.sex, enroll.phone, enroll.email, 1);
-            try {
-                enroll.state = ClientMapping.add(trainer);
-                if (enroll.state == 6) {
-                    handle_nickName(enroll.nickName, enroll.state);
-                }
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            while (enroll.state == 2) {
-                enroll.id = (int)(Math.random()*10000);
-                try {
-                    enroll.state = ClientMapping.add(trainer);
-                    if (enroll.state == 6) {
-                        handle_nickName(enroll.nickName, enroll.state);
-                    }
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
-        }
-        else{
-            User user = new User(enroll.id, enroll.nickName, enroll.password, enroll.sex, enroll.phone, enroll.email, 2);
+        while (enroll.state == 2) {
+            enroll.id = (int)(Math.random()*10000);
             try {
                 enroll.state = ClientMapping.add(user);
-                if (enroll.state == 6) {
-                    handle_nickName(enroll.nickName, enroll.state);
-                }
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
-            while (enroll.state == 2) {
-                enroll.id = (int)(Math.random()*10000);
-                try {
-                    enroll.state = ClientMapping.add(user);
-                    if (enroll.state == 6) {
-                        handle_nickName(enroll.nickName, enroll.state);
-                    }
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
+        }
+        if (enroll.state == 6) {
+            handle_nickName(enroll.nickName, enroll.state);
         }
     }
-
 
     private void message(){
         enroll.f_message.setVisible(true);

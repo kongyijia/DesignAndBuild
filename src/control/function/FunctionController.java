@@ -41,12 +41,21 @@ public class FunctionController extends Controller{
             public void mouseExited(MouseEvent e) { }
         });
         functionPanel.addListener(new FunctionActionListener());
+
+        // add menuPanel visible listener
+        functionPanel.getAvatarButton().addActionListener(e -> functionPanel.getMenuPanel().setVisible(!functionPanel.getMenuPanel().isVisible()));
+
+        // add exit Listener
+        functionPanel.getExitButton().addActionListener(e -> {
+            functionPanel.getMenuPanel().setVisible(false);
+            MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
+        });
     }
 
     public void goTo(String name){
         Controller controller = MainFrame.getInstance().getList().get(name);
         this.functionPanel = (FunctionPanel) this.panel;
-        // 如果还没有该页面，创造该页面
+        // create the panel if not established yet
         if(controller == null ) {
             controller = ControllerFactory.create(name);
             functionPanel.getShowPanel().add(controller.getPanel(), name);
@@ -76,21 +85,17 @@ public class FunctionController extends Controller{
                 functionPanel.setClient(currentClient);
             }
             functionPanel.getWelcomeLabel().setText("Welcome " + currentClient.getNickName() + " !");
+            ImageIcon avatarIcon = new ImageIcon(currentClient.getAvatarSrc());
+            JButton avatarButton = functionPanel.getAvatarButton();
+            avatarIcon.setImage(avatarIcon.getImage().getScaledInstance(avatarButton.getWidth(),avatarButton.getHeight(), Image.SCALE_DEFAULT));
+            avatarButton.setIcon(avatarIcon);
         }
     }
 
     class FunctionActionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == functionPanel.getAvatarButton()){
-                functionPanel.getMenuPanel().setVisible(true);
-            }
-            else if(e.getSource() == functionPanel.getExitButton()){
-                // MainFrame.getInstance().setClient(null);
-                functionPanel.getMenuPanel().setVisible(false);
-                MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
-            }
-            else if(functionPanel.getMenuButtons().containsValue(e.getSource())){
+            if(functionPanel.getMenuButtons().containsValue(e.getSource())){
                 MenuButton menuButton = (MenuButton) e.getSource();
                 functionPanel.getMenuPanel().setVisible(false);
                 goTo(menuButton.getKey());

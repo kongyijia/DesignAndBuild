@@ -1,6 +1,7 @@
 package view.function;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicBorders;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
@@ -8,6 +9,14 @@ import java.util.HashMap;
 import control.MainFrame;
 import model.*;
 import util.config;
+
+/**
+ *  This is the main view after log in.
+ *
+ *  @author Jufeng Sun
+ *  @version 1.0
+ *  @since 16 April 2021
+ */
 
 public class FunctionPanel extends JLayeredPane implements config {
     public static final int MENU_WIDTH = 150;
@@ -38,7 +47,7 @@ public class FunctionPanel extends JLayeredPane implements config {
         this.setBounds(0,0, PANEL_WIDTH, PANEL_HEIGHT);
 
         showPanel_init();
-        infoPanel_init(client.getNickName(), "assets/pictures/test.jpg");
+        infoPanel_init(client.getNickName(), client.getAvatarSrc());
         menuPanel_init();
         button_init(client.getRole());
     }
@@ -47,6 +56,7 @@ public class FunctionPanel extends JLayeredPane implements config {
         showPanel = new JPanel();
         showPanel.setLayout(cardLayout);
         showPanel.setBounds(0, INFO_HEIGHT, PAGE_WIDTH, PAGE_HEIGHT);
+        showPanel.setBackground(Color.white);
 
         this.add(showPanel);
         this.setLayer(showPanel, -1);
@@ -101,8 +111,6 @@ public class FunctionPanel extends JLayeredPane implements config {
     }
 
     public void addListener(ActionListener actionListener){
-        avatarButton.addActionListener(actionListener);
-        exitButton.addActionListener(actionListener);
         menuButtons.forEach((k, v) -> v.addActionListener(actionListener));
         infoButtons.forEach((k, v) -> v.addActionListener(actionListener));
     }
@@ -115,7 +123,7 @@ public class FunctionPanel extends JLayeredPane implements config {
         infoPanel.setBounds(0, 0, PANEL_WIDTH, INFO_HEIGHT);
 
         avatarButton = new JButton();
-        avatarButton.setBounds(1100, 0, 50, 50);
+        avatarButton.setBounds(config.PAGE_WIDTH - 100, 0, 50, 50);
         ImageIcon avatarIcon = new ImageIcon(avatarURL);
         avatarIcon.setImage(avatarIcon.getImage().getScaledInstance(avatarButton.getWidth(),avatarButton.getHeight(),Image.SCALE_DEFAULT));
         avatarButton.setIcon(avatarIcon);
@@ -128,7 +136,8 @@ public class FunctionPanel extends JLayeredPane implements config {
         infoPanel.add(logoLabel);
 
         welcomeLabel = new JLabel("Welcome " + nickname + " !");
-        welcomeLabel.setBounds(900, 10, 200, 40);
+        welcomeLabel.setForeground(Color.white);
+        welcomeLabel.setBounds(900, 0, 200, 50);
 
         infoPanel.add(welcomeLabel);
         infoPanel.add(avatarButton);
@@ -141,32 +150,45 @@ public class FunctionPanel extends JLayeredPane implements config {
         menuPanel = new JPanel();
         menuPanel.setLayout(null);
         menuPanel.setBounds(1000, INFO_HEIGHT, MENU_WIDTH, MENU_HEIGHT);
-        menuPanel.setBackground(Color.white);
+
+        menuPanel.setBackground(new Color(255, 255, 255));
 
         this.add(menuPanel);
-        this.setLayer(menuPanel, 3);
+        this.setLayer(menuPanel, Integer.MAX_VALUE);
 
         exitButton = new JButton("Sign out");
         exitButton.setBounds(0, MENU_HEIGHT - MENU_BUTTON_HEIGHT, MENU_WIDTH, MENU_BUTTON_HEIGHT);
-        exitButton.setBorder(BorderFactory.createRaisedBevelBorder());
+        exitButton.setBackground(Color.DARK_GRAY);
+        exitButton.setForeground(Color.white);
         menuPanel.add(exitButton);
+
         menuPanel.setVisible(false);
     }
+
+    /**
+     * This method will create different view button correspond to different role
+     *
+     * @param role is current logged client's role
+     */
     public void button_init(int role){
         if(role == 2){
             addButton("Your Profile",USERDESCRIPTION_PANEL_NAME, 1);
-            addButton("Your Course","userCourse",2);
-            addButton("Video Square","userVideoSquare", 1);
+            addButton("My Course",SCHEDULE_NAME, 1);
+            addButton("Video Square",VIDEOSQUARE_PANEL_NAME, 2);
+            addButton("Book Course", COURSE_BOOK_NAME,2);
         }
         else if(role == 1){
             addButton("Your Profile",USERDESCRIPTION_PANEL_NAME,1);
-            addButton("Your Course","coachCourse",1);
-            addButton("Video Management","coachVideoManagement",1);
+            addButton("My Course",SCHEDULE_NAME, 1);
+            addButton("Video Square",VIDEOSQUARE_PANEL_NAME, 2);
+            addButton("Video Management",VIDEO_MANAGEMENT,2);
+            addButton("Video Modify",VIDEO_MODIFY,2);
         }
         else if(role == 0){
-            addButton("Video Square","adminVideoSquare",1);
-            addButton("Video Management","adminVideoManagement",1);
-            addButton("Staff Management","adminStaffManagement",1);
+            addButton("Staff Management",STAFF_MANAGE_NAME,2);
+            addButton("Video Square",VIDEOSQUARE_PANEL_NAME, 2);
+            addButton("Video History", RECORD_MANAGE_NAME,2);
+            
         }
     }
 
