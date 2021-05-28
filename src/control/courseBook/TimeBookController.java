@@ -11,6 +11,7 @@ import view.courseBook.SingleSchedulePanel;
 import view.courseBook.TimeBookPanel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Time;
@@ -103,6 +104,8 @@ public class TimeBookController extends Controller {
                     schedules[i][j] = panel;
                     if (dayOffset >= 0 && today.compareTo(Util.strToDate(timeBookPanel.getDateLabels().get(j).getText())) <= 0)
                         panel.addMouseListener(new CourseBookMouseAdapter(i, j));
+                    else
+                        panel.setBackground(Color.lightGray);
                 }
                 timeBookPanel.getSchedulePanel().add(panel);
             }
