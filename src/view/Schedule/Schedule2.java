@@ -1,5 +1,7 @@
 package view.Schedule;
 
+import control.PersonalSchedule.ScheduleController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -34,13 +36,7 @@ public class Schedule2 extends JPanel {
 
     GeneratePanel g=new GeneratePanel();
 
-    public void setOffsetOfPage(int i) {
-        g.setOffsetOfPage(i);
-    }
 
-    public int getOffsetOfPage() {
-        return g.getOffsetOfPage();
-    }
     public void setDate(JPanel generateDate) {
         date.removeAll();
         date.add(generateDate);
@@ -74,11 +70,11 @@ public class Schedule2 extends JPanel {
         week.setBackground(Color.decode("#7F7F7F"));
         week.setBounds(0,0,1200,50);
 
-        setDate(g.generateDate());
+        setDate(ScheduleController.generateDate());
         date.setLayout(null);
         date.setBounds(0,50,1200,30);
 
-        setSchedulePanel(g.generateSchedule());
+        setSchedulePanel(ScheduleController.generateSchedule());
         schedulePanel.setLayout(null);
         schedulePanel.setBounds(160,80,PANELWIDTH*7+PANELGAP*6,PANELHIGHT*4+PANELGAP*3);
 
