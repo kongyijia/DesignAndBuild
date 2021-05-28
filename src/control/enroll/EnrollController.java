@@ -9,6 +9,7 @@ import model.Administrator;
 import model.Coach;
 import model.User;
 import model.mapping.ClientMapping;
+import util.Util;
 import util.config;
 import view.Enroll;
 
@@ -68,6 +69,14 @@ public class EnrollController extends Controller {
     private void handle_nickName(String nickName, int state){
         if(nickName.length() != 0){
             if(enroll.w_nickName != null){enroll.p_enroll.remove(enroll.w_nickName);}
+            if(!Util.isNickNameLegal(nickName)){
+                enroll.flag = 0;
+                enroll.w_nickName =new JLabel("Nickname not in right mode. Please input another one.");
+                enroll.w_nickName.setForeground(Color.RED);
+                enroll.w_nickName.setBounds(150,125,300,20);
+                enroll.p_enroll.add(enroll.w_nickName);
+                enroll.p_enroll.repaint();
+            }
             if(state == 6){
                 enroll.flag = 0;
                 enroll.w_nickName =new JLabel("Duplicate nickname. Please input another one.");
@@ -147,6 +156,15 @@ public class EnrollController extends Controller {
     private void handle_phone(String phone){
         if(phone.length() != 0){
             if(enroll.w_phone != null){enroll.p_enroll.remove(enroll.w_phone);}
+            if(!Util.isPhoneLegal(phone)){
+                enroll.flag = 0;
+                if(enroll.w_phone != null){enroll.p_enroll.remove(enroll.w_phone);}
+                enroll.w_phone = new JLabel("Phone number must be 11 digits.");
+                enroll.w_phone.setForeground(Color.RED);
+                enroll.w_phone.setBounds(150,325,300,20);
+                enroll.p_enroll.add(enroll.w_phone);
+                enroll.p_enroll.repaint();
+            }
         }
         else{
             enroll.flag = 0;
@@ -169,8 +187,7 @@ public class EnrollController extends Controller {
             enroll.p_enroll.add(enroll.w_email);
         }
         else{
-            String regex = "^\\w+(\\w|[.]\\w+)+@\\w+([.]\\w+){1,3}";
-            if(!email.matches(regex)){
+            if(!Util.isEmailLegal(email)){
                 enroll.flag = 0;
                 if(enroll.w_email != null){enroll.p_enroll.remove(enroll.w_email);}
                 enroll.w_email = new JLabel("Please input your email in the correct form!");
