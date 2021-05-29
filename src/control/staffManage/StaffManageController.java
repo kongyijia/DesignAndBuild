@@ -180,43 +180,55 @@ public class StaffManageController extends Controller {
 
                 // modify client level
                 clientDetail.getModifyLevelButton().addActionListener(actionEvent -> {
-                    int newLevel = (Integer) clientDetail.getLevel().getSelectedItem();
-                    Client newClient = v.getClient();
-                    if (v.getClient().getRole() == 1) {
-                        ((Coach) newClient).setLevel(newLevel);
-                    } else {
-                        ((User) newClient).setLevel(newLevel);
-                    }
-                    try {
-                        if (ClientMapping.modify(newClient) == ClientMapping.SUCCESS) {
-                            clientDetail.setBuildinformation(new BuildInformation(newClient));
-                            Util.showDialog(clientDetail, "Modify Success! ");
-                            update();
+                    Object[] buttonName = {"Confirm", "Cancel"};
+                    int result = JOptionPane.showOptionDialog(staffManagePanel,
+                            "Are you sure to modify level?",
+                            "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttonName, buttonName);
+                    if (result == JOptionPane.YES_OPTION) {
+                        int newLevel = (Integer) clientDetail.getLevel().getSelectedItem();
+                        Client newClient = v.getClient();
+                        if (v.getClient().getRole() == 1) {
+                            ((Coach) newClient).setLevel(newLevel);
                         } else {
+                            ((User) newClient).setLevel(newLevel);
+                        }
+                        try {
+                            if (ClientMapping.modify(newClient) == ClientMapping.SUCCESS) {
+                                clientDetail.setBuildinformation(new BuildInformation(newClient));
+                                Util.showDialog(clientDetail, "Modify Success! ");
+                                update();
+                            } else {
+                                Util.showDialog(clientDetail, "Error! \n     Modify failed !");
+                            }
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
                             Util.showDialog(clientDetail, "Error! \n     Modify failed !");
                         }
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                        Util.showDialog(clientDetail, "Error! \n     Modify failed !");
                     }
                 });
 
                 // modify client VIP level
                 clientDetail.getModifyVIPButton().addActionListener(actionEvent -> {
-                    String newVIPLevel = (String) clientDetail.getVIPLevel().getSelectedItem();
-                    User newUser = (User) v.getClient();
-                    newUser.setVip(newVIPLevel);
-                    try {
-                        if (ClientMapping.modify(newUser) == ClientMapping.SUCCESS) {
-                            clientDetail.setBuildinformation(new BuildInformation(newUser));
-                            Util.showDialog(clientDetail, "Modify Success! ");
-                            update();
-                        } else {
+                    Object[] buttonName = {"Confirm", "Cancel"};
+                    int result = JOptionPane.showOptionDialog(staffManagePanel,
+                            "Are you sure to modify VIP level?",
+                            "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttonName, buttonName);
+                    if (result == JOptionPane.YES_OPTION) {
+                        String newVIPLevel = (String) clientDetail.getVIPLevel().getSelectedItem();
+                        User newUser = (User) v.getClient();
+                        newUser.setVip(newVIPLevel);
+                        try {
+                            if (ClientMapping.modify(newUser) == ClientMapping.SUCCESS) {
+                                clientDetail.setBuildinformation(new BuildInformation(newUser));
+                                Util.showDialog(clientDetail, "Modify Success! ");
+                                update();
+                            } else {
+                                Util.showDialog(clientDetail, "Error! \n     Modify failed !");
+                            }
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
                             Util.showDialog(clientDetail, "Error! \n     Modify failed !");
                         }
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                        Util.showDialog(clientDetail, "Error! \n     Modify failed !");
                     }
                 });
                 clientDetail.setVisible(true);

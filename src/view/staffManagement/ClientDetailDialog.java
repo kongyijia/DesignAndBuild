@@ -87,7 +87,9 @@ public class ClientDetailDialog extends JDialog {
         modifyLevelButton.setBackground(Color.white);
         changePanel.add(modifyLevelButton);
 
-        this.add(changePanel);
+        if (!client.isCancel()) {
+            this.add(changePanel);
+        }
     }
 
     public JButton getModifyLevelButton() {
