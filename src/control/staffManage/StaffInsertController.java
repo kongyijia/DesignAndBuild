@@ -5,6 +5,7 @@ import control.MainFrame;
 import model.Administrator;
 import model.Coach;
 import model.mapping.ClientMapping;
+import util.Util;
 import util.config;
 import view.staffManagement.StaffInsertPanel;
 
@@ -40,9 +41,7 @@ public class StaffInsertController extends Controller {
                 handle_email(staffInsertPanel.email);
                 if (staffInsertPanel.flag == 1) {
                     write(getRole());
-                    if (staffInsertPanel.flag == 1) {
-                        write_suc();
-                    }
+                    if (staffInsertPanel.flag == 1) { write_suc(); }
                 }
             } else if (e.getSource() == staffInsertPanel.b_back) {
                 staffInsertPanel.f_message.setVisible(false);
@@ -54,8 +53,14 @@ public class StaffInsertController extends Controller {
 
     private void handle_nickName(String nickName, int state) {
         if (nickName.length() != 0) {
-            if (staffInsertPanel.w_nickName != null) {
-                staffInsertPanel.remove(staffInsertPanel.w_nickName);
+            if (staffInsertPanel.w_nickName != null) { staffInsertPanel.remove(staffInsertPanel.w_nickName); }
+            if(!Util.isNickNameLegal(nickName)){
+                staffInsertPanel.flag = 0;
+                staffInsertPanel.w_nickName =new JLabel("Nickname not in right mode. Please input another one.");
+                staffInsertPanel.w_nickName.setForeground(Color.RED);
+                staffInsertPanel.w_nickName.setBounds(100,75,300,20);
+                staffInsertPanel.add(staffInsertPanel.w_nickName);
+                staffInsertPanel.repaint();
             }
             if (state == 6) {
                 staffInsertPanel.flag = 0;
@@ -67,9 +72,7 @@ public class StaffInsertController extends Controller {
             }
         } else {
             staffInsertPanel.flag = 0;
-            if (staffInsertPanel.w_nickName != null) {
-                staffInsertPanel.remove(staffInsertPanel.w_nickName);
-            }
+            if (staffInsertPanel.w_nickName != null) { staffInsertPanel.remove(staffInsertPanel.w_nickName); }
             staffInsertPanel.w_nickName = new JLabel("Please input your nickName!");
             staffInsertPanel.w_nickName.setForeground(Color.RED);
             staffInsertPanel.w_nickName.setBounds(100, 75, 300, 20);
@@ -80,14 +83,10 @@ public class StaffInsertController extends Controller {
 
     private void handle_password(String password) {
         if (password.length() != 0) {
-            if (staffInsertPanel.w_password != null) {
-                staffInsertPanel.remove(staffInsertPanel.w_password);
-            }
+            if (staffInsertPanel.w_password != null) { staffInsertPanel.remove(staffInsertPanel.w_password); }
         } else {
             staffInsertPanel.flag = 0;
-            if (staffInsertPanel.w_password != null) {
-                staffInsertPanel.remove(staffInsertPanel.w_password);
-            }
+            if (staffInsertPanel.w_password != null) { staffInsertPanel.remove(staffInsertPanel.w_password); }
             staffInsertPanel.w_password = new JLabel("Please input password!");
             staffInsertPanel.w_password.setForeground(Color.RED);
             staffInsertPanel.w_password.setBounds(100, 125, 300, 20);
@@ -99,9 +98,7 @@ public class StaffInsertController extends Controller {
     private void handle_password2(String password, String password2) {
         if (password2.length() == 0) {
             staffInsertPanel.flag = 0;
-            if (staffInsertPanel.w_password2 != null) {
-                staffInsertPanel.remove(staffInsertPanel.w_password2);
-            }
+            if (staffInsertPanel.w_password2 != null) { staffInsertPanel.remove(staffInsertPanel.w_password2); }
             staffInsertPanel.w_password2 = new JLabel("Please input password again!");
             staffInsertPanel.w_password2.setForeground(Color.RED);
             staffInsertPanel.w_password2.setBounds(100, 175, 300, 20);
@@ -110,32 +107,42 @@ public class StaffInsertController extends Controller {
         } else {
             if (!password.equals(password2)) {
                 staffInsertPanel.flag = 0;
-                if (staffInsertPanel.w_password2 != null) {
-                    staffInsertPanel.remove(staffInsertPanel.w_password2);
-                }
+                if (staffInsertPanel.w_password2 != null) { staffInsertPanel.remove(staffInsertPanel.w_password2); }
                 staffInsertPanel.w_password2 = new JLabel("Please input the same password!");
                 staffInsertPanel.w_password2.setForeground(Color.RED);
                 staffInsertPanel.w_password2.setBounds(100, 175, 300, 20);
                 staffInsertPanel.add(staffInsertPanel.w_password2);
                 staffInsertPanel.repaint();
             } else {
-                if (staffInsertPanel.w_password2 != null) {
-                    staffInsertPanel.remove(staffInsertPanel.w_password2);
-                }
+                if (staffInsertPanel.w_password2 != null) { staffInsertPanel.remove(staffInsertPanel.w_password2); }
             }
         }
     }
 
     private void handle_phone(String phone) {
         if (phone.length() != 0) {
-            if (staffInsertPanel.w_phone != null) {
-                staffInsertPanel.remove(staffInsertPanel.w_phone);
+            if (staffInsertPanel.w_phone != null) { staffInsertPanel.remove(staffInsertPanel.w_phone); }
+            if(Util.isPhoneLegal(phone) == 0) {
+                staffInsertPanel.flag = 0;
+                if (staffInsertPanel.w_phone != null) { staffInsertPanel.remove(staffInsertPanel.w_phone); }
+                staffInsertPanel.w_phone = new JLabel("Phone number must be 11 digits.");
+                staffInsertPanel.w_phone.setForeground(Color.RED);
+                staffInsertPanel.w_phone.setBounds(100, 275, 300, 20);
+                staffInsertPanel.add(staffInsertPanel.w_phone);
+                staffInsertPanel.repaint();
+            }
+            else if(Util.isPhoneLegal(phone) == -1){
+                staffInsertPanel.flag = 0;
+                if(staffInsertPanel.w_phone != null){staffInsertPanel.remove(staffInsertPanel.w_phone);}
+                staffInsertPanel.w_phone = new JLabel("Phone number should only contain numbers.");
+                staffInsertPanel.w_phone.setForeground(Color.RED);
+                staffInsertPanel.w_phone.setBounds(100,275,300,20);
+                staffInsertPanel.add(staffInsertPanel.w_phone);
+                staffInsertPanel.repaint();
             }
         } else {
             staffInsertPanel.flag = 0;
-            if (staffInsertPanel.w_phone != null) {
-                staffInsertPanel.remove(staffInsertPanel.w_phone);
-            }
+            if (staffInsertPanel.w_phone != null) { staffInsertPanel.remove(staffInsertPanel.w_phone); }
             staffInsertPanel.w_phone = new JLabel("Please input your phone number!");
             staffInsertPanel.w_phone.setForeground(Color.RED);
             staffInsertPanel.w_phone.setBounds(100, 275, 300, 20);
@@ -147,28 +154,21 @@ public class StaffInsertController extends Controller {
     private void handle_email(String email) {
         if (email.length() == 0) {
             staffInsertPanel.flag = 0;
-            if (staffInsertPanel.w_email != null) {
-                staffInsertPanel.remove(staffInsertPanel.w_email);
-            }
+            if (staffInsertPanel.w_email != null) { staffInsertPanel.remove(staffInsertPanel.w_email); }
             staffInsertPanel.w_email = new JLabel("Please input your email!");
             staffInsertPanel.w_email.setForeground(Color.RED);
             staffInsertPanel.w_email.setBounds(100, 325, 300, 20);
             staffInsertPanel.add(staffInsertPanel.w_email);
         } else {
-            String regex = "^\\w+(\\w|[.]\\w+)+@\\w+([.]\\w+){1,3}";
-            if (!email.matches(regex)) {
+            if (!Util.isEmailLegal(email)) {
                 staffInsertPanel.flag = 0;
-                if (staffInsertPanel.w_email != null) {
-                    staffInsertPanel.remove(staffInsertPanel.w_email);
-                }
+                if (staffInsertPanel.w_email != null) { staffInsertPanel.remove(staffInsertPanel.w_email); }
                 staffInsertPanel.w_email = new JLabel("Please input your email in the correct form!");
                 staffInsertPanel.w_email.setForeground(Color.RED);
                 staffInsertPanel.w_email.setBounds(100, 325, 300, 20);
                 staffInsertPanel.add(staffInsertPanel.w_email);
             } else {
-                if (staffInsertPanel.w_email != null) {
-                    staffInsertPanel.remove(staffInsertPanel.w_email);
-                }
+                if (staffInsertPanel.w_email != null) { staffInsertPanel.remove(staffInsertPanel.w_email); }
             }
         }
         staffInsertPanel.repaint();
