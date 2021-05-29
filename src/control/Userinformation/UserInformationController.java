@@ -14,11 +14,14 @@ import view.Userinformation.ShowCustomDialog;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 public class UserInformationController extends Controller
@@ -66,9 +69,9 @@ public class UserInformationController extends Controller
             public void actionPerformed(ActionEvent e)
             {
                 JFileChooser fileChooser = new JFileChooser();
-
+                fileChooser.setApproveButtonText("Open");
                 // Set the default displayed folder to the current folder
-                fileChooser.setCurrentDirectory(new File("."));
+//                fileChooser.setCurrentDirectory(new File("."));
 
                 // Sets the mode for file selection (select only files, select only folders, files and files are optional)
                 fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -129,27 +132,32 @@ public class UserInformationController extends Controller
             public void actionPerformed(ActionEvent e)
             {
                 String inputContent = JOptionPane.showInputDialog(null, "Enter the top-up amount:", "0");
-                try
+                if (inputContent != null)
                 {
-                    double money = Double.parseDouble(inputContent);
-                    if (checkAccount(money))
+                    try
                     {
-                        User temUser = (User) user;
-                        double oriMoney = temUser.getAccount();
-                        temUser.setAccount(oriMoney + money);
-                        try
+                        double money = Double.parseDouble(inputContent);
+                        DecimalFormat moneyTem = new DecimalFormat(".00");
+                        money = Double.parseDouble(moneyTem.format(money));
+                        if (checkAccount(money))
                         {
-                            ClientMapping.modify(user);
-                        } catch (IOException ioException)
-                        {
-                            ioException.printStackTrace();
-                        }
-                    } else
-                        JOptionPane.showMessageDialog(null, "Wrong Number!", "ERROR", JOptionPane.WARNING_MESSAGE);
-                    MainFrame.getInstance().setClient(user);
-                }catch (NumberFormatException er)
-                {
-                    JOptionPane.showMessageDialog(null, "Wrong Number!");
+                            User temUser = (User) user;
+                            double oriMoney = temUser.getAccount();
+                            temUser.setAccount(oriMoney + money);
+                            try
+                            {
+                                ClientMapping.modify(user);
+                            } catch (IOException ioException)
+                            {
+                                ioException.printStackTrace();
+                            }
+                        } else
+                            JOptionPane.showMessageDialog(null, "Wrong Number!", "ERROR", JOptionPane.WARNING_MESSAGE);
+                        MainFrame.getInstance().setClient(user);
+                    } catch (NumberFormatException er)
+                    {
+                        JOptionPane.showMessageDialog(null, "Wrong Number!");
+                    }
                 }
             }
         });
@@ -174,9 +182,9 @@ public class UserInformationController extends Controller
                         }
                         else
                         {
-                            dialog.getOpwd().setEchoChar('*');
-                            dialog.getNpwd().setEchoChar('*');
-                            dialog.getCpwd().setEchoChar('*');
+                            dialog.getOpwd().setEchoChar('●');
+                            dialog.getNpwd().setEchoChar('●');
+                            dialog.getCpwd().setEchoChar('●');
                         }
                     }
                 });
@@ -222,7 +230,7 @@ public class UserInformationController extends Controller
 
     private boolean checkAccount(double money)
     {
-        if (money > 0 && money <= 1000)
+        if (money > 0 && money <= 5000)
             return true;
         return false;
     }

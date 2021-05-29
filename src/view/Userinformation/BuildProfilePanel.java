@@ -7,10 +7,10 @@ import java.awt.*;
 
 public class BuildProfilePanel extends JPanel
 {
-    private static JButton profileButton = new JButton("Profile Picture");
-    private static JButton changePassword = new JButton("Change Password");
-    private static JButton personalInformation = new JButton("modify personal information");
-    private static JButton topup = new JButton("Top Up");
+    private static final JButton profileButton = new JButton("Profile Picture");
+    private static final JButton changePassword = new JButton("Change Password");
+    private static final JButton personalInformation = new JButton("modify information");
+    private static final JButton topup = new JButton("Top Up");
 
     public static JButton getProfilebutton()
     {
@@ -49,7 +49,7 @@ public class BuildProfilePanel extends JPanel
         logoIcon.setImage(logoIcon.getImage().getScaledInstance(profileButton.getWidth(),profileButton.getHeight(),Image.SCALE_DEFAULT));
         profileButton.setIcon(logoIcon);
 
-        personalInformation.setFont(new Font("Times", Font.ITALIC, 10));
+        personalInformation.setFont(new Font("Times", Font.ITALIC, 15));
         profileButton.setFont(new Font("Times", Font.ITALIC, 15));
         changePassword.setFont(new Font("Times", Font.ITALIC, 15));
         topup.setFont(new Font("Times", Font.ITALIC, 15));
@@ -57,7 +57,8 @@ public class BuildProfilePanel extends JPanel
         this.add(personalInformation);
         this.add(profileButton);
         this.add(changePassword);
-        this.add(topup);
+        if (MainFrame.getInstance().getClient().getRole() == 2)
+            this.add(topup);
         this.setVisible(true);
     }
 }

@@ -11,7 +11,7 @@ public class BuildDescription extends JPanel
 {
     public BuildDescription(Client receiveuser)
     {
-        JTextArea destext = null;
+        JTextArea destext = new JTextArea();
         if (receiveuser.getRole() == 1) //coach
         {
             Coach self = (Coach) receiveuser;
