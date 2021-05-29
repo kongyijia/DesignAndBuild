@@ -54,6 +54,7 @@ public class UploadForm extends JPanel {
     }
 
     public void setMultiComboBox(String[] args){
+        this.multiComboBox.setSelectValues(new String[0]);
         this.multiComboBox.setSelectValues(args);
     }
 

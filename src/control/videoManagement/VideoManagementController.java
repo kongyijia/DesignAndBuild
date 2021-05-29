@@ -2,7 +2,6 @@ package control.videoManagement;
 
 import control.MainFrame;
 import control.VideoSquare.VideoSquareController;
-import model.Video;
 import util.config;
 import view.videoManagement.videoManagement.VideoManagement;
 

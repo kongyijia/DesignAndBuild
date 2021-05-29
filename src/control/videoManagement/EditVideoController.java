@@ -2,7 +2,6 @@ package control.videoManagement;
 
 import control.Controller;
 import control.MainFrame;
-import it.sauronsoftware.jave.EncoderException;
 import model.Video;
 import model.mapping.VideoMapping;
 import util.Util;
@@ -21,10 +20,6 @@ public class EditVideoController extends UploadVideoController {
         super(config.VIDEO_MODIFY, new UpLoadVideo(EditVideoController.getTypes()));
         this.modifyUi();
         this.getCurrentVideoFromManagement();
-    }
-
-    public Video getCurrentVideo() {
-        return currentVideo;
     }
 
     public void setCurrentVideo(Video currentVideo) {
@@ -96,7 +91,7 @@ public class EditVideoController extends UploadVideoController {
     }
 
     public void update(){
-        getCurrentVideoFromManagement();
+        this.getCurrentVideoFromManagement();
     }
 
 }

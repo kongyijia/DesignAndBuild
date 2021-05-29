@@ -184,7 +184,7 @@ public class FunctionPanel extends JLayeredPane implements config {
         }
         else if(role == 0){
             addButton("Staff Management",STAFF_MANAGE_NAME,2);
-            addButton("Video Square",VIDEOSQUARE_PANEL_NAME, 2);
+            addButton("Video Management",VIDEO_MANAGEMENT, 2);
             addButton("Video History", RECORD_MANAGE_NAME,2);
             
         }

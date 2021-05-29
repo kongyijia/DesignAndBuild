@@ -148,6 +148,13 @@ public class UploadVideoController extends Controller implements ActionListener 
         }
     }
 
+    public void resetAll(){
+        this.uploadForm.setVideoTextField("");
+        this.uploadForm.setVideoTagComboBox(1);
+        this.uploadForm.setMultiComboBox(new String[0]);
+        this.uploadForm.setVideoSrcTextField("");
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         this.onAction(e);
@@ -158,6 +165,6 @@ public class UploadVideoController extends Controller implements ActionListener 
 
     @Override
     public void update() {
-        //this.uploadForm.initMultiComboBox();
+        resetAll();
     }
 }
