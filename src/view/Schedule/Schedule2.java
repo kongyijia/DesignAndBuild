@@ -34,9 +34,6 @@ public class Schedule2 extends JPanel {
     public static final int PANELGAP=10;
     public static final int GAP=20;
 
-    GeneratePanel g=new GeneratePanel();
-
-
     public void setDate(JPanel generateDate) {
         date.removeAll();
         date.add(generateDate);
@@ -122,13 +119,8 @@ public class Schedule2 extends JPanel {
         this.add(schedulePanel);
     }
 
-
-
-
     public void addaddListener(ActionListener actionListener){
        this.getLast().addActionListener(actionListener);
         this.getNext().addActionListener(actionListener);
     }
-
-
 }

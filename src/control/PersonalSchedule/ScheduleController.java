@@ -7,12 +7,10 @@ import model.Course;
 import model.mapping.ClientMapping;
 import model.mapping.CourseMapping;
 import util.config;
-import view.Schedule.GeneratePanel;
 import view.Schedule.Schedule2;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -33,7 +31,6 @@ public class ScheduleController extends Controller {
     public static final int PANELGAP=10;
     public static final int GAP=20;
     private static Schedule2 schedule2;
-  //  GeneratePanel g=new GeneratePanel();
 
     public static Client client= MainFrame.getInstance().getClient();
     public static int today;
