@@ -34,7 +34,7 @@
 	"role":0,
 	"sex":0
 },{
-	"account":170.12300000000005,
+	"account":570.123,
 	"avatarSrc":"data/image/4bddde9c-4485-4e5a-91cb-02e5dcf7ef0c.jpg",
 	"cancel":false,
 	"courseSubscription":[
@@ -62,11 +62,11 @@
 	"recordHistory":[],
 	"role":2,
 	"sex":1,
-	"vip":"plain"
+	"vip":"Plain"
 },{
 	"account":123.45,
 	"avatarSrc":"data/image/default.jpeg",
-	"cancel":false,
+	"cancel":true,
 	"courseSubscription":[
 		{
 			"coachId":0,
@@ -85,7 +85,7 @@
 	"email":"93327537@qq.com",
 	"id":123333,
 	"learningTime":100,
-	"level":1,
+	"level":2,
 	"nickName":"sdf1",
 	"password":"123456",
 	"phone":"1234567890",
@@ -105,7 +105,7 @@
 	],
 	"role":2,
 	"sex":1,
-	"vip":"video"
+	"vip":"Video"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":true,
@@ -151,7 +151,7 @@
 	"description":"",
 	"email":"2018213231@qmul.ac.uk",
 	"id":0,
-	"level":0,
+	"level":1,
 	"nickName":"qwertyuio43",
 	"password":"123",
 	"phone":"1234567890",
@@ -174,7 +174,7 @@
 },{
 	"account":0.0,
 	"avatarSrc":"data/image/default.jpeg",
-	"cancel":false,
+	"cancel":true,
 	"courseSubscription":[],
 	"description":"",
 	"email":"1234565432@qq.com",
@@ -187,7 +187,7 @@
 	"recordHistory":[],
 	"role":2,
 	"sex":1,
-	"vip":"plain"
+	"vip":"Plain"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":false,
