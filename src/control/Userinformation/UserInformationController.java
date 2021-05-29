@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -131,27 +132,32 @@ public class UserInformationController extends Controller
             public void actionPerformed(ActionEvent e)
             {
                 String inputContent = JOptionPane.showInputDialog(null, "Enter the top-up amount:", "0");
-                try
+                if (inputContent != null)
                 {
-                    double money = Double.parseDouble(inputContent);
-                    if (checkAccount(money))
+                    try
                     {
-                        User temUser = (User) user;
-                        double oriMoney = temUser.getAccount();
-                        temUser.setAccount(oriMoney + money);
-                        try
+                        double money = Double.parseDouble(inputContent);
+                        DecimalFormat moneyTem = new DecimalFormat(".00");
+                        money = Double.parseDouble(moneyTem.format(money));
+                        if (checkAccount(money))
                         {
-                            ClientMapping.modify(user);
-                        } catch (IOException ioException)
-                        {
-                            ioException.printStackTrace();
-                        }
-                    } else
-                        JOptionPane.showMessageDialog(null, "Wrong Number!", "ERROR", JOptionPane.WARNING_MESSAGE);
-                    MainFrame.getInstance().setClient(user);
-                }catch (NumberFormatException er)
-                {
-                    JOptionPane.showMessageDialog(null, "Wrong Number!");
+                            User temUser = (User) user;
+                            double oriMoney = temUser.getAccount();
+                            temUser.setAccount(oriMoney + money);
+                            try
+                            {
+                                ClientMapping.modify(user);
+                            } catch (IOException ioException)
+                            {
+                                ioException.printStackTrace();
+                            }
+                        } else
+                            JOptionPane.showMessageDialog(null, "Wrong Number!", "ERROR", JOptionPane.WARNING_MESSAGE);
+                        MainFrame.getInstance().setClient(user);
+                    } catch (NumberFormatException er)
+                    {
+                        JOptionPane.showMessageDialog(null, "Wrong Number!");
+                    }
                 }
             }
         });
