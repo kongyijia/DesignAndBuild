@@ -23,8 +23,8 @@ public class ClientDetailDialog extends JDialog {
     private BuildInformation buildinformation;
     private BuildDescription builddescription;
     private JPanel changePanel;
-    private JButton modifyLevelButton =  new JButton("Modify");
-    private JButton modifyVIPButton = new JButton("Modify");
+    private JButton modifyLevelButton =  new JButton("Modify Level");
+    private JButton modifyVIPButton = new JButton("Modify VIP");
     private JComboBox<Integer> level;
     private JComboBox<String> VIPLevel;
 
@@ -76,18 +76,20 @@ public class ClientDetailDialog extends JDialog {
             VIPLevel.setBounds(100,60, 100,30);
             changePanel.add(VIPLevel);
 
-            modifyVIPButton.setBounds(280,60,80,30);
+            modifyVIPButton.setBounds(260,60,120,30);
             modifyVIPButton.setBackground(Color.white);
             changePanel.add(modifyVIPButton);
         }
         level.setBounds(100,10, 100,30);
         changePanel.add(level);
 
-        modifyLevelButton.setBounds(280,10,80,30);
+        modifyLevelButton.setBounds(260,10,120,30);
         modifyLevelButton.setBackground(Color.white);
         changePanel.add(modifyLevelButton);
 
-        this.add(changePanel);
+        if (!client.isCancel()) {
+            this.add(changePanel);
+        }
     }
 
     public JButton getModifyLevelButton() {

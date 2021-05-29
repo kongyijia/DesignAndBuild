@@ -1,6 +1,7 @@
 package view.courseBook;
 
 import util.config;
+import view.basicComponents.ColorSquare;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +31,8 @@ public class TimeBookPanel extends JPanel {
 
     private JPanel schedulePanel;
     private JPanel infoPanel;
+    private JPanel hintPanel;
+
     public TimeBookPanel() {
         init();
     }
@@ -39,6 +42,7 @@ public class TimeBookPanel extends JPanel {
 
         schedulePanel_init();
         infoPanel_init();
+        hintPanel_init();
 
         nextButton = new JButton("Next");
         nextButton.setBounds(1190 - BUTTONWIDTH,80,BUTTONWIDTH,PANELHIGHT * 4 + PANELGAP * 3);
@@ -81,7 +85,7 @@ public class TimeBookPanel extends JPanel {
         this.add(infoPanel);
     }
 
-    private void schedulePanel_init(){
+    private void schedulePanel_init() {
         schedulePanel = new JPanel();
         schedulePanel.setLayout(new GridLayout(4,7,10,10));
         schedulePanel.setBounds(160,80,PANELWIDTH*7+PANELGAP*6,PANELHIGHT*4+PANELGAP*3);
@@ -89,7 +93,35 @@ public class TimeBookPanel extends JPanel {
         this.add(schedulePanel);
     }
 
-    public void showDate(int dayOffset){
+    private void hintPanel_init() {
+        hintPanel = new JPanel();
+        hintPanel.setLayout(null);
+        hintPanel.setBounds(0, 90 + PANELHIGHT * 4 + PANELGAP * 3, config.PAGE_WIDTH, config.PAGE_HEIGHT - PANELHIGHT * 4 + PANELGAP * 3);
+
+        JLabel hintLabel = new JLabel("Hint: ");
+        hintLabel.setBounds(180, 5, 50, 20);
+        hintPanel.add(hintLabel);
+
+        ColorSquare lightgraySquare = new ColorSquare(10, Color.lightGray);
+        lightgraySquare.setBounds(230,10,10,10);
+        hintPanel.add(lightgraySquare);
+
+        JLabel lightgrayLabel = new JLabel("This course is not available and you cannot book it.");
+        lightgrayLabel.setBounds(250, 5, 300, 20);
+        hintPanel.add(lightgrayLabel);
+
+        ColorSquare greenSquare = new ColorSquare(10, Color.decode("#B4EEB4"));
+        greenSquare.setBounds(580,10,10,10);
+        hintPanel.add(greenSquare);
+
+        JLabel greenLabel = new JLabel("This course is available and double-click to book this course.");
+        greenLabel.setBounds(610, 5, 350, 20);
+        hintPanel.add(greenLabel);
+
+        this.add(hintPanel);
+    }
+
+    public void showDate(int dayOffset) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
         while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY)
