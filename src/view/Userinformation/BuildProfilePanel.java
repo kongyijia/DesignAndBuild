@@ -57,7 +57,8 @@ public class BuildProfilePanel extends JPanel
         this.add(personalInformation);
         this.add(profileButton);
         this.add(changePassword);
-        this.add(topup);
+        if (MainFrame.getInstance().getClient().getRole() == 2)
+            this.add(topup);
         this.setVisible(true);
     }
 }
