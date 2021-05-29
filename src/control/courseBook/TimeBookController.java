@@ -140,7 +140,12 @@ public class TimeBookController extends Controller {
                         coachSearch.put("id", Integer.toString(coachID));
                         Coach coach = ClientMapping.findCoach(coachSearch).get(0);
 
-                        if (user.getAccount() < Coach.level2price(coach)){
+                        double discount = 1;
+                        if ( user.getVip().equals("Big") || user.getVip().equals("Course") )
+                            discount = 0.8;
+                        double coursePrice =  Coach.level2price(coach) * discount;
+
+                        if (user.getAccount() < coursePrice){
                             Util.showDialog(timeBookPanel, "Error! \n     Book failed: Insufficient balance! ");
                             return;
                         }
@@ -159,7 +164,7 @@ public class TimeBookController extends Controller {
                             state = CourseMapping.add(course);
                         }
                         if (state == CourseMapping.SUCCESS) {
-                            user.setAccount(user.getAccount() - Coach.level2price(coach));
+                            user.setAccount(user.getAccount() - coursePrice);
                             ClientMapping.modify(user);
                             Util.showDialog(timeBookPanel, "Book Success! ");
                             update();
