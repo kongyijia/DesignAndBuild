@@ -61,6 +61,9 @@ public class StaffManageController extends Controller {
                     searchMap.put(k, (String) v.getComboBox().getSelectedItem());
             }
         });
+        if (searchMap.containsKey("role") && searchMap.get("role").equals("0"))
+            searchMap.remove("level");
+
         // search clients
         ArrayList<Client> clients = new ArrayList<>();
         try {
@@ -137,15 +140,32 @@ public class StaffManageController extends Controller {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == v.getDeleteButton()) {
                 Object[] buttonName = {"Confirm", "Cancel"};
-                int result = JOptionPane.showOptionDialog(staffManagePanel,
-                        "Are you sure to delete this client?\n ",
-                        "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttonName, buttonName);
+                int result = Integer.MAX_VALUE;
+                int flag = 0;
+                if (k == MainFrame.getInstance().getClient().getId()){
+                    flag = 1;
+                    result = JOptionPane.showOptionDialog(staffManagePanel,
+                            "Are you sure to delete yourself?\n You will sign out if execute this instruction.",
+                            "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttonName, buttonName);
+                }
+                else {
+                    result = JOptionPane.showOptionDialog(staffManagePanel,
+                            "Are you sure to delete this client?\n ",
+                            "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttonName, buttonName);
+                }
+
                 // confirm to delete
                 if (result == JOptionPane.YES_OPTION) {
                     try {
                         if (ClientMapping.cancel(k) == ClientMapping.SUCCESS) {
                             Util.showDialog(staffManagePanel, "Delete Success! ");
-                            update();
+                            if (flag == 0) {
+                                update();
+                            }
+                            else {
+                                MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
+                            }
+
                         } else
                             Util.showDialog(staffManagePanel, "Error! \n     Delete failed !");
                     } catch (IOException ex) {

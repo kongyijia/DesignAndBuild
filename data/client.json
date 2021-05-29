@@ -212,7 +212,7 @@
 	"sex":1
 },{
 	"avatarSrc":"data/image/default.jpeg",
-	"cancel":false,
+	"cancel":true,
 	"email":"31252@qq.com",
 	"id":1213,
 	"nickName":"wyb",
