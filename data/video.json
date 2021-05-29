@@ -30,32 +30,21 @@
 	"author":7131,
 	"coverSrc":"data/image/defaultCover.png",
 	"id":3,
-	"name":"1234",
+	"name":"lady boy",
 	"src":"data/video/3.mp4",
-	"tag":1,
+	"tag":5,
 	"time":317,
 	"types":[
-		"British"
+		"European"
 	]
 },{
 	"author":7131,
 	"coverSrc":"data/image/defaultCover.png",
 	"id":4,
-	"name":"1234567",
+	"name":"little c",
 	"src":"data/video/4.mp4",
-	"tag":5,
+	"tag":4,
 	"time":222,
-	"types":[
-		"Japanese"
-	]
-},{
-	"author":7131,
-	"coverSrc":"data/image/defaultCover.png",
-	"id":5,
-	"name":"556",
-	"src":"data/video/5.mp4",
-	"tag":5,
-	"time":45,
 	"types":[
 		"Latin"
 	]

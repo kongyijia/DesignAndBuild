@@ -59,6 +59,7 @@ public class UploadVideoController extends Controller implements ActionListener 
         this.uploadForm.getShowFileChooserButton().addActionListener(this);
         this.uploadForm.getConfirmButton().addActionListener(this);
         this.uploadForm.getReturnButton().addActionListener(this);
+        this.uploadForm.getDeleteButton().addActionListener(this);
         this.addTypeModal.getConfirmButton().addActionListener(this);
         this.addTypeModal.getCancelButton().addActionListener(this);
     }
@@ -78,7 +79,7 @@ public class UploadVideoController extends Controller implements ActionListener 
         return x + 1;
     }
 
-    private Video generateVideo() throws FileNotFoundException {
+    public Video generateVideo() throws FileNotFoundException {
         int id = this.idIncrement();
         int author = MainFrame.getInstance().getClient().getId();
         String name = this.uploadForm.getVideoNameTextField();
@@ -103,7 +104,6 @@ public class UploadVideoController extends Controller implements ActionListener 
             } catch (EncoderException | IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("song");
         }
     }
 
@@ -127,26 +127,32 @@ public class UploadVideoController extends Controller implements ActionListener 
             try {
                 VideoTypeMapping.add(arg);
                 this.uploadForm.returnMultiComboBox().setValues(VideoTypeMapping.readAllVideoTypes().toArray());
+                this.addTypeModal.setVisible(false);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
         }
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public void onAction(ActionEvent e) {
         if(e.getSource() == this.uploadForm.getAddType()){
             this.addTypeModal.setVisible(true);
         } else if(e.getSource() == this.uploadForm.getShowFileChooserButton()) {
             this.onShowFileChooserButton();
-        }else if(e.getSource() == this.uploadForm.getConfirmButton()){
-            this.onConfirm();
         } else if(e.getSource() == this.uploadForm.getReturnButton()){
             MainFrame.getInstance().goTo(config.VIDEO_MANAGEMENT);
         } else if(e.getSource() == this.addTypeModal.getConfirmButton()){
             this.onAddTypeModal();
         } else if(e.getSource() == this.addTypeModal.getCancelButton()){
             this.addTypeModal.setVisible(false);
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.onAction(e);
+        if(e.getSource() == this.uploadForm.getConfirmButton()){
+            this.onConfirm();
         }
     }
 

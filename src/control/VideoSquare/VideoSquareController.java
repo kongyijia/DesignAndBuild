@@ -29,6 +29,7 @@ public class VideoSquareController extends Controller implements ActionListener 
 	public static final int P_HEIGHT = 250;
 	public static final int P_WIDTH= 275;
 	private Client client= MainFrame.getInstance().getClient();
+	public Video currentVideo;
 	
 	public VideoSquareController() {
 		super(config.VIDEOSQUARE_PANEL_NAME, new VideoSquare());
@@ -40,6 +41,14 @@ public class VideoSquareController extends Controller implements ActionListener 
 	public VideoSquareController(String name, JPanel videoSquare){
 		super(name, videoSquare);
 		this.videoSquare = (VideoSquare) this.panel;
+	}
+
+	public void setCurrentVideo(Video currentVideo) {
+		this.currentVideo = currentVideo;
+	}
+
+	public Video getCurrentVideo() {
+		return currentVideo;
 	}
 
 	public void bind(){
@@ -83,7 +92,6 @@ public class VideoSquareController extends Controller implements ActionListener 
 		}
 		
 		vs = VideoMapping.find(map);
-		System.out.println(vs);
 		return vs;
 	}
 	
@@ -91,33 +99,33 @@ public class VideoSquareController extends Controller implements ActionListener 
 		this.refresh();
 		videoSquare.getPanel().setPreferredSize(new Dimension(videoSquare.getScrollPane().getWidth() - 50, (vs.size()/4+1)*(2*GAP+ P_HEIGHT +50)));
 		for(int i=0;i<vs.size();i++) {
-			videoSquare.getPanel().add(generateButton(i+1,vs.get(i).getName(),vs.get(i).getTag(),vs.get(i).getCoverSrc()));
+			videoSquare.getPanel().add(generateButton(i+1,vs.get(i)));
 			videoSquare.getPanel().revalidate();
 		}
 	}
 
-	public void addButtonListener(int num, int tag, String path, JButton button){
+	public void addButtonListener(int num, Video video, JButton button){
 		button.addActionListener(e ->{
 			//TODO： link to the videos
 			if(client.getRole()==2) {
 				User user=(User) client;
-				if(user.getLevel()<tag)
+				if(user.getLevel()<video.getTag())
 					JOptionPane.showMessageDialog(null,"Level is not satisfied!!"+num);
 				else
 					JOptionPane.showMessageDialog(null,"Developing!"+num);
 			} else {
-				System.out.println("go to edit video");
-				//MainFrame.getInstance().goTo(config.VIDEO_MODIFY);
+				this.setCurrentVideo(video);
+				MainFrame.getInstance().goTo(config.VIDEO_MODIFY);
 			}
 		});
-		if(!path.isEmpty()) {
-			ImageIcon picIcon = new ImageIcon(path);
+		if(!video.getCoverSrc().isEmpty()) {
+			ImageIcon picIcon = new ImageIcon(video.getCoverSrc());
 			picIcon.setImage(picIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
 			button.setIcon(picIcon);
 		}
 	}
 
-	public JPanel generateButton(int num, String name, int tag, String path) {
+	public JPanel generateButton(int num, Video video) {
 		int row;
 		int column;
 		
@@ -132,11 +140,11 @@ public class VideoSquareController extends Controller implements ActionListener 
 		buttonPanel.setBounds(GAP+(column-1)* (P_WIDTH+GAP), GAP+(row-1)*(P_HEIGHT +50), P_WIDTH, P_HEIGHT +50);
 		buttonPanel.setBackground(new Color(255, 255, 255));  
 		
-		JLabel videoName = new JLabel("Name: "+name+" Tag: "+tag);
+		JLabel videoName = new JLabel("Name: "+video.getName()+" Tag: "+video.getTag());
 		videoName.setFont(new Font(null, Font.PLAIN, 18));
 		JButton button = new JButton();	
 		button.setBounds(0, 0, P_WIDTH, P_HEIGHT);
-		this.addButtonListener(num,tag,path,button);
+		this.addButtonListener(num,video,button);
 		buttonPanel.add(button);
 		buttonPanel.add(videoName);
 		

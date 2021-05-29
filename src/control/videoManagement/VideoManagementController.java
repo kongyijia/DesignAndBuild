@@ -2,21 +2,15 @@ package control.videoManagement;
 
 import control.MainFrame;
 import control.VideoSquare.VideoSquareController;
-import model.User;
 import model.Video;
-import model.mapping.VideoMapping;
 import util.config;
 import view.videoManagement.videoManagement.VideoManagement;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class VideoManagementController extends VideoSquareController implements ActionListener {
 
-    private Video currentVideo;
     private final VideoManagement videoManagement;
 
     public VideoManagementController() {
@@ -29,10 +23,6 @@ public class VideoManagementController extends VideoSquareController implements 
     public void bind() {
         videoManagement.addListener(this);
         videoManagement.getUploadButton().addActionListener(this);
-    }
-
-    public Video getCurrentVideo() {
-        return currentVideo;
     }
 
     @Override

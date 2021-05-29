@@ -35,6 +35,7 @@ public class UploadForm extends JPanel {
     
     private final JButton confirmButton = new JButton("Upload");
     private final JButton returnButton = new JButton("Go Back");
+    private final JButton deleteButton = new JButton("Delete");
 
     public UploadForm(ArrayList<String> args){
         super();
@@ -49,7 +50,7 @@ public class UploadForm extends JPanel {
     }
 
     public void setVideoTagComboBox(int tag) {
-        this.videoTagComboBox.setSelectedIndex(tag);
+        this.videoTagComboBox.setSelectedIndex(tag - 1);
     }
 
     public void setMultiComboBox(String[] args){
@@ -106,6 +107,8 @@ public class UploadForm extends JPanel {
         return this.returnButton;
     }
 
+    public JButton getDeleteButton() { return this.deleteButton; }
+
     public void initMultiComboBox(ArrayList<String> args){
         String[] types;
         types = args.toArray(new String[0]);
@@ -133,7 +136,7 @@ public class UploadForm extends JPanel {
         this.videoSrcTextField.setBounds(180,200,300,30);
         this.showFileChooserButton.setBounds(500,200,150,30);
         this.confirmButton.setBounds(400,250,150,50);
-        this.returnButton.setBounds(610,250,150,50);
+        this.returnButton.setBounds(600,250,150,50);
 
         this.add(this.title);
         this.add(this.videoNameLabel);
@@ -152,6 +155,20 @@ public class UploadForm extends JPanel {
 
         this.repaint();
 
+    }
+
+    public void modifyToEdit(){
+        this.remove(this.videoSrcTextField);
+        this.remove(this.showFileChooserButton);
+        this.remove(this.videoSrcLabel);
+
+
+        this.deleteButton.setBounds(200,250,150,50);
+        this.add(this.deleteButton);
+
+        this.confirmButton.setText("Modify");
+
+        this.updateUI();
     }
 
 }
