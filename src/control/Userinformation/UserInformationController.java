@@ -1,35 +1,41 @@
 package control.Userinformation;
 
-import com.sun.tools.javac.Main;
 import control.Controller;
 import control.EditPersonalPageModal.EditCoachModalController;
 import control.EditPersonalPageModal.EditUserModalController;
 import control.MainFrame;
 import model.Client;
 import model.User;
+import model.mapping.ClientMapping;
 import util.config;
-import view.Userinformation.Userdescription;
-import view.Userinformation.buildProfilepanel;
-import view.Userinformation.showCustomDialog;
+import view.Userinformation.UserDescription;
+import view.Userinformation.BuildProfilePanel;
+import view.Userinformation.ShowCustomDialog;
 
 import javax.swing.*;
-import java.awt.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 public class UserInformationController extends Controller
 {
     private Client user;
-    private final Userdescription userdescription;
+    private final UserDescription userdescription;
 
     private EditCoachModalController editCoachModalController;
     private EditUserModalController editUserModalController;
 
     public UserInformationController(){
-        super(config.USERDESCRIPTION_PANEL_NAME, new Userdescription());
+        super(config.USERDESCRIPTION_PANEL_NAME, new UserDescription());
         user = MainFrame.getInstance().getClient();
-        this.userdescription = (Userdescription) this.panel;
+        this.userdescription = (UserDescription) this.panel;
         buttons();
         this.panel.setVisible(true);
         this.setH_gap(150);
@@ -38,6 +44,14 @@ public class UserInformationController extends Controller
     public void changepassword(String newpwd)
     {
         user.setPassword(newpwd);
+        try
+        {
+            ClientMapping.modify(user);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     public boolean checkpassword(String oldpwd)
@@ -49,15 +63,52 @@ public class UserInformationController extends Controller
 
     private void buttons()
     {
-        buildProfilepanel.getProfilebutton().addActionListener(new ActionListener()
+        BuildProfilePanel.getProfilebutton().addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                    JOptionPane.showMessageDialog(null,"Developing!");
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setApproveButtonText("Open");
+                // Set the default displayed folder to the current folder
+//                fileChooser.setCurrentDirectory(new File("."));
+
+                // Sets the mode for file selection (select only files, select only folders, files and files are optional)
+                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                // Sets whether multiple selection is allowed
+                fileChooser.setMultiSelectionEnabled(false);
+
+                // Set the file filter used by default
+                fileChooser.setFileFilter(new FileNameExtensionFilter("image(*.jpg, *.png)", "jpg", "png"));
+
+                // Open the file selection box (the thread will be blocked until the selection box is closed)
+                int result = fileChooser.showOpenDialog(null);
+
+                if (result == JFileChooser.APPROVE_OPTION)
+                {
+                    // If you click OK, get the selected file path
+                    File file = fileChooser.getSelectedFile();
+                    String path = file.getAbsolutePath();
+                    try
+                    {
+                        int returnValue = ClientMapping.modifyAvatar(user.getId(), path);
+                        if (returnValue == ClientMapping.SUCCESS) {
+                            JOptionPane.showMessageDialog(null,"Done!");
+                            MainFrame.getInstance().setClient(user.getId());
+                        } else if (returnValue == ClientMapping.NOT_IMAGE) {
+                            JOptionPane.showMessageDialog(null,"Format Error!");
+                        }
+                    } catch (IOException ioException)
+                    {
+                        ioException.printStackTrace();
+                    }
+
+//                    String cwd = System.getProperty("user.dir");
+//                    System.out.println(new File(cwd).toURI().relativize(file.toURI()).getPath());
+                }
             }
         });
-        buildProfilepanel.getChangeinformation().addActionListener(new ActionListener()
+        BuildProfilePanel.getPersonalInformation().addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -75,20 +126,47 @@ public class UserInformationController extends Controller
                 }
             }
         });
-        buildProfilepanel.getTopup().addActionListener(new ActionListener()
+        BuildProfilePanel.getTopup().addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                //TODO
+                String inputContent = JOptionPane.showInputDialog(null, "Enter the top-up amount:", "0");
+                if (inputContent != null)
+                {
+                    try
+                    {
+                        double money = Double.parseDouble(inputContent);
+                        DecimalFormat moneyTem = new DecimalFormat(".00");
+                        money = Double.parseDouble(moneyTem.format(money));
+                        if (checkAccount(money))
+                        {
+                            User temUser = (User) user;
+                            double oriMoney = temUser.getAccount();
+                            temUser.setAccount(oriMoney + money);
+                            try
+                            {
+                                ClientMapping.modify(user);
+                            } catch (IOException ioException)
+                            {
+                                ioException.printStackTrace();
+                            }
+                        } else
+                            JOptionPane.showMessageDialog(null, "Wrong Number!", "ERROR", JOptionPane.WARNING_MESSAGE);
+                        MainFrame.getInstance().setClient(user);
+                    } catch (NumberFormatException er)
+                    {
+                        JOptionPane.showMessageDialog(null, "Wrong Number!");
+                    }
+                }
             }
         });
-        buildProfilepanel.getChangepassword().addActionListener(new ActionListener()
+        BuildProfilePanel.getChangePassword().addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                showCustomDialog dialog = new showCustomDialog(userdescription);
+                ShowCustomDialog dialog = new ShowCustomDialog(userdescription);
 
                 dialog.getBt1().addActionListener(new ActionListener()
                 {
@@ -104,9 +182,9 @@ public class UserInformationController extends Controller
                         }
                         else
                         {
-                            dialog.getOpwd().setEchoChar('*');
-                            dialog.getNpwd().setEchoChar('*');
-                            dialog.getCpwd().setEchoChar('*');
+                            dialog.getOpwd().setEchoChar('●');
+                            dialog.getNpwd().setEchoChar('●');
+                            dialog.getCpwd().setEchoChar('●');
                         }
                     }
                 });
@@ -149,12 +227,21 @@ public class UserInformationController extends Controller
 
 
     }
+
+    private boolean checkAccount(double money)
+    {
+        if (money > 0 && money <= 5000)
+            return true;
+        return false;
+    }
+
     @Override
     public void update()
     {
         this.user = MainFrame.getInstance().getClient();
-        System.out.println("fuck anyone");
         if (user != null)
-                userdescription.update();
+        {
+            userdescription.update();
+        }
     }
 }

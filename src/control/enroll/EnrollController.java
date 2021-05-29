@@ -9,6 +9,7 @@ import model.Administrator;
 import model.Coach;
 import model.User;
 import model.mapping.ClientMapping;
+import util.Util;
 import util.config;
 import view.Enroll;
 
@@ -34,7 +35,7 @@ public class EnrollController extends Controller {
                 enroll.email = enroll.i_email.getText();
 
                 enroll.flag = 1;
-                handle_select();
+                enroll.state = 0;
                 handle_nickName(enroll.nickName, enroll.state);
                 handle_password(enroll.password);
                 handle_password2(enroll.password, enroll.password2);
@@ -51,6 +52,12 @@ public class EnrollController extends Controller {
             }
             else if(e.getSource() == enroll.b_back){
                 enroll.f_message.setVisible(false);
+                enroll.s_sex.clearSelection();
+                enroll.i_nickName.setText("");
+                enroll.i_password.setText("");
+                enroll.i_password2.setText("");
+                enroll.i_phone.setText("");
+                enroll.i_email.setText("");
             }
             else if(e.getSource() == enroll.b_login){
                 enroll.f_message.setVisible(false);
@@ -59,24 +66,17 @@ public class EnrollController extends Controller {
         });
     }
 
-    private void handle_select(){
-        if(enroll.i_admin.isSelected() || enroll.i_trainer.isSelected() || enroll.i_user.isSelected()) {
-            if(enroll.w_select != null){enroll.p_enroll.remove(enroll.w_select);}
-        }
-        else{
-            enroll.flag = 0;
-            if(enroll.w_select != null){enroll.p_enroll.remove(enroll.w_select);}
-            enroll.w_select = new JLabel("Please select a role!");
-            enroll.w_select.setForeground(Color.RED);
-            enroll.w_select.setBounds(150, 75, 300, 20);
-            enroll.p_enroll.add(enroll.w_select);
-            enroll.p_enroll.repaint();
-        }
-    }
-
     private void handle_nickName(String nickName, int state){
         if(nickName.length() != 0){
             if(enroll.w_nickName != null){enroll.p_enroll.remove(enroll.w_nickName);}
+            if(!Util.isNickNameLegal(nickName)){
+                enroll.flag = 0;
+                enroll.w_nickName =new JLabel("Nickname not in right mode. Please input another one.");
+                enroll.w_nickName.setForeground(Color.RED);
+                enroll.w_nickName.setBounds(150,125,300,20);
+                enroll.p_enroll.add(enroll.w_nickName);
+                enroll.p_enroll.repaint();
+            }
             if(state == 6){
                 enroll.flag = 0;
                 enroll.w_nickName =new JLabel("Duplicate nickname. Please input another one.");
@@ -156,6 +156,26 @@ public class EnrollController extends Controller {
     private void handle_phone(String phone){
         if(phone.length() != 0){
             if(enroll.w_phone != null){enroll.p_enroll.remove(enroll.w_phone);}
+            if(Util.isPhoneLegal(phone) == 0) {
+                enroll.flag = 0;
+                if (enroll.w_phone != null) {
+                    enroll.p_enroll.remove(enroll.w_phone);
+                }
+                enroll.w_phone = new JLabel("Phone number must be 11 digits.");
+                enroll.w_phone.setForeground(Color.RED);
+                enroll.w_phone.setBounds(150, 325, 300, 20);
+                enroll.p_enroll.add(enroll.w_phone);
+                enroll.p_enroll.repaint();
+            }
+            else if(Util.isPhoneLegal(phone) == -1){
+                    enroll.flag = 0;
+                    if(enroll.w_phone != null){enroll.p_enroll.remove(enroll.w_phone);}
+                    enroll.w_phone = new JLabel("Phone number should only contain numbers.");
+                    enroll.w_phone.setForeground(Color.RED);
+                    enroll.w_phone.setBounds(150,325,300,20);
+                    enroll.p_enroll.add(enroll.w_phone);
+                    enroll.p_enroll.repaint();
+                }
         }
         else{
             enroll.flag = 0;
@@ -178,8 +198,7 @@ public class EnrollController extends Controller {
             enroll.p_enroll.add(enroll.w_email);
         }
         else{
-            String regex = "^\\w+(\\w|[.]\\w+)+@\\w+([.]\\w+){1,3}";
-            if(!email.matches(regex)){
+            if(!Util.isEmailLegal(email)){
                 enroll.flag = 0;
                 if(enroll.w_email != null){enroll.p_enroll.remove(enroll.w_email);}
                 enroll.w_email = new JLabel("Please input your email in the correct form!");
@@ -195,74 +214,25 @@ public class EnrollController extends Controller {
     }
 
     private void write(){
-        if(enroll.i_admin.isSelected()){
-            Administrator admin = new Administrator(enroll.id, enroll.nickName, enroll.password, enroll.sex, enroll.phone, enroll.email, 0);
-            try {
-                enroll.state = ClientMapping.add(admin);
-                if (enroll.state == 6) {
-                    handle_nickName(enroll.nickName, enroll.state);
-                }
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            while (enroll.state == 2) {
-                enroll.id = (int)(Math.random()*10000);
-                try {
-                    enroll.state = ClientMapping.add(admin);
-                    if (enroll.state == 6) {
-                        handle_nickName(enroll.nickName, enroll.state);
-                    }
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
+        enroll.id = (int)(Math.random()*10000);
+        User user = new User(enroll.id, enroll.nickName, enroll.password, enroll.sex, enroll.phone, enroll.email, 2);
+        try {
+            enroll.state = ClientMapping.add(user);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
-        else if(enroll.i_trainer.isSelected()){
-            Coach trainer = new Coach(enroll.id, enroll.nickName, enroll.password, enroll.sex, enroll.phone, enroll.email, 1);
-            try {
-                enroll.state = ClientMapping.add(trainer);
-                if (enroll.state == 6) {
-                    handle_nickName(enroll.nickName, enroll.state);
-                }
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            while (enroll.state == 2) {
-                enroll.id = (int)(Math.random()*10000);
-                try {
-                    enroll.state = ClientMapping.add(trainer);
-                    if (enroll.state == 6) {
-                        handle_nickName(enroll.nickName, enroll.state);
-                    }
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
-        }
-        else{
-            User user = new User(enroll.id, enroll.nickName, enroll.password, enroll.sex, enroll.phone, enroll.email, 2);
+        while (enroll.state == 2) {
+            enroll.id = (int)(Math.random()*10000);
             try {
                 enroll.state = ClientMapping.add(user);
-                if (enroll.state == 6) {
-                    handle_nickName(enroll.nickName, enroll.state);
-                }
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
-            while (enroll.state == 2) {
-                enroll.id = (int)(Math.random()*10000);
-                try {
-                    enroll.state = ClientMapping.add(user);
-                    if (enroll.state == 6) {
-                        handle_nickName(enroll.nickName, enroll.state);
-                    }
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
+        }
+        if (enroll.state == 6) {
+            handle_nickName(enroll.nickName, enroll.state);
         }
     }
-
 
     private void message(){
         enroll.f_message.setVisible(true);

@@ -1,19 +1,26 @@
 import control.MainFrame;
-import control.enroll.EnrollController;
-import control.function.FunctionController;
-import control.index.IndexController;
+
 import util.config;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
+import java.util.Locale;
+
+/**
+ *  This is ths main entrance of the whole project.
+ *
+ *  @author Jufeng Sun
+ *  @version 1.0
+ *  @since 16 April 2021
+ */
 
 public class MainApp {
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-//                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
                     MainFrame mainFrame = MainFrame.getInstance();
+                    config.init();
                     MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
                 } catch (Exception e) {
                     e.printStackTrace();
