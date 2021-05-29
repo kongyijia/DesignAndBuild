@@ -14,11 +14,13 @@ import view.Userinformation.ShowCustomDialog;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Locale;
 import java.util.Objects;
 
 public class UserInformationController extends Controller
@@ -65,10 +67,30 @@ public class UserInformationController extends Controller
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                UIManager.put( "FileChooser.openDialogTitleText" , "Open" );
+                UIManager.put( "FileChooser.lookInLabelText" , "LookIn" );
+                UIManager.put( "FileChooser.openButtonText" , "Open" );
+                UIManager.put( "FileChooser.cancelButtonText" , "Cancel" );
+                UIManager.put( "FileChooser.fileNameLabelText" , "FileName" );
+                UIManager.put( "FileChooser.filesOfTypeLabelText" , "TypeFiles" );
+                UIManager.put( "FileChooser.openButtonToolTipText" , "OpenSelectedFile" );
+                UIManager.put( "FileChooser.cancelButtonToolTipText" , "Cancel" );
+                UIManager.put( "FileChooser.fileNameHeaderText" , "FileName" );
+                UIManager.put( "FileChooser.upFolderToolTipText" , "UpOneLevel" );
+                UIManager.put( "FileChooser.homeFolderToolTipText" , "Desktop" );
+                UIManager.put( "FileChooser.newFolderToolTipText" , "CreateNewFolder" );
+                UIManager.put( "FileChooser.listViewButtonToolTipText" , "List" );
+                UIManager.put( "FileChooser.newFolderButtonText" , "CreateNewFolder" );
+                UIManager.put( "FileChooser.renameFileButtonText" , "RenameFile" );
+                UIManager.put( "FileChooser.deleteFileButtonText" , "DeleteFile" );
+                UIManager.put( "FileChooser.filterLabelText" , "TypeFiles" );
+                UIManager.put( "FileChooser.detailsViewButtonToolTipText" , "Details" );
+                UIManager.put( "FileChooser.fileSizeHeaderText" , "Size" );
+                UIManager.put( "FileChooser.fileDateHeaderText" , "DateModified" );
                 JFileChooser fileChooser = new JFileChooser();
-
+                fileChooser.setApproveButtonText("Open");
                 // Set the default displayed folder to the current folder
-                fileChooser.setCurrentDirectory(new File("."));
+//                fileChooser.setCurrentDirectory(new File("."));
 
                 // Sets the mode for file selection (select only files, select only folders, files and files are optional)
                 fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
