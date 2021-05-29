@@ -68,7 +68,6 @@ public class IndexController extends Controller {
 
     @Override
     public void update() {
-        System.out.println("Index update");
         clean();
         indexPanel.getPasswordText().setText("");
         indexPanel.getUserText().setText("");

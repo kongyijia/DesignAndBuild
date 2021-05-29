@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,12 +23,28 @@ import view.VideoSquare.*;
 import model.mapping.*;
 import model.*;
 
-public class VideoSquareController extends Controller{
+public class VideoSquareController extends Controller implements ActionListener {
 	private final VideoSquare videoSquare;
 	public static final int GAP= 10;
 	public static final int P_HEIGHT = 250;
 	public static final int P_WIDTH= 275;
-	private final Client client= MainFrame.getInstance().getClient();
+	private Client client= MainFrame.getInstance().getClient();
+	
+	public VideoSquareController() {
+		super(config.VIDEOSQUARE_PANEL_NAME, new VideoSquare());
+		videoSquare = (VideoSquare)this.panel;
+		this.onSearch();
+		this.bind();
+	}
+
+	public VideoSquareController(String name, JPanel videoSquare){
+		super(name, videoSquare);
+		this.videoSquare = (VideoSquare) this.panel;
+	}
+
+	public void bind(){
+		this.videoSquare.addListener(this);
+	}
 
 	public void onSearch(){
 		ArrayList<Video> vs=new ArrayList<>();
@@ -44,21 +62,6 @@ public class VideoSquareController extends Controller{
 		this.videoSquare.getSearchText2().setText("");
 		this.videoSquare.getTagBox().setSelectedIndex(0);
 	}
-	
-	public VideoSquareController() {
-		super(config.VIDEOSQUARE_PANEL_NAME, new VideoSquare());
-		videoSquare = (VideoSquare)this.panel;
-
-		this.onSearch();
-		videoSquare.addListener(e ->{
-			if (e.getSource() == videoSquare.getSearchButton()) {
-				this.onSearch();
-			}
-			else if(e.getSource() == videoSquare.getResetButton()) {
-                this.onReset();
-			}
-		});
-	}
 
 	public ArrayList<Video> generateMap(String name,String type,String tag) throws FileNotFoundException {
 		HashMap<String, String> map = new HashMap<>();
@@ -74,9 +77,13 @@ public class VideoSquareController extends Controller{
 		if(!tag.equals("ALL")) {
 			map.put("tag", tag);
 			System.out.println(" tag"+tag);
-		}		
+		}
+		if(MainFrame.getInstance().getClient().getRole() == 1){
+			map.put("author", ""+MainFrame.getInstance().getClient().getId());
+		}
 		
 		vs = VideoMapping.find(map);
+		System.out.println(vs);
 		return vs;
 	}
 	
@@ -86,9 +93,30 @@ public class VideoSquareController extends Controller{
 		for(int i=0;i<vs.size();i++) {
 			videoSquare.getPanel().add(generateButton(i+1,vs.get(i).getName(),vs.get(i).getTag(),vs.get(i).getCoverSrc()));
 			videoSquare.getPanel().revalidate();
-		}	
-				
+		}
 	}
+
+	public void addButtonListener(int num, int tag, String path, JButton button){
+		button.addActionListener(e ->{
+			//TODO： link to the videos
+			if(client.getRole()==2) {
+				User user=(User) client;
+				if(user.getLevel()<tag)
+					JOptionPane.showMessageDialog(null,"Level is not satisfied!!"+num);
+				else
+					JOptionPane.showMessageDialog(null,"Developing!"+num);
+			} else {
+				System.out.println("go to edit video");
+				//MainFrame.getInstance().goTo(config.VIDEO_MODIFY);
+			}
+		});
+		if(!path.isEmpty()) {
+			ImageIcon picIcon = new ImageIcon(path);
+			picIcon.setImage(picIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
+			button.setIcon(picIcon);
+		}
+	}
+
 	public JPanel generateButton(int num, String name, int tag, String path) {
 		int row;
 		int column;
@@ -108,23 +136,7 @@ public class VideoSquareController extends Controller{
 		videoName.setFont(new Font(null, Font.PLAIN, 18));
 		JButton button = new JButton();	
 		button.setBounds(0, 0, P_WIDTH, P_HEIGHT);
-		button.addActionListener(e ->{
-			//TODO： link to the videos
-			if(client.getRole()==2) {
-				User user=(User) client;
-				if(user.getLevel()<tag)
-					JOptionPane.showMessageDialog(null,"Level is not satisfied!!"+num);
-				else
-					JOptionPane.showMessageDialog(null,"Developing!"+num);
-			}
-			else
-			 JOptionPane.showMessageDialog(null,"Developing!"+num);
-			});
-		if(!path.isEmpty()) {
-			ImageIcon picIcon = new ImageIcon(path);
-			picIcon.setImage(picIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_DEFAULT));
-			button.setIcon(picIcon);
-		}
+		this.addButtonListener(num,tag,path,button);
 		buttonPanel.add(button);
 		buttonPanel.add(videoName);
 		
@@ -134,12 +146,22 @@ public class VideoSquareController extends Controller{
 	public void refresh(){
 		videoSquare.getPanel().removeAll();
 		videoSquare.getPanel().revalidate();
+		this.videoSquare.updateUI();
 	}
 	
 	@Override
 	public void update() {
+		this.client = MainFrame.getInstance().getClient();
 		this.onReset();
 		this.onSearch();
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == videoSquare.getSearchButton()) {
+			this.onSearch();
+		} else if(e.getSource() == videoSquare.getResetButton()) {
+			this.onReset();
+		}
+	}
 }

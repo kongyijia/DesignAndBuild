@@ -10,7 +10,8 @@ public class VideoSquare extends JPanel{
 	private final JPanel panel= new JPanel();
     private final JScrollPane scrollPane = new JScrollPane(panel);
     private final SearchVideo searchVideoPanel=new SearchVideo();
-    
+
+    public SearchVideo getSearchVideoPanel() { return this.searchVideoPanel; }
     public JComboBox<String> getTagBox() {
     	return searchVideoPanel.getTagBox();
     }
