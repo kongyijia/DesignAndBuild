@@ -37,7 +37,7 @@ public class User extends Client {
         this.account = 0.0;
         this.level = 1;
         this.learningTime = 0;
-        this.vip = "plain";
+        this.vip = "Plain";
         this.courseSubscription = new ArrayList<>();
         this.description = "";
     }
@@ -49,7 +49,7 @@ public class User extends Client {
         this.account = 0.0;
         this.level = 1;
         this.learningTime = 0;
-        this.vip = "plain";
+        this.vip = "Plain";
         this.courseSubscription = new ArrayList<>();
     }
 

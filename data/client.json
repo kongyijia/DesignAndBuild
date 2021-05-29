@@ -60,7 +60,7 @@
 	"recordHistory":[],
 	"role":2,
 	"sex":1,
-	"vip":"plain"
+	"vip":"Plain"
 },{
 	"account":123.45,
 	"avatarSrc":"data/image/default.jpeg",
@@ -101,7 +101,7 @@
 	],
 	"role":2,
 	"sex":1,
-	"vip":"video"
+	"vip":"Video"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":true,
@@ -183,7 +183,7 @@
 	"recordHistory":[],
 	"role":2,
 	"sex":1,
-	"vip":"plain"
+	"vip":"Plain"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":false,
