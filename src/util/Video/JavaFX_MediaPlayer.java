@@ -134,10 +134,6 @@ public class JavaFX_MediaPlayer extends Application
                                 if (mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED)
                                         mediaPlayer.play();
                         }
-                        if (e.getCode() == KeyCode.RIGHT)
-                        {
-                                mediaPlayer.seek(Duration.millis(1000));
-                        }
                 });
         }
 
