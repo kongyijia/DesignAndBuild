@@ -63,6 +63,10 @@ public class ControllerFactory {
                 }
             case VIDEO_MANAGEMENT:
                 return new VideoManagementController();
+            case VIDEO_UPLOAD:
+                return new UploadVideoController();
+            case VIDEO_MODIFY:
+                return new EditVideoController();
         }
         System.out.println("Can find the view:" + name);
         return null;
