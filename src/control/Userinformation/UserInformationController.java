@@ -182,9 +182,9 @@ public class UserInformationController extends Controller
                         }
                         else
                         {
-                            dialog.getOpwd().setEchoChar('*');
-                            dialog.getNpwd().setEchoChar('*');
-                            dialog.getCpwd().setEchoChar('*');
+                            dialog.getOpwd().setEchoChar('●');
+                            dialog.getNpwd().setEchoChar('●');
+                            dialog.getCpwd().setEchoChar('●');
                         }
                     }
                 });
@@ -230,7 +230,7 @@ public class UserInformationController extends Controller
 
     private boolean checkAccount(double money)
     {
-        if (money > 0 && money <= 1000)
+        if (money > 0 && money <= 5000)
             return true;
         return false;
     }
