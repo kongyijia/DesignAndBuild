@@ -21,5 +21,6 @@ public class VideoPlayerLauncher
             long testruntime = JavaFX_MediaPlayer.getRunTime();
             System.out.println(testruntime);
         }
+        Application.
     }
 }

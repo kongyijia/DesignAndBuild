@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import control.Controller;
+import control.FX_Video.VideoPlayerLauncher;
 import control.MainFrame;
 import util.config;
 import view.VideoSquare.*;
@@ -111,8 +112,12 @@ public class VideoSquareController extends Controller implements ActionListener 
 				User user=(User) client;
 				if(user.getLevel()<video.getTag())
 					JOptionPane.showMessageDialog(null,"Level is not satisfied!!"+num);
-				else
-					JOptionPane.showMessageDialog(null,"Developing!"+num);
+				else{
+					//JOptionPane.showMessageDialog(null,"Developing!"+num);
+					VideoPlayerLauncher a = new VideoPlayerLauncher();
+					a.creatplayer(video.getSrc());
+				}
+
 			} else {
 				this.setCurrentVideo(video);
 				MainFrame.getInstance().goTo(config.VIDEO_MODIFY);
