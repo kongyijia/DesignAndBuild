@@ -65,7 +65,7 @@ public class ClientDetailDialog extends JDialog {
             VIPLabel.setBounds(20,60,70,30);
             changePanel.add(VIPLabel);
 
-            level = new JComboBox<>(new Integer[]{0, 1, 2, 3, 4, 5, 6});
+            level = new JComboBox<>(new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12});
             level.setSelectedIndex(((User) client).getLevel());
 
             String[] VIPType = new String[]{"Big", "Video", "Course", "Plain"};
