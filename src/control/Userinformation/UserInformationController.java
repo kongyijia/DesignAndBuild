@@ -67,26 +67,6 @@ public class UserInformationController extends Controller
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                UIManager.put( "FileChooser.openDialogTitleText" , "Open" );
-                UIManager.put( "FileChooser.lookInLabelText" , "LookIn" );
-                UIManager.put( "FileChooser.openButtonText" , "Open" );
-                UIManager.put( "FileChooser.cancelButtonText" , "Cancel" );
-                UIManager.put( "FileChooser.fileNameLabelText" , "FileName" );
-                UIManager.put( "FileChooser.filesOfTypeLabelText" , "TypeFiles" );
-                UIManager.put( "FileChooser.openButtonToolTipText" , "OpenSelectedFile" );
-                UIManager.put( "FileChooser.cancelButtonToolTipText" , "Cancel" );
-                UIManager.put( "FileChooser.fileNameHeaderText" , "FileName" );
-                UIManager.put( "FileChooser.upFolderToolTipText" , "UpOneLevel" );
-                UIManager.put( "FileChooser.homeFolderToolTipText" , "Desktop" );
-                UIManager.put( "FileChooser.newFolderToolTipText" , "CreateNewFolder" );
-                UIManager.put( "FileChooser.listViewButtonToolTipText" , "List" );
-                UIManager.put( "FileChooser.newFolderButtonText" , "CreateNewFolder" );
-                UIManager.put( "FileChooser.renameFileButtonText" , "RenameFile" );
-                UIManager.put( "FileChooser.deleteFileButtonText" , "DeleteFile" );
-                UIManager.put( "FileChooser.filterLabelText" , "TypeFiles" );
-                UIManager.put( "FileChooser.detailsViewButtonToolTipText" , "Details" );
-                UIManager.put( "FileChooser.fileSizeHeaderText" , "Size" );
-                UIManager.put( "FileChooser.fileDateHeaderText" , "DateModified" );
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setApproveButtonText("Open");
                 // Set the default displayed folder to the current folder
