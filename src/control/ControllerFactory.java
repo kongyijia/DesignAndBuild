@@ -16,6 +16,7 @@ import control.RecordManage.*;
 import control.VideoSquare.VideoSquareController;
 import control.videoManagement.EditVideoController;
 import control.videoManagement.UploadVideoController;
+import control.videoManagement.VideoManagementController;
 
 import static util.config.*;
 
@@ -40,13 +41,7 @@ public class ControllerFactory {
             case FUNCTION_PANEL_NAME:
                 return new FunctionController();
             case VIDEOSQUARE_PANEL_NAME:
-			try {
-				return new VideoSquareController();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				break;
-			}
+                return new VideoSquareController();
             case STAFF_MANAGE_NAME:
                 return new StaffManageController();
             case STAFF_INSERT_NAME:
@@ -67,11 +62,11 @@ public class ControllerFactory {
                     break;
                 }
             case VIDEO_MANAGEMENT:
+                return new VideoManagementController();
+            case VIDEO_UPLOAD:
                 return new UploadVideoController();
             case VIDEO_MODIFY:
                 return new EditVideoController();
-
-
         }
         System.out.println("Can find the view:" + name);
         return null;

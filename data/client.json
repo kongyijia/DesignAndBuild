@@ -34,7 +34,9 @@
 	"role":0,
 	"sex":0
 },{
+
 	"account":570.123,
+
 	"avatarSrc":"data/image/4bddde9c-4485-4e5a-91cb-02e5dcf7ef0c.jpg",
 	"cancel":false,
 	"courseSubscription":[
@@ -244,7 +246,7 @@
 	"role":0,
 	"sex":1
 },{
-	"avatarSrc":"data/image/default.jpeg",
+	"avatarSrc":"data/image/b4911089-9fa4-456d-8cf3-bb74c2a3cb54.png",
 	"cancel":false,
 	"description":"",
 	"email":"23131@qeq.com",

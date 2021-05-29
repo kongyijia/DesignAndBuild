@@ -170,8 +170,12 @@ public class MultiComboBox extends JComponent implements ActionListener {
                         }
                     }
                 }
-                setText(getSelectedValues());
+            } else {
+                for (int j = 0; j < checkBoxList.size(); j++) {
+                    checkBoxList.get(j).setSelected(false);
+                }
             }
+            setText(getSelectedValues());
         }
 
 

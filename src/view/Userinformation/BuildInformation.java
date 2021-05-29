@@ -6,6 +6,7 @@ import model.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.DecimalFormat;
 
 public class BuildInformation extends JPanel
 {
@@ -13,7 +14,7 @@ public class BuildInformation extends JPanel
     {
 
         this.setBounds(300, 20, 500, 330);
-        this.setBackground(Color.PINK); // monkey ass whole
+        this.setBackground(Color.PINK); // monkey ass hole
 
         if (receiveUser != null)
         {
@@ -47,7 +48,11 @@ public class BuildInformation extends JPanel
                 JLabel label_Time = new JLabel("Study Time: ");
                 JLabel label_vip = new JLabel("VIP Level: ");
 
-                JLabel account = new JLabel("" + user.getAccount());
+
+                DecimalFormat accountTem = new DecimalFormat("######0.00");
+
+
+                JLabel account = new JLabel("" + accountTem.format(user.getAccount()));
                 JLabel time = new JLabel("" + user.getLearningTime());
                 JLabel vip = new JLabel("" + user.getVip());
                 JLabel level = new JLabel("" + user.getLevel());
