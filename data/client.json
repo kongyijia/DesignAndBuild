@@ -34,18 +34,20 @@
 	"role":0,
 	"sex":0
 },{
-	"account":70.12299999999999,
+	"account":170.12300000000005,
 	"avatarSrc":"data/image/4bddde9c-4485-4e5a-91cb-02e5dcf7ef0c.jpg",
 	"cancel":false,
 	"courseSubscription":[
 		{
 			"coachId":0,
 			"id":123,
+			"price":0.0,
 			"userId":0
 		},
 		{
 			"coachId":0,
 			"id":234,
+			"price":0.0,
 			"userId":0
 		}
 	],
@@ -69,11 +71,13 @@
 		{
 			"coachId":0,
 			"id":123,
+			"price":0.0,
 			"userId":0
 		},
 		{
 			"coachId":0,
 			"id":234,
+			"price":0.0,
 			"userId":0
 		}
 	],
