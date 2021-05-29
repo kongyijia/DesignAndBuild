@@ -17,7 +17,8 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
-public class GetVipController
+public class
+GetVipController
 {
     BuyVip vipDialog = null;
     private User user = null;
@@ -86,14 +87,16 @@ public class GetVipController
                     DecimalFormat accountTem = new DecimalFormat("######0.00");
                     vipDialog.getBalance().setText(accountTem.format(Double.parseDouble(vipDialog.getBalance().getText()) - 2000.0));
                     if (vipDialog.getVideo().isSelected() && !lock[1])
-                    {
                         vipDialog.getBalance().setText(accountTem.format(Double.parseDouble(vipDialog.getBalance().getText()) + 1200.0));
+                    if (vipDialog.getCourse().isSelected() && !lock[2])
+                        vipDialog.getBalance().setText(accountTem.format(Double.parseDouble(vipDialog.getBalance().getText()) + 1200.0));
+                    if(!lock[1])
+                    {
                         vipDialog.getVideo().setSelected(true);
                         vipDialog.getVideo().setEnabled(false);
                     }
-                    if (vipDialog.getCourse().isSelected() && !lock[2])
+                    if (!lock[2])
                     {
-                        vipDialog.getBalance().setText(accountTem.format(Double.parseDouble(vipDialog.getBalance().getText()) + 1200.0));
                         vipDialog.getCourse().setSelected(true);
                         vipDialog.getCourse().setEnabled(false);
                     }

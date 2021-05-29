@@ -183,7 +183,7 @@
 	"recordHistory":[],
 	"role":2,
 	"sex":1,
-	"vip":"plain"
+	"vip":"BIG"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":false,
