@@ -15,7 +15,7 @@
 	]
 },{
 	"author":534526,
-	"coverSrc":"data/image/e6307268-38f9-4305-b739-70bd341d6460.jpg",
+	"coverSrc":"data/image/defaultCover.png",
 	"id":2,
 	"name":"test2",
 	"src":"data/video/2.mp4",
@@ -47,5 +47,16 @@
 	"time":222,
 	"types":[
 		"Japanese"
+	]
+},{
+	"author":7131,
+	"coverSrc":"data/image/defaultCover.png",
+	"id":5,
+	"name":"556",
+	"src":"data/video/5.mp4",
+	"tag":5,
+	"time":45,
+	"types":[
+		"Latin"
 	]
 }]

@@ -27,7 +27,7 @@ public class UploadVideoController extends Controller implements ActionListener 
     protected AddTypeModal addTypeModal;
 
     public UploadVideoController()  {
-        super(config.VIDEO_MANAGEMENT, new UpLoadVideo(UploadVideoController.getTypes()));
+        super(config.VIDEO_UPLOAD, new UpLoadVideo(UploadVideoController.getTypes()));
         init();
     }
 
