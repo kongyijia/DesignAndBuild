@@ -21,14 +21,16 @@ public class Course {
     private int userId;
     private int coachId;
     private String type;
+    private double price;
 
-    public Course(int id, Date date, Time start, int userId, int coachId, String type) {
+    public Course(int id, Date date, Time start, int userId, int coachId, String type, double price) {
         this.id = id;
         this.date = date;
         this.start = start;
         this.userId = userId;
         this.coachId = coachId;
         this.type = type;
+        this.price = price;
     }
 
     public Course() {
@@ -82,6 +84,14 @@ public class Course {
         this.type = type;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -91,6 +101,7 @@ public class Course {
                 ", userId=" + userId +
                 ", coachId=" + coachId +
                 ", type='" + type + '\'' +
+                ", price=" + price +
                 '}';
     }
 }
