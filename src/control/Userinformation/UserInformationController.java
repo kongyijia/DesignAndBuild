@@ -4,6 +4,7 @@ import control.Controller;
 import control.EditPersonalPageModal.EditCoachModalController;
 import control.EditPersonalPageModal.EditUserModalController;
 import control.MainFrame;
+import control.getVIP.GetVipController;
 import model.Client;
 import model.User;
 import model.mapping.ClientMapping;
@@ -108,6 +109,7 @@ public class UserInformationController extends Controller
                 }
             }
         });
+
         BuildProfilePanel.getPersonalInformation().addActionListener(new ActionListener()
         {
             @Override
@@ -126,6 +128,7 @@ public class UserInformationController extends Controller
                 }
             }
         });
+
         BuildProfilePanel.getTopup().addActionListener(new ActionListener()
         {
             @Override
@@ -161,6 +164,7 @@ public class UserInformationController extends Controller
                 }
             }
         });
+
         BuildProfilePanel.getChangePassword().addActionListener(new ActionListener()
         {
             @Override
@@ -223,6 +227,15 @@ public class UserInformationController extends Controller
             }
 
 
+        });
+
+        BuildProfilePanel.getGetVip().addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                GetVipController vipController = new GetVipController(userdescription,user);
+            }
         });
 
 
