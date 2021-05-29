@@ -34,7 +34,7 @@
 	"role":0,
 	"sex":0
 },{
-	"account":395.99699999999996,
+	"account":800.0,
 	"avatarSrc":"data/image/4bddde9c-4485-4e5a-91cb-02e5dcf7ef0c.jpg",
 	"cancel":false,
 	"courseSubscription":[
@@ -60,7 +60,7 @@
 	"recordHistory":[],
 	"role":2,
 	"sex":1,
-	"vip":"plain"
+	"vip":"BIG"
 },{
 	"account":123.45,
 	"avatarSrc":"data/image/default.jpeg",
