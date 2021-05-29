@@ -154,6 +154,7 @@ public class EnrollController extends Controller {
     }
 
     private void handle_phone(String phone){
+        int flag = 1;
         if(phone.length() != 0){
             if(enroll.w_phone != null){enroll.p_enroll.remove(enroll.w_phone);}
             if(!Util.isPhoneLegal(phone)){
@@ -165,6 +166,18 @@ public class EnrollController extends Controller {
                 enroll.p_enroll.add(enroll.w_phone);
                 enroll.p_enroll.repaint();
             }
+            for (int i = 0; i < phone.length(); i++)
+                if(phone.charAt(i) >= '0' && phone.charAt(i) <= '9')
+                    flag = 0;
+                if(flag == 0){
+                    enroll.flag = 0;
+                    if(enroll.w_phone != null){enroll.p_enroll.remove(enroll.w_phone);}
+                    enroll.w_phone = new JLabel("Phone number should only contain numbers.");
+                    enroll.w_phone.setForeground(Color.RED);
+                    enroll.w_phone.setBounds(150,325,300,20);
+                    enroll.p_enroll.add(enroll.w_phone);
+                    enroll.p_enroll.repaint();
+                }
         }
         else{
             enroll.flag = 0;
