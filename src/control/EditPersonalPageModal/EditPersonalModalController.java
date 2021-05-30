@@ -73,8 +73,7 @@ public class EditPersonalModalController implements ActionListener {
             Util.showDialog(this.jFrame, "Illegal phone number! Expect 11 numbers!");
         } else if(Util.isPhoneLegal(this.editPersonalModal.getPhoneTextField()) == -1) {
             Util.showDialog(this.jFrame, "Illegal phone number! Only numbers allowed!");
-        }
-        else if(!Util.isEmailLegal(this.editPersonalModal.getEmailTextField())){
+        } else if(!Util.isEmailLegal(this.editPersonalModal.getEmailTextField())){
             Util.showDialog(this.jFrame, "Illegal email address! Please try again!");
         } else {
             this.edit();

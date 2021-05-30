@@ -7,7 +7,9 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.swing.ImageIcon;
@@ -19,6 +21,7 @@ import javax.swing.JPanel;
 import control.Controller;
 import control.FX_Video.VideoPlayerLauncher;
 import control.MainFrame;
+import util.Util;
 import util.config;
 import view.VideoSquare.*;
 import model.mapping.*;
@@ -31,10 +34,22 @@ public class VideoSquareController extends Controller implements ActionListener 
 	public static final int P_WIDTH= 275;
 	private Client client= MainFrame.getInstance().getClient();
 	public Video currentVideo;
-	
+
+	public void setComboBoxArray(){
+		try {
+			ArrayList<String> arrayList = VideoTypeMapping.readAllVideoTypes();
+			arrayList.add(0,"");
+			this.videoSquare.getSearchVideoPanel().setTypeComboBox(arrayList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public VideoSquareController() {
 		super(config.VIDEOSQUARE_PANEL_NAME, new VideoSquare());
 		videoSquare = (VideoSquare)this.panel;
+		this.setComboBoxArray();
 		this.onSearch();
 		this.bind();
 	}
@@ -42,6 +57,7 @@ public class VideoSquareController extends Controller implements ActionListener 
 	public VideoSquareController(String name, JPanel videoSquare){
 		super(name, videoSquare);
 		this.videoSquare = (VideoSquare) this.panel;
+		this.setComboBoxArray();
 	}
 
 	public void setCurrentVideo(Video currentVideo) {
@@ -59,7 +75,7 @@ public class VideoSquareController extends Controller implements ActionListener 
 	public void onSearch(){
 		ArrayList<Video> vs=new ArrayList<>();
 		try {
-			vs=generateMap(videoSquare.getSearchText1().getText(),videoSquare.getSearchText2().getText(),(String) videoSquare.getTagBox().getSelectedItem());
+			vs=generateMap(videoSquare.getSearchText1().getText(),(String)videoSquare.getTypeComboBox().getSelectedItem(),(String) videoSquare.getTagBox().getSelectedItem());
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -69,7 +85,7 @@ public class VideoSquareController extends Controller implements ActionListener 
 
 	public void onReset(){
 		this.videoSquare.getSearchText1().setText("");
-		this.videoSquare.getSearchText2().setText("");
+		this.videoSquare.getTypeComboBox().setSelectedItem("");
 		this.videoSquare.getTagBox().setSelectedIndex(0);
 	}
 
@@ -110,13 +126,23 @@ public class VideoSquareController extends Controller implements ActionListener 
 			//TODO： link to the videos
 			if(client.getRole()==2) {
 				User user=(User) client;
-				if(user.getLevel()<video.getTag())
+				if(user.getLevel()<video.getTag() &&
+					(user.getVip().equals("Plain") || user.getVip().equals("Course"))
+				)
 					JOptionPane.showMessageDialog(null,"Level is not satisfied!!");
 				else{
 					//JOptionPane.showMessageDialog(null,"Developing!"+num);
 					VideoPlayerLauncher a = new VideoPlayerLauncher();
 					try {
-						System.out.println(a.creatplayer(video.getSrc()));
+						int learningTime = (int)a.creatplayer(video.getSrc());
+						int total = ((User) client).getLearningTime() + learningTime;
+						((User) client).setLearningTime(total);
+						int newLevel = total / 100 + 1;
+						if(newLevel > ((User) client).getLevel()){
+							((User) client).setLevel(Math.min(newLevel, 12));
+						}
+						ClientMapping.modify(client);
+						ClientMapping.modifyRecordHistory(client.getId(),new Client.RecordHistory(video.getId(),learningTime,0,new Date()));
 					} catch (Exception exception) {
 						exception.printStackTrace();
 					}
@@ -149,7 +175,7 @@ public class VideoSquareController extends Controller implements ActionListener 
 		buttonPanel.setBounds(GAP+(column-1)* (P_WIDTH+GAP), GAP+(row-1)*(P_HEIGHT +50), P_WIDTH, P_HEIGHT +50);
 		buttonPanel.setBackground(new Color(255, 255, 255));  
 		
-		JLabel videoName = new JLabel("Name: "+video.getName()+" Tag: "+video.getTag());
+		JLabel videoName = new JLabel("Name: "+video.getName()+ " " + " Level: "+video.getTag());
 		videoName.setFont(new Font(null, Font.PLAIN, 18));
 		JButton button = new JButton();	
 		button.setBounds(0, 0, P_WIDTH, P_HEIGHT);
