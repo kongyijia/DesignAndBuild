@@ -48,6 +48,9 @@ public class Video {
         this.coverSrc = "";
     }
 
+    public Video() {
+    }
+
     public String getCoverSrc() {
         return coverSrc;
     }

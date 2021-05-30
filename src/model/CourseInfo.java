@@ -15,6 +15,9 @@ public class CourseInfo{
         this.coach = coach;
     }
 
+    public CourseInfo() {
+    }
+
     public static CourseInfo generateCourseInfo(Course course){
         try{
             HashMap<String,String> searchUser = new HashMap<>();
