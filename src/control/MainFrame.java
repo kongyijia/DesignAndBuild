@@ -39,7 +39,7 @@ public class MainFrame extends JFrame{
     private void initialize() {
         this.list = new HashMap<>();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("CourseWork");
+        this.setTitle("London Fitness");
         this.setSize(config.FRAME_WIDTH, config.FRAME_HEIGHT);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
