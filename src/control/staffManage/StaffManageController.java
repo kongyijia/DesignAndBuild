@@ -34,21 +34,18 @@ public class StaffManageController extends Controller {
                     comboBox.removeAllItems();
                     comboBox.addItem("All");
                     comboBox.setSelectedIndex(0);
-                    comboBox.setEditable(false);
                 }
                 if (e.getItem().equals("Coach")) {
                     comboBox.removeAllItems();
                     comboBox.addItem("All");
                     for (int i = 0; i < 3; i++)
                         comboBox.addItem(Integer.toString(i));
-                    comboBox.setEditable(true);
                 }
                 else if (e.getItem().equals("User")) {
                     comboBox.removeAllItems();
                     comboBox.addItem("All");
                     for (int i = 0; i < 13; i++)
                         comboBox.addItem(Integer.toString(i));
-                    comboBox.setEditable(true);
                 }
                 comboBox.updateUI();
             }
