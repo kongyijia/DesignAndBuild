@@ -14,8 +14,12 @@ public class Util {
         return nickName.matches(regex);
     }
 
-    public static boolean isPhoneLegal(String phone){
-        return phone.length() == 11;
+    public static int isPhoneLegal(String phone){
+        if(phone.length() != 11) return 0;
+        for (int i = 0; i < phone.length(); i++)
+            if(phone.charAt(i) < '0' || phone.charAt(i) > '9')
+                return -1;
+            return 1;
     }
 
     public static boolean isEmailLegal(String email){

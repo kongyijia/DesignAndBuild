@@ -62,13 +62,25 @@ public class IndexController extends Controller {
             } else {
                 MainFrame.getInstance().setClient(clients.get(0));
                 MainFrame.getInstance().goTo(config.FUNCTION_PANEL_NAME);
+
+                int role = clients.get(0).getRole();
+                switch (role) {
+                    case 0:
+                        MainFrame.getInstance().goTo(config.STAFF_MANAGE_NAME);
+                        break;
+                    case 1:
+                        MainFrame.getInstance().goTo(config.VIDEO_MANAGEMENT);
+                        break;
+                    case 2:
+                        MainFrame.getInstance().goTo(config.VIDEOSQUARE_PANEL_NAME);
+                        break;
+                }
             }
         }
     }
 
     @Override
     public void update() {
-        System.out.println("Index update");
         clean();
         indexPanel.getPasswordText().setText("");
         indexPanel.getUserText().setText("");

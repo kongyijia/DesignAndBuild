@@ -3,24 +3,20 @@ package view.VideoSquare;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
 import javax.swing.*;
-import view.staffManagement.PersonPanel;
 
 public class VideoSquare extends JPanel{
 
-	private static JButton search = new JButton ("Search");
-	private static JTextField searchText = new JTextField(20);
-	private static JPanel panel= new JPanel();
-    private static JScrollPane scrollpane = new JScrollPane(panel);
-    private static SearchVideo searchVideoPanel=new SearchVideo();
-    
+	private final JPanel panel= new JPanel();
+    private final JScrollPane scrollPane = new JScrollPane(panel);
+    private final SearchVideo searchVideoPanel=new SearchVideo();
+
+    public SearchVideo getSearchVideoPanel() { return this.searchVideoPanel; }
     public JComboBox<String> getTagBox() {
     	return searchVideoPanel.getTagBox();
     }
-    public JScrollPane getScrollpane() {
-    	return scrollpane;
+    public JScrollPane getScrollPane() {
+    	return scrollPane;
     }
 	public JPanel getPanel() {
 		return panel;
@@ -49,10 +45,10 @@ public class VideoSquare extends JPanel{
 	private void initPanel() {
         panel.setBackground(Color.WHITE);
         panel.setLayout(null);
-        scrollpane.setBounds(10,60, 1170, 450);    
-		panel.setPreferredSize(new Dimension(scrollpane.getWidth() - 50, 800));
+        scrollPane.setBounds(10,60, 1170, 450);    
+		panel.setPreferredSize(new Dimension(scrollPane.getWidth() - 50, 800));
 		
-		this.add(scrollpane);
+		this.add(scrollPane);
 		panel.revalidate();
 
 	}

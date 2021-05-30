@@ -1,29 +1,12 @@
 package view.VideoSquare;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-
-import control.MainFrame;
-import model.Client;
-import model.Coach;
-import model.User;
-import model.Video;
 import util.config;
-import view.staffManagement.PeopleSearchComponent;
-import view.staffManagement.PersonPanel;
 
 public class SearchVideo extends JPanel{
 	public static final int SEARCH_PANEL_HEIGHT = 50;
@@ -31,10 +14,7 @@ public class SearchVideo extends JPanel{
 	private JTextField searchInputField2;//tag
     private JButton searchButton;
     private JButton resetButton;
-    private JLabel labelType;
-    private JLabel labelTag;
-    private JLabel labelName;
-    private JComboBox<String> comboBox;
+	private JComboBox<String> comboBox;
     
     public JButton getSearch() {
 		return searchButton;
@@ -58,7 +38,7 @@ public class SearchVideo extends JPanel{
 	        this.setBackground(Color.lightGray);
 	        this.setBounds(0, 0, config.PAGE_WIDTH, SEARCH_PANEL_HEIGHT);
 	        
-	        init();	        
+	        init();
 	    }
 
 		private void init() {
@@ -76,18 +56,18 @@ public class SearchVideo extends JPanel{
 	        resetButton.setBackground(Color.white);
 	        
 	       // searchComboBoxMap.put("tag", new PeopleSearchComponent("TAG", new String[]{"ALL","0", "1", "2","3","4","5","6","7","8","9","10","11","12"}, searchComboBoxMap.size()));
-	        labelType = new JLabel("TYPE" + " :");
+			JLabel labelType = new JLabel("TYPE" + " :");
 	        labelType.setBounds(330, 10, 50, 30);
-	        labelTag = new JLabel("TAG" + " :");
+			JLabel labelTag = new JLabel("TAG" + " :");
 	        labelTag.setBounds(630, 10, 50, 30);
-	        labelName = new JLabel("Name" + " :");
+			JLabel labelName = new JLabel("Name" + " :");
 	        labelName.setBounds(30, 10, 50, 30);
 	        
-	        comboBox = new JComboBox<String>(new String[]{"ALL", "1", "2","3","4","5","6","7","8","9","10","11","12"});
+	        comboBox = new JComboBox<>(new String[]{"ALL", "1", "2","3","4","5","6","7","8","9","10","11","12"});
 	        comboBox.setSelectedIndex(0);
 	        comboBox.setBounds(700, 10, 90, 30);
 	        comboBox.setBackground(Color.white);
-	        
+
 	        this.add(searchInputField1);
 	        this.add(searchInputField2);
 	        this.add(searchButton);

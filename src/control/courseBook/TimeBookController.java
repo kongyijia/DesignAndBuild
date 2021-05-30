@@ -15,6 +15,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Time;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -125,25 +126,39 @@ public class TimeBookController extends Controller {
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
             if (e.getClickCount() == 2) {
+                User user = (User) MainFrame.getInstance().getClient();
+                Coach coach;
+                double coursePrice;
+
+                try {
+                    CoachBookController coachController = (CoachBookController) MainFrame.getInstance().getController(config.COURSE_BOOK_COACH_NAME);
+                    int coachID = coachController.getCoachID();
+                    HashMap<String, String> coachSearch = new HashMap<>();
+                    coachSearch.put("id", Integer.toString(coachID));
+                    coach = ClientMapping.findCoach(coachSearch).get(0);
+
+                    double discount = 1;
+                    if ( user.getVip().equals("Big") || user.getVip().equals("Course") )
+                        discount = 0.8;
+                    coursePrice = Coach.level2price(coach) * discount;
+                } catch (Exception exception) {
+                    Util.showDialog(timeBookPanel, "Error! \n     Book failed !");
+                    exception.printStackTrace();
+                    return;
+                }
+
                 Object[] buttonName = {"Confirm", "Cancel"};
                 int result = JOptionPane.showOptionDialog(timeBookPanel,
-                        "Are you sure to book this course?\n ",
+                        "Are you sure to book this course?\n You need to pay " + new DecimalFormat("#.00").format(coursePrice),
                         "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttonName, buttonName);
                 if (result == JOptionPane.YES_OPTION) {
                     try {
-                        User user = (User) MainFrame.getInstance().getClient();
-                        int userID = user.getId();
-
-                        CoachBookController coachController = (CoachBookController) MainFrame.getInstance().getController(config.COURSE_BOOK_COACH_NAME);
-                        int coachID = coachController.getCoachID();
-                        HashMap<String, String> coachSearch = new HashMap<>();
-                        coachSearch.put("id", Integer.toString(coachID));
-                        Coach coach = ClientMapping.findCoach(coachSearch).get(0);
-
-                        if (user.getAccount() < Coach.level2price(coach)){
+                        if (user.getAccount() < coursePrice){
                             Util.showDialog(timeBookPanel, "Error! \n     Book failed: Insufficient balance! ");
                             return;
                         }
+                        int userID = user.getId();
+                        int coachID = coach.getId();
 
                         CourseBookController courseController = (CourseBookController) MainFrame.getInstance().getController(config.COURSE_BOOK_NAME);
                         String type = courseController.getCourseType();
@@ -151,7 +166,7 @@ public class TimeBookController extends Controller {
                         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(timeBookPanel.getDateLabels().get(j).getText());
                         Time start = Util.strToTime(START_TIMES[i]);
 
-                        Course course = new Course(new Random().nextInt(Integer.MAX_VALUE), date, start, userID, coachID, type);
+                        Course course = new Course(new Random().nextInt(Integer.MAX_VALUE), date, start, userID, coachID, type, coursePrice);
 
                         int state = CourseMapping.add(course);
                         while (state == CourseMapping.DUPLICATE_ID) {
@@ -159,7 +174,7 @@ public class TimeBookController extends Controller {
                             state = CourseMapping.add(course);
                         }
                         if (state == CourseMapping.SUCCESS) {
-                            user.setAccount(user.getAccount() - Coach.level2price(coach));
+                            user.setAccount(user.getAccount() - coursePrice);
                             ClientMapping.modify(user);
                             Util.showDialog(timeBookPanel, "Book Success! ");
                             update();

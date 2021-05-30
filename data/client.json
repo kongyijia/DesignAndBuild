@@ -41,11 +41,13 @@
 		{
 			"coachId":0,
 			"id":123,
+			"price":0.0,
 			"userId":0
 		},
 		{
 			"coachId":0,
 			"id":234,
+			"price":0.0,
 			"userId":0
 		}
 	],
@@ -53,7 +55,7 @@
 	"email":"98765@qq.com",
 	"id":987678,
 	"learningTime":30,
-	"level":1,
+	"level":12,
 	"nickName":"sdf",
 	"password":"123456",
 	"phone":"12345678221",
@@ -64,16 +66,18 @@
 },{
 	"account":123.45,
 	"avatarSrc":"data/image/default.jpeg",
-	"cancel":false,
+	"cancel":true,
 	"courseSubscription":[
 		{
 			"coachId":0,
 			"id":123,
+			"price":0.0,
 			"userId":0
 		},
 		{
 			"coachId":0,
 			"id":234,
+			"price":0.0,
 			"userId":0
 		}
 	],
@@ -81,7 +85,7 @@
 	"email":"93327537@qq.com",
 	"id":123333,
 	"learningTime":100,
-	"level":1,
+	"level":2,
 	"nickName":"sdf1",
 	"password":"123456",
 	"phone":"1234567890",
@@ -101,7 +105,7 @@
 	],
 	"role":2,
 	"sex":1,
-	"vip":"video"
+	"vip":"Video"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":true,
@@ -170,7 +174,7 @@
 },{
 	"account":0.0,
 	"avatarSrc":"data/image/default.jpeg",
-	"cancel":false,
+	"cancel":true,
 	"courseSubscription":[],
 	"description":"",
 	"email":"1234565432@qq.com",
@@ -184,6 +188,7 @@
 	"role":2,
 	"sex":1,
 	"vip":"BIG"
+	"vip":"Plain"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":false,
@@ -208,7 +213,7 @@
 	"sex":1
 },{
 	"avatarSrc":"data/image/default.jpeg",
-	"cancel":false,
+	"cancel":true,
 	"email":"31252@qq.com",
 	"id":1213,
 	"nickName":"wyb",
