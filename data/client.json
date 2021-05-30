@@ -34,9 +34,7 @@
 	"role":0,
 	"sex":0
 },{
-
-	"account":570.123,
-
+	"account":800.0,
 	"avatarSrc":"data/image/4bddde9c-4485-4e5a-91cb-02e5dcf7ef0c.jpg",
 	"cancel":false,
 	"courseSubscription":[
@@ -57,16 +55,16 @@
 	"email":"98765@qq.com",
 	"id":987678,
 	"learningTime":30,
-	"level":1,
+	"level":12,
 	"nickName":"sdf",
 	"password":"123456",
 	"phone":"12345678221",
 	"recordHistory":[],
 	"role":2,
 	"sex":1,
-	"vip":"Plain"
+	"vip":"Big"
 },{
-	"account":123.45,
+	"account":2723.45,
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":true,
 	"courseSubscription":[
@@ -107,7 +105,7 @@
 	],
 	"role":2,
 	"sex":1,
-	"vip":"Video"
+	"vip":"Big"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":true,
@@ -189,7 +187,7 @@
 	"recordHistory":[],
 	"role":2,
 	"sex":1,
-	"vip":"Plain"
+	"vip":"Big"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":false,
