@@ -12,10 +12,7 @@ import view.Userinformation.BuildInformation;
 import view.staffManagement.*;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +26,30 @@ public class StaffManageController extends Controller {
         staffManagePanel = (StaffManagePanel) this.panel;
 
         staffManagePanel.addListener(new StaffManageListener());
+
+        staffManagePanel.getSearchComboBoxMap().get("role").getComboBox().addItemListener(e -> {
+            JComboBox<String> comboBox = staffManagePanel.getSearchComboBoxMap().get("level").getComboBox();
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                if (e.getItem().equals("All") || e.getItem().equals("Admin")) {
+                    comboBox.removeAllItems();
+                    comboBox.addItem("All");
+                    comboBox.setSelectedIndex(0);
+                }
+                if (e.getItem().equals("Coach")) {
+                    comboBox.removeAllItems();
+                    comboBox.addItem("All");
+                    for (int i = 0; i < 3; i++)
+                        comboBox.addItem(Integer.toString(i));
+                }
+                else if (e.getItem().equals("User")) {
+                    comboBox.removeAllItems();
+                    comboBox.addItem("All");
+                    for (int i = 0; i < 13; i++)
+                        comboBox.addItem(Integer.toString(i));
+                }
+                comboBox.updateUI();
+            }
+        });
         update();
     }
 
@@ -61,8 +82,6 @@ public class StaffManageController extends Controller {
                     searchMap.put(k, (String) v.getComboBox().getSelectedItem());
             }
         });
-        if (searchMap.containsKey("role") && searchMap.get("role").equals("0"))
-            searchMap.remove("level");
 
         // search clients
         ArrayList<Client> clients = new ArrayList<>();
@@ -74,9 +93,7 @@ public class StaffManageController extends Controller {
         return clients;
     }
 
-    @Override
-    public void update() {
-        System.out.println("Staff Management Page update");
+    private void showClientInfo() {
         // clear old panel
         staffManagePanel.getInfoPanel().removeAll();
         staffManagePanel.getPersonMap().clear();
@@ -113,12 +130,21 @@ public class StaffManageController extends Controller {
             Util.showDialog(staffManagePanel, "No qualified clients were found!");
     }
 
+    @Override
+    public void update() {
+        System.out.println("Staff Management Page update");
+
+        search_reset();
+        showClientInfo();
+    }
+
     class StaffManageListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             // add search listener
             if (e.getSource() == staffManagePanel.getSearchButton()) {
-                update();
+                showClientInfo();
+                staffManagePanel.updateUI();
             }
             // add reset listener
             if (e.getSource() == staffManagePanel.getResetButton()) {

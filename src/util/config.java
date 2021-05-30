@@ -34,6 +34,8 @@ public interface config {
      String VIDEO_UPLOAD = "videoUpload";
      String VIDEO_MODIFY = "videoModify";
 
+     Object lock = new Object();
+
      static void init()
      {
           Locale.setDefault(Locale.ENGLISH);

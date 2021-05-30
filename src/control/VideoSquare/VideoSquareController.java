@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import control.Controller;
+import control.FX_Video.VideoPlayerLauncher;
 import control.MainFrame;
 import util.config;
 import view.VideoSquare.*;
@@ -104,15 +105,23 @@ public class VideoSquareController extends Controller implements ActionListener 
 		}
 	}
 
-	public void addButtonListener(int num, Video video, JButton button){
+	public void addButtonListener(Video video, JButton button){
 		button.addActionListener(e ->{
 			//TODO： link to the videos
 			if(client.getRole()==2) {
 				User user=(User) client;
 				if(user.getLevel()<video.getTag())
-					JOptionPane.showMessageDialog(null,"Level is not satisfied!!"+num);
-				else
-					JOptionPane.showMessageDialog(null,"Developing!"+num);
+					JOptionPane.showMessageDialog(null,"Level is not satisfied!!");
+				else{
+					//JOptionPane.showMessageDialog(null,"Developing!"+num);
+					VideoPlayerLauncher a = new VideoPlayerLauncher();
+					try {
+						System.out.println(a.creatplayer(video.getSrc()));
+					} catch (Exception exception) {
+						exception.printStackTrace();
+					}
+				}
+
 			} else {
 				this.setCurrentVideo(video);
 				MainFrame.getInstance().goTo(config.VIDEO_MODIFY);
@@ -144,7 +153,7 @@ public class VideoSquareController extends Controller implements ActionListener 
 		videoName.setFont(new Font(null, Font.PLAIN, 18));
 		JButton button = new JButton();	
 		button.setBounds(0, 0, P_WIDTH, P_HEIGHT);
-		this.addButtonListener(num,video,button);
+		this.addButtonListener(video,button);
 		buttonPanel.add(button);
 		buttonPanel.add(videoName);
 		
