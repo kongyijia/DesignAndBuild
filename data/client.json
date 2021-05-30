@@ -34,9 +34,7 @@
 	"role":0,
 	"sex":0
 },{
-
 	"account":570.123,
-
 	"avatarSrc":"data/image/4bddde9c-4485-4e5a-91cb-02e5dcf7ef0c.jpg",
 	"cancel":false,
 	"courseSubscription":[
@@ -59,7 +57,7 @@
 	"learningTime":30,
 	"level":1,
 	"nickName":"sdf",
-	"password":"123456",
+	"password":"1",
 	"phone":"12345678221",
 	"recordHistory":[],
 	"role":2,

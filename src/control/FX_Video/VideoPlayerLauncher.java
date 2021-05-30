@@ -1,26 +1,63 @@
 package control.FX_Video;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 import util.Video.JavaFX_MediaPlayer;
 
-import static util.Video.JavaFX_MediaPlayer.lock;
+import static util.config.lock;
 
 public class VideoPlayerLauncher
 {
-    public static void main(String[] args) {
-        VideoPlayerLauncher a = new VideoPlayerLauncher();
-        a.creatplayer("data/video/1.mp4");
+    private static volatile boolean javaFxLaunched = false;
+
+    public long getTime() {
+        synchronized (lock)
+        {
+            try {
+//                System.out.println("start wait");
+                lock.wait();
+//                System.out.println("finish wait");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return JavaFX_MediaPlayer.getRunTime();
+        }
     }
 
-    public void creatplayer(String path)
-    {
+    public long creatplayer(String path){
         JavaFX_MediaPlayer.path = path;
-        Application.launch(util.Video.JavaFX_MediaPlayer.class);
-        synchronized (JavaFX_MediaPlayer.class)
-        {
-            long testruntime = JavaFX_MediaPlayer.getRunTime();
-            System.out.println(testruntime);
+
+        if (!javaFxLaunched) {
+            // First time
+            Platform.setImplicitExit(false);
+            new Thread(()->Application.launch(util.Video.JavaFX_MediaPlayer.class)).start();
+            javaFxLaunched = true;
+        } else { // Next times
+            Platform.runLater(()->{
+                try {
+                    Application application = util.Video.JavaFX_MediaPlayer.class.newInstance();
+                    Stage primaryStage = new Stage();
+                    application.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
         }
-        Application.
+
+        return this.getTime();
+
+//        synchronized (lock)
+//        {
+//            try {
+////                System.out.println("start wait");
+//                lock.wait();
+////                System.out.println("finish wait");
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            long testruntime = JavaFX_MediaPlayer.getRunTime();
+//            System.out.println(testruntime);
+//        }
     }
 }

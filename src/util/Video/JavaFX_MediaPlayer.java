@@ -2,6 +2,7 @@ package util.Video;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import java.awt.*;
@@ -21,11 +23,12 @@ import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static util.config.lock;
+
 public class JavaFX_MediaPlayer extends Application
 {
         public static  String path;
 
-        public static final Object lock = new Object();
 
         private static Scene scene;
         private static BorderPane pane;
@@ -43,15 +46,28 @@ public class JavaFX_MediaPlayer extends Application
 
 
         @Override
-        public synchronized void start(Stage primaryStage)
+        public void start(Stage primaryStage)
         {
                         //Instantiating Media class
                         media = new Media(new File(path).toURI().toString());
-
+                        studyTime = 0;
                         initMediaPlayer();
                         initPaneCtl();
                         initPane();
                         initScene();
+
+
+                        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                        @Override
+                                public void handle(WindowEvent event) {
+                                        if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING)
+                                                mediaPlayer.stop();
+                                        synchronized (lock) {
+//                                                System.out.println("notify");
+                                                lock.notify();
+                                        }
+                                }
+                        });
 
                         primaryStage.setScene(scene);
                         primaryStage.setTitle("Playing video");
@@ -60,11 +76,10 @@ public class JavaFX_MediaPlayer extends Application
 
 
         @Override
-        public synchronized void stop() throws Exception
+        public void stop() throws Exception
         {
                 timer.cancel();
                 super.stop();
-
         }
 
         private void initMediaPlayer()
@@ -112,6 +127,14 @@ public class JavaFX_MediaPlayer extends Application
                                 pauseTimer();
                         }
                 });
+                mediaPlayer.setOnStopped(new Runnable()
+                {
+                        @Override
+                        public void run() {
+                                pauseTimer();
+                        }
+                });
+
         }
 
         private void initPane()
@@ -153,6 +176,7 @@ public class JavaFX_MediaPlayer extends Application
 
         public static void startTimer()
         {
+//                System.out.println("start Timer" + studyTime);
                 countingTask = new TimerTask()
                 {
                         @Override
@@ -164,8 +188,12 @@ public class JavaFX_MediaPlayer extends Application
 
         public static void pauseTimer()
         {
-                countingTask.cancel();
-                countingTask = null;
+//                System.out.println("Pause Timer" + studyTime);
+                if (countingTask != null)
+                {
+                        countingTask.cancel();
+                        countingTask = null;
+                }
         }
 
         public static long getRunTime()
