@@ -36,7 +36,7 @@ GetVipController
         vipDialog = new BuyVip(parentComponent);
         DecimalFormat accountTem = new DecimalFormat("######0.00");
         vipDialog.getBalance().setText("" + accountTem.format(user.getAccount()));
-        if (Objects.equals(user.getVip(), "BIG"))
+        if (Objects.equals(user.getVip(), "Big"))
         {
             lock[0] = true;
             lock[1] = true;
@@ -48,13 +48,13 @@ GetVipController
             vipDialog.getVideo().setEnabled(false);
             vipDialog.getCourse().setEnabled(false);
         }
-        if (Objects.equals(user.getVip(), "VIDEO"))
+        if (Objects.equals(user.getVip(), "Video"))
         {
             lock[1] = true;
             vipDialog.getVideo().setSelected(true);
             vipDialog.getVideo().setEnabled(false);
         }
-        if (Objects.equals(user.getVip(), "COURSE"))
+        if (Objects.equals(user.getVip(), "Course"))
         {
             lock[2] = true;
             vipDialog.getCourse().setSelected(true);
@@ -196,13 +196,13 @@ GetVipController
                     {
                         user.setAccount(Double.parseDouble(vipDialog.getBalance().getText()));
                         if(vipDialog.getBig().isSelected())
-                            user.setVip("BIG");
+                            user.setVip("Big");
                         else
                         {
                             if (vipDialog.getVideo().isSelected())
-                                user.setVip("VIDEO");
+                                user.setVip("Video");
                             else if (vipDialog.getCourse().isSelected())
-                                user.setVip("COURSE");
+                                user.setVip("Course");
                         }
                         ClientMapping.modify((Client) user);
                         MainFrame.getInstance().setClient((Client) user);

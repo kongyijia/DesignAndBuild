@@ -62,9 +62,9 @@
 	"recordHistory":[],
 	"role":2,
 	"sex":1,
-	"vip":"BIG"
+	"vip":"Big"
 },{
-	"account":123.45,
+	"account":2723.45,
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":true,
 	"courseSubscription":[
@@ -105,7 +105,7 @@
 	],
 	"role":2,
 	"sex":1,
-	"vip":"Video"
+	"vip":"Big"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":true,
@@ -187,8 +187,7 @@
 	"recordHistory":[],
 	"role":2,
 	"sex":1,
-	"vip":"BIG"
-	"vip":"Plain"
+	"vip":"Big"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":false,
