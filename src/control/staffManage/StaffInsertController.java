@@ -27,6 +27,8 @@ public class StaffInsertController extends Controller {
             if (e.getSource() == staffInsertPanel.getBackButton())
                 MainFrame.getInstance().goTo(config.STAFF_MANAGE_NAME);
             else if (e.getSource() == staffInsertPanel.getConfirmButton()) {
+                staffInsertPanel.flag = 1;
+                staffInsertPanel.state = 0;
                 staffInsertPanel.nickName = staffInsertPanel.nickNameInput.getText();
                 staffInsertPanel.password = String.valueOf(staffInsertPanel.passwordInput.getPassword());
                 staffInsertPanel.password2 = String.valueOf(staffInsertPanel.password2Input.getPassword());
