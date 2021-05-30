@@ -1,12 +1,16 @@
 package control;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 import control.function.FunctionController;
+import javafx.scene.image.Image;
 import model.Client;
 import model.mapping.ClientMapping;
 import util.config;
