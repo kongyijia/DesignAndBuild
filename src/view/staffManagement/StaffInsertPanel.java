@@ -53,7 +53,7 @@ public class StaffInsertPanel extends JPanel {
         JLabel password2Label = new JLabel("Input your password again to confirm: ", JLabel.CENTER);
         password2Input = new JPasswordField();
         this.insertMap.put("password2", passwordInput);
-        password2Label.setBounds(100,150,100,25);
+        password2Label.setBounds(50,150,250,25);
         password2Input.setBounds(350,150,100,25);
         this.add(password2Label);
         this.add(password2Input);
