@@ -31,7 +31,7 @@ import java.util.UUID;
  * @see User
  * @see Coach
  * @see Administrator
- * @since 18 April 2021
+ * @since 8 May 2021
  */
 public class ClientMapping {
     public static final String DATA_PATH = "data/client.json";
