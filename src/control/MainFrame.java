@@ -1,12 +1,16 @@
 package control;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 import control.function.FunctionController;
+import javafx.scene.image.Image;
 import model.Client;
 import model.mapping.ClientMapping;
 import util.config;
@@ -39,7 +43,7 @@ public class MainFrame extends JFrame{
     private void initialize() {
         this.list = new HashMap<>();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("CourseWork");
+        this.setTitle("London Fitness");
         this.setSize(config.FRAME_WIDTH, config.FRAME_HEIGHT);
         this.setLocationRelativeTo(null);
         this.setResizable(false);

@@ -30,8 +30,8 @@ public class VideoSquare extends JPanel{
 	public JTextField getSearchText1() {
 		return searchVideoPanel.getSearchText1();
 	}
-	public JTextField getSearchText2() {
-		return searchVideoPanel.getSearchText2();
+	public JComboBox<String> getTypeComboBox() {
+		return searchVideoPanel.getTypeComboBox();
 	}
 	public VideoSquare() {
 		this.setLayout(null);

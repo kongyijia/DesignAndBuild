@@ -46,9 +46,13 @@ public class CourseBookPanel extends JPanel {
         searchButton.setBounds(450, 10, 80, INFO_PANEL_HEIGHT - 20);
         searchButton.setBackground(Color.white);
 
+        JLabel jLabel = new JLabel("Double click to choose one type of course!");
+        jLabel.setBounds(600,10,300,INFO_PANEL_HEIGHT -20);
+
         infoPanel.add(searchInputField);
         infoPanel.add(searchButton);
         infoPanel.add(resetButton);
+        infoPanel.add(jLabel);
 
         this.add(infoPanel);
     }

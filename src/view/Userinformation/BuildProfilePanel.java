@@ -56,9 +56,9 @@ public class BuildProfilePanel extends JPanel
         logoIcon.setImage(logoIcon.getImage().getScaledInstance(profileButton.getWidth(),profileButton.getHeight(),Image.SCALE_DEFAULT));
         profileButton.setIcon(logoIcon);
 
-        personalInformation.setFont(new Font("Times", Font.ITALIC, 15));
+        personalInformation.setFont(new Font("Times", Font.ITALIC, 12));
         profileButton.setFont(new Font("Times", Font.ITALIC, 15));
-        changePassword.setFont(new Font("Times", Font.ITALIC, 15));
+        changePassword.setFont(new Font("Times", Font.ITALIC, 12));
         topup.setFont(new Font("Times", Font.ITALIC, 15));
         getVip.setFont(new Font("Times", Font.ITALIC, 15));
 

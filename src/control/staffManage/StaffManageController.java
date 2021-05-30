@@ -44,7 +44,7 @@ public class StaffManageController extends Controller {
                 else if (e.getItem().equals("User")) {
                     comboBox.removeAllItems();
                     comboBox.addItem("All");
-                    for (int i = 0; i < 13; i++)
+                    for (int i = 1; i < 13; i++)
                         comboBox.addItem(Integer.toString(i));
                 }
                 comboBox.updateUI();
@@ -132,8 +132,6 @@ public class StaffManageController extends Controller {
 
     @Override
     public void update() {
-        System.out.println("Staff Management Page update");
-
         search_reset();
         showClientInfo();
     }
@@ -217,6 +215,7 @@ public class StaffManageController extends Controller {
                             ((Coach) newClient).setLevel(newLevel);
                         } else {
                             ((User) newClient).setLevel(newLevel);
+                            ((User) newClient).setLearningTime(newLevel * 100 - 100);
                         }
                         try {
                             if (ClientMapping.modify(newClient) == ClientMapping.SUCCESS) {

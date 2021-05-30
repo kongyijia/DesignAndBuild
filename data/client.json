@@ -34,7 +34,7 @@
 	"role":0,
 	"sex":0
 },{
-	"account":800.0,
+	"account":160.0,
 	"avatarSrc":"data/image/4bddde9c-4485-4e5a-91cb-02e5dcf7ef0c.jpg",
 	"cancel":false,
 	"courseSubscription":[
@@ -54,8 +54,8 @@
 	"description":"12345ghjkdsalfegadafds\n1111",
 	"email":"98765@qq.com",
 	"id":987678,
-	"learningTime":30,
-	"level":12,
+	"learningTime":0,
+	"level":1,
 	"nickName":"sdf",
 	"password":"1",
 	"phone":"12345678221",
@@ -64,7 +64,7 @@
 	"sex":1,
 	"vip":"Big"
 },{
-	"account":2483.45,
+	"account":83.45,
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":false,
 	"courseSubscription":[
@@ -84,28 +84,28 @@
 	"description":"12345ghjkdsalfegadafds\nadsfweoba",
 	"email":"93327537@qq.com",
 	"id":123333,
-	"learningTime":100,
-	"level":2,
+	"learningTime":0,
+	"level":1,
 	"nickName":"sdf1",
 	"password":"123456",
 	"phone":"1234567890",
 	"recordHistory":[
 		{
-			"latestPlayingDateTime":"2021-04-18 16:42:24",
-			"learningTime":5,
-			"progress":5,
-			"videoId":1
-		},
-		{
 			"latestPlayingDateTime":"2021-04-18 16:47:27",
-			"learningTime":5,
+			"learningTime":10,
 			"progress":5,
 			"videoId":2
+		},
+		{
+			"latestPlayingDateTime":"2021-05-31 01:54:14",
+			"learningTime":15,
+			"progress":0,
+			"videoId":1
 		}
 	],
 	"role":2,
 	"sex":1,
-	"vip":"Big"
+	"vip":"Video"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":true,
@@ -256,4 +256,28 @@
 	"recordHistory":[],
 	"role":1,
 	"sex":0
+},{
+	"account":80.12,
+	"avatarSrc":"data/image/80332f47-d1fc-4609-92c7-4118bccec45a.jpg",
+	"cancel":false,
+	"courseSubscription":[],
+	"description":"",
+	"email":"kongyijia@163.com",
+	"id":170,
+	"learningTime":19,
+	"level":1,
+	"nickName":"kongyijia",
+	"password":"12345678",
+	"phone":"13651224068",
+	"recordHistory":[
+		{
+			"latestPlayingDateTime":"2021-05-31 02:19:22",
+			"learningTime":4,
+			"progress":0,
+			"videoId":6
+		}
+	],
+	"role":2,
+	"sex":0,
+	"vip":"Big"
 }]

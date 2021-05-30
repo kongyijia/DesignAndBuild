@@ -1,6 +1,7 @@
 package view.VideoSquare;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -11,13 +12,17 @@ import util.config;
 public class SearchVideo extends JPanel{
 	public static final int SEARCH_PANEL_HEIGHT = 50;
 	private JTextField searchInputField1;//name
-	private JTextField searchInputField2;//tag
     private JButton searchButton;
     private JButton resetButton;
 	private JComboBox<String> comboBox;
+	private JComboBox<String> typeComboBox;
     
     public JButton getSearch() {
 		return searchButton;
+	}
+
+	public JComboBox<String> getTypeComboBox(){
+    	return typeComboBox;
 	}
     
     public JButton getReset() {
@@ -26,12 +31,15 @@ public class SearchVideo extends JPanel{
     public JTextField getSearchText1() {
 		return searchInputField1;
 	}
-    public JTextField getSearchText2() {
-		return searchInputField2;
-	}
     public JComboBox<String> getTagBox() {
     	return comboBox;
     }
+
+    public void setTypeComboBox(ArrayList<String> args){
+    	for(String i : args){
+			this.typeComboBox.addItem(i);
+		}
+	}
     
 	    public SearchVideo () {
 	    	this.setLayout(null);
@@ -44,8 +52,8 @@ public class SearchVideo extends JPanel{
 		private void init() {
 			searchInputField1= new JTextField();
 	        searchInputField1.setBounds(100, 10, 200, SEARCH_PANEL_HEIGHT - 20);
-	        searchInputField2 = new JTextField();
-	        searchInputField2.setBounds(400, 10, 200, SEARCH_PANEL_HEIGHT - 20);
+			typeComboBox = new JComboBox<>();
+	        typeComboBox.setBounds(400, 10, 200, SEARCH_PANEL_HEIGHT - 20);
 	        
 	        searchButton = new JButton("Search");
 	        searchButton.setBounds(config.PAGE_WIDTH - 100, 10, 80, SEARCH_PANEL_HEIGHT - 20);
@@ -54,11 +62,10 @@ public class SearchVideo extends JPanel{
 	        resetButton = new JButton("Reset");
 	        resetButton.setBounds(config.PAGE_WIDTH - 200, 10, 80, SEARCH_PANEL_HEIGHT - 20);
 	        resetButton.setBackground(Color.white);
-	        
-	       // searchComboBoxMap.put("tag", new PeopleSearchComponent("TAG", new String[]{"ALL","0", "1", "2","3","4","5","6","7","8","9","10","11","12"}, searchComboBoxMap.size()));
-			JLabel labelType = new JLabel("TYPE" + " :");
+
+			JLabel labelType = new JLabel("Type" + " :");
 	        labelType.setBounds(330, 10, 50, 30);
-			JLabel labelTag = new JLabel("TAG" + " :");
+			JLabel labelTag = new JLabel("Level" + " :");
 	        labelTag.setBounds(630, 10, 50, 30);
 			JLabel labelName = new JLabel("Name" + " :");
 	        labelName.setBounds(30, 10, 50, 30);
@@ -69,7 +76,7 @@ public class SearchVideo extends JPanel{
 	        comboBox.setBackground(Color.white);
 
 	        this.add(searchInputField1);
-	        this.add(searchInputField2);
+	        this.add(typeComboBox);
 	        this.add(searchButton);
 	        this.add(resetButton);
 	        this.add(labelType);

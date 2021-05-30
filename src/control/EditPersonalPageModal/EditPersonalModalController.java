@@ -60,7 +60,6 @@ public class EditPersonalModalController implements ActionListener {
     }
 
     protected void onConfirm() throws IOException {
-        System.out.println("confirm");
         if(this.editPersonalModal.getNickNameTextField().equals("")){
             Util.showDialog(this.jFrame, "Your nick name cannot be empty!");
         } else if(this.editPersonalModal.getPhoneTextField().equals("")){
@@ -73,8 +72,7 @@ public class EditPersonalModalController implements ActionListener {
             Util.showDialog(this.jFrame, "Illegal phone number! Expect 11 numbers!");
         } else if(Util.isPhoneLegal(this.editPersonalModal.getPhoneTextField()) == -1) {
             Util.showDialog(this.jFrame, "Illegal phone number! Only numbers allowed!");
-        }
-        else if(!Util.isEmailLegal(this.editPersonalModal.getEmailTextField())){
+        } else if(!Util.isEmailLegal(this.editPersonalModal.getEmailTextField())){
             Util.showDialog(this.jFrame, "Illegal email address! Please try again!");
         } else {
             this.edit();
@@ -83,7 +81,6 @@ public class EditPersonalModalController implements ActionListener {
             } else if(ClientMapping.modify(this.client) == 2) {
                 Util.showDialog(this.jFrame, "Error! Cannot find your info!");
             } else {
-                System.out.println(this.client.getNickName());
                 MainFrame.getInstance().setClient(this.client);
                 this.jFrame.dispose();
             }
@@ -91,7 +88,6 @@ public class EditPersonalModalController implements ActionListener {
     }
 
     protected void onCancel(){
-        System.out.println("cancel");
         this.jFrame.dispose();
     }
 

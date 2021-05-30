@@ -15,9 +15,7 @@ public class VideoPlayerLauncher
         synchronized (lock)
         {
             try {
-//                System.out.println("start wait");
                 lock.wait();
-//                System.out.println("finish wait");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -46,18 +44,5 @@ public class VideoPlayerLauncher
         }
 
         return this.getTime();
-
-//        synchronized (lock)
-//        {
-//            try {
-////                System.out.println("start wait");
-//                lock.wait();
-////                System.out.println("finish wait");
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            long testruntime = JavaFX_MediaPlayer.getRunTime();
-//            System.out.println(testruntime);
-//        }
     }
 }
