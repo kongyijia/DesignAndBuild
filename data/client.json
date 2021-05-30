@@ -64,9 +64,9 @@
 	"sex":1,
 	"vip":"Big"
 },{
-	"account":2723.45,
+	"account":2483.45,
 	"avatarSrc":"data/image/default.jpeg",
-	"cancel":true,
+	"cancel":false,
 	"courseSubscription":[
 		{
 			"coachId":0,
