@@ -4,6 +4,7 @@ import control.Controller;
 import control.MainFrame;
 import model.Client;
 import model.Course;
+import model.User;
 import model.mapping.ClientMapping;
 import model.mapping.CourseMapping;
 import util.config;
@@ -133,7 +134,17 @@ public class ScheduleController extends Controller {
                 System.out.println("delete!!");
 
                 try {
-                    CourseMapping.delete(findCourse(dayLabel[j].getText(),i).get(0).getId());
+                   User user = (User) client;
+                     System.out.println(user.getAccount());
+                   user.setAccount(user.getAccount()+findCourse(dayLabel[j].getText(),i).get(0).getPrice());
+                    int returnValue = ClientMapping.modify(user);
+                    if (returnValue == ClientMapping.SUCCESS) {
+                        System.out.println("!!!!");
+                    } else if (returnValue == ClientMapping.CLIENT_NOT_FOUND) {
+                        // if can not found the (user, coach or administrator)
+                    }
+                   CourseMapping.delete(findCourse(dayLabel[j].getText(),i).get(0).getId());
+                      System.out.println(user.getAccount());
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
@@ -159,7 +170,7 @@ public class ScheduleController extends Controller {
             System.out.println(getTelenum(dayLabel[j].getText(),i));
             System.out.println(client.getRole());
             try {
-                if(isfuture(dayLabel[j].getText()))
+                if(isfuture(dayLabel[j].getText())&&client.getRole()==2)
                     p.add(button);
             } catch (ParseException e) {
                 e.printStackTrace();

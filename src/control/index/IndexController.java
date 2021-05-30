@@ -53,9 +53,14 @@ public class IndexController extends Controller {
         if (clients.isEmpty()) {
             indexPanel.getNoAccount().setText("the account is not exist");
             indexPanel.getNoAccount().setForeground(Color.red);
-        } else {
+        }
+        else {
             //不能登录
-            if (!clients.get(0).getPassword().equals(password)) {
+            if (clients.get(0).isCancel()){
+                indexPanel.getNoAccount().setText("the account is canceled");
+                indexPanel.getNoAccount().setForeground(Color.red);
+            }
+            else if (!clients.get(0).getPassword().equals(password)) {
                 indexPanel.getPasswordError().setText("your password is wrong, please try again!");
                 indexPanel.getPasswordError().setForeground(Color.red);
                 System.out.println("can not login");
