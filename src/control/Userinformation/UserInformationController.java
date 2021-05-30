@@ -103,9 +103,6 @@ public class UserInformationController extends Controller
                     {
                         ioException.printStackTrace();
                     }
-
-//                    String cwd = System.getProperty("user.dir");
-//                    System.out.println(new File(cwd).toURI().relativize(file.toURI()).getPath());
                 }
             }
         });

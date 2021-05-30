@@ -85,7 +85,6 @@ public class EditVideoController extends UploadVideoController {
         if(e.getSource() == this.uploadForm.getConfirmButton()){
             this.onConfirm();
         } else if (e.getSource() == this.uploadForm.getDeleteButton()){
-            System.out.println("进到delete了");
             this.onDelete();
         }
     }

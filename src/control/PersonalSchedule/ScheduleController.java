@@ -77,12 +77,9 @@ public class ScheduleController extends Controller {
         schedule2.setDate(generateDate());
         try {
             schedule2.setSchedulePanel(generateSchedule());
-            System.out.println("update inner schedule!!");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        System.out.println("update schedule!!");
     }
 
 
@@ -131,26 +128,20 @@ public class ScheduleController extends Controller {
                     "Are you sure to delete this course?\n ",
                     "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttonName, buttonName);
             if (result == JOptionPane.YES_OPTION) {
-                System.out.println("delete!!");
-
                 try {
                    User user = (User) client;
-                     System.out.println(user.getAccount());
                    user.setAccount(user.getAccount()+findCourse(dayLabel[j].getText(),i).get(0).getPrice());
                     int returnValue = ClientMapping.modify(user);
                     if (returnValue == ClientMapping.SUCCESS) {
-                        System.out.println("!!!!");
                     } else if (returnValue == ClientMapping.CLIENT_NOT_FOUND) {
                         // if can not found the (user, coach or administrator)
                     }
                    CourseMapping.delete(findCourse(dayLabel[j].getText(),i).get(0).getId());
-                      System.out.println(user.getAccount());
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
                 try {
                     schedule2.setSchedulePanel(generateSchedule());
-                    System.out.println("update inner schedule!!");
                 } catch (FileNotFoundException e2) {
                     e2.printStackTrace();
                 }
@@ -167,8 +158,6 @@ public class ScheduleController extends Controller {
             l3.setBounds(0, 35, 120, 10);
             l4.setText(getTelenum(dayLabel[j].getText(), i).get(3));//调取接口获取string
             l4.setBounds(0, 50, 120, 10);
-            System.out.println(getTelenum(dayLabel[j].getText(),i));
-            System.out.println(client.getRole());
             try {
                 if(isfuture(dayLabel[j].getText())&&client.getRole()==2)
                     p.add(button);
@@ -187,16 +176,10 @@ public class ScheduleController extends Controller {
     }
 
     private static boolean isfuture(String date) throws ParseException {
-//        java.util.Date nowdate = new java.util.Date();
-//        String date = DateUtils.formatDate(nowdate, "yyyy-MM-dd");
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
-//        Date d;
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date sd1=df.parse(df.format(Calendar.getInstance().getTime()));
         Date sd2=df.parse(date);
 
-//        System.out.println(sd1.before(sd2));
-//        System.out.println(sd1.after(sd2));
         return sd1.before(sd2);
     }
 
@@ -221,7 +204,6 @@ public class ScheduleController extends Controller {
         return date;
     }
     public static int getWeek(Calendar c, String[] dayOfWeek){
-        System.out.println(offsetOfPage+"!!!");
         DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
         // c.add(Calendar.DAY_OF_YEAR,7*offsetOfPage);
         int today=-1;

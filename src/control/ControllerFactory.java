@@ -68,7 +68,6 @@ public class ControllerFactory {
             case VIDEO_MODIFY:
                 return new EditVideoController();
         }
-        System.out.println("Can find the view:" + name);
         return null;
     }
 }

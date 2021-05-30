@@ -89,7 +89,6 @@ public class CourseBookController extends Controller {
 
     @Override
     public void update() {
-        System.out.println("Course Book Page update");
         reset();
         showCourses();
     }

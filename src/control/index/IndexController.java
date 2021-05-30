@@ -63,7 +63,6 @@ public class IndexController extends Controller {
             else if (!clients.get(0).getPassword().equals(password)) {
                 indexPanel.getPasswordError().setText("your password is wrong, please try again!");
                 indexPanel.getPasswordError().setForeground(Color.red);
-                System.out.println("can not login");
             } else {
                 MainFrame.getInstance().setClient(clients.get(0));
                 MainFrame.getInstance().goTo(config.FUNCTION_PANEL_NAME);

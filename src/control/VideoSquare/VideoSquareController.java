@@ -94,15 +94,12 @@ public class VideoSquareController extends Controller implements ActionListener 
 		ArrayList<Video> vs;
 		if(!name.isEmpty()) {
 			map.put("name",name);
-			System.out.println("name"+name);
 		}			
 		if(!type.isEmpty()) {
 			map.put("types",type);
-			System.out.println(" type"+type);
 		}		
 		if(!tag.equals("ALL")) {
 			map.put("tag", tag);
-			System.out.println(" tag"+tag);
 		}
 		if(MainFrame.getInstance().getClient().getRole() == 1){
 			map.put("author", ""+MainFrame.getInstance().getClient().getId());

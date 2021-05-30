@@ -63,7 +63,6 @@ public class JavaFX_MediaPlayer extends Application
                                         if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING)
                                                 mediaPlayer.stop();
                                         synchronized (lock) {
-//                                                System.out.println("notify");
                                                 lock.notify();
                                         }
                                 }
@@ -176,7 +175,6 @@ public class JavaFX_MediaPlayer extends Application
 
         public static void startTimer()
         {
-//                System.out.println("start Timer" + studyTime);
                 countingTask = new TimerTask()
                 {
                         @Override
@@ -188,7 +186,6 @@ public class JavaFX_MediaPlayer extends Application
 
         public static void pauseTimer()
         {
-//                System.out.println("Pause Timer" + studyTime);
                 if (countingTask != null)
                 {
                         countingTask.cancel();

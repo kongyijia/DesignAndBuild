@@ -132,8 +132,6 @@ public class StaffManageController extends Controller {
 
     @Override
     public void update() {
-        System.out.println("Staff Management Page update");
-
         search_reset();
         showClientInfo();
     }

@@ -60,7 +60,6 @@ public class EditPersonalModalController implements ActionListener {
     }
 
     protected void onConfirm() throws IOException {
-        System.out.println("confirm");
         if(this.editPersonalModal.getNickNameTextField().equals("")){
             Util.showDialog(this.jFrame, "Your nick name cannot be empty!");
         } else if(this.editPersonalModal.getPhoneTextField().equals("")){
@@ -82,7 +81,6 @@ public class EditPersonalModalController implements ActionListener {
             } else if(ClientMapping.modify(this.client) == 2) {
                 Util.showDialog(this.jFrame, "Error! Cannot find your info!");
             } else {
-                System.out.println(this.client.getNickName());
                 MainFrame.getInstance().setClient(this.client);
                 this.jFrame.dispose();
             }
@@ -90,7 +88,6 @@ public class EditPersonalModalController implements ActionListener {
     }
 
     protected void onCancel(){
-        System.out.println("cancel");
         this.jFrame.dispose();
     }
 

@@ -33,7 +33,6 @@ public class CoachBookController extends Controller {
 
     @Override
     public void update() {
-        System.out.println("Coach Book Page update");
         search_reset();
         showCoachInfo();
 
