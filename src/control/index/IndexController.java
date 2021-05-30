@@ -69,8 +69,11 @@ public class IndexController extends Controller {
                         MainFrame.getInstance().goTo(config.STAFF_MANAGE_NAME);
                         break;
                     case 1:
+                        MainFrame.getInstance().goTo(config.VIDEO_MANAGEMENT);
+                        break;
                     case 2:
                         MainFrame.getInstance().goTo(config.VIDEOSQUARE_PANEL_NAME);
+                        break;
                 }
             }
         }
