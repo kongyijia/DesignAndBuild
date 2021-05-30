@@ -52,17 +52,21 @@ public class CoachBookPanel extends JPanel {
         backButton.setBackground(Color.white);
 
         searchButton = new JButton("Search");
-        searchButton.setBounds(config.PAGE_WIDTH - 300, 10, 80, INFO_PANEL_HEIGHT - 20);
+        searchButton.setBounds(config.PAGE_WIDTH - 500, 10, 80, INFO_PANEL_HEIGHT - 20);
         searchButton.setBackground(Color.white);
 
         resetButton = new JButton("Reset");
-        resetButton.setBounds(config.PAGE_WIDTH - 400, 10, 80, INFO_PANEL_HEIGHT - 20);
+        resetButton.setBounds(config.PAGE_WIDTH - 600, 10, 80, INFO_PANEL_HEIGHT - 20);
         resetButton.setBackground(Color.white);
+
+        JLabel jLabel = new JLabel("Double click to choose one coach!");
+        jLabel.setBounds(800,10,300,INFO_PANEL_HEIGHT -20);
 
         infoPanel.add(searchInputField);
         infoPanel.add(backButton);
         infoPanel.add(searchButton);
         infoPanel.add(resetButton);
+        infoPanel.add(jLabel);
         searchComboBoxMap.forEach((k, v) -> {
             infoPanel.add(v.getLabel());
             infoPanel.add(v.getComboBox());
