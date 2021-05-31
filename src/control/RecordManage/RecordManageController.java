@@ -33,8 +33,7 @@ public class RecordManageController extends Controller {
     @Override
     public void update() {
         ArrayList<Client> clients = new ArrayList<>();
-        String[] factory = new String[]{"client ID", "Nickname", "Video ID", "Time span", "Progress",
-                "Watching time", "Total watching time"};
+        String[] factory = new String[]{"client ID", "Nickname", "Video ID", "Time span", "Progress", "Watching time"};
         DefaultTableModel model = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -46,15 +45,12 @@ public class RecordManageController extends Controller {
         try {
             clients = ClientMapping.readAllClients();
             clients.forEach(client -> {
-                AtomicInteger time = new AtomicInteger();
                 ArrayList<Client.RecordHistory> record = client.getRecordHistory();
                 if(!record.isEmpty()){
-                    record.forEach(entry -> time.addAndGet(entry.getLearningTime()));
                     record.forEach(entry -> {
                         String[] temp = {String.valueOf(client.getId()), client.getNickName(),
                                 String.valueOf(entry.getVideoId()), String.valueOf(entry.getLearningTime()),
-                                String.valueOf(entry.getProgress()), String.valueOf(entry.getLatestPlayingDateTime()),
-                                String.valueOf(time)};
+                                String.valueOf(entry.getProgress()), String.valueOf(entry.getLatestPlayingDateTime())};
                         model.addRow(temp);
                     });
                 }
