@@ -54,15 +54,28 @@
 	"description":"12345ghjkdsalfegadafds\n1111",
 	"email":"98765@qq.com",
 	"id":987678,
-	"learningTime":0,
+	"learningTime":20,
 	"level":1,
 	"nickName":"sdf",
 	"password":"1",
 	"phone":"12345678221",
-	"recordHistory":[],
+	"recordHistory":[
+		{
+			"latestPlayingDateTime":"2021-05-31 17:07:27",
+			"learningTime":4,
+			"progress":0,
+			"videoId":1
+		},
+		{
+			"latestPlayingDateTime":"2021-05-31 17:08:19",
+			"learningTime":9,
+			"progress":0,
+			"videoId":5
+		}
+	],
 	"role":2,
 	"sex":1,
-	"vip":"Big"
+	"vip":"Plain"
 },{
 	"account":83.45,
 	"avatarSrc":"data/image/default.jpeg",
@@ -105,7 +118,7 @@
 	],
 	"role":2,
 	"sex":1,
-	"vip":"Video"
+	"vip":"Premium"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":true,
@@ -187,7 +200,7 @@
 	"recordHistory":[],
 	"role":2,
 	"sex":1,
-	"vip":"Big"
+	"vip":"Premium"
 },{
 	"avatarSrc":"data/image/default.jpeg",
 	"cancel":false,
@@ -279,5 +292,5 @@
 	],
 	"role":2,
 	"sex":0,
-	"vip":"Big"
+	"vip":"Premium"
 }]

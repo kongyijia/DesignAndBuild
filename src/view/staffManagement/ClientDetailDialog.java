@@ -68,7 +68,7 @@ public class ClientDetailDialog extends JDialog {
             level = new JComboBox<>(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"});
             level.setSelectedIndex(((User) client).getLevel() - 1);
 
-            String[] VIPType = new String[]{"Big", "Video", "Course", "Plain"};
+            String[] VIPType = new String[]{"Premium", "Video", "Course", "Plain"};
             VIPLevel = new JComboBox<>(VIPType);
 
             VIPLevel.setSelectedItem(((User) client).getVip());

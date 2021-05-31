@@ -138,7 +138,7 @@ public class TimeBookController extends Controller {
                     coach = ClientMapping.findCoach(coachSearch).get(0);
 
                     double discount = 1;
-                    if ( user.getVip().equals("Big") || user.getVip().equals("Course") )
+                    if ( user.getVip().equals("Premium") || user.getVip().equals("Course") )
                         discount = 0.8;
                     coursePrice = Coach.level2price(coach) * discount;
                 } catch (Exception exception) {
