@@ -12,11 +12,29 @@ import java.util.ArrayList;
  * @since 8 May 2021
  */
 public class User extends Client {
+    /**
+     * User account balance
+     */
     private double account;
+    /**
+     * User level. range from {@code 1} to {@code 12}
+     */
     private int level;
+    /**
+     * User total learning time (with seconds)
+     */
     private int learningTime;
+    /**
+     * User vip status. {@code Plain}, {@code Course}, {@code Video} or {@code Premium}
+     */
     private String vip;
+    /**
+     * Subscript status of a user
+     */
     private ArrayList<Course> courseSubscription;
+    /**
+     * User description
+     */
     private String description;
 
     /**
@@ -36,19 +54,26 @@ public class User extends Client {
 
     /**
      * Constructor of {@link User}. With some default values.
-     * <p>
+     * <br>
      * {@link User#account} is {@code 0.0}
-     * <p>
+     * <br>
      * {@link User#level} is {@code 1}
-     * <p>
+     * <br>
      * {@link User#learningTime} is {@code 0}
-     * <p>
+     * <br>
      * {@link User#vip} is {@code Plain}
-     * <p>
+     * <br>
      * {@link User#courseSubscription} is an empty {@link ArrayList}
-     * <p>
+     * <br>
      * {@link User#description} is an empty {@link String}
-     * <p>
+     *
+     * @param id       user id
+     * @param nickName user nickname
+     * @param password user password
+     * @param sex      user sex
+     * @param phone    user phone number
+     * @param email    user email
+     * @param role     user role, which is {@code 2}
      */
     public User(int id, String nickName, String password, int sex, String phone, String email, int role) {
         super(id, nickName, password, sex, phone, email, role);
@@ -63,17 +88,25 @@ public class User extends Client {
 
     /**
      * Constructor of {@link User}. With some default values.
-     * <p>
+     * <br>
      * {@link User#account} is {@code 0.0}
-     * <p>
+     * <br>
      * {@link User#level} is {@code 1}
-     * <p>
+     * <br>
      * {@link User#learningTime} is {@code 0}
-     * <p>
+     * <br>
      * {@link User#vip} is {@code Plain}
-     * <p>
+     * <br>
      * {@link User#courseSubscription} is an empty {@link ArrayList}
-     * <p>
+     *
+     * @param id          user id
+     * @param nickName    user nickname
+     * @param password    user password
+     * @param sex         user sex
+     * @param phone       user phone number
+     * @param email       user email
+     * @param role        user role, which is {@code 2}
+     * @param description user description
      */
     public User(int id, String nickName, String password, int sex, String phone, String email, int role, String description) {
         super(id, nickName, password, sex, phone, email, role);

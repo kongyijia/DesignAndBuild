@@ -20,7 +20,7 @@ import java.util.UUID;
 /**
  * Map {@link Client} data to JSON database.
  * This "JSON database" is a self-defined database and it should only be used in this software.
- * <p>
+ * <br>
  * Offering {@code add}, {@code delete}, {@code modify} and {@code find} methods for client data, which include ({@link User}, {@link Coach} and {@link Administrator}).
  * In this class, we use {@link com.alibaba.fastjson.JSON} to manage our {@link Client} POJO.
  *
@@ -34,16 +34,49 @@ import java.util.UUID;
  * @since 8 May 2021
  */
 public class ClientMapping {
+    /**
+     * JSON file path root
+     */
     public static final String DATA_PATH = "data/client.json";
+    /**
+     * Avatar source path root
+     */
     public static final String AVATAR_PATH = "data/image/";
+    /**
+     * Default avatar source name
+     */
     public static final String DEFAULT_AVATAR = "default.jpeg";
+    /**
+     * Operation success status code
+     */
     public static final int SUCCESS = 0;
+    /**
+     * Duplicate Client ID
+     */
     public static final int DUPLICATE_ID = 1;
+    /**
+     * Duplicate Client nickname, must be unique.
+     */
     public static final int DUPLICATE_NICKNAME = 6;
+    /**
+     * Cannot found Client in database
+     */
     public static final int CLIENT_NOT_FOUND = 2;
+    /**
+     * Cannot found User in database
+     */
     public static final int USER_NOT_FOUND = 3;
+    /**
+     * Cannot found Coach in database
+     */
     public static final int COACH_NOT_FOUND = 4;
+    /**
+     * Cannot found Administrator in database
+     */
     public static final int ADMIN_NOT_FOUND = 5;
+    /**
+     * No image found in certain path
+     */
     public static final int NOT_IMAGE = 7;
 
 
@@ -52,7 +85,7 @@ public class ClientMapping {
      *
      * @param type instance of class extended {@link Client} class
      * @param <T>  extends {@link Client} class
-     * @return status code: {@value DUPLICATE_ID}, {@value DUPLICATE_NICKNAME} or {@value SUCCESS}
+     * @return status code: {@link ClientMapping#DUPLICATE_ID}, {@link ClientMapping#DUPLICATE_NICKNAME} or {@link ClientMapping#SUCCESS}
      * @throws IOException when IO issue occur
      */
     public static <T extends Client> int add(T type) throws IOException {
@@ -75,7 +108,7 @@ public class ClientMapping {
      * Delete Client({@link User}, {@link Coach}, {@link Administrator}) from JSON database.
      *
      * @param id ID of the {@link Client} instance which you want to delete
-     * @return Status code: {@value CLIENT_NOT_FOUND} or {@value SUCCESS}
+     * @return Status code: {@link ClientMapping#CLIENT_NOT_FOUND} or {@link ClientMapping#SUCCESS}
      * @throws IOException when IO issue occur
      */
     public static int delete(int id) throws IOException {
@@ -100,7 +133,7 @@ public class ClientMapping {
      * That is, to set "cancel" to true.
      *
      * @param id ID of the {@link Client} instance which you want to delete
-     * @return Status code: CLIENT_NOT_FOUND={@value CLIENT_NOT_FOUND} or SUCCESS={@value SUCCESS}
+     * @return Status code: {@link ClientMapping#CLIENT_NOT_FOUND} or {@link ClientMapping#SUCCESS}
      * @throws IOException when IO issue occur
      */
     public static int cancel(int id) throws IOException {
@@ -117,13 +150,13 @@ public class ClientMapping {
     /**
      * Update Client({@link User}, {@link Coach}, {@link Administrator}) data in JSON database.
      * The method need {@code ID} to locate where the data is so do not set a new value to the {@code ID}.
-     * <p>
+     * <br>
      * NOTE: You can not use this method to modify {@code avatarSrc} or {@code recordHistory} in Client.
      * If you want to modify them, you need to use {@link ClientMapping#modifyAvatar(int, String)}.
      *
      * @param type updated instance of client class extended {@link Client}
      * @param <T>  extends {@link Client} class
-     * @return status code: {@value DUPLICATE_NICKNAME}, {@value CLIENT_NOT_FOUND} or {@value SUCCESS}
+     * @return status code: {@link ClientMapping#DUPLICATE_NICKNAME}, {@link ClientMapping#CLIENT_NOT_FOUND} or {@link ClientMapping#SUCCESS}
      * @throws IOException when IO issue occur
      * @see ClientMapping#modifyAvatar(int, String)
      */
@@ -150,13 +183,15 @@ public class ClientMapping {
 
     /**
      * Update Client({@link User}, {@link Coach} and {@link Administrator}} {@code recordHistory} data.
-     * <p>
+     * <br>
      * If the {@code history} you want to modified not exist, then add it to database automatically.
      * If exist, then modify it.
+     * <br>
+     * NOTE: If you want to modify recordHistory and the data itself simultaneously, you need to call this method first.
      *
      * @param id      Client id you want to modified
      * @param history history record you want to modified
-     * @return status code: CLIENT_NOT_FOUND={@value CLIENT_NOT_FOUND}, SUCCESS={@value SUCCESS}
+     * @return status code: {@link ClientMapping#CLIENT_NOT_FOUND} or {@link ClientMapping#SUCCESS}
      * @throws IOException when IO issue occur
      */
     public static int modifyRecordHistory(int id, Client.RecordHistory history) throws IOException {
@@ -186,11 +221,11 @@ public class ClientMapping {
 
     /**
      * Update Client({@link User}, {@link Coach} and {@link Administrator}} avatar data.
-     * It will first copy the image to {@value AVATAR_PATH}, then update the srcPath of image to JSON database.
+     * It will first copy the image to {@link ClientMapping#AVATAR_PATH}, then update the srcPath of image to JSON database.
      *
      * @param id           Client id you want to modify
      * @param originalPath the original path of the profile photo. Must be absolute path
-     * @return status code: NOT_IMAGE={@value NOT_IMAGE}, SUCCESS={@value SUCCESS}
+     * @return {@link ClientMapping#NOT_IMAGE} or {@link ClientMapping#SUCCESS}
      * @throws IOException when IO issue occur
      */
     public static int modifyAvatar(int id, String originalPath) throws IOException {
@@ -224,7 +259,7 @@ public class ClientMapping {
      *
      * @param map the WHERE conditions are represented by K-V pairs using {@link HashMap}
      * @return {@link ArrayList<Client>} contained results.
-     * @throws FileNotFoundException when {@value DATA_PATH} not found
+     * @throws FileNotFoundException when {@link ClientMapping#DATA_PATH} not found
      */
     public static ArrayList<Client> find(HashMap<String, String> map) throws FileNotFoundException {
         ArrayList<Client> clients = new ArrayList<>();
@@ -267,7 +302,7 @@ public class ClientMapping {
      * @param key   the key of the value you want to search
      * @param value the value you want to search
      * @return {@link ArrayList<Client>} contained results.
-     * @throws FileNotFoundException when {@value DATA_PATH} not found
+     * @throws FileNotFoundException when {@link ClientMapping#DATA_PATH} not found
      */
     public static ArrayList<Client> find(String key, String value) throws FileNotFoundException {
         ArrayList<Client> clients = new ArrayList<>();
@@ -295,7 +330,7 @@ public class ClientMapping {
      *
      * @param map the WHERE conditions are represented by K-V pairs using {@link HashMap}
      * @return {@link ArrayList<User>} contained results.
-     * @throws FileNotFoundException when {@value DATA_PATH} not found
+     * @throws FileNotFoundException when {@link ClientMapping#DATA_PATH} not found
      * @see ClientMapping#find(HashMap)
      */
     public static ArrayList<User> findUser(HashMap<String, String> map) throws FileNotFoundException {
@@ -314,7 +349,7 @@ public class ClientMapping {
      *
      * @param map the WHERE conditions are represented by K-V pairs using {@link HashMap}
      * @return {@link ArrayList<Coach>} contained results.
-     * @throws FileNotFoundException when {@value DATA_PATH} not found
+     * @throws FileNotFoundException when {@link ClientMapping#DATA_PATH} not found
      * @see ClientMapping#find(HashMap)
      */
     public static ArrayList<Coach> findCoach(HashMap<String, String> map) throws FileNotFoundException {
@@ -333,7 +368,7 @@ public class ClientMapping {
      *
      * @param map the WHERE conditions are represented by K-V pairs using {@link HashMap}
      * @return {@link ArrayList<Administrator>} contained results.
-     * @throws FileNotFoundException when {@value DATA_PATH} not found
+     * @throws FileNotFoundException when {@link ClientMapping#DATA_PATH} not found
      * @see ClientMapping#find(HashMap)
      */
     public static ArrayList<Administrator> findAdministrator(HashMap<String, String> map) throws FileNotFoundException {
@@ -347,10 +382,10 @@ public class ClientMapping {
     }
 
     /**
-     * Read {@value DATA_PATH} to the program and convert it to POJO using fastJSON.
+     * Read {@link ClientMapping#DATA_PATH} to the program and convert it to POJO using fastJSON.
      *
-     * @return all data in {@value DATA_PATH}
-     * @throws FileNotFoundException when {@value DATA_PATH} not found
+     * @return all data in {@link ClientMapping#DATA_PATH}
+     * @throws FileNotFoundException when {@link ClientMapping#DATA_PATH} not found
      */
     public static ArrayList<Client> readAllClients() throws FileNotFoundException {
         ArrayList<Client> clients = new ArrayList<>();
@@ -374,7 +409,7 @@ public class ClientMapping {
 
     /**
      * Write all {@code clients} in {@link ArrayList<Client>} to the file using fastJSON.
-     * This method will overwrite the {@value DATA_PATH} file, so this method is set to be {@code private} to protect the data.
+     * This method will overwrite the {@link ClientMapping#DATA_PATH} file, so this method is set to be {@code private} to protect the data.
      *
      * @param clients the {@link Client} data that you want to write
      * @throws IOException when IO issue occur

@@ -13,15 +13,45 @@ import java.util.Date;
  * @since 8 May 2021
  */
 public class Client {
+    /**
+     * Client ID
+     */
     private int id;
+    /**
+     * Client nickname, unique
+     */
     private String nickName;
+    /**
+     * Client password
+     */
     private String password;
+    /**
+     * Client sex. {@code 0} for female; {@code 1} for male.
+     */
     private int sex; // 0: female; 1: male
+    /**
+     * Client phone number with 11 digits
+     */
     private String phone;
+    /**
+     * Client email
+     */
     private String email;
+    /**
+     * Client role. {@code 0} for {@link Administrator}; {@code 1} for {@link Coach}; {@code 2} for {@link User}.
+     */
     private int role; // 0: admin; 1:coach; 2: user
+    /**
+     * Client cancel status. {@code false} is Active status; {@code true} is cancel status.
+     */
     private boolean cancel; // false: active; true: cancel
+    /**
+     * Client playback history
+     */
     private ArrayList<RecordHistory> recordHistory; // record history
+    /**
+     * Client avatar source path
+     */
     private String avatarSrc;
 
 
@@ -43,11 +73,11 @@ public class Client {
 
     /**
      * Constructor of {@link Client}. With default value.
-     * <p>
+     * <br>
      * {@link Client#cancel} is {@code false}
-     * <p>
+     * <br>
      * {@link Client#recordHistory} is an empty {@link ArrayList}
-     * <p>
+     * <br>
      * {@link Client#avatarSrc} is an empty {@link String}
      *
      * @param id       client id
@@ -80,9 +110,9 @@ public class Client {
 
     /**
      * Constructor of {@link Client}. With default value.
-     * <p>
+     * <br>
      * {@link Client#cancel} is {@code false}
-     * <p>
+     * <br>
      * {@link Client#recordHistory} is an empty {@link ArrayList}
      *
      * @param avatarSrc avatar source path
@@ -243,18 +273,29 @@ public class Client {
 
     /**
      * Used to record the user's playback history.
-     * <p>
+     * <br>
      * {@link Client.RecordHistory#videoId} to record video ID.
-     * <p>
+     * <br>
      * {@link Client.RecordHistory#learningTime} to record the learning time of this history.
-     * <p>
+     * <br>
      * {@link Client.RecordHistory#latestPlayingDateTime} to record the latest datetime the user watched this video.
      */
     public static class RecordHistory {
+        /**
+         * Video ID
+         */
         private int videoId;
+        /**
+         * Learning time for this video record
+         */
         private int learningTime;
+        /**
+         * The progress of the record
+         */
         private int progress;
-
+        /**
+         * the latest playing datetime the user watched
+         */
         @JSONField(format = "yyyy-MM-dd HH:mm:ss")
         private Date latestPlayingDateTime;
 
