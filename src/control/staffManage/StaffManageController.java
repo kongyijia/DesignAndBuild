@@ -38,8 +38,9 @@ public class StaffManageController extends Controller {
                 if (e.getItem().equals("Coach")) {
                     comboBox.removeAllItems();
                     comboBox.addItem("All");
-                    for (int i = 0; i < 3; i++)
-                        comboBox.addItem(Integer.toString(i));
+                    String[] levelName = new String[]{"normal", "advanced", "outstanding"};
+                    for (int i = 0; i < levelName.length; i++)
+                        comboBox.addItem(levelName[i]);
                 }
                 else if (e.getItem().equals("User")) {
                     comboBox.removeAllItems();
@@ -76,10 +77,15 @@ public class StaffManageController extends Controller {
                         searchMap.put(k, "1");
                     else if ("User".equals(role))
                         searchMap.put(k, "2");
-                } else if (k.equals("cancel"))
+                } else if (k.equals("cancel")) {
                     searchMap.put(k, v.getComboBox().getSelectedItem().equals("Active") ? "false" : "true");
-                else
+                }
+                else if (k.equals("level")) {
+                    searchMap.put(k, (v.getComboBox().getSelectedIndex() - 1) + "");
+                }
+                else {
                     searchMap.put(k, (String) v.getComboBox().getSelectedItem());
+                }
             }
         });
 
@@ -209,7 +215,7 @@ public class StaffManageController extends Controller {
                             "Are you sure to modify level?",
                             "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttonName, buttonName);
                     if (result == JOptionPane.YES_OPTION) {
-                        int newLevel = (Integer) clientDetail.getLevel().getSelectedItem();
+                        int newLevel = clientDetail.getLevel().getSelectedIndex();
                         Client newClient = v.getClient();
                         if (v.getClient().getRole() == 1) {
                             ((Coach) newClient).setLevel(newLevel);

@@ -86,7 +86,8 @@ public class BuildInformation extends JPanel
                 label_Phone = new JLabel("Phone: ");
                 label_mail = new JLabel("E-mail: ");
                 label_level = new JLabel("Level: ");
-                JLabel level = new JLabel("" + coach.getLevel());
+                String[] levelName = new String[]{"normal", "advanced", "outstanding"};
+                JLabel level = new JLabel("" + levelName[coach.getLevel()]);
                 this.setLayout(layout);// Depends on size
 
                 this.add(label_name);

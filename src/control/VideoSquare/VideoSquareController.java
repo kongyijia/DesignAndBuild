@@ -79,7 +79,6 @@ public class VideoSquareController extends Controller implements ActionListener 
         try {
             vs = generateMap(videoSquare.getSearchText1().getText(), (String) videoSquare.getTypeComboBox().getSelectedItem(), (String) videoSquare.getTagBox().getSelectedItem());
         } catch (FileNotFoundException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
         forSearch(vs);
@@ -126,7 +125,6 @@ public class VideoSquareController extends Controller implements ActionListener 
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 1) {
-                    //TODO： link to the videos
                     if (client.getRole() == 2) {
                         User user = (User) client;
                         if (user.getLevel() < video.getTag() &&

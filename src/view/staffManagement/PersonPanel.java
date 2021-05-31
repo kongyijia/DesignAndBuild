@@ -54,7 +54,7 @@ public class PersonPanel extends JPanel {
 
         // show client name
         nameLabel = new JLabel(client.getNickName());
-        nameLabel.setBounds(100,10,100,30);
+        nameLabel.setBounds(100,10,100,25);
 
         // show client isCancel
         if (client.isCancel()){
@@ -66,17 +66,19 @@ public class PersonPanel extends JPanel {
 
         // show client level
         levelLabel = new JLabel();
-        if(client.getRole() == 1)
-            levelLabel.setText("Lv : " + ((Coach) client).getLevel() + " (Coach)");
+        if(client.getRole() == 1) {
+            String[] levelName = new String[]{"normal", "advanced", "outstanding"};
+            levelLabel.setText("Lv : " + levelName[((Coach) client).getLevel()] + " (Coach)");
+        }
         else if(client.getRole() == 2)
             levelLabel.setText("Lv : " + ((User) client).getLevel() + " (User)");
         else
             levelLabel.setText("Administrator");
-        levelLabel.setBounds(100, 40, 100, 30);
+        levelLabel.setBounds(100, 35, 180, 20);
 
         // show client sex
         sexLabel = new JLabel(client.getSex() == 0 ? "female" : "male");
-        sexLabel.setBounds(200,40,60,30);
+        sexLabel.setBounds(100,55,60,25);
 
         // show client phone
         phoneLabel = new JLabel("Phone : " + client.getPhone());
