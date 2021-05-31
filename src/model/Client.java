@@ -12,7 +12,7 @@ import java.util.Date;
  * @version 1.3
  * @since 8 May 2021
  */
-public class Client {
+public class Client implements Cloneable {
     /**
      * Client ID
      */

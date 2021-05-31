@@ -24,35 +24,44 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RecordManageController extends Controller {
     private RecordManagePanel Recordmanagepanel;
     private TableRowSorter sorter;
+    private JTable table;
+    private DefaultTableModel model;
+    private JScrollPane pane;
+    private String[] factory = new String[]{"client ID", "Nickname", "Video ID", "Where have I watched", "Watching time"};
 
     public RecordManageController() {
         super(config.RECORD_MANAGE_NAME, new RecordManagePanel());
         Recordmanagepanel = (RecordManagePanel) this.panel;
+
+        pane = new JScrollPane();
+        pane.setBounds(0,20,1200,510);
+        pane.setVisible(true);
+        Recordmanagepanel.add(pane);
         update();
     }
 
     @Override
     public void update() {
         Client client;
-        String[] factory = new String[]{"client ID", "Nickname", "Video ID", "Time span", "Progress", "Watching time"};
-        DefaultTableModel model = new DefaultTableModel(){
+        client = MainFrame.getInstance().getClient();
+        ArrayList<Client.RecordHistory> record = client.getRecordHistory();
+        model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         model.setColumnIdentifiers(factory);
-        JTable table = new JTable(model);
-        client = MainFrame.getInstance().getClient();
-        ArrayList<Client.RecordHistory> record = client.getRecordHistory();
         if(!record.isEmpty()){
             record.forEach(entry -> {
                 String[] temp = {String.valueOf(client.getId()), client.getNickName(), String.valueOf(entry.getVideoId()),
-                        String.valueOf(entry.getLearningTime()), String.valueOf(entry.getProgress()),
-                        String.valueOf(entry.getLatestPlayingDateTime())};
+                        String.valueOf(entry.getLearningTime()), String.valueOf(entry.getLatestPlayingDateTime())};
                 model.addRow(temp);
             });
         }
+        if(table != null)
+            pane.remove(table);
+        table = new JTable(model);
         table.setModel(model);
         table.setBounds(0,20,1200,510);
         table.setAutoCreateRowSorter(true);
@@ -70,9 +79,6 @@ public class RecordManageController extends Controller {
         Recordmanagepanel.filterReset.addActionListener(e -> {
             sorter.setRowFilter(null);
         });
-        JScrollPane pane = new JScrollPane(table);
-        pane.setBounds(0,20,1200,510);
-        pane.setVisible(true);
-        Recordmanagepanel.add(pane);
+        pane.setViewportView(table);
     }
 }
