@@ -47,8 +47,11 @@ public class StaffInsertController extends Controller {
                 }
             } else if (e.getSource() == staffInsertPanel.b_back) {
                 staffInsertPanel.f_message.setVisible(false);
-                MainFrame.getInstance().goTo(config.STAFF_MANAGE_NAME);
+                MainFrame.getInstance().goTo(config.STAFF_INSERT_NAME);
                 update();
+            }
+            else {
+                MainFrame.getInstance().goTo(config.STAFF_MANAGE_NAME);
             }
         });
     }
