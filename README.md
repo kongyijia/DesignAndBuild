@@ -23,7 +23,7 @@ This project is a digital gam system for this Group Project in EBU6304, and is a
 
 To run this program, your environment must be/have:
 - Windows 10
-- JDK 13
+- JDK 13 ([Java SE 13](https://jdk.java.net/java-se-ri/13))
 - IDEA (optional)
 
 If you don't have IDEA, you need to ensure that you can run `javac` and `java` command in your terminal.
