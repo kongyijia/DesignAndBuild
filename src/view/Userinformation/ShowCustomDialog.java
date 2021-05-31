@@ -7,6 +7,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * <p>
+ *     Class {@code ShowCustomDialog} is a class extends JDialog.
+ * </p>
+ * <p>
+ *     Change the password dialog. <br>
+ * </p>
+ * @see JDialog
+ * @see control.Userinformation.UserInformationController
+ */
 public class ShowCustomDialog extends JDialog
 {
     private JButton okBtn = new JButton("OK");
@@ -24,33 +34,90 @@ public class ShowCustomDialog extends JDialog
     private JPasswordField cpwd = new JPasswordField();
 
 
-
+    /**
+     *
+     * Getter function of component.
+     * @return javax.swing.JPasswordField
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:30
+     * @version V1.0
+     */
     public JPasswordField getOpwd() { return opwd; }
 
+    /**
+     *
+     * Getter function of component.
+     * @return javax.swing.JPasswordField
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:30
+     * @version V1.0
+     */
     public JPasswordField getNpwd()
     {
         return npwd;
     }
 
+    /**
+     *
+     * Getter function of component.
+     * @return javax.swing.JPasswordField
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:30
+     * @version V1.0
+     */
     public JPasswordField getCpwd()
     {
         return cpwd;
     }
 
+    /**
+     *
+     * Getter function of OkButton.
+     * @return javax.swing.JButton
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:30
+     * @version V1.0
+     */
     public JButton getOkBtn()
     {
         return okBtn;
     }
 
+    /**
+     *
+     * Getter function of CenButton.
+     * @return javax.swing.JButton
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:30
+     * @version V1.0
+     */
     public JButton getCenBtn()
     {
         return CenBtn;
     }
 
+    /**
+     *
+     * Getter function of Bt1Button.
+     * @return javax.swing.JButton
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:30
+     * @version V1.0
+     */
     public JButton getBt1()
     {
         return bt1;
     }
+
+    /**
+     *
+     * Show the change password Dialog.
+     * @param parentComponent father component
+     * @return void
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:31
+     * @version V1.0
+     */
 
     public ShowCustomDialog(Component parentComponent) {
 

@@ -7,8 +7,30 @@ import model.User;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * <p>
+ *     Class {@code BuildDescription} is a class extens JPanel.
+ * </p>
+ *
+ * <p>
+ *     It is a parent component used to display the user's personal description.
+ * </p>
+ *
+ * @author Zhanao zhang
+ * @version V1.0
+ */
 public class BuildDescription extends JPanel
 {
+    /**
+     *
+     * Build {@code client} description panel.
+     * @see Client
+     * @param receiveuser User
+     * @return void
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:15
+     * @version V1.0
+     */
     public BuildDescription(Client receiveuser)
     {
         JTextArea destext = new JTextArea();

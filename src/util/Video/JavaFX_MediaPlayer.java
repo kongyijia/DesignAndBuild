@@ -25,11 +25,24 @@ import java.util.TimerTask;
 
 import static util.config.lock;
 
+/**
+ * <p>
+ *     Class {@code JavaFX_MediaPlayer}Video Player Based On JavaFX.
+ *
+ * <p>
+ *     Accepts a {@code String} representing the video path.<br>
+ *     return {@code Long} representing the watching time.<br>
+ *     Base on {@code JavaFX} components such as {@code MediaView MediaPlayer}.<br>
+ *     Satisfy thread security.
+ *
+ * @author Zhanao Zhang
+ * @version V1.0
+ *
+ *
+ */
 public class JavaFX_MediaPlayer extends Application
 {
         public static  String path;
-
-
         private static Scene scene;
         private static BorderPane pane;
         private static HBox paneCtl;
@@ -45,6 +58,15 @@ public class JavaFX_MediaPlayer extends Application
 
 
 
+        /**
+         *
+         * Create a new thread and start the video application.
+         * @param primaryStage new stage that locate the mediaViewer
+         * @return void
+         * @author Zhanao Zhang
+         * @date 2021/5/31 18:02
+         * @version V1.0
+         */
         @Override
         public void start(Stage primaryStage)
         {
@@ -55,7 +77,6 @@ public class JavaFX_MediaPlayer extends Application
                         initPaneCtl();
                         initPane();
                         initScene();
-
 
                         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                         @Override
@@ -73,14 +94,28 @@ public class JavaFX_MediaPlayer extends Application
                         primaryStage.show();
         }
 
-
+/**
+ *
+ * Close the player and release resources.
+ * @return void
+ * @author Zhanao Zhang
+ * @date 2021/5/31 18:02
+ * @version V1.0
+ */
         @Override
         public void stop() throws Exception
         {
                 timer.cancel();
                 super.stop();
         }
-
+/**
+ *
+ * Initialize the player.
+ * @return void
+ * @author Zhanao Zhang
+ * @date 2021/5/31 18:03
+ * @version V1.0
+ */
         private void initMediaPlayer()
         {
 
@@ -135,7 +170,14 @@ public class JavaFX_MediaPlayer extends Application
                 });
 
         }
-
+/**
+ *
+ * Initialize the player container.
+ * @return void
+ * @author Zhanao Zhang
+ * @date 2021/5/31 18:03
+ * @version V1.0
+ */
         private void initPane()
         {
                 //setting group and scene
@@ -160,7 +202,15 @@ public class JavaFX_MediaPlayer extends Application
                         }
                 });
         }
-
+/**
+ *
+ * Convert the number of seconds into a string of format {@code XX:XX}.
+ * @param seconds seconds
+ * @return java.lang.String - format {@code XX:XX}
+ * @author Zhanao Zhang
+ * @date 2021/5/31 18:05
+ * @version V1.0
+ */
         private String Seconds2Str(Double seconds)
         {
                 int count = seconds.intValue();
@@ -172,7 +222,14 @@ public class JavaFX_MediaPlayer extends Application
         }
 
 
-
+/**
+ *
+ * Start counting the study time.
+ * @return void
+ * @author Zhanao Zhang
+ * @date 2021/5/31 18:05
+ * @version V1.0
+ */
         public static void startTimer()
         {
                 countingTask = new TimerTask()
@@ -184,6 +241,14 @@ public class JavaFX_MediaPlayer extends Application
 
         }
 
+        /**
+         *
+         * Pause counting the study time.
+         * @return void
+         * @author Zhanao Zhang
+         * @date 2021/5/31 18:06
+         * @version V1.0
+         */
         public static void pauseTimer()
         {
                 if (countingTask != null)
@@ -192,7 +257,14 @@ public class JavaFX_MediaPlayer extends Application
                         countingTask = null;
                 }
         }
-
+/**
+ *
+ * Return study time.
+ * @return long
+ * @author Zhanao Zhang
+ * @date 2021/5/31 18:06
+ * @version V1.0
+ */
         public static long getRunTime()
         {
                 return studyTime;

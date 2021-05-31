@@ -8,8 +8,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.DecimalFormat;
 
+/**
+ * <p>
+ *     Class {@code BuildInformation} is a class extends JPanel.
+ * </p>
+ * <p>
+ *     It is a parent component used to display the user's personal information.
+ *
+ * </p>
+ */
 public class BuildInformation extends JPanel
 {
+    /**
+     *
+     * Create {@code Client} information panel.
+     * @param receiveUser Client
+     * @see Client
+     * @return void
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:18
+     * @version V1.0
+     */
     public BuildInformation(Client receiveUser)
     {
 

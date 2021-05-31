@@ -42,6 +42,16 @@ public class UserInformationController extends Controller
         this.setH_gap(150);
     }
 
+    /**
+     *
+     * Synchronize password changes that pass the password verification to json
+     * @param newpwd new password
+     * @return void
+     * @author Zhanao Zhang
+     * @date 2021/5/31 16:26
+     * @version V1.0
+     */
+
     public void changepassword(String newpwd)
     {
         user.setPassword(newpwd);
@@ -55,6 +65,15 @@ public class UserInformationController extends Controller
 
     }
 
+    /**
+     *
+     * Check if the password is correct.
+     * @param  oldpwd Old Password.
+     * @return boolean
+     * @author Zhanao Zhang
+     * @date 2021/5/31 16:29
+     * @version V1.0
+     */
     public boolean checkpassword(String oldpwd)
     {
         String correctpassword = user.getPassword();
@@ -62,10 +81,19 @@ public class UserInformationController extends Controller
     }
 
 
+    /**
+     *
+     * Add button action listener.
+     * @return void
+     * @author Zhanao Zhang
+     * @date 2021/5/31 16:32
+     * @version V1.0
+     */
     private void buttons()
     {
         BuildProfilePanel.getProfilebutton().addActionListener(new ActionListener()
         {
+
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -238,13 +266,29 @@ public class UserInformationController extends Controller
 
     }
 
+    /**
+     *
+     * Check whether the recharge amount is legal.
+     * @param money money
+     * @return boolean
+     * @author Zhanao Zhang
+     * @date 2021/5/31 16:46
+     * @version V1.0
+     */
     private boolean checkAccount(double money)
     {
-        if (money > 0 && money <= 5000)
-            return true;
-        return false;
+        return money > 0 && money <= 5000;
     }
 
+
+    /**
+     *
+     * Update all components (for factory mode).
+     * @return void
+     * @author Zhanao Zhang
+     * @date 2021/5/31 16:47
+     * @version V1.0
+     */
     @Override
     public void update()
     {
