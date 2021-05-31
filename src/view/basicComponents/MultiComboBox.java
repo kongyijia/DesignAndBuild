@@ -83,10 +83,8 @@ public class MultiComboBox extends JComponent implements ActionListener {
         }
     }
 
-
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
         if (!popup.isVisible()) {
             popup.show(this, 0, getHeight());
         }
@@ -99,8 +97,6 @@ public class MultiComboBox extends JComponent implements ActionListener {
         button.setName("ComboBox.arrowButton");
         return button;
     }
-
-
 
     public class MultiPopup extends JPopupMenu implements ActionListener {
         private Object[] values;
@@ -178,7 +174,6 @@ public class MultiComboBox extends JComponent implements ActionListener {
             setText(getSelectedValues());
         }
 
-
         public Object[] getSelectedValues() {
             List<Object> selectedValues = new ArrayList<Object>();
 
@@ -201,15 +196,11 @@ public class MultiComboBox extends JComponent implements ActionListener {
                     }
                 }
             }
-
             return selectedValues.toArray(new Object[selectedValues.size()]);
         }
 
-
-
         @Override
         public void actionPerformed(ActionEvent arg0) {
-            // TODO Auto-generated method stub
             Object source = arg0.getSource();
             if (source instanceof JButton) {
                 JButton button = (JButton) source;
@@ -221,7 +212,5 @@ public class MultiComboBox extends JComponent implements ActionListener {
                 }
             }
         }
-
     }
-
 }

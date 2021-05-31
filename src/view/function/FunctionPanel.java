@@ -186,7 +186,6 @@ public class FunctionPanel extends JLayeredPane implements config {
             addButton("Staff Management",STAFF_MANAGE_NAME,2);
             addButton("Video Management",VIDEO_MANAGEMENT, 2);
             addButton("Video History", RECORD_MANAGE_NAME,2);
-            
         }
     }
 

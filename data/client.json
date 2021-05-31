@@ -15,7 +15,7 @@
 	"description":"",
 	"email":"6914532@qq.com",
 	"id":4667,
-	"level":0,
+	"level":2,
 	"nickName":"shengbo43",
 	"password":"1234",
 	"phone":"0987654321",
@@ -84,23 +84,23 @@
 	"description":"12345ghjkdsalfegadafds\nadsfweoba",
 	"email":"93327537@qq.com",
 	"id":123333,
-	"learningTime":0,
+	"learningTime":53,
 	"level":1,
 	"nickName":"sdf1",
 	"password":"123456",
 	"phone":"1234567890",
 	"recordHistory":[
 		{
-			"latestPlayingDateTime":"2021-04-18 16:47:27",
-			"learningTime":10,
-			"progress":5,
-			"videoId":2
-		},
-		{
 			"latestPlayingDateTime":"2021-05-31 01:54:14",
 			"learningTime":15,
 			"progress":0,
 			"videoId":1
+		},
+		{
+			"latestPlayingDateTime":"2021-05-31 15:09:46",
+			"learningTime":4,
+			"progress":0,
+			"videoId":2
 		}
 	],
 	"role":2,

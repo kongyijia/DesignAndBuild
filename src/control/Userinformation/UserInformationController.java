@@ -183,9 +183,9 @@ public class UserInformationController extends Controller
                         }
                         else
                         {
-                            dialog.getOpwd().setEchoChar('●');
-                            dialog.getNpwd().setEchoChar('●');
-                            dialog.getCpwd().setEchoChar('●');
+                            dialog.getOpwd().setEchoChar('\u25CF');
+                            dialog.getNpwd().setEchoChar('\u25CF');
+                            dialog.getCpwd().setEchoChar('\u25CF');
                         }
                     }
                 });

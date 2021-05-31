@@ -25,7 +25,7 @@ public class ClientDetailDialog extends JDialog {
     private JPanel changePanel;
     private JButton modifyLevelButton =  new JButton("Modify Level");
     private JButton modifyVIPButton = new JButton("Modify VIP");
-    private JComboBox<Integer> level;
+    private JComboBox<String> level;
     private JComboBox<String> VIPLevel;
 
     public ClientDetailDialog(Client client){
@@ -57,7 +57,7 @@ public class ClientDetailDialog extends JDialog {
         changePanel.add(levelLabel);
 
         if (client.getRole() == 1) {
-            level = new JComboBox<>(new Integer[]{0, 1, 2});
+            level = new JComboBox<>(new String[]{"normal", "advanced", "outstanding"});
             level.setSelectedIndex(((Coach) client).getLevel());
         }
         else if (client.getRole() == 2) {
@@ -65,7 +65,7 @@ public class ClientDetailDialog extends JDialog {
             VIPLabel.setBounds(20,60,70,30);
             changePanel.add(VIPLabel);
 
-            level = new JComboBox<>(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12});
+            level = new JComboBox<>(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"});
             level.setSelectedIndex(((User) client).getLevel() - 1);
 
             String[] VIPType = new String[]{"Big", "Video", "Course", "Plain"};
@@ -100,7 +100,7 @@ public class ClientDetailDialog extends JDialog {
         return modifyVIPButton;
     }
 
-    public JComboBox<Integer> getLevel() {
+    public JComboBox<String> getLevel() {
         return level;
     }
 
