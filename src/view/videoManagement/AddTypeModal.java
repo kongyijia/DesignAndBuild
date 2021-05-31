@@ -2,6 +2,13 @@ package view.videoManagement;
 
 import javax.swing.*;
 
+/**
+ * UI for edit adding new video type
+ *
+ * @author Zai Song
+ * @version 1.0
+ * @since 23 April 2021
+ */
 public class AddTypeModal extends JFrame {
 
     private final JPanel jPanel = new JPanel();

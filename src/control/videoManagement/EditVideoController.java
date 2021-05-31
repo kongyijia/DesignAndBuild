@@ -12,6 +12,18 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ *  This class is inherited from {@link Controller}
+ *  <br>
+ *  This class mainly focus on the process of modifying new Video information
+ *  <br>
+ *  It provides some specific method for coach and admin to modify videos
+ *  <br>
+ *
+ *  @author Zai Song
+ *  @version 1.0
+ *  @since 23 April 2021
+ */
 public class EditVideoController extends UploadVideoController {
 
     private Video currentVideo;
@@ -30,6 +42,10 @@ public class EditVideoController extends UploadVideoController {
         this.uploadForm.modifyToEdit();
     }
 
+    /**
+     * init form value based on selected video
+     * @param video
+     */
     public void setVideo(Video video){
         this.uploadForm.setVideoTextField(video.getName());
         this.uploadForm.setVideoTagComboBox(video.getTag());
@@ -37,6 +53,9 @@ public class EditVideoController extends UploadVideoController {
         this.uploadForm.setMultiComboBox(args.toArray(new String[0]));
     }
 
+    /**
+     * get selected video info from {@link VideoManagementController}
+     */
     public void getCurrentVideoFromManagement(){
         Controller c = MainFrame.getInstance().getController(config.VIDEO_MANAGEMENT);
         VideoManagementController v = (VideoManagementController) c;
@@ -45,6 +64,10 @@ public class EditVideoController extends UploadVideoController {
         this.setCurrentVideo(video);
     }
 
+    /**
+     * to generate new object {@link Video} containing info for new info
+     * @return
+     */
     public Video generateVideo(){
         String name = this.uploadForm.getVideoNameTextField();
         int tag = this.uploadForm.getVideoTagComboBox();
@@ -55,6 +78,12 @@ public class EditVideoController extends UploadVideoController {
         return this.currentVideo;
     }
 
+    /**
+     * this method is called when admin or coach try to confirm their info for changing
+     * validity checking are include in this function
+     * if it pass all the checking, the information will be stored
+     * @throws IOException
+     */
     public void onConfirm(){
         if (this.uploadForm.getVideoNameTextField().equals("")){
             Util.showDialog(MainFrame.getInstance(), "Your video name cannot be empty");
@@ -70,6 +99,9 @@ public class EditVideoController extends UploadVideoController {
         }
     }
 
+    /**
+     * this method is to delete existing video
+     */
     public void onDelete(){
         try {
             VideoMapping.delete(this.currentVideo.getId());
@@ -79,6 +111,11 @@ public class EditVideoController extends UploadVideoController {
         }
     }
 
+    /**
+     * react to amdin's or coach's action
+     * specify which part of the UI is currently interact with the user or coach
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         this.onAction(e);
@@ -89,6 +126,11 @@ public class EditVideoController extends UploadVideoController {
         }
     }
 
+    /**
+     * every time the main function panel turn to this panel
+     * this method will be called
+     * call the get method to init form data
+     */
     public void update(){
         this.getCurrentVideoFromManagement();
     }
