@@ -176,6 +176,7 @@ public class FunctionPanel extends JLayeredPane implements config {
             addButton("My Course",SCHEDULE_NAME, 1);
             addButton("Video Square",VIDEOSQUARE_PANEL_NAME, 2);
             addButton("Book Course", COURSE_BOOK_NAME,2);
+            addButton("Video History", RECORD_MANAGE_NAME,2);
         }
         else if(role == 1){
             addButton("My Profile",USERDESCRIPTION_PANEL_NAME,1);
@@ -185,7 +186,6 @@ public class FunctionPanel extends JLayeredPane implements config {
         else if(role == 0){
             addButton("Staff Management",STAFF_MANAGE_NAME,2);
             addButton("Video Management",VIDEO_MANAGEMENT, 2);
-            addButton("Video History", RECORD_MANAGE_NAME,2);
         }
     }
 

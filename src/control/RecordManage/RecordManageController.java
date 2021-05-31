@@ -1,5 +1,6 @@
 package control.RecordManage;
 import control.Controller;
+import control.MainFrame;
 import model.Client;
 import util.config;
 import view.staffManagement.RecordManagePanel;
@@ -32,7 +33,7 @@ public class RecordManageController extends Controller {
 
     @Override
     public void update() {
-        ArrayList<Client> clients = new ArrayList<>();
+        Client client;
         String[] factory = new String[]{"client ID", "Nickname", "Video ID", "Time span", "Progress", "Watching time"};
         DefaultTableModel model = new DefaultTableModel(){
             @Override
@@ -42,42 +43,36 @@ public class RecordManageController extends Controller {
         };
         model.setColumnIdentifiers(factory);
         JTable table = new JTable(model);
-        try {
-            clients = ClientMapping.readAllClients();
-            clients.forEach(client -> {
-                ArrayList<Client.RecordHistory> record = client.getRecordHistory();
-                if(!record.isEmpty()){
-                    record.forEach(entry -> {
-                        String[] temp = {String.valueOf(client.getId()), client.getNickName(),
-                                String.valueOf(entry.getVideoId()), String.valueOf(entry.getLearningTime()),
-                                String.valueOf(entry.getProgress()), String.valueOf(entry.getLatestPlayingDateTime())};
-                        model.addRow(temp);
-                    });
-                }
+        client = MainFrame.getInstance().getClient();
+        ArrayList<Client.RecordHistory> record = client.getRecordHistory();
+        if(!record.isEmpty()){
+            record.forEach(entry -> {
+                String[] temp = {String.valueOf(client.getId()), client.getNickName(), String.valueOf(entry.getVideoId()),
+                        String.valueOf(entry.getLearningTime()), String.valueOf(entry.getProgress()),
+                        String.valueOf(entry.getLatestPlayingDateTime())};
+                model.addRow(temp);
             });
-            table.setModel(model);
-            table.setBounds(0,20,1200,510);
-            table.setAutoCreateRowSorter(true);
-            sorter = new TableRowSorter(model);
-            table.setRowSorter(sorter);
-            Recordmanagepanel.filterButton.addActionListener(e -> {
-                String text = Recordmanagepanel.filterText.getText();
-                if(text.length() == 0){
-                    sorter.setRowFilter(null);
-                }
-                else{
-                    sorter.setRowFilter(RowFilter.regexFilter(text));
-                }
-            });
-            Recordmanagepanel.filterReset.addActionListener(e -> {
-                sorter.setRowFilter(null);
-            });
-            JScrollPane pane = new JScrollPane(table);
-            pane.setBounds(0,20,1200,510);
-            pane.setVisible(true);
-            Recordmanagepanel.add(pane);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
+        table.setModel(model);
+        table.setBounds(0,20,1200,510);
+        table.setAutoCreateRowSorter(true);
+        sorter = new TableRowSorter(model);
+        table.setRowSorter(sorter);
+        Recordmanagepanel.filterButton.addActionListener(e -> {
+            String text = Recordmanagepanel.filterText.getText();
+            if(text.length() == 0){
+                sorter.setRowFilter(null);
+            }
+            else{
+                sorter.setRowFilter(RowFilter.regexFilter(text));
+            }
+        });
+        Recordmanagepanel.filterReset.addActionListener(e -> {
+            sorter.setRowFilter(null);
+        });
+        JScrollPane pane = new JScrollPane(table);
+        pane.setBounds(0,20,1200,510);
+        pane.setVisible(true);
+        Recordmanagepanel.add(pane);
     }
 }
