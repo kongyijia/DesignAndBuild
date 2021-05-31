@@ -1,16 +1,12 @@
 package control;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 import control.function.FunctionController;
-import javafx.scene.image.Image;
 import model.Client;
 import model.mapping.ClientMapping;
 import util.config;
@@ -51,18 +47,34 @@ public class MainFrame extends JFrame{
         this.setVisible(true);
     }
 
+    /**
+     *
+     * @param name The name of the controller registered to the list
+     * @param o Controller registered to the list
+     */
     public void registerObserver(String name, Controller o) {
         list.put(name, o);
     }
 
+    /**
+     *
+     * @param name The name of the controller that needs to be removed from the list
+     */
     public void removeObserver(String name) {
         list.remove(name);
     }
 
+    /**
+     * Call the {@link Controller#update()} method of all controllers in the list
+     */
     private void notifyObserver() {
         list.forEach((k, v) -> v.update());
     }
 
+    /**
+     * Call the {@link Controller#update()} method of one controller in the list
+     * @param name the name of controller
+     */
     public void notifyObserver(String name) {
         if (list.containsKey(name))
             list.get(name).update();
@@ -72,13 +84,19 @@ public class MainFrame extends JFrame{
      * This function is used to change current logged client.
      * When this function is called, it will call update() of all members in {@link MainFrame#list}.
      *
-     * @param client is the new client of current logged client.
+     * @param client the new client of current logged client.
      */
     public void setClient(Client client) {
         this.client = client;
         notifyObserver();
     }
 
+    /**
+     * This function is used to change current logged client.
+     * When this function is called, it will call update() of all members in {@link MainFrame#list}.
+     *
+     * @param ID the new clientID of current logged client.
+     */
     public void setClient(int ID) {
         HashMap<String, String> map = new HashMap<>();
         // 设置查找条件
@@ -94,14 +112,28 @@ public class MainFrame extends JFrame{
         }
     }
 
+    /**
+     * This method is used to get the currently logged in user
+     *
+     * @return the current logged client.
+     */
     public Client getClient() {
         return client;
     }
 
+    /**
+     * This method is used to get the currently registered controller list
+     * @return Controller List
+     */
     public HashMap<String, Controller> getList() {
         return list;
     }
 
+    /**
+     * This method is used to get a registered controller
+     * @param name the name of controller
+     * @return controller needed
+     */
     public Controller getController(String name){
             return list.get(name);
     }
@@ -112,10 +144,9 @@ public class MainFrame extends JFrame{
      * Index, enroll, function view switch uses this switch mode, other view switch use {@link FunctionController#goTo(String)}
      * <P>
      * Views loaded on demand.
-     * The view will be created if {@link MainFrame#list} doesn't have this view.
+     * The view will be created by {@link ControllerFactory} if {@link MainFrame#list} doesn't have this view.
      *
-     *
-     * @param name is the view name which will be switched to
+     * @param name the view name which will be switched to
      */
     public void goTo(String name) {
         ArrayList<String> firstGate = new ArrayList<>(Arrays.asList(

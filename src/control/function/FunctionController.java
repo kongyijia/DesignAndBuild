@@ -17,6 +17,14 @@ import model.Client;
 
 import javax.swing.*;
 
+/**
+ * @description This class is used to control view display and data interaction of {@link FunctionPanel}
+ *
+ * @author Jufeng Sun
+ * @version 1.0
+ * @since 16 May 2021
+ */
+
 public class FunctionController extends Controller{
     private FunctionPanel functionPanel;
 
@@ -52,6 +60,14 @@ public class FunctionController extends Controller{
         });
     }
 
+    /**
+     * This method used to switch view.
+     * <P>
+     * Views loaded on demand.
+     * The view will be created by {@link ControllerFactory} if {@link MainFrame#getList()} doesn't have this view.
+     *
+     * @param name the view name which will be switched to
+     */
     public void goTo(String name){
         Controller controller = MainFrame.getInstance().getList().get(name);
         this.functionPanel = (FunctionPanel) this.panel;
@@ -68,6 +84,9 @@ public class FunctionController extends Controller{
         functionPanel.getCardLayout().show(functionPanel.getShowPanel(), name);
     }
 
+    /**
+     * This method is used to refresh the {@link FunctionPanel} page
+     */
     @Override
     public void update() {
         Client currentClient = MainFrame.getInstance().getClient();

@@ -3,11 +3,20 @@ package view.courseBook;
 import util.config;
 import view.staffManagement.PeopleSearchComponent;
 import view.staffManagement.PersonPanel;
+import view.staffManagement.StaffManagePanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+
+/**
+ * @description This class is used for users to select courses, mainly used to select coach.
+ *
+ * @author Jufeng Sun
+ * @version 1.0
+ * @since 16 May 2021
+ */
 
 public class CoachBookPanel extends JPanel {
     private static final int INFO_PANEL_HEIGHT = 50;
@@ -90,15 +99,6 @@ public class CoachBookPanel extends JPanel {
         return dataPanel;
     }
 
-
-    public JPanel getInfoPanel() {
-        return infoPanel;
-    }
-
-    public void setInfoPanel(JPanel infoPanel) {
-        this.infoPanel = infoPanel;
-    }
-
     public HashMap<Integer, PersonPanel> getPersonMap() {
         return personMap;
     }
@@ -111,13 +111,8 @@ public class CoachBookPanel extends JPanel {
         return searchComboBoxMap;
     }
 
-
     public JTextField getSearchInputField() {
         return searchInputField;
-    }
-
-    public void setSearchInputField(JTextField searchInputField) {
-        this.searchInputField = searchInputField;
     }
 
     public void addListener(ActionListener actionListener){

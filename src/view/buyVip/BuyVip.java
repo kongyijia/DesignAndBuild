@@ -9,7 +9,7 @@ public class BuyVip extends JDialog
 {
     private JButton okBtn = new JButton("OK");
     private JButton cenBtn = new JButton("Cancel");
-    private JToggleButton Big = new JToggleButton("Big");
+    private JToggleButton Big = new JToggleButton("Premium");
     private JToggleButton Video = new JToggleButton("Video");
     private JToggleButton Course = new JToggleButton("Course");
 

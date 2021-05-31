@@ -36,7 +36,7 @@ GetVipController
         vipDialog = new BuyVip(parentComponent);
         DecimalFormat accountTem = new DecimalFormat("######0.00");
         vipDialog.getBalance().setText("" + accountTem.format(user.getAccount()));
-        if (Objects.equals(user.getVip(), "Big"))
+        if (Objects.equals(user.getVip(), "Premium"))
         {
             lock[0] = true;
             lock[1] = true;
@@ -196,7 +196,7 @@ GetVipController
                     {
                         user.setAccount(Double.parseDouble(vipDialog.getBalance().getText()));
                         if(vipDialog.getBig().isSelected())
-                            user.setVip("Big");
+                            user.setVip("Premium");
                         else
                         {
                             if (vipDialog.getVideo().isSelected())

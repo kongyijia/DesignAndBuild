@@ -1,7 +1,6 @@
 package view.function;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicBorders;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
@@ -168,7 +167,7 @@ public class FunctionPanel extends JLayeredPane implements config {
     /**
      * This method will create different view button correspond to different role
      *
-     * @param role is current logged client's role
+     * @param role current logged client's role
      */
     public void button_init(int role){
         if(role == 2){

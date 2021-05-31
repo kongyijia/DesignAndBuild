@@ -3,6 +3,10 @@ package util;
 import javax.swing.*;
 import java.util.Locale;
 
+/**
+ * This interface is mainly used to store the constants of the entire project, as well as some configurations.
+ */
+
 public interface config {
      int FRAME_WIDTH = 1200;
      int FRAME_HEIGHT = 600;
@@ -36,6 +40,9 @@ public interface config {
 
      Object lock = new Object();
 
+     /**
+      *  Configuration when the project is initialized
+      */
      static void init()
      {
           Locale.setDefault(Locale.ENGLISH);
