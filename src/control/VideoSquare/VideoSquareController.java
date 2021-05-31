@@ -133,6 +133,7 @@ public class VideoSquareController extends Controller implements ActionListener 
                             JOptionPane.showMessageDialog(null, "Level is not satisfied!!");
                         else {
                             VideoPlayerLauncher a = new VideoPlayerLauncher();
+                            client = MainFrame.getInstance().getClient();
                             try {
                                 int learningTime = (int) a.creatplayer(video.getSrc());
                                 int total = ((User) client).getLearningTime() + learningTime;
@@ -143,6 +144,7 @@ public class VideoSquareController extends Controller implements ActionListener 
                                 }
                                 ClientMapping.modify(client);
                                 ClientMapping.modifyRecordHistory(client.getId(), new Client.RecordHistory(video.getId(), learningTime, 0, new Date()));
+                                MainFrame.getInstance().setClient(client.getId());
                             } catch (Exception exception) {
                                 exception.printStackTrace();
                             }

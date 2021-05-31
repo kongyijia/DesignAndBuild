@@ -2,6 +2,7 @@ package control.videoManagement;
 
 import control.Controller;
 import control.MainFrame;
+import control.VideoSquare.VideoSquareController;
 import it.sauronsoftware.jave.EncoderException;
 import model.Video;
 import model.mapping.VideoMapping;
@@ -20,6 +21,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ *  This class is inherited from {@link Controller}
+ *  <br>
+ *  This class mainly focus on the process of adding new Video information
+ *  <br>
+ *  It provides some specific method for coach and admin to add new videos
+ *  <br>
+ *
+ *  @author Zai Song
+ *  @version 1.0
+ *  @since 23 April 2021
+ */
 public class UploadVideoController extends Controller implements ActionListener {
 
     protected UpLoadVideo upLoadVideo;
@@ -36,6 +49,10 @@ public class UploadVideoController extends Controller implements ActionListener 
         init();
     }
 
+    /**
+     * init layout and UI
+     * this will generate basic ui for coach and admin to type in some basic info of a new video
+     */
     private void init(){
         this.upLoadVideo = (UpLoadVideo) panel;
         this.uploadForm = this.upLoadVideo.getUploadForm();
@@ -45,6 +62,10 @@ public class UploadVideoController extends Controller implements ActionListener 
         this.setH_gap(200);
     }
 
+    /**
+     * get type name from database
+     * @return all the video type name in ArrayList
+     */
     protected static ArrayList<String> getTypes(){
         try {
             return VideoTypeMapping.readAllVideoTypes();
@@ -54,6 +75,10 @@ public class UploadVideoController extends Controller implements ActionListener 
         return null;
     }
 
+    /**
+     * bind action listener for buttons
+     * enable some buttons to react to users or coaches action
+     */
     private void bindListener(){
         this.uploadForm.getAddType().addActionListener(this);
         this.uploadForm.getShowFileChooserButton().addActionListener(this);
@@ -64,10 +89,18 @@ public class UploadVideoController extends Controller implements ActionListener 
         this.addTypeModal.getCancelButton().addActionListener(this);
     }
 
+    /**
+     * make UI visible to coach and admin
+     */
     public void showPanel() {
         this.upLoadVideo.showPanel();
     }
 
+    /**
+     * to generate id for the new video
+     * @return the least integer that is larger than the largest id in database, use it as the id of new Video
+     * @throws FileNotFoundException
+     */
     public int idIncrement() throws FileNotFoundException {
         ArrayList<Video> videos = VideoMapping.readAllVideos();
         int x = 0;
@@ -79,6 +112,11 @@ public class UploadVideoController extends Controller implements ActionListener 
         return x + 1;
     }
 
+    /**
+     * to generate {@link Video} for the new video
+     * @return An object {@link Video} which contains all the info required to add a new video
+     * @throws FileNotFoundException
+     */
     public Video generateVideo() throws FileNotFoundException {
         int id = this.idIncrement();
         int author = MainFrame.getInstance().getClient().getId();
@@ -88,6 +126,12 @@ public class UploadVideoController extends Controller implements ActionListener 
         return new Video(id,author,name,tag,types);
     }
 
+    /**
+     * this method is called when admin or coach try to confirm their info for new video
+     * validity checking are include in this function
+     * if it pass all the checking, the information will be stored
+     * @throws IOException
+     */
     private void onConfirm(){
         if (this.uploadForm.getVideoNameTextField().equals("")){
             Util.showDialog(MainFrame.getInstance(), "Your video name cannot be empty");
@@ -107,6 +151,9 @@ public class UploadVideoController extends Controller implements ActionListener 
         }
     }
 
+    /**
+     * to show the file chooser admin or coach used to select source video
+     */
     public void onShowFileChooserButton(){
         JFileChooser jFileChooser = this.uploadForm.getJFileChooser();
         int result  = jFileChooser.showOpenDialog(null);
@@ -117,6 +164,12 @@ public class UploadVideoController extends Controller implements ActionListener 
         }
     }
 
+    /**
+     * this method is called when admin or coach try to confirm their new video type
+     * validity checking are include in this method
+     * if it pass all the checking, the information will be stored
+     * @throws IOException
+     */
     public void onAddTypeModal(){
         String arg = this.addTypeModal.getJTextField();
         if(arg.length() == 0){
@@ -134,6 +187,11 @@ public class UploadVideoController extends Controller implements ActionListener 
         }
     }
 
+    /**
+     * react to admin's or coach's action
+     * specify which part of the UI is currently interact with the user or coach
+     * @param e
+     */
     public void onAction(ActionEvent e) {
         if(e.getSource() == this.uploadForm.getAddType()){
             this.addTypeModal.setVisible(true);
@@ -148,6 +206,11 @@ public class UploadVideoController extends Controller implements ActionListener 
         }
     }
 
+    /**
+     * reset the form
+     * clean up all the value in current form
+     * replace them with initial value or null or ""
+     */
     public void resetAll(){
         this.uploadForm.setVideoTextField("");
         this.uploadForm.setVideoTagComboBox(1);
@@ -155,6 +218,11 @@ public class UploadVideoController extends Controller implements ActionListener 
         this.uploadForm.setVideoSrcTextField("");
     }
 
+    /**
+     * react to admin's or coach's action
+     * specify which part of the UI is currently interact with the user or coach
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         this.onAction(e);
@@ -163,6 +231,10 @@ public class UploadVideoController extends Controller implements ActionListener 
         }
     }
 
+    /**
+     * every time the main function panel turn to this panel
+     * this method will be called
+     */
     @Override
     public void update() {
         resetAll();

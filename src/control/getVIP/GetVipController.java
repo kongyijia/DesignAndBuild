@@ -17,13 +17,32 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
-public class
-GetVipController
+/**
+ * <p>
+ *     Class {@code GetVipController} is the controller of class {@code BuyVip}.
+ * </p>
+ * @see BuyVip
+ *
+ * @author Zhanao zhang
+ * @date 2021/5/31 17:51
+ * @version V1.0
+ */
+public class GetVipController
 {
     BuyVip vipDialog = null;
     private User user = null;
     private Component parentComponent = null;
     final boolean[] lock = {false,false,false};
+    /**
+     *
+     * Constructor
+     * @param parentComponent parent component
+     * @param user Client
+     * @return  void
+     * @author Zhanao Zhang
+     * @date 2021/5/31 17:57
+     * @version V1.0
+     */
     public GetVipController(Component parentComponent, Client user)
     {
         this.user = (User) user;
@@ -31,12 +50,20 @@ GetVipController
         init();
     }
 
+    /**
+     *
+     * Initialize the vip purchase interface.
+     * @return void
+     * @author Zhanao Zhang
+     * @date 2021/5/31 17:51
+     * @version V1.0
+     */
     private void init()
     {
         vipDialog = new BuyVip(parentComponent);
         DecimalFormat accountTem = new DecimalFormat("######0.00");
         vipDialog.getBalance().setText("" + accountTem.format(user.getAccount()));
-        if (Objects.equals(user.getVip(), "Big"))
+        if (Objects.equals(user.getVip(), "Premium"))
         {
             lock[0] = true;
             lock[1] = true;
@@ -63,6 +90,15 @@ GetVipController
         addButton();
         vipDialog.setVisible(true);
     }
+
+    /**
+     *
+     * Add button action listener.
+     * @return void
+     * @author Zhanao Zhang
+     * @date 2021/5/31 17:53
+     * @version V1.0
+     */
     private void addButton()
     {
         final boolean[] flag = {false};
@@ -196,7 +232,7 @@ GetVipController
                     {
                         user.setAccount(Double.parseDouble(vipDialog.getBalance().getText()));
                         if(vipDialog.getBig().isSelected())
-                            user.setVip("Big");
+                            user.setVip("Premium");
                         else
                         {
                             if (vipDialog.getVideo().isSelected())

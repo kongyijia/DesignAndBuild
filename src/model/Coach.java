@@ -11,9 +11,18 @@ import java.util.ArrayList;
  * @since 28 May 2021
  */
 public class Coach extends Client {
-    private int level; // 0: 低级（默认）; 1: 高级; 2: 特级
+    /**
+     * Coach level. {@code 0} is normal;{@code 1} is advanced;{@code 2} is outstanding.
+     */
+    private int level;
+    /**
+     * Coach description
+     */
     private String description;
 
+    /**
+     * Constructor of {@link Coach}. Mainly used in fastJSON.
+     */
     public Coach(int id, String nickName, String password, int sex, String phone, String email, int role
             , boolean cancel, ArrayList<Client.RecordHistory> recordHistory, String avatarSrc, int level
             , String description) {
@@ -22,12 +31,29 @@ public class Coach extends Client {
         this.description = description;
     }
 
+    /**
+     * Constructor of {@link Coach}. Mainly used in fastJSON.
+     */
     public Coach(int id, String nickName, String password, int sex, String phone, String email, int role, int level, String description) {
         super(id, nickName, password, sex, phone, email, role);
         this.level = level;
         this.description = description;
     }
 
+    /**
+     * Constructor of {@link Coach}. With default value.
+     * <br>
+     * {@link Coach#level} is {@code 0}
+     *
+     * @param id          coach id
+     * @param nickName    coach nickname
+     * @param password    coach password
+     * @param sex         coach sex
+     * @param phone       coach phone number
+     * @param email       coach email
+     * @param role        coach role, which is {@code 1}
+     * @param description coach description
+     */
     public Coach(int id, String nickName, String password, int sex, String phone, String email, int role, String description) {
         super(id, nickName, password, sex, phone, email, role);
         this.description = description;
@@ -35,6 +61,21 @@ public class Coach extends Client {
         this.level = 0;
     }
 
+    /**
+     * Constructor of {@link Coach}. With default value.
+     * <br>
+     * {@link Coach#level} is {@code 0}
+     * <br>
+     * {@link Coach#description} is an empty {@link String}
+     *
+     * @param id       coach id
+     * @param nickName coach nickname
+     * @param password coach password
+     * @param sex      coach sex
+     * @param phone    coach phone number
+     * @param email    coach email
+     * @param role     coach role, which is {@code 1}
+     */
     public Coach(int id, String nickName, String password, int sex, String phone, String email, int role) {
         super(id, nickName, password, sex, phone, email, role);
         // default value
@@ -42,26 +83,49 @@ public class Coach extends Client {
         this.level = 0;
     }
 
+    /**
+     * Constructor with none params of {@link Coach}. Mainly used in fastJSON.
+     * <br>
+     * Default value: {@link Coach#level} is {@code 0}
+     */
     public Coach() {
         this.level = 0;
     }
 
+    /**
+     * @return {@link Coach#level}
+     */
     public int getLevel() {
         return level;
     }
 
+    /**
+     * @param level {@link Coach#level}
+     */
     public void setLevel(int level) {
         this.level = level;
     }
 
+    /**
+     * @return {@link Coach#description}
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @param description {@link Coach#description}
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Convert a certain level of a coach to price of the lecture.
+     *
+     * @param coach the coach you want to get whose price of the course
+     * @return the price
+     */
     public static double level2price(Coach coach) {
         return (coach.getLevel() + 1) * 400;
     }

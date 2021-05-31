@@ -3,6 +3,14 @@ package view.courseBook;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class is used to display the course type.
+ *
+ * @author Jufeng Sun
+ * @version 1.0
+ * @since 16 May 2021
+ */
+
 public class SingleCoursePanel extends JPanel {
     private String courseName;
     private JLabel nameLabel;

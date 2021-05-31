@@ -13,8 +13,16 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @description This class is used to control view display and data interaction of {@link CourseBookPanel}
+ *
+ * @author Jufeng Sun
+ * @version 1.0
+ * @since 16 May 2021
+ */
+
 public class CourseBookController extends Controller {
-    private CourseBookPanel courseBookPanel;
+    private final CourseBookPanel courseBookPanel;
     private String courseType = "";
 
     public CourseBookController() {
@@ -27,6 +35,11 @@ public class CourseBookController extends Controller {
         update();
     }
 
+    /**
+     * This method is used to search for course types that meet the filter criteria.
+     *
+     * @return Course types which meet the filter criteria
+     */
     private ArrayList<String> searchTypes() {
         ArrayList<String> types = new ArrayList<>();
         String type = courseBookPanel.getSearchInputField().getText();
@@ -43,6 +56,9 @@ public class CourseBookController extends Controller {
         return types;
     }
 
+    /**
+     * This method will use {@link SingleCoursePanel} to display qualified coach information in {@link CourseBookPanel} page
+     */
     private void showCourses() {
         courseBookPanel.getDataPanel().removeAll();
         courseBookPanel.getCourseMap().clear();
@@ -83,16 +99,27 @@ public class CourseBookController extends Controller {
         courseBookPanel.updateUI();
     }
 
+    /**
+     * This method is used to clear the search information
+     */
     private void reset(){
         courseBookPanel.getSearchInputField().setText("");
     }
 
+    /**
+     * This method is used to refresh the {@link CourseBookPanel} page
+     */
     @Override
     public void update() {
         reset();
         showCourses();
     }
 
+    /**
+     * This method is used to get currently selected course type
+     *
+     * @return Currently selected course type
+     */
     public String getCourseType() {
         return courseType;
     }

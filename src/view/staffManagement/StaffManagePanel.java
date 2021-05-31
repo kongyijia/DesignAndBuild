@@ -39,6 +39,9 @@ public class StaffManagePanel extends JPanel {
         init_infoPanel();
     }
 
+    /**
+     *  This method is used to initialize the search information panel in {@link StaffManagePanel}
+     */
     private void init_searchPanel() {
         searchPanel = new JPanel();
         searchPanel.setLayout(null);

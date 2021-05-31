@@ -4,7 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-
+/**
+ * UI for upload panel
+ *
+ * @author Zai Song
+ * @version 1.0
+ * @since 23 April 2021
+ */
 public class UpLoadVideo extends JPanel {
 
     protected final Instruction instruction = new Instruction();

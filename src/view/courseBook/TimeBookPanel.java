@@ -9,6 +9,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * This class is used to display the course schedule in the course selection interface,
+ * and the user can see the available courses and the non-selectable courses in each week
+ *
+ * @description This class is used for users to select courses, mainly used to select course schedule.
+ * @author Jufeng Sun
+ * @version 1.0
+ * @since 16 May 2021
+ */
+
 public class TimeBookPanel extends JPanel {
     private static final int INFO_PANEL_HEIGHT = 50;
     public static final int LABELWIDTH=120;
@@ -121,6 +131,13 @@ public class TimeBookPanel extends JPanel {
         this.add(hintPanel);
     }
 
+    /**
+     * Used to determine the displayed date
+     *
+     * @param dayOffset Offset value of week number, the value of this week is 0,
+     *                  the value of the previous week is -1,
+     *                  and the value of the next week is 1
+     */
     public void showDate(int dayOffset) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();

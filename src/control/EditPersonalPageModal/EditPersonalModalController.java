@@ -12,6 +12,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**
+ *  This class is the superclass of {@link EditUserModalController} and {@link EditCoachModalController}
+ *  <br>
+ *  This class mainly focus on modifying personal information
+ *  <br>
+ *  It provides some general methods for other classes to control the process of changing personal information
+ *  <br>
+ *
+ *  @author Zai Song
+ *  @version 1.0
+ *  @since 23 April 2021
+ */
+
 public class EditPersonalModalController implements ActionListener {
 
     protected EditPersonalModal editPersonalModal;
@@ -32,6 +45,9 @@ public class EditPersonalModalController implements ActionListener {
         return jFrame;
     }
 
+    /**
+     * initial JFrame, the UI for user or coach to edit their personal info
+     */
     protected void initJFrame(){
         this.jFrame = new JFrame("Edit Personal Info");
         this.jFrame.setBounds(0,0,350,650);
@@ -41,17 +57,29 @@ public class EditPersonalModalController implements ActionListener {
         this.jFrame.setVisible(true);
     }
 
+    /**
+     * bind action listener for buttons
+     * enable some buttons to react to users or coaches action
+     */
     protected void bindActionListener(){
         this.editPersonalModal.getConfirmButton().addActionListener(this);
         this.editPersonalModal.getCancelButton().addActionListener(this);
     }
 
+    /**
+     * show UI when users and coaches want to
+     */
     protected void showModal(){
         this.editPersonalModal.initModalLayout();
         this.bindActionListener();
         this.initJFrame();
     }
 
+    /**
+     * get some general values that users or coaches just changed
+     * set them into Client
+     * when this finished, local variable {@link Client} is updated
+     */
     protected void edit(){
         this.client.setNickName(this.editPersonalModal.getNickNameTextField());
         this.client.setSex(this.editPersonalModal.getSexualityComboBox());
@@ -59,6 +87,12 @@ public class EditPersonalModalController implements ActionListener {
         this.client.setEmail(this.editPersonalModal.getEmailTextField());
     }
 
+    /**
+     * this function is called when user or coach try to confirm their changes on their info
+     * validity checking are include in this function
+     * if it pass all the checking, the information will be stored
+     * @throws IOException
+     */
     protected void onConfirm() throws IOException {
         if(this.editPersonalModal.getNickNameTextField().equals("")){
             Util.showDialog(this.jFrame, "Your nick name cannot be empty!");
@@ -87,10 +121,18 @@ public class EditPersonalModalController implements ActionListener {
         }
     }
 
+    /**
+     * interface for exiting this function
+     */
     protected void onCancel(){
         this.jFrame.dispose();
     }
 
+    /**
+     * react to user's or coach's action
+     * specify which part of the UI is currently interact with the user or coach
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.editPersonalModal.getConfirmButton()){

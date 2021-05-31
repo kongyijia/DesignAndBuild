@@ -16,10 +16,18 @@ import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
+/**
+ * @description This class is used to control view display and data interaction of {@link CoachBookPanel}
+ *
+ * @author Jufeng Sun
+ * @version 1.0
+ * @since 16 May 2021
+ */
 
 public class CoachBookController extends Controller {
-    private CoachBookPanel coachBookPanel;
+    private final CoachBookPanel coachBookPanel;
 
     private int coachID;
 
@@ -31,6 +39,9 @@ public class CoachBookController extends Controller {
         update();
     }
 
+    /**
+     * This method is used to refresh the {@link CoachBookPanel} page
+     */
     @Override
     public void update() {
         search_reset();
@@ -39,6 +50,9 @@ public class CoachBookController extends Controller {
         coachBookPanel.updateUI();
     }
 
+    /**
+     * This method will use {@link PersonPanel} to display qualified coach information in {@link CoachBookPanel} page
+     */
     private void showCoachInfo(){
         // clear old panel
         coachBookPanel.getDataPanel().removeAll();
@@ -77,6 +91,11 @@ public class CoachBookController extends Controller {
         }
     }
 
+    /**
+     * This method is used to search for coaches that meet the filter criteria.
+     *
+     * @return Coaches who meet the filter criteria
+     */
     private ArrayList<Coach> search_coaches(){
         HashMap<String, String> searchMap = new HashMap<>();
         searchMap.put("cancel","false");
@@ -84,9 +103,9 @@ public class CoachBookController extends Controller {
         if (!coachBookPanel.getSearchInputField().getText().equals(""))
             searchMap.put("nickName", coachBookPanel.getSearchInputField().getText());
         coachBookPanel.getSearchComboBoxMap().forEach((k, v) -> {
-            if (!v.getComboBox().getSelectedItem().equals("All")) {
+            if (!"All".equals(v.getComboBox().getSelectedItem())) {
                 if (k.equals("sex"))
-                    searchMap.put(k, v.getComboBox().getSelectedItem().equals("male") ? "1" : "0");
+                    searchMap.put(k, Objects.equals(v.getComboBox().getSelectedItem(), "male") ? "1" : "0");
                 else
                     searchMap.put(k, (String) v.getComboBox().getSelectedItem());
             }
@@ -101,7 +120,9 @@ public class CoachBookController extends Controller {
         return coaches;
     }
 
-    // clear the search information
+    /**
+     * This method is used to clear the search information
+     */
     private void search_reset() {
         coachBookPanel.getSearchComboBoxMap().forEach((k, v) -> v.getComboBox().setSelectedIndex(0));
         coachBookPanel.getSearchInputField().setText("");

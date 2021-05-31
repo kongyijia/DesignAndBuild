@@ -19,10 +19,18 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * @description This class is used to control view display and data interaction of {@link TimeBookPanel}
+ *
+ * @author Jufeng Sun
+ * @version 1.0
+ * @since 16 May 2021
+ */
+
 public class TimeBookController extends Controller {
     public static final String[] START_TIMES = new String[]{"09:00:00", "13:00:00", "16:00:00", "19:00:00"};
 
-    private TimeBookPanel timeBookPanel;
+    private final TimeBookPanel timeBookPanel;
     private int dayOffset = 0;
 
     public TimeBookController() {
@@ -42,6 +50,9 @@ public class TimeBookController extends Controller {
         update();
     }
 
+    /**
+     * This method is used to refresh the {@link TimeBookPanel} page
+     */
     @Override
     public void update() {
         timeBookPanel.showDate(dayOffset = 0);
@@ -50,6 +61,9 @@ public class TimeBookController extends Controller {
         timeBookPanel.updateUI();
     }
 
+    /**
+     * This method will use {@link SingleSchedulePanel} to display qualified coach information in {@link TimeBookPanel} page
+     */
     private void showScheduleInfo() {
         timeBookPanel.getSchedulePanel().removeAll();
         SingleSchedulePanel[][] schedules = new SingleSchedulePanel[4][7];
@@ -113,15 +127,23 @@ public class TimeBookController extends Controller {
         }
     }
 
+    /**
+     * This listener is designed for {@link SingleSchedulePanel} and is used to select the course you want to book
+     */
     class CourseBookMouseAdapter extends MouseAdapter {
-        private int i;
-        private int j;
+        private final int i;
+        private final int j;
 
         public CourseBookMouseAdapter(int i, int j) {
             this.i = i;
             this.j = j;
         }
 
+        /**
+         * Double click to select the course you want to book
+         *
+         * @param e MouseEvent
+         */
         @Override
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
@@ -138,7 +160,7 @@ public class TimeBookController extends Controller {
                     coach = ClientMapping.findCoach(coachSearch).get(0);
 
                     double discount = 1;
-                    if ( user.getVip().equals("Big") || user.getVip().equals("Course") )
+                    if ( user.getVip().equals("Premium") || user.getVip().equals("Course") )
                         discount = 0.8;
                     coursePrice = Coach.level2price(coach) * discount;
                 } catch (Exception exception) {

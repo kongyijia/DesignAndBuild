@@ -5,6 +5,13 @@ import view.videoManagement.Const;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * UI for edit adding and modify video
+ *
+ * @author Zai Song
+ * @version 1.0
+ * @since 23 April 2021
+ */
 public class Instruction extends JPanel {
 
     private final JLabel title = new JLabel(Const.VM_TITLE);

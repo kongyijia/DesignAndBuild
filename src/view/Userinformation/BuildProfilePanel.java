@@ -5,6 +5,23 @@ import control.MainFrame;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * <p>
+ *     Class {@code BuildProfilePanel} is a class extends JPanel.
+ * </p>
+ * <p>
+ *     A container that include the {@code Client} function.<br>
+ *         such as : <pre>
+ *             change profile picture.
+ *             change password.
+ *             modify information.
+ *             top-up.
+ *             get Vip.
+ *         </pre>
+ * </p>
+ * @author Zhanao Zhang
+ * @version V1.0
+ */
 public class BuildProfilePanel extends JPanel
 {
     private static final JButton profileButton = new JButton("Profile Picture");
@@ -13,31 +30,83 @@ public class BuildProfilePanel extends JPanel
     private static final JButton topup = new JButton("Top Up");
     private static final JButton getVip = new JButton("Get VIP!! 0.0");
 
+    /**
+     *
+     * Getter function of {@code profile} button.
+     * @return javax.swing.JButton
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:22
+     * @version V1.0
+     */
     public static JButton getProfilebutton()
     {
         return profileButton;
     }
-
+    /**
+     *
+     * Getter function of {@code personalInformation} button.
+     * @see control.Userinformation.UserInformationController
+     * @return javax.swing.JButton
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:22
+     * @version V1.0
+     */
     public static JButton getPersonalInformation()
     {
         return personalInformation;
     }
 
+    /**
+     *
+     * Getter function of {@code changePassword} button.
+     * @see control.Userinformation.UserInformationController
+     * @return javax.swing.JButton
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:22
+     * @version V1.0
+     */
     public static JButton getChangePassword()
     {
         return changePassword;
     }
 
+    /**
+     *
+     * Getter function of {@code topUp} button.
+     * @see control.Userinformation.UserInformationController
+     * @return javax.swing.JButton
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:22
+     * @version V1.0
+     */
     public static JButton getTopup()
     {
         return topup;
     }
 
+    /**
+     *
+     * Getter function of {@code getVip} button.
+     * @see control.Userinformation.UserInformationController
+     * @return javax.swing.JButton
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:22
+     * @version V1.0
+     */
     public static JButton getGetVip()
     {
         return getVip;
     }
 
+    /**
+     *
+     * Initialize the {@code Client} information panel.
+     * @see UserDescription
+     * @return void
+     * @author Zhanao Zhang
+     * @date 2021/5/31 21:25
+     * @version V1.0
+     */
     public BuildProfilePanel()
     {
         this.setSize(200,510);
