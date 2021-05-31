@@ -98,16 +98,15 @@ public class Util {
      * @return {@link java.sql.Time} Corresponding time after conversion
      */
     public static java.sql.Time strToTime(String strDate) {
-        String str = strDate;
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         Date d = null;
         try {
-            d = format.parse(str);
+            d = format.parse(strDate);
         } catch (Exception e) {
             e.printStackTrace();
         }
         java.sql.Time time = new java.sql.Time(d.getTime());
-        return time.valueOf(str);
+        return time.valueOf(strDate);
     }
 
     /**

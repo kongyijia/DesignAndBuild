@@ -9,17 +9,31 @@ import model.mapping.ClientMapping;
 import util.Util;
 import util.config;
 import view.Userinformation.BuildInformation;
-import view.staffManagement.*;
+import view.staffManagement.ClientDetailDialog;
+import view.staffManagement.InsertButtonPanel;
+import view.staffManagement.PersonPanel;
+import view.staffManagement.StaffManagePanel;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
+
+/**
+ * @description This class is used to control view display and data interaction of {@link StaffManagePanel}
+ *
+ * @author Jufeng Sun
+ * @version 1.0
+ * @since 16 May 2021
+ */
 
 public class StaffManageController extends Controller {
-    private StaffManagePanel staffManagePanel;
+    private final StaffManagePanel staffManagePanel;
 
     public StaffManageController() {
         super(config.STAFF_MANAGE_NAME, new StaffManagePanel());
@@ -39,8 +53,7 @@ public class StaffManageController extends Controller {
                     comboBox.removeAllItems();
                     comboBox.addItem("All");
                     String[] levelName = new String[]{"normal", "advanced", "outstanding"};
-                    for (int i = 0; i < levelName.length; i++)
-                        comboBox.addItem(levelName[i]);
+                    for (String s : levelName) comboBox.addItem(s);
                 }
                 else if (e.getItem().equals("User")) {
                     comboBox.removeAllItems();
@@ -54,37 +67,48 @@ public class StaffManageController extends Controller {
         update();
     }
 
-    // clear the search information
+    /**
+     * This method is used to clear the search information
+     */
     private void search_reset() {
         staffManagePanel.getSearchComboBoxMap().forEach((k, v) -> v.getComboBox().setSelectedIndex(0));
         staffManagePanel.getSearchInputField().setText("");
     }
 
+    /**
+     * This method is used to search for clients that meet the filter criteria.
+     *
+     * @return Clients which meet the filter criteria
+     */
     private ArrayList<Client> search_clients() {
         HashMap<String, String> searchMap = new HashMap<>();
         // add search information
         if (!staffManagePanel.getSearchInputField().getText().equals(""))
             searchMap.put("nickName", staffManagePanel.getSearchInputField().getText());
         staffManagePanel.getSearchComboBoxMap().forEach((k, v) -> {
-            if (!v.getComboBox().getSelectedItem().equals("All")) {
-                if (k.equals("sex"))
-                    searchMap.put(k, v.getComboBox().getSelectedItem().equals("female") ? "0" : "1");
-                else if (k.equals("role")) {
-                    String role = (String) v.getComboBox().getSelectedItem();
-                    if ("Admin".equals(role))
-                        searchMap.put(k, "0");
-                    else if ("Coach".equals(role))
-                        searchMap.put(k, "1");
-                    else if ("User".equals(role))
-                        searchMap.put(k, "2");
-                } else if (k.equals("cancel")) {
-                    searchMap.put(k, v.getComboBox().getSelectedItem().equals("Active") ? "false" : "true");
-                }
-                else if (k.equals("level")) {
-                    searchMap.put(k, (v.getComboBox().getSelectedIndex() - 1) + "");
-                }
-                else {
-                    searchMap.put(k, (String) v.getComboBox().getSelectedItem());
+            if (!Objects.equals(v.getComboBox().getSelectedItem(), "All")) {
+                switch (k) {
+                    case "sex":
+                        searchMap.put(k, v.getComboBox().getSelectedItem().equals("female") ? "0" : "1");
+                        break;
+                    case "role":
+                        String role = (String) v.getComboBox().getSelectedItem();
+                        if ("Admin".equals(role))
+                            searchMap.put(k, "0");
+                        else if ("Coach".equals(role))
+                            searchMap.put(k, "1");
+                        else if ("User".equals(role))
+                            searchMap.put(k, "2");
+                        break;
+                    case "cancel":
+                        searchMap.put(k, v.getComboBox().getSelectedItem().equals("Active") ? "false" : "true");
+                        break;
+                    case "level":
+                        searchMap.put(k, (v.getComboBox().getSelectedIndex() - 1) + "");
+                        break;
+                    default:
+                        searchMap.put(k, (String) v.getComboBox().getSelectedItem());
+                        break;
                 }
             }
         });
@@ -99,6 +123,9 @@ public class StaffManageController extends Controller {
         return clients;
     }
 
+    /**
+     * This method will use {@link PersonPanel} to display qualified client information in {@link StaffManagePanel} page
+     */
     private void showClientInfo() {
         // clear old panel
         staffManagePanel.getInfoPanel().removeAll();
@@ -136,12 +163,19 @@ public class StaffManageController extends Controller {
             Util.showDialog(staffManagePanel, "No qualified clients were found!");
     }
 
+    /**
+     * This method is used to refresh the {@link StaffManagePanel} page
+     */
     @Override
     public void update() {
         search_reset();
         showClientInfo();
     }
 
+    /**
+     * This listener is designed for {@link StaffManagePanel}
+     * and is used to search for qualified clients.
+     */
     class StaffManageListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -157,9 +191,12 @@ public class StaffManageController extends Controller {
         }
     }
 
+    /**
+     * This listener is designed for {@link PersonPanel} and is used to modify or delete the chose client
+     */
     class PersonPanelListener implements ActionListener {
-        private int k;
-        private PersonPanel v;
+        private final int k;
+        private final PersonPanel v;
 
         public PersonPanelListener(int k, PersonPanel v) {
             this.k = k;
@@ -170,7 +207,7 @@ public class StaffManageController extends Controller {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == v.getDeleteButton()) {
                 Object[] buttonName = {"Confirm", "Cancel"};
-                int result = Integer.MAX_VALUE;
+                int result;
                 int flag = 0;
                 if (k == MainFrame.getInstance().getClient().getId()){
                     flag = 1;

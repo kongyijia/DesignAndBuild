@@ -1,8 +1,15 @@
 package model;
 
 import model.mapping.ClientMapping;
-
 import java.util.HashMap;
+
+/**
+ * Course information model class. The information consist of {@link User}, {@link Coach} and {@link Course}.
+ *
+ * @author Jufeng Sun
+ * @version 1.0
+ * @since 18 May 2021
+ */
 
 public class CourseInfo{
     private Coach coach;
@@ -18,6 +25,13 @@ public class CourseInfo{
     public CourseInfo() {
     }
 
+    /**
+     * This method is used to integrate the {@link Coach} and {@link User} information corresponding to the {@link Course}
+     * and convert it to {@link CourseInfo}
+     *
+     * @param course Courses that need to be displayed
+     * @return course information
+     */
     public static CourseInfo generateCourseInfo(Course course){
         try{
             HashMap<String,String> searchUser = new HashMap<>();
