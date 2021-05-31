@@ -200,6 +200,7 @@ public class TimeBookController extends Controller {
                             ClientMapping.modify(user);
                             Util.showDialog(timeBookPanel, "Book Success! ");
                             update();
+                            MainFrame.getInstance().setClient(user.getId());
                             MainFrame.getInstance().goTo(config.VIDEOSQUARE_PANEL_NAME);
                         }
                         else

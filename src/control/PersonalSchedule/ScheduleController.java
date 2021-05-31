@@ -7,6 +7,7 @@ import model.Course;
 import model.User;
 import model.mapping.ClientMapping;
 import model.mapping.CourseMapping;
+import util.Util;
 import util.config;
 import view.Schedule.Schedule2;
 
@@ -133,10 +134,10 @@ public class ScheduleController extends Controller {
                    user.setAccount(user.getAccount()+findCourse(dayLabel[j].getText(),i).get(0).getPrice());
                     int returnValue = ClientMapping.modify(user);
                     if (returnValue == ClientMapping.SUCCESS) {
-                    } else if (returnValue == ClientMapping.CLIENT_NOT_FOUND) {
-                        // if can not found the (user, coach or administrator)
+                        Util.showDialog(null,"Delete success");
                     }
-                   CourseMapping.delete(findCourse(dayLabel[j].getText(),i).get(0).getId());
+                    CourseMapping.delete(findCourse(dayLabel[j].getText(),i).get(0).getId());
+                    MainFrame.getInstance().setClient(user.getId());
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }

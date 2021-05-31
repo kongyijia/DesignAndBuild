@@ -34,7 +34,7 @@
 	"role":0,
 	"sex":0
 },{
-	"account":160.0,
+	"account":2800.0,
 	"avatarSrc":"data/image/4bddde9c-4485-4e5a-91cb-02e5dcf7ef0c.jpg",
 	"cancel":false,
 	"courseSubscription":[
@@ -54,10 +54,10 @@
 	"description":"12345ghjkdsalfegadafds\n1111",
 	"email":"98765@qq.com",
 	"id":987678,
-	"learningTime":42,
+	"learningTime":54,
 	"level":1,
 	"nickName":"sdf",
-	"password":"1",
+	"password":"2",
 	"phone":"12345678221",
 	"recordHistory":[
 		{
@@ -65,12 +65,6 @@
 			"learningTime":9,
 			"progress":0,
 			"videoId":5
-		},
-		{
-			"latestPlayingDateTime":"2021-05-31 22:20:19",
-			"learningTime":5,
-			"progress":0,
-			"videoId":2
 		},
 		{
 			"latestPlayingDateTime":"2021-05-31 22:20:32",
@@ -83,14 +77,20 @@
 			"learningTime":13,
 			"progress":0,
 			"videoId":1
+		},
+		{
+			"latestPlayingDateTime":"2021-06-01 01:11:51",
+			"learningTime":12,
+			"progress":0,
+			"videoId":2
 		}
 	],
 	"role":2,
 	"sex":1,
 	"vip":"Premium"
 },{
-	"account":83.45,
-	"avatarSrc":"data/image/default.jpeg",
+	"account":6763.45,
+	"avatarSrc":"data/image/0eb5bdc2-4a01-4e5b-95a4-bba54e911a7b.jpg",
 	"cancel":false,
 	"courseSubscription":[
 		{
@@ -109,23 +109,23 @@
 	"description":"12345ghjkdsalfegadafds\nadsfweoba",
 	"email":"93327537@qq.com",
 	"id":123333,
-	"learningTime":53,
-	"level":1,
+	"learningTime":1108,
+	"level":12,
 	"nickName":"sdf1",
 	"password":"123456",
 	"phone":"1234567890",
 	"recordHistory":[
 		{
-			"latestPlayingDateTime":"2021-05-31 01:54:14",
-			"learningTime":15,
-			"progress":0,
-			"videoId":1
-		},
-		{
 			"latestPlayingDateTime":"2021-05-31 15:09:46",
 			"learningTime":4,
 			"progress":0,
 			"videoId":2
+		},
+		{
+			"latestPlayingDateTime":"2021-06-01 01:24:30",
+			"learningTime":8,
+			"progress":0,
+			"videoId":1
 		}
 	],
 	"role":2,

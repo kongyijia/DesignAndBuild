@@ -27,7 +27,7 @@ public class RecordManageController extends Controller {
     private JTable table;
     private DefaultTableModel model;
     private JScrollPane pane;
-    private String[] factory = new String[]{"client ID", "Nickname", "Video ID", "Where have I watched", "Watching time"};
+    private String[] factory = new String[]{"client ID", "Nickname", "Video ID", "learning time", "Watching time"};
 
     public RecordManageController() {
         super(config.RECORD_MANAGE_NAME, new RecordManagePanel());

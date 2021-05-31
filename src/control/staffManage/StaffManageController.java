@@ -252,7 +252,7 @@ public class StaffManageController extends Controller {
                             "Are you sure to modify level?",
                             "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttonName, buttonName);
                     if (result == JOptionPane.YES_OPTION) {
-                        int newLevel = clientDetail.getLevel().getSelectedIndex();
+                        int newLevel = clientDetail.getLevel().getSelectedIndex()+1;
                         Client newClient = v.getClient();
                         if (v.getClient().getRole() == 1) {
                             ((Coach) newClient).setLevel(newLevel);
