@@ -5,6 +5,13 @@ import view.basicComponents.JLabelPro;
 
 import javax.swing.*;
 
+/**
+ * UI for edit Personal Modal
+ *
+ * @author Zai Song
+ * @version 1.0
+ * @since 23 April 2021
+ */
 public class EditPersonalModal extends JPanel{
 
     private final JLabelPro nickNameLabel = new JLabelPro("NickName: ");

@@ -11,7 +11,13 @@ import java.util.ArrayList;
 
 import static view.videoManagement.Const.VM_TAG_EXP;
 
-
+/**
+ * UI for form of upload new video
+ *
+ * @author Zai Song
+ * @version 1.0
+ * @since 23 April 2021
+ */
 public class UploadForm extends JPanel {
 
     private final JLabelPro title = new JLabelPro("Settings", 30);

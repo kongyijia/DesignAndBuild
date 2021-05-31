@@ -9,7 +9,13 @@ import java.awt.*;
 
 import static view.VideoSquare.SearchVideo.SEARCH_PANEL_HEIGHT;
 
-
+/**
+ * UI for video management
+ *
+ * @author Zai Song
+ * @version 1.0
+ * @since 23 April 2021
+ */
 public class VideoManagement extends VideoSquare {
 
     private final JButton uploadButton = new JButton("Add New");

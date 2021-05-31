@@ -1,5 +1,12 @@
 package view.videoManagement;
 
+/**
+ * some description
+ *
+ * @author Zai Song
+ * @version 1.0
+ * @since 23 April 2021
+ */
 public class Const {
 
     public static String VM_TITLE = "Hints: ";
