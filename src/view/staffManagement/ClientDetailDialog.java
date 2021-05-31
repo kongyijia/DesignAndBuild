@@ -108,6 +108,10 @@ public class ClientDetailDialog extends JDialog {
         return VIPLevel;
     }
 
+    /**
+     * This method use {@link BuildInformation} to show the client information
+     * @param information client information {@link BuildInformation}
+     */
     public void setBuildinformation(BuildInformation information) {
         this.remove(buildinformation);
         this.buildinformation = information;

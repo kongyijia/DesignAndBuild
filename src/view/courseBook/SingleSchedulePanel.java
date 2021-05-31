@@ -7,6 +7,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.DecimalFormat;
 
+/**
+ * This class is used to display the information of a single course schedule.
+ *
+ * @description If there is a course, the coach, type and price of the course will be displayed.
+ *              If there is no course, it will be blank.
+ * @author Jufeng Sun
+ * @version 1.0
+ * @since 16 May 2021
+ */
+
 public class SingleSchedulePanel extends JPanel {
     private boolean isAvailable;
 
@@ -14,9 +24,6 @@ public class SingleSchedulePanel extends JPanel {
         this.isAvailable = false;
         this.setLayout(null);
         this.setBackground(Color.lightGray);
-
-        // JLabel userLabel = new JLabel("User: " + courseInfo.getUser().getNickName(), JLabel.LEFT);
-        // userLabel.setBounds(5,10,130,20);
 
         JLabel coachLabel = new JLabel("Coach: " + courseInfo.getCoach().getNickName(), JLabel.LEFT);
         coachLabel.setBounds(5,10,130,20);
@@ -27,7 +34,6 @@ public class SingleSchedulePanel extends JPanel {
         JLabel priceLabel = new JLabel("Price:" + new DecimalFormat("#.00").format(courseInfo.getCourse().getPrice()), JLabel.LEFT);
         priceLabel.setBounds(5,50,130,20);
 
-        // this.add(userLabel);
         this.add(coachLabel);
         this.add(typeLabel);
         this.add(priceLabel);

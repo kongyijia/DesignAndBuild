@@ -13,7 +13,6 @@ import java.awt.*;
  *  @since 16 April 2021
  */
 
-
 public class PeopleSearchComponent {
     private String name;
     private JLabel label;

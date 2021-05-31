@@ -3,6 +3,10 @@ package util;
 import javax.swing.*;
 import java.util.Locale;
 
+/**
+ *
+ */
+
 public interface config {
      int FRAME_WIDTH = 1200;
      int FRAME_HEIGHT = 600;

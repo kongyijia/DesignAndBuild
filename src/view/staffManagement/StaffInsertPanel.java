@@ -7,6 +7,14 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
+/**
+ * @description This class is used in {@link StaffManagePanel} generate new coaches and new administrators panel
+ *
+ * @author Jufeng Sun
+ * @version 1.0
+ * @since 16 May 2021
+ */
+
 public class StaffInsertPanel extends JPanel {
     private HashMap<String, JComponent> insertMap = new HashMap<>();
 
@@ -30,6 +38,9 @@ public class StaffInsertPanel extends JPanel {
         initialize();
     }
 
+    /**
+     * This method is used to initialize {@link StaffInsertPanel}
+     */
     private void initialize(){
         this.setLayout(null);
         this.setSize(new Dimension(config.PAGE_WIDTH, config.PAGE_HEIGHT - 50));
@@ -109,6 +120,10 @@ public class StaffInsertPanel extends JPanel {
         f_message.setVisible(false);
     }
 
+    /**
+     *
+     * @param actionListener
+     */
     public void addListener(ActionListener actionListener){
         this.backButton.addActionListener(actionListener);
         this.confirmButton.addActionListener(actionListener);
@@ -121,9 +136,5 @@ public class StaffInsertPanel extends JPanel {
 
     public JButton getConfirmButton() {
         return confirmButton;
-    }
-
-    public HashMap<String, JComponent> getInsertMap() {
-        return insertMap;
     }
 }
