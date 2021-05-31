@@ -24,7 +24,7 @@ import util.config;
  *  @since 16 April 2021
  */
 
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame implements Cloneable{
     private static MainFrame mainFrame;
     private HashMap<String, Controller> list;      // management list
     private Client client;                         // current logged client
@@ -95,6 +95,11 @@ public class MainFrame extends JFrame{
     }
 
     public Client getClient() {
+        try {
+            return (Client) client.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         return client;
     }
 
@@ -140,4 +145,6 @@ public class MainFrame extends JFrame{
             functionController.goTo(name);
         }
     }
+
+
 }

@@ -199,4 +199,9 @@ public class Client {
             this.latestPlayingDateTime = latestPlayingDateTime;
         }
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }
