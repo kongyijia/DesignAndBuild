@@ -106,6 +106,8 @@ public class CoachBookController extends Controller {
             if (!"All".equals(v.getComboBox().getSelectedItem())) {
                 if (k.equals("sex"))
                     searchMap.put(k, Objects.equals(v.getComboBox().getSelectedItem(), "male") ? "1" : "0");
+                else if (k.equals("level"))
+                    searchMap.put(k,  (v.getComboBox().getSelectedIndex() - 1) + "");
                 else
                     searchMap.put(k, (String) v.getComboBox().getSelectedItem());
             }

@@ -54,7 +54,7 @@ public class CoachBookPanel extends JPanel {
         searchInputField.setBounds(30, 10, 200, INFO_PANEL_HEIGHT - 20);
 
         searchComboBoxMap.put("sex", new PeopleSearchComponent("Sex", new String[]{"All", "male", "female"}, searchComboBoxMap.size()));
-        searchComboBoxMap.put("level", new PeopleSearchComponent("Level", new String[]{"All", "0", "1", "2"}, searchComboBoxMap.size()));
+        searchComboBoxMap.put("level", new PeopleSearchComponent("Level", new String[]{"All", "normal", "advanced", "outstanding"}, searchComboBoxMap.size()));
 
         backButton = new JButton("Back");
         backButton.setBounds(config.PAGE_WIDTH - 100, 10, 80, INFO_PANEL_HEIGHT - 20);
