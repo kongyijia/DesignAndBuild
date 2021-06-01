@@ -255,7 +255,7 @@ public class StaffManageController extends Controller {
                         int newLevel = clientDetail.getLevel().getSelectedIndex()+1;
                         Client newClient = v.getClient();
                         if (v.getClient().getRole() == 1) {
-                            ((Coach) newClient).setLevel(newLevel);
+                            ((Coach) newClient).setLevel(newLevel - 1);
                         } else {
                             ((User) newClient).setLevel(newLevel);
                             ((User) newClient).setLearningTime(newLevel * 100 - 100);

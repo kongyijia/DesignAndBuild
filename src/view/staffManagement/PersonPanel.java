@@ -86,7 +86,7 @@ public class PersonPanel extends JPanel {
 
         // show client email
         emailLabel = new JLabel("E-mail : " + client.getEmail());
-        emailLabel.setBounds(20,100,200,30);
+        emailLabel.setBounds(20,100,250,30);
 
         deleteButton = new JButton("Delete");
         deleteButton.setBounds(50,140,80,25);
