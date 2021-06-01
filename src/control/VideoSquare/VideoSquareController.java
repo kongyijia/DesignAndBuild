@@ -228,7 +228,7 @@ public class VideoSquareController extends Controller implements ActionListener 
         buttonPanel.setBackground(new Color(255, 255, 255));
 
         JLabel videoName = new JLabel("Name: " + video.getName() + " " + " Level: " + video.getTag());
-        videoName.setFont(new Font(null, Font.PLAIN, 18));
+        videoName.setFont(new Font(null, Font.PLAIN, 13));
         JButton button = new JButton();
         button.setBounds(0, 0, P_WIDTH, P_HEIGHT);
         this.addButtonListener(video, button);
