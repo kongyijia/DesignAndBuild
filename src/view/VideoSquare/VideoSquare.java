@@ -4,7 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-
+/**
+ *  This is the view of video search where to show the videos.
+ *
+ *  @author Xinyu Zhou
+ *  @version 1.0
+ *  @since 2021/4/27
+ */
 public class VideoSquare extends JPanel{
 
 	private final JPanel panel= new JPanel();

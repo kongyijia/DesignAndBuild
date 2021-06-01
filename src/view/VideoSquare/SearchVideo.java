@@ -8,7 +8,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import util.config;
-
+/**
+ *  This is the general view of "video and video management"
+ *
+ *  @author Xinyu Zhou
+ *  @version 1.0
+ *  @since 2021/4/27
+ */
 public class SearchVideo extends JPanel{
 	public static final int SEARCH_PANEL_HEIGHT = 50;
 	private JTextField searchInputField1;//name

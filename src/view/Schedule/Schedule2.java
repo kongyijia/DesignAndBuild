@@ -6,6 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+/**
+ *  This is the view of " my course "
+ *
+ *  @author Xinyu Zhou
+ *  @version 1.0
+ *  @since 2021/5/12
+ */
 
 public class Schedule2 extends JPanel {
     private static JButton next = new JButton ("Next");
