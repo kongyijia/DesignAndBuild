@@ -26,7 +26,6 @@ public class BuyVip extends JDialog
     private JToggleButton Video = new JToggleButton("Video");
     private JToggleButton Course = new JToggleButton("Course");
 
-    // 创建一个标签显示消息内容
     private JLabel balanceLabel = new JLabel("Your Balance ");
     private JLabel Balance = new JLabel();
 
@@ -118,25 +117,15 @@ public class BuyVip extends JDialog
      */
     public BuyVip(Component parentComponent) {
 
-        // 创建一个模态对话框
         super(MainFrame.getInstance() ,"Choose Your VIP Type", true);
 
-        // 设置对话框的宽高
         this.setSize(600, 300);
-        // 设置对话框大小不可改变
         this.setResizable(false);
-        // 设置对话框相对显示的位置
         this.setLocationRelativeTo(parentComponent);
 
 
-        // 创建对话框的内容面板, 在面板内可以根据自己的需要添加任何组件并做任意是布局
         JPanel panel = new JPanel();
         panel.setLayout(null);
-
-//        balanceLabel.setOpaque(true);
-//        Balance.setOpaque(true);
-//        balanceLabel.setBackground(Color.GREEN);
-//        Balance.setBackground(Color.GREEN);
 
 
         balanceLabel.setFont(new Font("Times", Font.ITALIC, 15));
@@ -155,7 +144,6 @@ public class BuyVip extends JDialog
         cenBtn.setBounds(330,220,100,40);
 
 
-        // 添加组件到面板
         panel.add(balanceLabel);
         panel.add(Balance);
         panel.add(Big);
@@ -163,8 +151,6 @@ public class BuyVip extends JDialog
         panel.add(Course);
         panel.add(okBtn);
         panel.add(cenBtn);
-
-        // 设置对话框的内容面板
         this.setContentPane(panel);
 
     }

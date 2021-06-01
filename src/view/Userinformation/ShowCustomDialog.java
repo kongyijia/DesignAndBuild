@@ -23,7 +23,7 @@ public class ShowCustomDialog extends JDialog
     private JButton CenBtn = new JButton("Cancel");
     private JButton bt1 = new JButton("show");
     public int times = 0;
-    // 创建一个标签显示消息内容
+
     private JLabel npassword = new JLabel("New Password:");
     private JLabel cpassword = new JLabel("Confirm New Password:");
     private JLabel opassword = new JLabel("Original Password:");
@@ -120,20 +120,14 @@ public class ShowCustomDialog extends JDialog
      */
 
     public ShowCustomDialog(Component parentComponent) {
-
-        // 创建一个模态对话框
         super(MainFrame.getInstance() ,"Change Your Password", true);
         JFrame Owner = MainFrame.getInstance();
 
-        // 设置对话框的宽高
         this.setSize(300, 150);
-        // 设置对话框大小不可改变
         this.setResizable(false);
-        // 设置对话框相对显示的位置
         this.setLocationRelativeTo(parentComponent);
 
 
-        // 创建对话框的内容面板, 在面板内可以根据自己的需要添加任何组件并做任意是布局
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(2,1));
 
@@ -141,7 +135,6 @@ public class ShowCustomDialog extends JDialog
         JPanel btnpanel = new JPanel(new GridLayout(1,2));
 
 
-        // 添加组件到面板
         pwdpanel.add(opassword);
         pwdpanel.add(opwd);
         pwdpanel.add(npassword);
@@ -154,9 +147,7 @@ public class ShowCustomDialog extends JDialog
         panel.add(pwdpanel);
         panel.add(btnpanel);
 
-        // 设置对话框的内容面板
         this.setContentPane(panel);
-        // 显示对话框
 
     }
 

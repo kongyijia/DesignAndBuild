@@ -55,7 +55,6 @@ public class IndexController extends Controller {
             indexPanel.getNoAccount().setForeground(Color.red);
         }
         else {
-            //不能登录
             if (clients.get(0).isCancel()){
                 indexPanel.getNoAccount().setText("the account is canceled");
                 indexPanel.getNoAccount().setForeground(Color.red);

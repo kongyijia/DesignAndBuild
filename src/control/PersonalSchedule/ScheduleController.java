@@ -51,7 +51,7 @@ public class ScheduleController extends Controller {
 
     public ScheduleController() throws FileNotFoundException {
         super(config.SCHEDULE_NAME,new Schedule2());
-        schedule2 = (Schedule2) this.panel;    // 强制转换为当前控制器对应的页面类型
+        schedule2 = (Schedule2) this.panel;
         update();
         schedule2.addaddListener(e->{
             if(e.getSource()== schedule2.getNext()){
@@ -191,13 +191,13 @@ public class ScheduleController extends Controller {
         });
         button.setBounds(0, 65,90,20);
         if(!getTelenum(dayLabel[j].getText(),i).isEmpty()) {
-            l1.setText(getTelenum(dayLabel[j].getText(), i).get(0));//调取接口获取string
+            l1.setText(getTelenum(dayLabel[j].getText(), i).get(0));//get string
             l1.setBounds(0, 0, 120, 10);
-            l2.setText(getTelenum(dayLabel[j].getText(), i).get(1));//调取接口获取string
+            l2.setText(getTelenum(dayLabel[j].getText(), i).get(1));//get string
             l2.setBounds(0, 15, 120, 10);
-            l3.setText(getTelenum(dayLabel[j].getText(), i).get(2));//调取接口获取string
+            l3.setText(getTelenum(dayLabel[j].getText(), i).get(2));//get string
             l3.setBounds(0, 35, 120, 10);
-            l4.setText(getTelenum(dayLabel[j].getText(), i).get(3));//调取接口获取string
+            l4.setText(getTelenum(dayLabel[j].getText(), i).get(3));//get string
             l4.setBounds(0, 50, 120, 10);
             try {
                 if(isfuture(dayLabel[j].getText())&&client.getRole()==2)
