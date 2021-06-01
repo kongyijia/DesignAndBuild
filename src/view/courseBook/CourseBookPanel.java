@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.HashMap;
 
 /**
- * @description This class is used for users to select courses, mainly used to select course types.
+ * This class is used for users to select courses, mainly used to select course types.
  *
  * @author Jufeng Sun
  * @version 1.0

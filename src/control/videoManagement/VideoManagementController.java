@@ -44,7 +44,7 @@ public class VideoManagementController extends VideoSquareController implements 
     /**
      * react to admin's or coach's action
      * specify which part of the UI is currently interact with the admin or coach
-     * @param e
+     * @param e action event
      */
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -10,8 +10,8 @@ import java.text.DecimalFormat;
 /**
  * This class is used to display the information of a single course schedule.
  *
- * @description If there is a course, the coach, type and price of the course will be displayed.
- *              If there is no course, it will be blank.
+ * If there is a course, the coach, type and price of the course will be displayed.
+ * If there is no course, it will be blank.
  * @author Jufeng Sun
  * @version 1.0
  * @since 16 May 2021

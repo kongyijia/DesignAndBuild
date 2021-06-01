@@ -99,7 +99,7 @@ public class UploadVideoController extends Controller implements ActionListener 
     /**
      * to generate id for the new video
      * @return the least integer that is larger than the largest id in database, use it as the id of new Video
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException file not found
      */
     public int idIncrement() throws FileNotFoundException {
         ArrayList<Video> videos = VideoMapping.readAllVideos();
@@ -115,7 +115,7 @@ public class UploadVideoController extends Controller implements ActionListener 
     /**
      * to generate {@link Video} for the new video
      * @return An object {@link Video} which contains all the info required to add a new video
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException file not found
      */
     public Video generateVideo() throws FileNotFoundException {
         int id = this.idIncrement();
@@ -130,7 +130,6 @@ public class UploadVideoController extends Controller implements ActionListener 
      * this method is called when admin or coach try to confirm their info for new video
      * validity checking are include in this function
      * if it pass all the checking, the information will be stored
-     * @throws IOException
      */
     private void onConfirm(){
         if (this.uploadForm.getVideoNameTextField().equals("")){
@@ -173,7 +172,6 @@ public class UploadVideoController extends Controller implements ActionListener 
      * this method is called when admin or coach try to confirm their new video type
      * validity checking are include in this method
      * if it pass all the checking, the information will be stored
-     * @throws IOException
      */
     public void onAddTypeModal(){
         String arg = this.addTypeModal.getJTextField();
@@ -195,7 +193,7 @@ public class UploadVideoController extends Controller implements ActionListener 
     /**
      * react to admin's or coach's action
      * specify which part of the UI is currently interact with the user or coach
-     * @param e
+     * @param e action event
      */
     public void onAction(ActionEvent e) {
         if(e.getSource() == this.uploadForm.getAddType()){
@@ -226,7 +224,7 @@ public class UploadVideoController extends Controller implements ActionListener 
     /**
      * react to admin's or coach's action
      * specify which part of the UI is currently interact with the user or coach
-     * @param e
+     * @param e action event
      */
     @Override
     public void actionPerformed(ActionEvent e) {

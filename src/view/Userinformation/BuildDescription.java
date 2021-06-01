@@ -26,10 +26,6 @@ public class BuildDescription extends JPanel
      * Build {@code client} description panel.
      * @see Client
      * @param receiveuser User
-     * @return void
-     * @author Zhanao Zhang
-     * @since 2021/5/31 21:15
-     * @version V1.0
      */
     public BuildDescription(Client receiveuser)
     {

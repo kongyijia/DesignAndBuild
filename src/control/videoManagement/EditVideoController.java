@@ -44,7 +44,7 @@ public class EditVideoController extends UploadVideoController {
 
     /**
      * init form value based on selected video
-     * @param video
+     * @param video video
      */
     public void setVideo(Video video){
         this.uploadForm.setVideoTextField(video.getName());
@@ -66,7 +66,7 @@ public class EditVideoController extends UploadVideoController {
 
     /**
      * to generate new object {@link Video} containing info for new info
-     * @return
+     * @return current video
      */
     public Video generateVideo(){
         String name = this.uploadForm.getVideoNameTextField();
@@ -82,7 +82,6 @@ public class EditVideoController extends UploadVideoController {
      * this method is called when admin or coach try to confirm their info for changing
      * validity checking are include in this function
      * if it pass all the checking, the information will be stored
-     * @throws IOException
      */
     public void onConfirm(){
         if (this.uploadForm.getVideoNameTextField().equals("")){
@@ -119,7 +118,7 @@ public class EditVideoController extends UploadVideoController {
     /**
      * react to amdin's or coach's action
      * specify which part of the UI is currently interact with the user or coach
-     * @param e
+     * @param e action event
      */
     @Override
     public void actionPerformed(ActionEvent e) {

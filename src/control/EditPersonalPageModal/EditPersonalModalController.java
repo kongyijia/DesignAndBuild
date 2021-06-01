@@ -91,7 +91,7 @@ public class EditPersonalModalController implements ActionListener {
      * this function is called when user or coach try to confirm their changes on their info
      * validity checking are include in this function
      * if it pass all the checking, the information will be stored
-     * @throws IOException
+     * @throws IOException IO issue
      */
     protected void onConfirm() throws IOException {
         if(this.editPersonalModal.getNickNameTextField().equals("")){
@@ -131,7 +131,7 @@ public class EditPersonalModalController implements ActionListener {
     /**
      * react to user's or coach's action
      * specify which part of the UI is currently interact with the user or coach
-     * @param e
+     * @param e action event
      */
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -67,8 +67,8 @@ public class EnrollController extends Controller {
     /**
      * Check whether the input nickname contains other characters and
      * displays error when there's duplicate nickname error.
-     * @param nickName
-     * @param state
+     * @param nickName the input got from the text field
+     * @param state the return value of ClientMapping.add()
      */
 
     private void handle_nickName(String nickName, int state){
@@ -119,8 +119,8 @@ public class EnrollController extends Controller {
 
     /**
      * Check whether the two passwords are the same.
-     * @param password
-     * @param password2
+     * @param password the first input
+     * @param password2 the second input for confirmation
      */
     private void handle_password2(String password, String password2){
         if(password2.length() == 0){
@@ -168,7 +168,7 @@ public class EnrollController extends Controller {
      * isPhoneLegal = 0: not 11 digits
      * isPhoneLegal = -1: contain other characters
      * isPhoneLegal = 1: correct
-     * @param phone
+     * @param phone the phone number got from the text field
      */
     private void handle_phone(String phone){
         if(phone.length() != 0){

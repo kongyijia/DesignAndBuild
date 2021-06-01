@@ -78,10 +78,10 @@ public class Util {
     }
 
     /**
-     * This method is used to convert {@link Object} array to {@link ArrayList<>}
+     * This method is used to convert {@link Object} array to {@link ArrayList}
      *
      * @param args Data to be converted
-     * @return {@link ArrayList<String>} The converted ArrayList
+     * @return {@link ArrayList} The converted ArrayList
      */
     public static ArrayList<String> toArrayList(Object[] args){
         ArrayList<String> arrayList = new ArrayList<>();

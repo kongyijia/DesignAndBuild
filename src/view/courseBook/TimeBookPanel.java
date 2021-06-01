@@ -13,7 +13,7 @@ import java.util.Calendar;
  * This class is used to display the course schedule in the course selection interface,
  * and the user can see the available courses and the non-selectable courses in each week
  *
- * @description This class is used for users to select courses, mainly used to select course schedule.
+ * This class is used for users to select courses, mainly used to select course schedule.
  * @author Jufeng Sun
  * @version 1.0
  * @since 16 May 2021

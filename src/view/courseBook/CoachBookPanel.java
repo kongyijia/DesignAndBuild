@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 /**
- * @description This class is used for users to select courses, mainly used to select coach.
+ * This class is used for users to select courses, mainly used to select coach.
  *
  * @author Jufeng Sun
  * @version 1.0

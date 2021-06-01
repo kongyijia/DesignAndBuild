@@ -22,6 +22,7 @@ public class VideoTypeMapping {
 
     /**
      * Add videoType to JSON database
+     * @param type type
      * @throws IOException when IO issue occur
      */
     public static void add(String type) throws IOException {
@@ -36,7 +37,7 @@ public class VideoTypeMapping {
      * find existing type
      * @param type String
      * @return boolean, which stands for containing or not
-     * @throws IOException
+     * @throws IOException IO issue
      */
     public static boolean find(String type) throws IOException {
         ArrayList<String> types = readAllVideoTypes();
@@ -45,7 +46,7 @@ public class VideoTypeMapping {
 
     /**
      * show all type name
-     * @param name
+     * @param name name
      * @return all the types
      */
     public static ArrayList<String> search (String name){
@@ -64,7 +65,7 @@ public class VideoTypeMapping {
     /**
      * get all video type name from data base
      * @return all type name
-     * @throws IOException
+     * @throws IOException IO issue
      */
     public static ArrayList<String> readAllVideoTypes() throws IOException {
         ArrayList<String> types = new ArrayList<>();
@@ -86,8 +87,8 @@ public class VideoTypeMapping {
 
     /**
      * write all value into database
-     * @param arrayList
-     * @throws IOException
+     * @param arrayList all string
+     * @throws IOException IO issue
      */
     public static void writeAllVideoTypes(ArrayList<String> arrayList) throws IOException{
         try {
