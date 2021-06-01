@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 import model.mapping.VideoMapping;
 
 /**
@@ -54,7 +53,7 @@ public class RecordManageController extends Controller {
             }
         };
         model.setColumnIdentifiers(factory);
-        if(!record.isEmpty()){
+        if(!record.isEmpty()){//get all the history records of the current user
             record.forEach(entry -> {
                 int id = entry.getVideoId();
                 ArrayList<Integer> id_array = new ArrayList<>();
@@ -69,6 +68,7 @@ public class RecordManageController extends Controller {
                 }
             });
         }
+        //update data after the user watches a video
         if(table != null)
             pane.remove(table);
         table = new JTable(model);
@@ -76,7 +76,7 @@ public class RecordManageController extends Controller {
         table.setBounds(0,20,1200,510);
         table.setAutoCreateRowSorter(true);
         sorter = new TableRowSorter(model);
-        table.setRowSorter(sorter);
+        table.setRowSorter(sorter);//sort
         Recordmanagepanel.filterButton.addActionListener(e -> {
             String text = Recordmanagepanel.filterText.getText();
             if(text.length() == 0){

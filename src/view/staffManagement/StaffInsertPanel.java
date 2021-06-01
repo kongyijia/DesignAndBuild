@@ -119,7 +119,7 @@ public class StaffInsertPanel extends JPanel {
 
     /**
      *
-     * @param actionListener
+     * @param actionListener add listener to components
      */
     public void addListener(ActionListener actionListener){
         this.backButton.addActionListener(actionListener);

@@ -14,7 +14,7 @@ import java.awt.*;
 import java.io.IOException;
 
 /**
- * @description Controller of enrolment for administrators and coaches.
+ * Controller of enrolment for administrators and coaches.
  *
  * @author Shengbo Wang
  * @version 1.0

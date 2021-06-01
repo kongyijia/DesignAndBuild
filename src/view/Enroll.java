@@ -9,7 +9,7 @@ import model.*;
 import model.mapping.*;
 
 /**
- * @description Panel of enrolment for users.
+ * Panel of enrolment for users.
  *
  * @author Shengbo Wang
  * @version 1.2
