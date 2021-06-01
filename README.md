@@ -24,9 +24,26 @@ This project is a digital gym system for this Group Project in EBU6304, and is a
 
 To run this program, your environment must be/have:
 - Windows 10
-- JDK 13 ([Java SE 13](https://jdk.java.net/java-se-ri/13))
+- **JDK 13** ([Java SE 13](https://jdk.java.net/java-se-ri/13))
 
 You need to ensure that you can run `javac` and `java` command in your terminal.
+
+### Example Account
+
+#### User Account
+
+- username: YangFan
+- password: 123456
+
+#### Coach Account
+
+- username: ZaiSong
+- password: 123456
+
+#### Administrator Account
+
+- username: admin
+- password: admin
 
 ### Installation
 
