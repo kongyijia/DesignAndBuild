@@ -78,7 +78,7 @@ public class Util {
     }
 
     /**
-     * This method is used to convert {@link Object} array to {@link ArrayList<String>}
+     * This method is used to convert {@link Object} array to {@link ArrayList<>}
      *
      * @param args Data to be converted
      * @return {@link ArrayList<String>} The converted ArrayList
