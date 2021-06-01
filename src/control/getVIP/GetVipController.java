@@ -116,7 +116,6 @@ public class GetVipController
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                // 获取事件源（即开关按钮本身）
                 JToggleButton toggleBtn = (JToggleButton) e.getSource();
                 if (toggleBtn.isSelected())
                 {
@@ -160,7 +159,6 @@ public class GetVipController
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                // 获取事件源（即开关按钮本身）
                 JToggleButton toggleBtn = (JToggleButton) e.getSource();
                 if (toggleBtn.isSelected())
                 {
@@ -192,7 +190,6 @@ public class GetVipController
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                // 获取事件源（即开关按钮本身）
                 JToggleButton toggleBtn = (JToggleButton) e.getSource();
                 if (toggleBtn.isSelected())
                 {

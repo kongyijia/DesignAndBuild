@@ -99,9 +99,7 @@ public class MainFrame extends JFrame implements Cloneable{
      */
     public void setClient(int ID) {
         HashMap<String, String> map = new HashMap<>();
-        // 设置查找条件
         map.put("id", Integer.toString(ID));
-        // 查找
         try
         {
             ArrayList<Client> clients = ClientMapping.find(map);

@@ -283,10 +283,10 @@ public class JavaFX_MediaPlayer extends Application
 
 
 
-        private void initPaneCtl() // 屎山啊
+        private void initPaneCtl()
         {
                 Label lbCurrentTime = new Label();
-                Slider slTime = new Slider(); // 时间轴
+                Slider slTime = new Slider();
                 slTime.setPrefWidth(200);
                 Button btnPlay = new Button("Pause");
                 btnPlay.setOnAction(e->{
@@ -301,7 +301,7 @@ public class JavaFX_MediaPlayer extends Application
                 });
 
 
-                Slider slVolume = new Slider(); // 音量
+                Slider slVolume = new Slider();
                 slVolume.setPrefWidth(150);
                 slVolume.setValue(50);
                 slVolume.setShowTickLabels(true);
@@ -318,7 +318,7 @@ public class JavaFX_MediaPlayer extends Application
                                 mediaPlayer.seek(mediaPlayer.getTotalDuration().multiply(slTime.getValue()/100));
                         }
                 });
-                mediaPlayer.volumeProperty().bind(slVolume.valueProperty().divide(100)); // 音量调节
+                mediaPlayer.volumeProperty().bind(slVolume.valueProperty().divide(100));
 
 
 
