@@ -10,6 +10,7 @@ import model.mapping.CourseMapping;
 import util.Util;
 import util.config;
 import view.Schedule.Schedule2;
+import view.VideoSquare.VideoSquare;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,10 +24,8 @@ import java.util.*;
 import java.util.Calendar;
 
 /**
- *  This class is inherited from {@link Controller}
- *  <br>
- *  This class mainly focus on the process of switching the page, delete the course and update the data in json.
- *  <br>
+ *  This class is used to control view display and data interaction of {@link Schedule2}
+ *
  *  @author Xinyu Zhou
  *  @version 2.0
  *  @since 2021/5/12
@@ -79,12 +78,7 @@ public class ScheduleController extends Controller {
 
     }
     /**
-     *
-     * Update all components.
-     * @return void
-     * @author Xinyu Zhou
-     * @since 2021/5/28
-     * @version V2.0
+     * This method is used to refresh the {@link Schedule2} page
      */
 
     @Override
@@ -111,10 +105,9 @@ public class ScheduleController extends Controller {
     }
     /**
      * generate the JPanel which contains 28 courses.
-     * @return JPanel
-     * @author Xinyu Zhou
-     * @since 2021/5/12
-     * @version V1.0
+     *
+     * @return JPanel a whole JPanel contains an array of  course JPanels
+     * @throws FileNotFoundException when {@link CourseMapping#DATA_PATH} not found
      */
 
     public static JPanel generateSchedule() throws FileNotFoundException {
@@ -129,10 +122,8 @@ public class ScheduleController extends Controller {
     }
     /**
      * generate 28 courses JPanels and add them to classPanelArray.
-     * @return void
-     * @author Xinyu Zhou
-     * @since 2021/5/15
-     * @version V1.2
+     *
+     * @throws  FileNotFoundException when {@link CourseMapping#DATA_PATH} not found
      */
     public static void generateClass() throws FileNotFoundException {
 
@@ -149,12 +140,11 @@ public class ScheduleController extends Controller {
 
     /**
      * generate a specific course JPanel.
+     *
      * @param i the row of the course panel.
      * @param j the column of the course panel.
-     * @return JPanel
-     * @author Xinyu Zhou
-     * @since 2021/5/28
-     * @version V2.0
+     * @return JPanel which contains the course information.
+     * @throws FileNotFoundException when {@link CourseMapping#DATA_PATH} not found
      */
     public static JPanel generateCoursePanel(int j, int i) throws FileNotFoundException {
         JLabel l1=new JLabel("");
@@ -217,11 +207,10 @@ public class ScheduleController extends Controller {
     }
     /**
      * judge the date  is after today
+     *
      * @param date The date to be judged
-     * @return boolean
-     * @author Xinyu Zhou
-     * @since 2021/5/28
-     * @version V2.0
+     * @return boolean whether the input date is the future
+     * @throws ParseException fail for more information on date parsing
      */
     private static boolean isfuture(String date) throws ParseException {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -232,13 +221,10 @@ public class ScheduleController extends Controller {
     }
     /**
      * update all the course JPanels in the classPanelArray.
+     *
      * @param slot the row of the course JPanel.
      * @param day The column of the course JPanel.
      * @param course the course Panel with user and coach information.
-     * @return void
-     * @author Xinyu Zhou
-     * @since 2021/5/28
-     * @version V2.0
      */
     public static void setSchedule(int slot, int day, JPanel course){
         classPanelArray[slot][day].removeAll();
@@ -248,10 +234,8 @@ public class ScheduleController extends Controller {
     }
     /**
      * generate the JPanel for the date on the top of the schedule.
-     * @return JPanel
-     * @author Xinyu Zhou
-     * @since 2021/5/12
-     * @version V1.0
+     *
+     * @return JPanel which contain 7 dates of the schedule.
      */
     public static JPanel generateDate(){
         JPanel date= new JPanel();
@@ -269,12 +253,10 @@ public class ScheduleController extends Controller {
     }
     /**
      * update the date information in the date array and return the location of today's date.
+     *
      * @param c Calendar.
      * @param dayOfWeek a string array which contain 7 dates for the date JPanel.
-     * @return int
-     * @author Xinyu Zhou
-     * @since 2021/5/12
-     * @version V1.0
+     * @return int which presents the location of today
      */
     public static int getWeek(Calendar c, String[] dayOfWeek){
         DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
@@ -294,12 +276,11 @@ public class ScheduleController extends Controller {
     }
     /**
      * check the course.json to find the course match the login client role and the time of the course.
+     *
      * @param date the date of the course.
      * @param slot the row of the course JPanel.
-     * @return ArrayList<Course>
-     * @author Xinyu Zhou
-     * @since 2021/5/12
-     * @version V1.0
+     * @return {@link ArrayList} contained match the login client role and the time of the course.
+     * @throws FileNotFoundException when {@link CourseMapping#DATA_PATH} not found
      */
 
     public static ArrayList<Course> findCourse(String date, int slot) throws FileNotFoundException {
@@ -330,12 +311,11 @@ public class ScheduleController extends Controller {
     }
     /**
      * get the nickname and telephone number information for the coach and student in one course.
+     *
      * @param date the date of the course.
      * @param slot the row of the course JPanel.
-     * @return ArrayList<String>
-     * @author Xinyu Zhou
-     * @since 2021/5/12
-     * @version V1.0
+     * @return {@link ArrayList} contained nickname and telephone number information for the coach and student in one course.
+     * @throws FileNotFoundException when {@link CourseMapping#DATA_PATH} not found
      */
     public static ArrayList<String> getTelenum(String date, int slot) throws FileNotFoundException {
         ArrayList<Course> course=new ArrayList<Course>();

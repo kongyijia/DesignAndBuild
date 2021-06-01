@@ -28,12 +28,12 @@ import util.config;
 import view.VideoSquare.*;
 import model.mapping.*;
 import model.*;
+import view.courseBook.TimeBookPanel;
+import view.function.FunctionPanel;
 
 /**
- *  This class is inherited from {@link Controller}
- *  <br>
- *  This class mainly focus on the process of opening video player
- *  <br>
+ *  This class is used to control view display and data interaction of {@link VideoSquare}
+ *
  *  @author Xinyu Zhou, Zai Song
  *  @version 2.0
  *  @since 2021/4/27
@@ -84,9 +84,6 @@ public class VideoSquareController extends Controller implements ActionListener 
     }
     /**
      *  call the generateMap and ake the return results as parameters for forSearch function.
-     * @return void
-     * @since 2021/4/27
-     * @version V1.0
      */
     public void onSearch() {
         ArrayList<Video> vs = new ArrayList<>();
@@ -99,9 +96,6 @@ public class VideoSquareController extends Controller implements ActionListener 
     }
     /**
      *  reset the search information, delete previous input information.
-     * @return void
-     * @since 2021/4/27
-     * @version V1.0
      */
     public void onReset() {
         this.videoSquare.getSearchText1().setText("");
@@ -109,13 +103,13 @@ public class VideoSquareController extends Controller implements ActionListener 
         this.videoSquare.getTagBox().setSelectedIndex(0);
     }
     /**
-     *  return a list of videos satisfies the input conditions.
+     * find a list of videos satisfies the input conditions.
+     *
      * @param name the name of the video
      * @param type the type of the video
      * @param tag the tag of the video
-     * @return void
-     * @since 2021/4/27
-     * @version V1.0
+     * @return generateMap a list of videos satisfies the input conditions
+     * @throws FileNotFoundException when {@link VideoMapping#DATA_PATH} not found
      */
     public ArrayList<Video> generateMap(String name, String type, String tag) throws FileNotFoundException {
         HashMap<String, String> map = new HashMap<>();
@@ -137,13 +131,9 @@ public class VideoSquareController extends Controller implements ActionListener 
         return vs;
     }
     /**
-     *  set the perfect size of the JPanel according to the amount of videos need to show.
-     *  <br>
-     *  add the searched videos to the JPanel.
+     *  set the perfect size of the JPanel according to the amount of videos need to show and add the searched videos to the JPanel.
+     *
      * @param  vs a list of videos which satisfy the search conditions.
-     * @return void
-     * @since 2021/4/27
-     * @version V1.0
      */
     public void forSearch(ArrayList<Video> vs) {
         this.refresh();
@@ -155,11 +145,9 @@ public class VideoSquareController extends Controller implements ActionListener 
     }
     /**
      * add button action listener to the video button.
+     *
      * @param video one of the searched video
-     * @param button the button of the searched video
-     * @return void
-     * @since 2021/4/27
-     * @version V1.0
+     * @param button the button in the {@link VideoSquare} page
      */
     public void addButtonListener(Video video, JButton button) {
         button.addMouseListener(new MouseAdapter() {
@@ -206,11 +194,10 @@ public class VideoSquareController extends Controller implements ActionListener 
     }
     /**
      * Update all components.
+     *
      * @param num The serial number of the specific video match the search conditions.
      * @param video on of the video which satisfies the search condition.
-     * @return JPanel
-     * @since 2021/4/27
-     * @version V1.0
+     * @return JPanel which is used to show the search result.
      */
     public JPanel generateButton(int num, Video video) {
         int row;
@@ -238,10 +225,7 @@ public class VideoSquareController extends Controller implements ActionListener 
         return buttonPanel;
     }
     /**
-     * refresh the UI to avoid stuck.
-     * @return void
-     * @since 2021/4/27
-     * @version V1.0
+     * This method is used to refresh the {@link VideoSquare} page
      */
     public void refresh() {
         videoSquare.getPanel().removeAll();
@@ -249,10 +233,7 @@ public class VideoSquareController extends Controller implements ActionListener 
         this.videoSquare.updateUI();
     }
     /**
-     * Update all components.
-     * @return void
-     * @since 2021/4/27
-     * @version V1.0
+     * Update all components in the {@link VideoSquare} page
      */
     @Override
     public void update() {
@@ -261,11 +242,9 @@ public class VideoSquareController extends Controller implements ActionListener 
         this.onSearch();
     }
     /**
-     *  add actionlistener to the button search and reset.
-     * @param e
-     * @return void
-     * @since 2021/4/27
-     * @version V1.0
+     *  add actionListener to the button search and reset.
+     *
+     * @param e the actionEvent of the buttons in  {@link VideoSquare} page
      */
     @Override
     public void actionPerformed(ActionEvent e) {
