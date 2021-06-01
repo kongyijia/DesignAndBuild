@@ -85,7 +85,7 @@ public class VideoSquareController extends Controller implements ActionListener 
     /**
      *  call the generateMap and ake the return results as parameters for forSearch function.
      * @return void
-     * @date 2021/4/27
+     * @since 2021/4/27
      * @version V1.0
      */
     public void onSearch() {
@@ -100,7 +100,7 @@ public class VideoSquareController extends Controller implements ActionListener 
     /**
      *  reset the search information, delete previous input information.
      * @return void
-     * @date 2021/4/27
+     * @since 2021/4/27
      * @version V1.0
      */
     public void onReset() {
@@ -114,7 +114,7 @@ public class VideoSquareController extends Controller implements ActionListener 
      * @param type the type of the video
      * @param tag the tag of the video
      * @return void
-     * @date 2021/4/27
+     * @since 2021/4/27
      * @version V1.0
      */
     public ArrayList<Video> generateMap(String name, String type, String tag) throws FileNotFoundException {
@@ -142,7 +142,7 @@ public class VideoSquareController extends Controller implements ActionListener 
      *  add the searched videos to the JPanel.
      * @param  vs a list of videos which satisfy the search conditions.
      * @return void
-     * @date 2021/4/27
+     * @since 2021/4/27
      * @version V1.0
      */
     public void forSearch(ArrayList<Video> vs) {
@@ -158,7 +158,7 @@ public class VideoSquareController extends Controller implements ActionListener 
      * @param video one of the searched video
      * @param button the button of the searched video
      * @return void
-     * @date 2021/4/27
+     * @since 2021/4/27
      * @version V1.0
      */
     public void addButtonListener(Video video, JButton button) {
@@ -209,7 +209,7 @@ public class VideoSquareController extends Controller implements ActionListener 
      * @param num The serial number of the specific video match the search conditions.
      * @param video on of the video which satisfies the search condition.
      * @return JPanel
-     * @date 2021/4/27
+     * @since 2021/4/27
      * @version V1.0
      */
     public JPanel generateButton(int num, Video video) {
@@ -240,7 +240,7 @@ public class VideoSquareController extends Controller implements ActionListener 
     /**
      * refresh the UI to avoid stuck.
      * @return void
-     * @date 2021/4/27
+     * @since 2021/4/27
      * @version V1.0
      */
     public void refresh() {
@@ -251,7 +251,7 @@ public class VideoSquareController extends Controller implements ActionListener 
     /**
      * Update all components.
      * @return void
-     * @date 2021/4/27
+     * @since 2021/4/27
      * @version V1.0
      */
     @Override
@@ -264,7 +264,7 @@ public class VideoSquareController extends Controller implements ActionListener 
      *  add actionlistener to the button search and reset.
      * @param e
      * @return void
-     * @date 2021/4/27
+     * @since 2021/4/27
      * @version V1.0
      */
     @Override

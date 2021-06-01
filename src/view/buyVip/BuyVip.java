@@ -34,7 +34,7 @@ public class BuyVip extends JDialog
      * Getter function for {@code OK} button.
      * @return javax.swing.JButton
      * @author Zhanao Zhang
-     * @date 2021/5/31 18:09
+     * @since 2021/5/31 18:09
      * @version V1.0
      */
     public JButton getOkBtn()
@@ -47,7 +47,7 @@ public class BuyVip extends JDialog
      * Getter function for {@code Cancel} button.
      * @return javax.swing.JButton
      * @author Zhanao Zhang
-     * @date 2021/5/31 18:10
+     * @since 2021/5/31 18:10
      * @version V1.0
      */
     public JButton getCenBtn()
@@ -60,7 +60,7 @@ public class BuyVip extends JDialog
      * Getter function for {@code Big} button.
      * @return javax.swing.JToggleButton
      * @author Zhanao Zhang
-     * @date 2021/5/31 18:10
+     * @since 2021/5/31 18:10
      * @version V1.0
      */
     public JToggleButton getBig()
@@ -73,7 +73,7 @@ public class BuyVip extends JDialog
      * Getter function for {@code Video} button.
      * @return javax.swing.JToggleButton
      * @author Zhanao Zhang
-     * @date 2021/5/31 18:10
+     * @since 2021/5/31 18:10
      * @version V1.0
      */
     public JToggleButton getVideo()
@@ -86,7 +86,7 @@ public class BuyVip extends JDialog
      * Getter function for {@code Course} button.
      * @return javax.swing.JToggleButton
      * @author Zhanao Zhang
-     * @date 2021/5/31 18:10
+     * @since 2021/5/31 18:10
      * @version V1.0
      */
     public JToggleButton getCourse()
@@ -99,7 +99,7 @@ public class BuyVip extends JDialog
      * Getter function for {@code Balance} JLabel.
      * @return javax.swing.JLabel
      * @author Zhanao Zhang
-     * @date 2021/5/31 18:11
+     * @since 2021/5/31 18:11
      * @version V1.0
      */
     public JLabel getBalance()
@@ -112,7 +112,7 @@ public class BuyVip extends JDialog
      * pop-up window.
      * @param parentComponent parent component
      * @author Zhanao Zhang
-     * @date 2021/5/31 18:12
+     * @since 2021/5/31 18:12
      * @version V1.0
      */
     public BuyVip(Component parentComponent) {

@@ -25,6 +25,15 @@ import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * <p>
+ *     Class {@code UserInformationController} is a the {@code Controller} of the class {@code BuildProfilePanel}.<br>
+ *         {@link Controller}
+ * @see BuildProfilePanel
+ * @author Zhanao Zhang
+ * @version V1.0
+ *
+ */
 public class UserInformationController extends Controller
 {
     private Client user;
@@ -46,9 +55,8 @@ public class UserInformationController extends Controller
      *
      * Synchronize password changes that pass the password verification to json
      * @param newpwd new password
-     * @return void
      * @author Zhanao Zhang
-     * @date 2021/5/31 16:26
+     * @since 2021/5/31 16:26
      * @version V1.0
      */
 
@@ -71,7 +79,7 @@ public class UserInformationController extends Controller
      * @param  oldpwd Old Password.
      * @return boolean
      * @author Zhanao Zhang
-     * @date 2021/5/31 16:29
+     * @since 2021/5/31 16:29
      * @version V1.0
      */
     public boolean checkpassword(String oldpwd)
@@ -84,9 +92,8 @@ public class UserInformationController extends Controller
     /**
      *
      * Add button action listener.
-     * @return void
      * @author Zhanao Zhang
-     * @date 2021/5/31 16:32
+     * @since 2021/5/31 16:32
      * @version V1.0
      */
     private void buttons()
@@ -272,7 +279,7 @@ public class UserInformationController extends Controller
      * @param money money
      * @return boolean
      * @author Zhanao Zhang
-     * @date 2021/5/31 16:46
+     * @since 2021/5/31 16:46
      * @version V1.0
      */
     private boolean checkAccount(double money)
@@ -284,9 +291,8 @@ public class UserInformationController extends Controller
     /**
      *
      * Update all components (for factory mode).
-     * @return void
      * @author Zhanao Zhang
-     * @date 2021/5/31 16:47
+     * @since 2021/5/31 16:47
      * @version V1.0
      */
     @Override

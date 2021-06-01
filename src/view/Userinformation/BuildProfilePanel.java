@@ -8,7 +8,6 @@ import java.awt.*;
 /**
  * <p>
  *     Class {@code BuildProfilePanel} is a class extends JPanel.
- * </p>
  * <p>
  *     A container that include the {@code Client} function.<br>
  *         such as : <pre>
@@ -18,7 +17,6 @@ import java.awt.*;
  *             top-up.
  *             get Vip.
  *         </pre>
- * </p>
  * @author Zhanao Zhang
  * @version V1.0
  */
@@ -35,7 +33,7 @@ public class BuildProfilePanel extends JPanel
      * Getter function of {@code profile} button.
      * @return javax.swing.JButton
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:22
+     * te 2021/5/31 21:22
      * @version V1.0
      */
     public static JButton getProfilebutton()
@@ -48,7 +46,7 @@ public class BuildProfilePanel extends JPanel
      * @see control.Userinformation.UserInformationController
      * @return javax.swing.JButton
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:22
+     * @since 2021/5/31 21:22
      * @version V1.0
      */
     public static JButton getPersonalInformation()
@@ -62,7 +60,7 @@ public class BuildProfilePanel extends JPanel
      * @see control.Userinformation.UserInformationController
      * @return javax.swing.JButton
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:22
+     * @since 2021/5/31 21:22
      * @version V1.0
      */
     public static JButton getChangePassword()
@@ -76,7 +74,7 @@ public class BuildProfilePanel extends JPanel
      * @see control.Userinformation.UserInformationController
      * @return javax.swing.JButton
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:22
+     * @since 2021/5/31 21:22
      * @version V1.0
      */
     public static JButton getTopup()
@@ -90,7 +88,7 @@ public class BuildProfilePanel extends JPanel
      * @see control.Userinformation.UserInformationController
      * @return javax.swing.JButton
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:22
+     * @since 2021/5/31 21:22
      * @version V1.0
      */
     public static JButton getGetVip()
@@ -102,9 +100,8 @@ public class BuildProfilePanel extends JPanel
      *
      * Initialize the {@code Client} information panel.
      * @see UserDescription
-     * @return void
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:25
+     * @since 2021/5/31 21:25
      * @version V1.0
      */
     public BuildProfilePanel()

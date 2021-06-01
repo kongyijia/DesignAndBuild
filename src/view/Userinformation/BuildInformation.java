@@ -24,9 +24,8 @@ public class BuildInformation extends JPanel
      * Create {@code Client} information panel.
      * @param receiveUser Client
      * @see Client
-     * @return void
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:18
+     * @since 2021/5/31 21:18
      * @version V1.0
      */
     public BuildInformation(Client receiveUser)
