@@ -3,7 +3,7 @@ package view.staffManagement;
 import javax.swing.*;
 
 /**
- * @description Panel of watching record management for users.
+ * Panel of watching record management for users.
  *
  * @author Shengbo Wang
  * @version 1.2

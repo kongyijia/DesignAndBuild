@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * @description This class is used to control view display and data interaction of {@link CourseBookPanel}
+ * This class is used to control view display and data interaction of {@link CourseBookPanel}
  *
  * @author Jufeng Sun
  * @version 1.0

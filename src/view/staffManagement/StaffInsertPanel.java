@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 /**
- * @description This class is used in {@link StaffManagePanel} generate new coaches and new administrators panel
+ * This class is used in {@link StaffManagePanel} generate new coaches and new administrators panel
  *
  * @author Shengbo Wang
  * @version 1.0

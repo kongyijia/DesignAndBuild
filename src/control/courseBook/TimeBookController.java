@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * @description This class is used to control view display and data interaction of {@link TimeBookPanel}
+ * This class is used to control view display and data interaction of {@link TimeBookPanel}
  *
  * @author Jufeng Sun
  * @version 1.0

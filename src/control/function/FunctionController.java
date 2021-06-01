@@ -18,7 +18,7 @@ import model.Client;
 import javax.swing.*;
 
 /**
- * @description This class is used to control view display and data interaction of {@link FunctionPanel}
+ * This class is used to control view display and data interaction of {@link FunctionPanel}
  *
  * @author Jufeng Sun
  * @version 1.0

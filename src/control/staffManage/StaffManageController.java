@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 /**
- * @description This class is used to control view display and data interaction of {@link StaffManagePanel}
+ * This class is used to control view display and data interaction of {@link StaffManagePanel}
  *
  * @author Jufeng Sun
  * @version 1.0

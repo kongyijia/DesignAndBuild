@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 /**
- * @description This class is used to control view display and data interaction of {@link CoachBookPanel}
+ * This class is used to control view display and data interaction of {@link CoachBookPanel}
  *
  * @author Jufeng Sun
  * @version 1.0
