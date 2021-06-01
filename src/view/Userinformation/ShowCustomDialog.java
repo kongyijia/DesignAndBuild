@@ -39,7 +39,7 @@ public class ShowCustomDialog extends JDialog
      * Getter function of component.
      * @return javax.swing.JPasswordField
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:30
+     * @since 2021/5/31 21:30
      * @version V1.0
      */
     public JPasswordField getOpwd() { return opwd; }
@@ -49,7 +49,7 @@ public class ShowCustomDialog extends JDialog
      * Getter function of component.
      * @return javax.swing.JPasswordField
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:30
+     * @since 2021/5/31 21:30
      * @version V1.0
      */
     public JPasswordField getNpwd()
@@ -62,7 +62,7 @@ public class ShowCustomDialog extends JDialog
      * Getter function of component.
      * @return javax.swing.JPasswordField
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:30
+     * @since 2021/5/31 21:30
      * @version V1.0
      */
     public JPasswordField getCpwd()
@@ -75,7 +75,7 @@ public class ShowCustomDialog extends JDialog
      * Getter function of OkButton.
      * @return javax.swing.JButton
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:30
+     * @since 2021/5/31 21:30
      * @version V1.0
      */
     public JButton getOkBtn()
@@ -88,7 +88,7 @@ public class ShowCustomDialog extends JDialog
      * Getter function of CenButton.
      * @return javax.swing.JButton
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:30
+     * @since 2021/5/31 21:30
      * @version V1.0
      */
     public JButton getCenBtn()
@@ -101,7 +101,7 @@ public class ShowCustomDialog extends JDialog
      * Getter function of Bt1Button.
      * @return javax.swing.JButton
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:30
+     * @since 2021/5/31 21:30
      * @version V1.0
      */
     public JButton getBt1()
@@ -113,9 +113,8 @@ public class ShowCustomDialog extends JDialog
      *
      * Show the change password Dialog.
      * @param parentComponent father component
-     * @return void
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:31
+     * @since 2021/5/31 21:31
      * @version V1.0
      */
 

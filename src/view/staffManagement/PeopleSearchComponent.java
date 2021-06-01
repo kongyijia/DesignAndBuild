@@ -5,7 +5,7 @@ import java.awt.*;
 
 /**
  *  This is the component used in {@link StaffManagePanel} to filter searching information.
- *  This component consist of one {@link JLabel} and one {@link JComboBox<String>}.
+ *  This component consist of one {@link JLabel} and one {@link JComboBox}.
  *
  *  @author Jufeng Sun
  *  @version 1.0

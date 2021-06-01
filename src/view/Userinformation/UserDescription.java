@@ -32,9 +32,8 @@ public class UserDescription extends JPanel {
 /**
  *
  * Fit the factory mode and broadcast the update message.
- * @return void
  * @author Zhanao Zhang
- * @date 2021/5/31 21:35
+ * @since 2021/5/31 21:35
  * @version V1.0
  */
     public void update() {

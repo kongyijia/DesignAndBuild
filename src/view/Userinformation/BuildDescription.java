@@ -28,7 +28,7 @@ public class BuildDescription extends JPanel
      * @param receiveuser User
      * @return void
      * @author Zhanao Zhang
-     * @date 2021/5/31 21:15
+     * @since 2021/5/31 21:15
      * @version V1.0
      */
     public BuildDescription(Client receiveuser)

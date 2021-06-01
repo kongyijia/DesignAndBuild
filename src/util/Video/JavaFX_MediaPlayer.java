@@ -62,9 +62,8 @@ public class JavaFX_MediaPlayer extends Application
          *
          * Create a new thread and start the video application.
          * @param primaryStage new stage that locate the mediaViewer
-         * @return void
          * @author Zhanao Zhang
-         * @date 2021/5/31 18:02
+         * @since 2021/5/31 18:02
          * @version V1.0
          */
         @Override
@@ -97,9 +96,8 @@ public class JavaFX_MediaPlayer extends Application
 /**
  *
  * Close the player and release resources.
- * @return void
  * @author Zhanao Zhang
- * @date 2021/5/31 18:02
+ * @since 2021/5/31 18:02
  * @version V1.0
  */
         @Override
@@ -111,9 +109,8 @@ public class JavaFX_MediaPlayer extends Application
 /**
  *
  * Initialize the player.
- * @return void
  * @author Zhanao Zhang
- * @date 2021/5/31 18:03
+ * @since 2021/5/31 18:03
  * @version V1.0
  */
         private void initMediaPlayer()
@@ -173,9 +170,8 @@ public class JavaFX_MediaPlayer extends Application
 /**
  *
  * Initialize the player container.
- * @return void
  * @author Zhanao Zhang
- * @date 2021/5/31 18:03
+ * @since 2021/5/31 18:03
  * @version V1.0
  */
         private void initPane()
@@ -208,7 +204,7 @@ public class JavaFX_MediaPlayer extends Application
  * @param seconds seconds
  * @return java.lang.String - format {@code XX:XX}
  * @author Zhanao Zhang
- * @date 2021/5/31 18:05
+ * @since 2021/5/31 18:05
  * @version V1.0
  */
         private String Seconds2Str(Double seconds)
@@ -225,9 +221,8 @@ public class JavaFX_MediaPlayer extends Application
 /**
  *
  * Start counting the study time.
- * @return void
  * @author Zhanao Zhang
- * @date 2021/5/31 18:05
+ * @since 2021/5/31 18:05
  * @version V1.0
  */
         public static void startTimer()
@@ -244,9 +239,8 @@ public class JavaFX_MediaPlayer extends Application
         /**
          *
          * Pause counting the study time.
-         * @return void
          * @author Zhanao Zhang
-         * @date 2021/5/31 18:06
+         * @since 2021/5/31 18:06
          * @version V1.0
          */
         public static void pauseTimer()
@@ -262,7 +256,7 @@ public class JavaFX_MediaPlayer extends Application
  * Return study time.
  * @return long
  * @author Zhanao Zhang
- * @date 2021/5/31 18:06
+ * @since 2021/5/31 18:06
  * @version V1.0
  */
         public static long getRunTime()

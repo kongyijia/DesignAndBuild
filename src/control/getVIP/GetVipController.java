@@ -20,11 +20,10 @@ import java.util.Objects;
 /**
  * <p>
  *     Class {@code GetVipController} is the controller of class {@code BuyVip}.
- * </p>
  * @see BuyVip
  *
  * @author Zhanao zhang
- * @date 2021/5/31 17:51
+ * @since 2021/5/31 17:51
  * @version V1.0
  */
 public class GetVipController
@@ -38,10 +37,6 @@ public class GetVipController
      * Constructor
      * @param parentComponent parent component
      * @param user Client
-     * @return  void
-     * @author Zhanao Zhang
-     * @date 2021/5/31 17:57
-     * @version V1.0
      */
     public GetVipController(Component parentComponent, Client user)
     {
@@ -53,10 +48,6 @@ public class GetVipController
     /**
      *
      * Initialize the vip purchase interface.
-     * @return void
-     * @author Zhanao Zhang
-     * @date 2021/5/31 17:51
-     * @version V1.0
      */
     private void init()
     {
@@ -94,10 +85,6 @@ public class GetVipController
     /**
      *
      * Add button action listener.
-     * @return void
-     * @author Zhanao Zhang
-     * @date 2021/5/31 17:53
-     * @version V1.0
      */
     private void addButton()
     {

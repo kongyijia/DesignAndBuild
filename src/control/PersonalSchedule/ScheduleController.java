@@ -83,7 +83,7 @@ public class ScheduleController extends Controller {
      * Update all components.
      * @return void
      * @author Xinyu Zhou
-     * @date 2021/5/28
+     * @since 2021/5/28
      * @version V2.0
      */
 
@@ -113,7 +113,7 @@ public class ScheduleController extends Controller {
      * generate the JPanel which contains 28 courses.
      * @return JPanel
      * @author Xinyu Zhou
-     * @date 2021/5/12
+     * @since 2021/5/12
      * @version V1.0
      */
 
@@ -131,7 +131,7 @@ public class ScheduleController extends Controller {
      * generate 28 courses JPanels and add them to classPanelArray.
      * @return void
      * @author Xinyu Zhou
-     * @date 2021/5/15
+     * @since 2021/5/15
      * @version V1.2
      */
     public static void generateClass() throws FileNotFoundException {
@@ -153,7 +153,7 @@ public class ScheduleController extends Controller {
      * @param j the column of the course panel.
      * @return JPanel
      * @author Xinyu Zhou
-     * @date 2021/5/28
+     * @since 2021/5/28
      * @version V2.0
      */
     public static JPanel generateCoursePanel(int j, int i) throws FileNotFoundException {
@@ -220,7 +220,7 @@ public class ScheduleController extends Controller {
      * @param date The date to be judged
      * @return boolean
      * @author Xinyu Zhou
-     * @date 2021/5/28
+     * @since 2021/5/28
      * @version V2.0
      */
     private static boolean isfuture(String date) throws ParseException {
@@ -237,7 +237,7 @@ public class ScheduleController extends Controller {
      * @param course the course Panel with user and coach information.
      * @return void
      * @author Xinyu Zhou
-     * @date 2021/5/28
+     * @since 2021/5/28
      * @version V2.0
      */
     public static void setSchedule(int slot, int day, JPanel course){
@@ -250,7 +250,7 @@ public class ScheduleController extends Controller {
      * generate the JPanel for the date on the top of the schedule.
      * @return JPanel
      * @author Xinyu Zhou
-     * @date 2021/5/12
+     * @since 2021/5/12
      * @version V1.0
      */
     public static JPanel generateDate(){
@@ -273,7 +273,7 @@ public class ScheduleController extends Controller {
      * @param dayOfWeek a string array which contain 7 dates for the date JPanel.
      * @return int
      * @author Xinyu Zhou
-     * @date 2021/5/12
+     * @since 2021/5/12
      * @version V1.0
      */
     public static int getWeek(Calendar c, String[] dayOfWeek){
@@ -298,7 +298,7 @@ public class ScheduleController extends Controller {
      * @param slot the row of the course JPanel.
      * @return ArrayList<Course>
      * @author Xinyu Zhou
-     * @date 2021/5/12
+     * @since 2021/5/12
      * @version V1.0
      */
 
@@ -334,7 +334,7 @@ public class ScheduleController extends Controller {
      * @param slot the row of the course JPanel.
      * @return ArrayList<String>
      * @author Xinyu Zhou
-     * @date 2021/5/12
+     * @since 2021/5/12
      * @version V1.0
      */
     public static ArrayList<String> getTelenum(String date, int slot) throws FileNotFoundException {

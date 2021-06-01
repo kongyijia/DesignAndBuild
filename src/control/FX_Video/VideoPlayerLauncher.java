@@ -10,15 +10,10 @@ import static util.config.lock;
 /**
  * <p>
  *     Class {@code VideoPlayerLauncher} is a class which used to launch the class {@code JavaFX_MediaPlayer}.
- * </p>
  *
  * <p>
- *     <p>
- *         Call {@code Createplayer} function to start a MediaPlayer.
- *     </p>
- *     <p>
+ *         Call {@code Createplayer} function to start a MediaPlayer. <br>
  *         Call {@code getTime} function to get study time. as follow :
- *     </p>
  *     <pre>
  *     public long getTime() {
  *         synchronized (lock)
@@ -32,10 +27,9 @@ import static util.config.lock;
  *         }
  *     }
  *     </pre>
- * </p>
  *
  * @author Zhanao Zhang
- * @date 2021/5/31 17:41
+ * @since  2021/5/31 17:41
  * @version V1.0
  */
 public class VideoPlayerLauncher
@@ -47,8 +41,6 @@ public class VideoPlayerLauncher
  * Get watching time.
  * @return long study time
  * @author Zhanao Zhang
- * @date 2021/5/31 17:44
- * @version V1.0
  */
     public long getTime() {
         synchronized (lock)
@@ -67,11 +59,10 @@ public class VideoPlayerLauncher
      * Launch the JavaFX application.
      * @see JavaFX_MediaPlayer
      * @param path Video path
-     * @return long
-     * @author Zhanao Zhang
-     * @date 2021/5/31 17:46
-     * @version V1.0
+     * @return long study time
      */
+
+
     public long creatplayer(String path){
         JavaFX_MediaPlayer.path = path;
 
