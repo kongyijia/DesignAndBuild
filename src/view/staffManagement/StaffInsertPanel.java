@@ -29,7 +29,6 @@ public class StaffInsertPanel extends JPanel {
     public int flag = 1, state = 0, id = 0, sex = 0;
 
     public JFrame f_message;
-    public JButton b_back;
     public JButton b_login;
     public JPanel p_message;
     public JLabel r_message;
@@ -101,7 +100,6 @@ public class StaffInsertPanel extends JPanel {
         this.add(confirmButton);
 
         f_message = new JFrame();
-        b_back = new JButton("Enroll again");
         b_login = new JButton("Back to Panel");
         p_message = new JPanel();
         r_message = new JLabel("Enrollment success.");
@@ -112,11 +110,9 @@ public class StaffInsertPanel extends JPanel {
         f_message.setLocationRelativeTo(null);
         p_message.setLayout(null);
         r_message.setBounds(80,50,140,20);
-        b_back.setBounds(50,150,200,20);
-        b_login.setBounds(50,200,200,20);
+        b_login.setBounds(50,150,200,20);
 
         p_message.add(r_message);
-        p_message.add(b_back);
         p_message.add(b_login);
         f_message.setVisible(false);
     }
@@ -128,7 +124,6 @@ public class StaffInsertPanel extends JPanel {
     public void addListener(ActionListener actionListener){
         this.backButton.addActionListener(actionListener);
         this.confirmButton.addActionListener(actionListener);
-        b_back.addActionListener(actionListener);
         b_login.addActionListener(actionListener);
     }
 

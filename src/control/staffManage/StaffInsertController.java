@@ -13,6 +13,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * @description Controller of enrolment for administrators and coaches.
+ *
+ * @author Shengbo Wang
+ * @version 1.0
+ * @see StaffInsertController
+ * @since 30 April 2021
+ */
+
 public class StaffInsertController extends Controller {
     private StaffInsertPanel staffInsertPanel;
     private int role;
@@ -24,8 +33,10 @@ public class StaffInsertController extends Controller {
         this.setH_gap(300);
 
         staffInsertPanel.addListener(e -> {
-            if (e.getSource() == staffInsertPanel.getBackButton())
+            if (e.getSource() == staffInsertPanel.getBackButton()) {
                 MainFrame.getInstance().goTo(config.STAFF_MANAGE_NAME);
+                update();
+            }
             else if (e.getSource() == staffInsertPanel.getConfirmButton()) {
                 staffInsertPanel.flag = 1;
                 staffInsertPanel.state = 0;
@@ -45,13 +56,10 @@ public class StaffInsertController extends Controller {
                     write(getRole());
                     if (staffInsertPanel.flag == 1) { write_suc(); }
                 }
-            } else if (e.getSource() == staffInsertPanel.b_back) {
-                staffInsertPanel.f_message.setVisible(false);
-                MainFrame.getInstance().goTo(config.STAFF_INSERT_NAME);
-                update();
             }
             else {
                 MainFrame.getInstance().goTo(config.STAFF_MANAGE_NAME);
+                staffInsertPanel.f_message.setVisible(false);
             }
         });
     }
@@ -234,6 +242,12 @@ public class StaffInsertController extends Controller {
         staffInsertPanel.password2Input.setText("");
         staffInsertPanel.phoneInput.setText("");
         staffInsertPanel.emailInput.setText("");
+        if(staffInsertPanel.w_nickName != null) staffInsertPanel.remove(staffInsertPanel.w_nickName);
+        if(staffInsertPanel.w_password != null) staffInsertPanel.remove(staffInsertPanel.w_password);
+        if(staffInsertPanel.w_password2 != null) staffInsertPanel.remove(staffInsertPanel.w_password2);
+        if(staffInsertPanel.w_sex != null) staffInsertPanel.remove(staffInsertPanel.w_sex);
+        if(staffInsertPanel.w_phone != null) staffInsertPanel.remove(staffInsertPanel.w_phone);
+        if(staffInsertPanel.w_email != null) staffInsertPanel.remove(staffInsertPanel.w_email);
     }
 
     public void write_suc() {

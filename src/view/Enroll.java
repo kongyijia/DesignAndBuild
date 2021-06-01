@@ -8,6 +8,14 @@ import java.io.IOException;
 import model.*;
 import model.mapping.*;
 
+/**
+ * @description Panel of enrolment for users.
+ *
+ * @author Shengbo Wang
+ * @version 1.2
+ * @see Enroll
+ * @since 19 April 2021
+ */
 
 public class Enroll extends JPanel{
     public int flag;
@@ -23,7 +31,6 @@ public class Enroll extends JPanel{
     public int role;//0 admin, 1 trainer, 2 user
     public boolean cancel;
 
-    public JRadioButton i_admin, i_trainer, i_user;
     public ButtonGroup s_sex;
     //components shared by all 3 roles
     //components for input
@@ -51,7 +58,6 @@ public class Enroll extends JPanel{
     public JLabel w_email;
 
     public JFrame f_message;
-    public JButton b_back;
     public JButton b_login;
     public JPanel p_message;
     public JLabel r_message;
@@ -95,7 +101,6 @@ public class Enroll extends JPanel{
         i_ok = new JButton("ok");
 
         f_message = new JFrame();
-        b_back = new JButton("Enroll again");
         b_login = new JButton("Login");
         p_message = new JPanel();
         r_message = new JLabel("Enrollment success.");
@@ -127,11 +132,9 @@ public class Enroll extends JPanel{
         f_message.setLocationRelativeTo(null);
         p_message.setLayout(null);
         r_message.setBounds(80,50,140,20);
-        b_back.setBounds(50,150,100,20);
-        b_login.setBounds(150,150,100,20);
+        b_login.setBounds(100,150,100,20);
 
         p_message.add(r_message);
-        p_message.add(b_back);
         p_message.add(b_login);
         f_message.setVisible(false);
     }
@@ -157,7 +160,6 @@ public class Enroll extends JPanel{
     public void addListener(ActionListener actionListener){
         i_cancel.addActionListener(actionListener);
         i_ok.addActionListener(actionListener);
-        b_back.addActionListener(actionListener);
         b_login.addActionListener(actionListener);
     }
 }
