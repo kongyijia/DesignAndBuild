@@ -95,7 +95,7 @@ public class Enroll extends JPanel{
         i_ok = new JButton("ok");
 
         f_message = new JFrame();
-        b_back = new JButton("Back");
+        b_back = new JButton("Enroll again");
         b_login = new JButton("Login");
         p_message = new JPanel();
         r_message = new JLabel("Enrollment success.");
@@ -124,6 +124,7 @@ public class Enroll extends JPanel{
         f_message.setTitle("Enroll");
         f_message.setSize(300,300);
         f_message.setContentPane(p_message);
+        f_message.setLocationRelativeTo(null);
         p_message.setLayout(null);
         r_message.setBounds(80,50,140,20);
         b_back.setBounds(50,150,100,20);
@@ -159,184 +160,4 @@ public class Enroll extends JPanel{
         b_back.addActionListener(actionListener);
         b_login.addActionListener(actionListener);
     }
-
-
-//    public void handle_select(){
-//        if(i_admin.isSelected() || i_trainer.isSelected() || i_user.isSelected()) {
-//            flag = 1;
-//            if(w_select != null){p_enroll.remove(w_select);}
-//        }
-//        else{
-//            flag = 0;
-//            if(w_select != null){p_enroll.remove(w_select);}
-//            w_select = new JLabel("Please select a role!");
-//            w_select.setForeground(Color.RED);
-//            w_select.setBounds(150, 75, 300, 20);
-//            p_enroll.add(w_select);
-//            p_enroll.repaint();
-//        }
-//    }
-//
-//    public void handle_nickName(String nickName, int state){
-//        if(nickName.length() != 0){
-//            flag = 1;
-//            if(w_nickName != null){p_enroll.remove(w_nickName);}
-//            if(state == 6){
-//                flag = 0;
-//                w_nickName =new JLabel("Duplicate nickname. Please input another one.");
-//                w_nickName.setForeground(Color.RED);
-//                w_nickName.setBounds(150,125,300,20);
-//                p_enroll.add(w_nickName);
-//                p_enroll.repaint();
-//            }
-//        }
-//        else{
-//            flag = 0;
-//            if(w_nickName != null){p_enroll.remove(w_nickName);}
-//            w_nickName =new JLabel("Please input your nickName!");
-//            w_nickName.setForeground(Color.RED);
-//            w_nickName.setBounds(150,125,300,20);
-//            p_enroll.add(w_nickName);
-//            p_enroll.repaint();
-//        }
-//    }
-//
-//    public void handle_password(String password){
-//        if(password.length() != 0){
-//            flag = 1;
-//            if(w_password != null){p_enroll.remove(w_password);}
-//        }
-//        else{
-//            flag = 0;
-//            if(w_password != null){p_enroll.remove(w_password);}
-//            w_password = new JLabel("Please input password!");
-//            w_password.setForeground(Color.RED);
-//            w_password.setBounds(150,175,300,20);
-//            p_enroll.add(w_password);
-//            p_enroll.repaint();
-//        }
-//    }
-//
-//    public void handle_password2(String password, String password2){
-//        if(password2.length() == 0){
-//            flag = 0;
-//            if(w_password2 != null){p_enroll.remove(w_password2);}
-//            w_password2 = new JLabel("Please input password again!");
-//            w_password2.setForeground(Color.RED);
-//            w_password2.setBounds(150,225,300,20);
-//            p_enroll.add(w_password2);
-//            p_enroll.repaint();
-//        }
-//        else{
-//            if(!password.equals(password2)){
-//                flag = 0;
-//                if(w_password2 != null){p_enroll.remove(w_password2);}
-//                w_password2 = new JLabel("Please input the same password!");
-//                w_password2.setForeground(Color.RED);
-//                w_password2.setBounds(150,225,300,20);
-//                p_enroll.add(w_password2);
-//                p_enroll.repaint();
-//            }
-//            else{
-//                flag = 1;
-//                if(w_password2 != null){p_enroll.remove(w_password2);}
-//            }
-//        }
-//    }
-//
-//    public void handle_sex(){
-//        if(i_male.isSelected() || i_female.isSelected()){
-//            flag =1;
-//            if(w_sex != null){p_enroll.remove(w_sex);}
-//        }
-//        else{
-//            flag = 0;
-//            if(w_sex != null){p_enroll.remove(w_sex);}
-//            w_sex = new JLabel("Please select your sex!");
-//            w_sex.setForeground(Color.RED);
-//            w_sex.setBounds(150,275,300,20);
-//            p_enroll.add(w_sex);
-//            p_enroll.repaint();
-//        }
-//    }
-//
-//    public void handle_phone(String phone){
-//        if(phone.length() != 0){
-//            flag = 1;
-//            if(w_phone != null){p_enroll.remove(w_phone);}
-//        }
-//        else{
-//            flag = 0;
-//            if(w_phone != null){p_enroll.remove(w_phone);}
-//            w_phone = new JLabel("Please input your phone number!");
-//            w_phone.setForeground(Color.RED);
-//            w_phone.setBounds(150,325,300,20);
-//            p_enroll.add(w_phone);
-//            p_enroll.repaint();
-//        }
-//    }
-//
-//    public void handle_email(String email){
-//        if(email.length() == 0){
-//            flag = 0;
-//            if(w_email != null){p_enroll.remove(w_email);}
-//            w_email = new JLabel("Please input your email!");
-//            w_email.setForeground(Color.RED);
-//            w_email.setBounds(150,375,300,20);
-//            p_enroll.add(w_email);
-//        }
-//        else{
-//            String regex = "^\\w+(\\w|[.]\\w+)+@\\w+([.]\\w+){1,3}";
-//            if(!email.matches(regex)){
-//                flag = 0;
-//                if(w_email != null){p_enroll.remove(w_email);}
-//                w_email = new JLabel("Please input your email in the correct form!");
-//                w_email.setForeground(Color.RED);
-//                w_email.setBounds(150,375,300,20);
-//                p_enroll.add(w_email);
-//            }
-//            else{
-//                flag = 1;
-//                if(w_email != null){p_enroll.remove(w_email);}
-//            }
-//        }
-//        p_enroll.repaint();
-//    }
-//
-//    public void write(){
-//        if(i_admin.isSelected()){
-//            Administrator admin = new Administrator(id, nickName, password, sex, phone, email, 0);
-//            try {
-//                state = ClientMapping.add(admin);
-//                if(state == 6){
-//                    handle_nickName(nickName, state);
-//                }
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
-//        }
-//        else if(i_trainer.isSelected()){
-//            Coach trainer = new Coach(id, nickName, password, sex, phone, email, 1);
-//            try {
-//                state = ClientMapping.add(trainer);
-//                if(state == 6){
-//                    handle_nickName(nickName, state);
-//                }
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
-//        }
-//        else{
-//            User user = new User(id, nickName, password, sex, phone, email, 2);
-//            try {
-//                state = ClientMapping.add(user);
-//                if(state == 6){
-//                    handle_nickName(nickName, state);
-//                }
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
-//        }
-//        id++;
-//    }
 }

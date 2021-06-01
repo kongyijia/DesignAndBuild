@@ -240,6 +240,10 @@ public class EnrollController extends Controller {
 
     @Override
     public void update() {
-
+        enroll.i_nickName.setText("");
+        enroll.i_password.setText("");
+        enroll.i_password2.setText("");
+        enroll.i_phone.setText("");
+        enroll.i_email.setText("");
     }
 }

@@ -10,7 +10,7 @@ import java.util.HashMap;
 /**
  * @description This class is used in {@link StaffManagePanel} generate new coaches and new administrators panel
  *
- * @author Jufeng Sun
+ * @author Shengbo Wang
  * @version 1.0
  * @since 16 May 2021
  */

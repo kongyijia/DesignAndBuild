@@ -2,6 +2,7 @@ package control.RecordManage;
 import control.Controller;
 import control.MainFrame;
 import model.Client;
+import model.Video;
 import util.config;
 import view.staffManagement.RecordManagePanel;
 import model.mapping.ClientMapping;
@@ -12,6 +13,7 @@ import javax.swing.table.TableRowSorter;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
+import model.mapping.VideoMapping;
 
 /**
  * Controller of watching record management for administrators.
@@ -27,7 +29,7 @@ public class RecordManageController extends Controller {
     private JTable table;
     private DefaultTableModel model;
     private JScrollPane pane;
-    private String[] factory = new String[]{"client ID", "Nickname", "Video ID", "learning time", "Watching time"};
+    private String[] factory = new String[]{"Video Name", "Where have I watched", "Watching time"};
 
     public RecordManageController() {
         super(config.RECORD_MANAGE_NAME, new RecordManagePanel());
@@ -54,9 +56,17 @@ public class RecordManageController extends Controller {
         model.setColumnIdentifiers(factory);
         if(!record.isEmpty()){
             record.forEach(entry -> {
-                String[] temp = {String.valueOf(client.getId()), client.getNickName(), String.valueOf(entry.getVideoId()),
-                        String.valueOf(entry.getLearningTime()), String.valueOf(entry.getLatestPlayingDateTime())};
-                model.addRow(temp);
+                int id = entry.getVideoId();
+                ArrayList<Integer> id_array = new ArrayList<>();
+                id_array.add(id);
+                try {
+                    ArrayList<Video> result = VideoMapping.findVideosByIdList(id_array);
+                    String[] temp = {result.get(0).getName(), String.valueOf(entry.getLearningTime()),
+                            String.valueOf(entry.getLatestPlayingDateTime())};
+                    model.addRow(temp);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             });
         }
         if(table != null)
