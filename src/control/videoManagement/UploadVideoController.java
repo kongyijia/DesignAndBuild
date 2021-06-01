@@ -135,7 +135,7 @@ public class UploadVideoController extends Controller implements ActionListener 
     private void onConfirm(){
         if (this.uploadForm.getVideoNameTextField().equals("")){
             Util.showDialog(MainFrame.getInstance(), "Your video name cannot be empty");
-        } else if (this.uploadForm.getMultiComboBox().length == 0) {
+        } else if (this.uploadForm.getMultiComboBox().length == 0 || this.uploadForm.getMultiComboBox()[0].equals("")) {
             Util.showDialog(MainFrame.getInstance(), "You must choose at least one type for your video");
         } else if (this.uploadForm.getVideoSrcTextField().equals("")) {
             Util.showDialog(MainFrame.getInstance(), "You must select one video");
@@ -143,8 +143,13 @@ public class UploadVideoController extends Controller implements ActionListener 
             try {
                 Video video = this.generateVideo();
                 String originalSrc = this.uploadForm.getVideoSrcTextField();
-                VideoMapping.add(video,originalSrc);
-                MainFrame.getInstance().goTo(config.VIDEO_MANAGEMENT);
+                int result = VideoMapping.add(video,originalSrc);
+                if(result == 0){
+                    MainFrame.getInstance().goTo(config.VIDEO_MANAGEMENT);
+                } else {
+                    Util.showDialog(null, "Upload failed. Please try again");
+                }
+
             } catch (EncoderException | IOException e) {
                 e.printStackTrace();
             }

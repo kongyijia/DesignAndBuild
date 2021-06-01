@@ -64,7 +64,11 @@ public class MultiComboBox extends JComponent implements ActionListener {
     }
 
     public Object[] getSelectedValues() {
-        return popup.getSelectedValues();
+        String text = editor.getText();
+        text = text.replace(" ", "");
+        text = text.replace("[", "");
+        text = text.replace("]", "");
+        return text.split(",");
     }
 
     public void setSelectValues(Object[] selectvalues) {

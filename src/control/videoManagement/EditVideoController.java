@@ -87,12 +87,17 @@ public class EditVideoController extends UploadVideoController {
     public void onConfirm(){
         if (this.uploadForm.getVideoNameTextField().equals("")){
             Util.showDialog(MainFrame.getInstance(), "Your video name cannot be empty");
-        } else if (this.uploadForm.getMultiComboBox().length == 0) {
+        } else if (this.uploadForm.getMultiComboBox().length == 0 || this.uploadForm.getMultiComboBox()[0].equals("")) {
             Util.showDialog(MainFrame.getInstance(), "You must choose at least one type for your video");
         } else {
             try {
-                VideoMapping.modify(this.generateVideo());
-                MainFrame.getInstance().goTo(config.VIDEO_MANAGEMENT);
+                int result = VideoMapping.modify(this.generateVideo());
+                if(result == 0){
+                    MainFrame.getInstance().goTo(config.VIDEO_MANAGEMENT);
+                } else {
+                    Util.showDialog(null,"Edit failed. Please try again");
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
