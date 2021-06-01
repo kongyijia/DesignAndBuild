@@ -17,13 +17,12 @@ import java.awt.*;
 import java.io.IOException;
 
 /**
- * @description This class is inherited from {@link Controller}, and performs user's enrolment.
+ * This class is inherited from {@link Controller}, and performs user's enrolment.
  *
  * @author Shengbo Wang
  * @version 1.0
  * @since 10 Apr 2021
  */
-
 public class EnrollController extends Controller {
     private Enroll enroll;
 
@@ -66,13 +65,10 @@ public class EnrollController extends Controller {
     }
 
     /**
-     * Nickname input error/duplicate check.
-     * @param state the return value of method {@link #write()}
-     *              has duplicate nickname error on GUI if equals 6
-     * @return void
-     * @author Shengbo Wang
-     * @since 2021/4/20
-     * @version 1.0
+     * Check whether the input nickname contains other characters and
+     * displays error when there's duplicate nickname error.
+     * @param nickName
+     * @param state
      */
 
     private void handle_nickName(String nickName, int state){
@@ -121,6 +117,11 @@ public class EnrollController extends Controller {
         }
     }
 
+    /**
+     * Check whether the two passwords are the same.
+     * @param password
+     * @param password2
+     */
     private void handle_password2(String password, String password2){
         if(password2.length() == 0){
             enroll.flag = 0;
@@ -162,6 +163,13 @@ public class EnrollController extends Controller {
         }
     }
 
+    /**
+     * input phone number check.
+     * isPhoneLegal = 0: not 11 digits
+     * isPhoneLegal = -1: contain other characters
+     * isPhoneLegal = 1: correct
+     * @param phone
+     */
     private void handle_phone(String phone){
         if(phone.length() != 0){
             if(enroll.w_phone != null){enroll.p_enroll.remove(enroll.w_phone);}
@@ -224,12 +232,8 @@ public class EnrollController extends Controller {
 
     /**
      * Write the input to json file when there's no error in input check.
-     * @return void
-     * @author Shengbo Wang
-     * @since 2021/4/20
-     * @version 1.0
+     *
      */
-
     private void write(){
         enroll.id = (int)(Math.random()*10000);
         User user = new User(enroll.id, enroll.nickName, enroll.password, enroll.sex, enroll.phone, enroll.email, 2);
@@ -253,16 +257,17 @@ public class EnrollController extends Controller {
 
     /**
      * A window comes out when enrolment is successful.
-     * @return void
-     * @author Shengbo Wang
-     * @since 2021/4/20
-     * @version 1.0
+     *
      */
 
     private void message(){
         enroll.f_message.setVisible(true);
     }
 
+    /**
+     * The page updates and clears all the blanks every time when
+     * entering the page.
+     */
     @Override
     public void update() {
         enroll.i_nickName.setText("");
