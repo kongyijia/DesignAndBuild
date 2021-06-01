@@ -92,7 +92,7 @@ public class CourseMapping {
      * This {@code find} method can't handle other conditions except {@code AND}, like {@code OR} or {@code BETWEEN} or others.
      *
      * @param map the WHERE conditions are represented by K-V pairs using {@link HashMap}
-     * @return {@link ArrayList<Course>} contained results.
+     * @return {@link ArrayList} contained results.
      * @throws FileNotFoundException when {@link CourseMapping#DATA_PATH} not found
      */
     public static ArrayList<Course> find(HashMap<String, String> map) throws FileNotFoundException {
@@ -138,7 +138,7 @@ public class CourseMapping {
     }
 
     /**
-     * Write all {@code Course} in {@link ArrayList<Course>} to the file using fastJSON.
+     * Write all {@code Course} in {@link ArrayList} to the file using fastJSON.
      * This method will overwrite the {@link CourseMapping#DATA_PATH} file, so this method is set to be {@code private} to protect the data.
      *
      * @param courses the {@link Course} data that you want to write

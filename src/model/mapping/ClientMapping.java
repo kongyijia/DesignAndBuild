@@ -253,12 +253,12 @@ public class ClientMapping {
     }
 
     /**
-     * Find client({@link User}, {@link Coach}, {@link Administrator}) from JSON database, and return the results to a {@link ArrayList<Client>}.
+     * Find client({@link User}, {@link Coach}, {@link Administrator}) from JSON database, and return the results to a {@link ArrayList}.
      * The parameter are {@link HashMap}, you need to put all {@code AND} conditions in hashmap.
      * This {@code find} method can't handle other conditions except {@code AND}, like {@code OR} or {@code BETWEEN} or others.
      *
      * @param map the WHERE conditions are represented by K-V pairs using {@link HashMap}
-     * @return {@link ArrayList<Client>} contained results.
+     * @return {@link ArrayList} contained results.
      * @throws FileNotFoundException when {@link ClientMapping#DATA_PATH} not found
      */
     public static ArrayList<Client> find(HashMap<String, String> map) throws FileNotFoundException {
@@ -294,14 +294,14 @@ public class ClientMapping {
     }
 
     /**
-     * Find client({@link User}, {@link Coach}, {@link Administrator}) from JSON database, and return the results to a {@link ArrayList<Client>}.
+     * Find client({@link User}, {@link Coach}, {@link Administrator}) from JSON database, and return the results to a {@link ArrayList}.
      * This method supports {@code fuzzy search}.
      * This method require a key-value pair.
      * It a simple version of {@link ClientMapping#find(HashMap)}. If you have only one condition to search, you can use this method.
      *
      * @param key   the key of the value you want to search
      * @param value the value you want to search
-     * @return {@link ArrayList<Client>} contained results.
+     * @return {@link ArrayList} contained results.
      * @throws FileNotFoundException when {@link ClientMapping#DATA_PATH} not found
      */
     public static ArrayList<Client> find(String key, String value) throws FileNotFoundException {
@@ -325,11 +325,11 @@ public class ClientMapping {
     }
 
     /**
-     * Find {@link User} from JSON database, return the result to an {@link ArrayList<User>}.
+     * Find {@link User} from JSON database, return the result to an {@link ArrayList}.
      * The difference between the method and {@link ClientMapping#find(HashMap)} is that the return value of this method will contains the instances of {@link User}, not {@link Client}.
      *
      * @param map the WHERE conditions are represented by K-V pairs using {@link HashMap}
-     * @return {@link ArrayList<User>} contained results.
+     * @return {@link ArrayList} contained results.
      * @throws FileNotFoundException when {@link ClientMapping#DATA_PATH} not found
      * @see ClientMapping#find(HashMap)
      */
@@ -344,11 +344,11 @@ public class ClientMapping {
     }
 
     /**
-     * Find {@link Coach} from JSON database, return the result to an {@link ArrayList<Coach>}.
+     * Find {@link Coach} from JSON database, return the result to an {@link ArrayList}.
      * The difference between the method and {@link ClientMapping#find(HashMap)} is that the return value of this method will contains the instances of {@link Coach}, not {@link Client}.
      *
      * @param map the WHERE conditions are represented by K-V pairs using {@link HashMap}
-     * @return {@link ArrayList<Coach>} contained results.
+     * @return {@link ArrayList} contained results.
      * @throws FileNotFoundException when {@link ClientMapping#DATA_PATH} not found
      * @see ClientMapping#find(HashMap)
      */
@@ -363,11 +363,11 @@ public class ClientMapping {
     }
 
     /**
-     * Find {@link Administrator} from JSON database, return the result to an {@link ArrayList<Administrator>}.
+     * Find {@link Administrator} from JSON database, return the result to an {@link ArrayList}.
      * The difference between the method and {@link ClientMapping#find(HashMap)} is that the return value of this method will contains the instances of {@link Administrator}, not {@link Client}.
      *
      * @param map the WHERE conditions are represented by K-V pairs using {@link HashMap}
-     * @return {@link ArrayList<Administrator>} contained results.
+     * @return {@link ArrayList} contained results.
      * @throws FileNotFoundException when {@link ClientMapping#DATA_PATH} not found
      * @see ClientMapping#find(HashMap)
      */
@@ -408,7 +408,7 @@ public class ClientMapping {
     }
 
     /**
-     * Write all {@code clients} in {@link ArrayList<Client>} to the file using fastJSON.
+     * Write all {@code clients} in {@link ArrayList} to the file using fastJSON.
      * This method will overwrite the {@link ClientMapping#DATA_PATH} file, so this method is set to be {@code private} to protect the data.
      *
      * @param clients the {@link Client} data that you want to write

@@ -9,8 +9,8 @@ import java.util.Date;
  * client model class. It represents all type of client ({@link User}, {@link Coach} and {@link Administrator}).
  *
  * @author Yubo Wu
- * @version 1.3
- * @since 8 May 2021
+ * @version 1.4
+ * @since 18 May 2021
  */
 public class Client implements Cloneable {
     /**
@@ -57,6 +57,17 @@ public class Client implements Cloneable {
 
     /**
      * Constructor of {@link Client}. Mainly used in fastJSON.
+     *
+     * @param id            {@link Client#id}
+     * @param nickName      {@link Client#nickName}
+     * @param password      {@link Client#password}
+     * @param sex           {@link Client#sex}
+     * @param phone         {@link Client#phone}
+     * @param email         {@link Client#email}
+     * @param role          {@link Client#role}
+     * @param cancel        {@link Client#cancel}
+     * @param recordHistory {@link Client#recordHistory}
+     * @param avatarSrc     {@link Client#avatarSrc}
      */
     public Client(int id, String nickName, String password, int sex, String phone, String email, int role, boolean cancel, ArrayList<RecordHistory> recordHistory, String avatarSrc) {
         this.id = id;
@@ -80,13 +91,13 @@ public class Client implements Cloneable {
      * <br>
      * {@link Client#avatarSrc} is an empty {@link String}
      *
-     * @param id       client id
-     * @param nickName client nickname
-     * @param password client password
-     * @param sex      client sex
-     * @param phone    client phone
-     * @param email    client email
-     * @param role     client role: 0 for {@link Administrator}; 1 for {@link Coach}; 2 for {@link User}
+     * @param id       {@link Client#id}
+     * @param nickName {@link Client#nickName}
+     * @param password {@link Client#password}
+     * @param sex      {@link Client#sex}
+     * @param phone    {@link Client#phone}
+     * @param email    {@link Client#email}
+     * @param role     {@link Client#role}
      */
     public Client(int id, String nickName, String password, int sex, String phone, String email, int role) {
         this.id = id;
@@ -115,7 +126,14 @@ public class Client implements Cloneable {
      * <br>
      * {@link Client#recordHistory} is an empty {@link ArrayList}
      *
-     * @param avatarSrc avatar source path
+     * @param id        {@link Client#id}
+     * @param nickName  {@link Client#nickName}
+     * @param password  {@link Client#password}
+     * @param sex       {@link Client#sex}
+     * @param phone     {@link Client#phone}
+     * @param email     {@link Client#email}
+     * @param role      {@link Client#role}
+     * @param avatarSrc {@link Client#avatarSrc}
      */
     public Client(int id, String nickName, String password, int sex, String phone, String email, int role, String avatarSrc) {
         this.id = id;
@@ -279,6 +297,10 @@ public class Client implements Cloneable {
      * {@link Client.RecordHistory#learningTime} to record the learning time of this history.
      * <br>
      * {@link Client.RecordHistory#latestPlayingDateTime} to record the latest datetime the user watched this video.
+     *
+     * @author Yubo Wu
+     * @version 1.1
+     * @since 18 May 2021
      */
     public static class RecordHistory {
         /**
@@ -301,6 +323,11 @@ public class Client implements Cloneable {
 
         /**
          * Constructor of {@link Client.RecordHistory}. Mainly used in fastJSON.
+         *
+         * @param videoId               {@link Client.RecordHistory#videoId}
+         * @param learningTime          {@link Client.RecordHistory#learningTime}
+         * @param progress              {@link Client.RecordHistory#progress}
+         * @param latestPlayingDateTime {@link Client.RecordHistory#latestPlayingDateTime}
          */
         public RecordHistory(int videoId, int learningTime, int progress, Date latestPlayingDateTime) {
             this.videoId = videoId;
@@ -372,6 +399,12 @@ public class Client implements Cloneable {
         }
     }
 
+    /**
+     * Override the clone method to provide a deep copy.
+     *
+     * @return object of {@link Client}
+     * @throws CloneNotSupportedException when clone not supported
+     */
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();

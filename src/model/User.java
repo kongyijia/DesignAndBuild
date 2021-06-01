@@ -39,6 +39,23 @@ public class User extends Client {
 
     /**
      * Constructor of {@link User}. Mainly used in fastJSON.
+     *
+     * @param id                 User id
+     * @param nickName           User nickname
+     * @param password           User password
+     * @param sex                User sex. {@code 0} for female; {@code 1} for male.
+     * @param phone              User phone number
+     * @param email              User email
+     * @param role               User role, which is {@code 2}
+     * @param cancel             User cancel status
+     * @param recordHistory      User record history
+     * @param avatarSrc          User avatar source path
+     * @param account            {@link User#account}
+     * @param level              {@link User#level}
+     * @param learningTime       {@link User#learningTime}
+     * @param vip                {@link User#vip}
+     * @param courseSubscription {@link User#courseSubscription}
+     * @param description        {@link User#description}
      */
     public User(int id, String nickName, String password, int sex, String phone, String email
             , int role, boolean cancel, ArrayList<RecordHistory> recordHistory, String avatarSrc, double account
@@ -106,7 +123,7 @@ public class User extends Client {
      * @param phone       user phone number
      * @param email       user email
      * @param role        user role, which is {@code 2}
-     * @param description user description
+     * @param description {@link User#description}
      */
     public User(int id, String nickName, String password, int sex, String phone, String email, int role, String description) {
         super(id, nickName, password, sex, phone, email, role);

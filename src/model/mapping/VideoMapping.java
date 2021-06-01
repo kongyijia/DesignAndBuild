@@ -208,12 +208,12 @@ public class VideoMapping {
     }
 
     /**
-     * Find {@link Video} from JSON database, and return the results to a {@link ArrayList<Video>}.
+     * Find {@link Video} from JSON database, and return the results to a {@link ArrayList}.
      * The parameter are {@link HashMap}, you need to put all {@code AND} conditions in hashmap.
      * This {@code find} method can't handle other conditions except {@code AND}, like {@code OR} or {@code BETWEEN} or others.
      *
      * @param conditionMap the WHERE conditions are represented by K-V pairs using {@link HashMap}
-     * @return {@link ArrayList<Video>} contained results.
+     * @return {@link ArrayList} contained results.
      * @throws FileNotFoundException when {@link VideoMapping#DATA_PATH} not found
      */
     public static ArrayList<Video> find(HashMap<String, String> conditionMap) throws FileNotFoundException {
@@ -298,7 +298,7 @@ public class VideoMapping {
     }
 
     /**
-     * Write all {@code videos} in {@link ArrayList<Video>} to the file using fastJSON.
+     * Write all {@code videos} in {@link ArrayList} to the file using fastJSON.
      * This method will overwrite the {@link VideoMapping#DATA_PATH} file, so this method is set to be {@code private} to protect the data.
      *
      * @param videos the {@link Video} data that you want to write

@@ -22,6 +22,19 @@ public class Coach extends Client {
 
     /**
      * Constructor of {@link Coach}. Mainly used in fastJSON.
+     *
+     * @param id            Coach ID
+     * @param nickName      Coach nickname
+     * @param password      Coach password
+     * @param sex           Coach sex
+     * @param phone         Coach phone number
+     * @param email         Coach email
+     * @param role          Coach role, which is {@code 1}
+     * @param cancel        Coach cancel status
+     * @param recordHistory Coach record history
+     * @param avatarSrc     Coach avatar source path
+     * @param level         {@link Coach#level}
+     * @param description   {@link Coach#description}
      */
     public Coach(int id, String nickName, String password, int sex, String phone, String email, int role
             , boolean cancel, ArrayList<Client.RecordHistory> recordHistory, String avatarSrc, int level
@@ -33,6 +46,16 @@ public class Coach extends Client {
 
     /**
      * Constructor of {@link Coach}. Mainly used in fastJSON.
+     *
+     * @param id          Coach ID
+     * @param nickName    Coach nickname
+     * @param password    Coach password
+     * @param sex         Coach sex
+     * @param phone       Coach phone number
+     * @param email       Coach email
+     * @param role        Coach role, which is {@code 1}
+     * @param level       {@link Coach#level}
+     * @param description {@link Coach#description}
      */
     public Coach(int id, String nickName, String password, int sex, String phone, String email, int role, int level, String description) {
         super(id, nickName, password, sex, phone, email, role);
@@ -52,7 +75,7 @@ public class Coach extends Client {
      * @param phone       coach phone number
      * @param email       coach email
      * @param role        coach role, which is {@code 1}
-     * @param description coach description
+     * @param description {@link Coach#description}
      */
     public Coach(int id, String nickName, String password, int sex, String phone, String email, int role, String description) {
         super(id, nickName, password, sex, phone, email, role);
