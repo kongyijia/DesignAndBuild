@@ -113,23 +113,29 @@
 	"description":"This is JokerFeng!!!!!",
 	"email":"20186435feng@qmul.ac.uk",
 	"id":5840,
-	"learningTime":425,
+	"learningTime":443,
 	"level":5,
 	"nickName":"JokerFeng",
 	"password":"123456",
 	"phone":"15906765541",
 	"recordHistory":[
 		{
-			"latestPlayingDateTime":"2021-06-01 11:40:09",
-			"learningTime":7,
+			"latestPlayingDateTime":"2021-06-01 17:51:34",
+			"learningTime":2,
 			"progress":0,
-			"videoId":1
+			"videoId":3
 		},
 		{
-			"latestPlayingDateTime":"2021-06-01 11:44:21",
-			"learningTime":4,
+			"latestPlayingDateTime":"2021-06-01 17:51:37",
+			"learningTime":2,
 			"progress":0,
 			"videoId":2
+		},
+		{
+			"latestPlayingDateTime":"2021-06-01 17:51:50",
+			"learningTime":4,
+			"progress":0,
+			"videoId":1
 		}
 	],
 	"role":2,
@@ -167,12 +173,19 @@
 	"description":"",
 	"email":"22@qq.com",
 	"id":2296,
-	"learningTime":0,
+	"learningTime":10,
 	"level":1,
 	"nickName":"wang",
 	"password":"1234",
 	"phone":"12345678907",
-	"recordHistory":[],
+	"recordHistory":[
+		{
+			"latestPlayingDateTime":"2021-06-01 21:58:32",
+			"learningTime":10,
+			"progress":0,
+			"videoId":3
+		}
+	],
 	"role":2,
 	"sex":1,
 	"vip":"Video"
