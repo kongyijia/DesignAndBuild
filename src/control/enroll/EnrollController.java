@@ -16,6 +16,13 @@ import view.Enroll;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * @description This class is inherited from {@link Controller}, and performs user's enrolment.
+ *
+ * @author Shengbo Wang
+ * @version 1.0
+ * @since 10 Apr 2021
+ */
 
 public class EnrollController extends Controller {
     private Enroll enroll;
@@ -26,6 +33,7 @@ public class EnrollController extends Controller {
         enroll.addListener(e -> {
             if(e.getSource() == enroll.i_cancel){
                 MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
+                update();
             }
             else if(e.getSource() == enroll.i_ok){
                 enroll.nickName = enroll.i_nickName.getText();
@@ -50,21 +58,22 @@ public class EnrollController extends Controller {
                     }
                 }
             }
-            else if(e.getSource() == enroll.b_back){
-                enroll.f_message.setVisible(false);
-                enroll.s_sex.clearSelection();
-                enroll.i_nickName.setText("");
-                enroll.i_password.setText("");
-                enroll.i_password2.setText("");
-                enroll.i_phone.setText("");
-                enroll.i_email.setText("");
-            }
             else if(e.getSource() == enroll.b_login){
                 enroll.f_message.setVisible(false);
                 MainFrame.getInstance().goTo(config.INDEX_PANEL_NAME);
             }
         });
     }
+
+    /**
+     * Nickname input error/duplicate check.
+     * @param state the return value of method {@link #write()}
+     *              has duplicate nickname error on GUI if equals 6
+     * @return void
+     * @author Shengbo Wang
+     * @since 2021/4/20
+     * @version 1.0
+     */
 
     private void handle_nickName(String nickName, int state){
         if(nickName.length() != 0){
@@ -213,6 +222,14 @@ public class EnrollController extends Controller {
         enroll.p_enroll.repaint();
     }
 
+    /**
+     * Write the input to json file when there's no error in input check.
+     * @return void
+     * @author Shengbo Wang
+     * @since 2021/4/20
+     * @version 1.0
+     */
+
     private void write(){
         enroll.id = (int)(Math.random()*10000);
         User user = new User(enroll.id, enroll.nickName, enroll.password, enroll.sex, enroll.phone, enroll.email, 2);
@@ -234,6 +251,14 @@ public class EnrollController extends Controller {
         }
     }
 
+    /**
+     * A window comes out when enrolment is successful.
+     * @return void
+     * @author Shengbo Wang
+     * @since 2021/4/20
+     * @version 1.0
+     */
+
     private void message(){
         enroll.f_message.setVisible(true);
     }
@@ -245,5 +270,11 @@ public class EnrollController extends Controller {
         enroll.i_password2.setText("");
         enroll.i_phone.setText("");
         enroll.i_email.setText("");
+        if(enroll.w_nickName != null) enroll.p_enroll.remove(enroll.w_nickName);
+        if(enroll.w_password != null) enroll.p_enroll.remove(enroll.w_password);
+        if(enroll.w_password2 != null) enroll.p_enroll.remove(enroll.w_password2);
+        if(enroll.w_sex != null) enroll.p_enroll.remove(enroll.w_sex);
+        if(enroll.w_phone != null) enroll.p_enroll.remove(enroll.w_phone);
+        if(enroll.w_email != null) enroll.p_enroll.remove(enroll.w_email);
     }
 }
